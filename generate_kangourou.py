@@ -22,9 +22,19 @@ import fitz  # PyMuPDF
 # Configuration
 # ---------------------------------------------------------------------------
 
-YEARS = range(2011, 2026)
-PDF_URL = "https://www.mathkang.org/pdf/kangourou{}c.pdf"
+YEARS = range(2003, 2026)
 SOL_URL = "https://www.mathkang.org/concours/sol{}c.html"
+
+
+def pdf_url(year: int) -> str:
+    """Return the PDF URL for a given year.
+
+    Older papers (2003-2010) use cade{year}.pdf naming,
+    newer papers (2011+) use kangourou{year}c.pdf.
+    """
+    if year <= 2010:
+        return f"https://www.mathkang.org/pdf/cade{year}.pdf"
+    return f"https://www.mathkang.org/pdf/kangourou{year}c.pdf"
 OUT_DIR = pathlib.Path("kangourou")
 IMG_DIR = OUT_DIR / "img"
 TMP_DIR = pathlib.Path("/tmp/kangourou_pdf")
@@ -750,7 +760,7 @@ def main():
             throttle()
             try:
                 print(f"  Downloading PDF for {year}...")
-                pdf_data = fetch(PDF_URL.format(year), binary=True)
+                pdf_data = fetch(pdf_url(year), binary=True)
                 pdf_path.write_bytes(pdf_data)
             except Exception as exc:
                 print(f"  SKIP {year}: PDF download failed: {exc}")
