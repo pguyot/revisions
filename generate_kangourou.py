@@ -377,10 +377,15 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       border-color: var(--wrong) !important;
       color: #fff !important;
     }
+    .answers button.selected {
+      border-color: var(--moyen) !important;
+      background: color-mix(in srgb, var(--moyen) 25%, var(--btn-bg)) !important;
+    }
     .action-buttons {
       display: flex;
       gap: 0.75rem;
       justify-content: center;
+      flex-wrap: wrap;
     }
     .action-buttons button {
       font-size: 1rem;
@@ -401,23 +406,23 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
     }
     #start-screen h2 { font-size: 1.6rem; margin-bottom: 1rem; }
     #start-screen p { margin-bottom: 1.5rem; color: #666; }
-    #start-screen button {
+    .start-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .start-buttons button {
       font-size: 1.2rem;
       padding: 0.75rem 2.5rem;
       border: none;
       border-radius: 8px;
-      background: var(--moyen);
       color: #fff;
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    #start-screen button:hover { opacity: 0.85; }
+    .start-buttons button:hover { opacity: 0.85; }
 
     /* Statistics panel */
     #stats-panel {
       display: none;
       width: 100%;
-      max-width: 40rem;
+      max-width: 56rem;
       margin: 0 auto;
     }
     #stats-panel h2 { text-align: center; margin-bottom: 1rem; }
@@ -440,6 +445,7 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       display: flex;
       gap: 0.75rem;
       justify-content: center;
+      margin-top: 1.5rem;
     }
     .stats-actions button {
       font-size: 1rem;
@@ -465,6 +471,60 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
     .timer-display {
       font-variant-numeric: tabular-nums;
     }
+    .stats-section { margin-bottom: 1.5rem; }
+    .stats-section h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+    .stats-detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .stats-detail-table th, .stats-detail-table td {
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .stats-detail-table th {
+      background: var(--card-bg);
+      font-weight: 600;
+    }
+    .stats-detail-table a { color: var(--moyen); }
+    .histogram-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+    .histogram-wrap canvas {
+      width: 100%;
+      max-width: 50rem;
+      height: 220px;
+      display: block;
+      margin: 0 auto;
+    }
+    /* Kangourou nav */
+    .k-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+    .k-nav button {
+      min-width: 2.2rem;
+      padding: 0.25rem 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .k-nav button:hover { background: var(--btn-hover); }
+    .k-nav button.k-current { border-color: var(--moyen); background: color-mix(in srgb, var(--moyen) 20%, var(--btn-bg)); }
+    .k-nav button.k-answered { background: var(--card-bg); opacity: 0.7; }
+    .k-nav button.k-answered.k-current { opacity: 1; }
+    .k-countdown { color: var(--wrong); font-weight: 700; }
 
     @media (max-width: 600px) {
       header h1 { font-size: 1.1rem; }
@@ -478,7 +538,7 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
   <header>
     <h1>Kangourou des Mathématiques</h1>
     <div class="stats-bar" id="stats-bar" style="display:none">
-      <span>Score : <strong id="score-display">0</strong></span>
+      <span id="score-wrap">Score : <strong id="score-display">0</strong></span>
       <span>Question : <strong id="count-display">0</strong></span>
       <span class="timer-display">Temps : <strong id="timer-display">0:00</strong></span>
     </div>
@@ -491,10 +551,14 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       Répondez aux questions, passez celles que vous ne savez pas,<br>
       et cliquez sur <em>Arrêter</em> pour voir vos statistiques.
     </p>
-    <button onclick="startGame()">Commencer</button>
+    <div class="start-buttons">
+      <button style="background:var(--moyen)" onclick="startGame()">Entraînement libre</button>
+      <button style="background:var(--expert)" onclick="startKangourou()">Mode Kangourou</button>
+    </div>
   </div>
 
   <div id="game-area" style="display:none">
+    <div id="k-nav-bar" class="k-nav" style="display:none"></div>
     <div class="question-info">
       <span id="q-badge" class="badge"></span>
       <span id="q-info"></span>
@@ -503,7 +567,7 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       <img id="q-img" alt="Question" />
     </div>
     <div class="answers" id="answers-area"></div>
-    <div class="action-buttons">
+    <div class="action-buttons" id="action-buttons">
       <button onclick="skipQuestion()">Passer</button>
       <button onclick="stopGame()">Arrêter</button>
     </div>
@@ -525,7 +589,10 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       </thead>
       <tbody id="stats-body"></tbody>
     </table>
-    <div class="stats-actions">
+    <div id="stats-mistakes" class="stats-section"></div>
+    <div id="stats-slowest" class="stats-section"></div>
+    <div id="stats-histogram" class="stats-section"></div>
+    <div class="stats-actions" id="stats-actions">
       <button onclick="resumeGame()">Reprendre</button>
       <button class="primary" onclick="newGame()">Nouvelle partie</button>
     </div>
@@ -543,11 +610,13 @@ const SCORING = {
 };
 
 const DIFF_LABELS = {
-  facile: 'Facile (Q1–8)',
-  moyen: 'Moyen (Q9–16)',
-  difficile: 'Difficile (Q17–24)',
-  expert: 'Expert (Q25–26)',
+  facile: 'Facile (Q1\u20138)',
+  moyen: 'Moyen (Q9\u201316)',
+  difficile: 'Difficile (Q17\u201324)',
+  expert: 'Expert (Q25\u201326)',
 };
+
+const KANGOUROU_TIME_MS = 50 * 60 * 1000;
 
 let pool = [];
 let current = null;
@@ -560,15 +629,25 @@ let answered = false;
 let nextQuestionTimer = null;
 let pauseStart = 0;
 let totalPausedMs = 0;
+let questionLog = [];
 
 // Per-difficulty tracking
 let stats = {};
+
+// Kangourou mode state
+let kangourouMode = false;
+let kQuestions = [];
+let kAnswers = [];
+let kTimes = [];
+let kIndex = 0;
+let kFinished = false;
 
 function resetStats() {
   stats = {};
   for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
     stats[d] = { attempted: 0, correct: 0, timeMs: 0 };
   }
+  questionLog = [];
 }
 
 function shuffle(arr) {
@@ -591,15 +670,37 @@ function formatTime(ms) {
 }
 
 function updateTimerDisplay() {
-  const elapsed = Date.now() - gameStartTime - totalPausedMs;
-  document.getElementById('timer-display').textContent = formatTime(elapsed);
+  if (kangourouMode) {
+    const elapsed = Date.now() - gameStartTime - totalPausedMs;
+    const remaining = Math.max(0, KANGOUROU_TIME_MS - elapsed);
+    const el = document.getElementById('timer-display');
+    el.textContent = formatTime(remaining);
+    if (remaining <= 5 * 60 * 1000) {
+      el.classList.add('k-countdown');
+    } else {
+      el.classList.remove('k-countdown');
+    }
+    if (remaining <= 0) {
+      finishKangourou();
+    }
+  } else {
+    const elapsed = Date.now() - gameStartTime - totalPausedMs;
+    document.getElementById('timer-display').textContent = formatTime(elapsed);
+  }
 }
 
 function startGame() {
+  kangourouMode = false;
+  kFinished = false;
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
   document.getElementById('stats-bar').style.display = 'flex';
   document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('k-nav-bar').style.display = 'none';
+  document.getElementById('score-wrap').style.display = '';
+  document.getElementById('action-buttons').innerHTML =
+    '<button onclick="skipQuestion()">Passer</button>' +
+    '<button onclick="stopGame()">Arr\u00eater</button>';
   score = 0;
   questionCount = 0;
   totalPausedMs = 0;
@@ -612,14 +713,203 @@ function startGame() {
   nextQuestion();
 }
 
+function startKangourou() {
+  kangourouMode = true;
+  kFinished = false;
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  document.getElementById('stats-bar').style.display = 'flex';
+  document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('score-wrap').style.display = 'none';
+  document.getElementById('k-nav-bar').style.display = 'flex';
+  document.getElementById('action-buttons').innerHTML =
+    '<button onclick="kPrev()">Pr\u00e9c\u00e9dent</button>' +
+    '<button onclick="kSkip()">Passer</button>' +
+    '<button onclick="kNext()">Suivant</button>' +
+    '<button onclick="confirmStopKangourou()">Terminer</button>';
+
+  // Select 8 facile + 8 moyen + 8 difficile + 2 expert
+  const byDiff = { facile: [], moyen: [], difficile: [], expert: [] };
+  for (const q of ALL_QUESTIONS) byDiff[q.difficulty].push(q);
+  for (const d in byDiff) shuffle(byDiff[d]);
+  kQuestions = [
+    ...byDiff.facile.slice(0, 8),
+    ...byDiff.moyen.slice(0, 8),
+    ...byDiff.difficile.slice(0, 8),
+    ...byDiff.expert.slice(0, 2),
+  ];
+  kAnswers = new Array(26).fill(null);
+  kTimes = new Array(26).fill(0);
+  kIndex = 0;
+
+  score = 0;
+  questionCount = 0;
+  totalPausedMs = 0;
+  pauseStart = 0;
+  resetStats();
+  gameStartTime = Date.now();
+  timerInterval = setInterval(updateTimerDisplay, 1000);
+  updateKNav();
+  showKQuestion(0);
+  updateScoreDisplay();
+}
+
+function updateKNav() {
+  const bar = document.getElementById('k-nav-bar');
+  bar.innerHTML = '';
+  for (let i = 0; i < kQuestions.length; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === kIndex) btn.classList.add('k-current');
+    if (kAnswers[i] !== null) btn.classList.add('k-answered');
+    btn.addEventListener('click', () => {
+      saveKTime();
+      showKQuestion(i);
+    });
+    bar.appendChild(btn);
+  }
+}
+
+function saveKTime() {
+  if (questionStartTime > 0) {
+    kTimes[kIndex] += Date.now() - questionStartTime;
+    questionStartTime = 0;
+  }
+}
+
+function showKQuestion(idx) {
+  kIndex = idx;
+  const q = kQuestions[idx];
+  current = q;
+  answered = kAnswers[idx] !== null;
+  questionStartTime = Date.now();
+
+  const badge = document.getElementById('q-badge');
+  badge.textContent = q.difficulty;
+  badge.className = 'badge badge-' + q.difficulty;
+  document.getElementById('q-info').textContent =
+    (idx + 1) + '/26 — Kangourou ' + q.year + ' — Q' + q.number;
+  document.getElementById('q-img').src = q.image;
+
+  const area = document.getElementById('answers-area');
+  area.innerHTML = '';
+  const isExpert = q.number >= 25;
+  const choices = isExpert
+    ? ['0','1','2','3','4','5','6','7','8','9']
+    : ['A','B','C','D','E'];
+  for (const ch of choices) {
+    const btn = document.createElement('button');
+    btn.textContent = ch;
+    if (kAnswers[idx] === ch) btn.classList.add('selected');
+    btn.addEventListener('click', () => handleKAnswer(ch));
+    area.appendChild(btn);
+  }
+  updateKNav();
+  document.getElementById('count-display').textContent = (idx + 1) + '/26';
+}
+
+function handleKAnswer(choice) {
+  kAnswers[kIndex] = choice;
+  // Re-render buttons to show selection
+  const area = document.getElementById('answers-area');
+  for (const btn of area.children) {
+    btn.classList.toggle('selected', btn.textContent === choice);
+  }
+  updateKNav();
+}
+
+function kPrev() {
+  if (kIndex > 0) {
+    saveKTime();
+    showKQuestion(kIndex - 1);
+  }
+}
+
+function kNext() {
+  if (kIndex < kQuestions.length - 1) {
+    saveKTime();
+    showKQuestion(kIndex + 1);
+  }
+}
+
+function kSkip() {
+  kAnswers[kIndex] = null;
+  const area = document.getElementById('answers-area');
+  for (const btn of area.children) btn.classList.remove('selected');
+  updateKNav();
+  // Move to next unanswered or next
+  for (let i = 1; i <= kQuestions.length; i++) {
+    const ni = (kIndex + i) % kQuestions.length;
+    if (kAnswers[ni] === null && ni !== kIndex) {
+      saveKTime();
+      showKQuestion(ni);
+      return;
+    }
+  }
+}
+
+function confirmStopKangourou() {
+  if (confirm('Terminer le mode Kangourou et voir les résultats ?')) {
+    finishKangourou();
+  }
+}
+
+function finishKangourou() {
+  if (kFinished) return;
+  kFinished = true;
+  saveKTime();
+  clearInterval(timerInterval);
+  // Compute score and stats from kAnswers
+  score = 0;
+  questionCount = 0;
+  resetStats();
+  questionLog = [];
+  for (let i = 0; i < kQuestions.length; i++) {
+    const q = kQuestions[i];
+    const d = q.difficulty;
+    const ans = kAnswers[i];
+    const elapsed = kTimes[i];
+    if (ans !== null) {
+      stats[d].attempted++;
+      stats[d].timeMs += elapsed;
+      questionCount++;
+      const ok = ans === q.answer;
+      if (ok) {
+        score += SCORING[d].correct;
+        stats[d].correct++;
+      } else {
+        score += SCORING[d].wrong;
+      }
+      questionLog.push({
+        question: q, userAnswer: ans, correct: ok,
+        timeMs: elapsed, skipped: false
+      });
+    } else {
+      // skipped
+      stats[d].timeMs += elapsed;
+      questionLog.push({
+        question: q, userAnswer: null, correct: false,
+        timeMs: elapsed, skipped: true
+      });
+    }
+  }
+  showStats();
+}
+
 function newGame() {
   startGame();
+}
+
+function newKangourou() {
+  startKangourou();
 }
 
 function updateScoreDisplay() {
   document.getElementById('score-display').textContent =
     Number.isInteger(score) ? score : score.toFixed(2);
-  document.getElementById('count-display').textContent = questionCount;
+  if (!kangourouMode) {
+    document.getElementById('count-display').textContent = questionCount;
+  }
 }
 
 function nextQuestion() {
@@ -635,7 +925,7 @@ function nextQuestion() {
 
   // Info
   document.getElementById('q-info').textContent =
-    'Kangourou ' + current.year + ' — Question ' + current.number;
+    'Kangourou ' + current.year + ' \u2014 Question ' + current.number;
 
   // Image
   document.getElementById('q-img').src = current.image;
@@ -680,6 +970,10 @@ function handleAnswer(choice, btn) {
       }
     }
   }
+  questionLog.push({
+    question: { ...current }, userAnswer: choice, correct: isCorrect,
+    timeMs: elapsed, skipped: false
+  });
   updateScoreDisplay();
   nextQuestionTimer = setTimeout(nextQuestion, isCorrect ? 600 : 1200);
 }
@@ -690,6 +984,10 @@ function skipQuestion() {
   const diff = current.difficulty;
   stats[diff].timeMs += elapsed;
   questionCount++;
+  questionLog.push({
+    question: { ...current }, userAnswer: null, correct: false,
+    timeMs: elapsed, skipped: true
+  });
   updateScoreDisplay();
   nextQuestion();
 }
@@ -699,12 +997,17 @@ function stopGame() {
   clearTimeout(nextQuestionTimer);
   nextQuestionTimer = null;
   pauseStart = Date.now();
+  showStats();
+}
+
+function showStats() {
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('stats-panel').style.display = 'block';
 
   document.getElementById('final-score').textContent =
     'Score : ' + (Number.isInteger(score) ? score : score.toFixed(2));
 
+  // Summary table
   const tbody = document.getElementById('stats-body');
   tbody.innerHTML = '';
   for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
@@ -712,10 +1015,10 @@ function stopGame() {
     const tr = document.createElement('tr');
     const rate = s.attempted > 0
       ? Math.round(100 * s.correct / s.attempted) + '%'
-      : '—';
+      : '\u2014';
     const avg = s.attempted > 0
       ? formatTime(Math.round(s.timeMs / s.attempted))
-      : '—';
+      : '\u2014';
     tr.innerHTML =
       '<td>' + DIFF_LABELS[d] + '</td>' +
       '<td>' + s.attempted + '</td>' +
@@ -725,6 +1028,167 @@ function stopGame() {
       '<td>' + avg + '</td>';
     tbody.appendChild(tr);
   }
+
+  // Mistakes section
+  const mistakesDiv = document.getElementById('stats-mistakes');
+  const mistakes = questionLog.filter(e => !e.correct && !e.skipped);
+  if (mistakes.length > 0) {
+    let h = '<h3>Erreurs</h3><table class="stats-detail-table"><thead><tr>' +
+      '<th>Question</th><th>Difficulté</th><th>Votre réponse</th><th>Bonne réponse</th><th>Temps</th>' +
+      '</tr></thead><tbody>';
+    for (const m of mistakes) {
+      const q = m.question;
+      const label = 'Kangourou ' + q.year + ' Q' + q.number;
+      h += '<tr>' +
+        '<td><a href="' + q.image + '" target="_blank">' + label + '</a></td>' +
+        '<td><span class="badge badge-' + q.difficulty + '">' + q.difficulty + '</span></td>' +
+        '<td><strong style="color:var(--wrong)">' + m.userAnswer + '</strong></td>' +
+        '<td><strong style="color:var(--correct)">' + q.answer + '</strong></td>' +
+        '<td>' + formatTime(m.timeMs) + '</td></tr>';
+    }
+    h += '</tbody></table>';
+    mistakesDiv.innerHTML = h;
+  } else {
+    mistakesDiv.innerHTML = '';
+  }
+
+  // Slowest correct/skipped per category (2 per category)
+  const slowestDiv = document.getElementById('stats-slowest');
+  let slowHtml = '';
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    const entries = questionLog.filter(e =>
+      e.question.difficulty === d && (e.correct || e.skipped)
+    );
+    entries.sort((a, b) => b.timeMs - a.timeMs);
+    const top2 = entries.slice(0, 2);
+    if (top2.length > 0) {
+      slowHtml += '<h3>Plus lentes (' + DIFF_LABELS[d] + ')</h3>' +
+        '<table class="stats-detail-table"><thead><tr>' +
+        '<th>Question</th><th>Temps</th><th>Résultat</th>' +
+        '</tr></thead><tbody>';
+      for (const e of top2) {
+        const q = e.question;
+        const label = 'Kangourou ' + q.year + ' Q' + q.number;
+        const res = e.skipped ? 'Passée' : 'Correcte';
+        slowHtml += '<tr>' +
+          '<td><a href="' + q.image + '" target="_blank">' + label + '</a></td>' +
+          '<td>' + formatTime(e.timeMs) + '</td>' +
+          '<td>' + res + '</td></tr>';
+      }
+      slowHtml += '</tbody></table>';
+    }
+  }
+  slowestDiv.innerHTML = slowHtml;
+
+  // Histogram of answer times
+  const histDiv = document.getElementById('stats-histogram');
+  const answered_entries = questionLog.filter(e => !e.skipped);
+  if (answered_entries.length > 0) {
+    histDiv.innerHTML = '<h3>Distribution des temps de réponse</h3>' +
+      '<div class="histogram-wrap"><canvas id="hist-canvas"></canvas></div>';
+    drawHistogram(answered_entries);
+  } else {
+    histDiv.innerHTML = '';
+  }
+
+  // Actions
+  const actionsDiv = document.getElementById('stats-actions');
+  if (kangourouMode) {
+    actionsDiv.innerHTML =
+      '<button class="primary" onclick="newKangourou()">Nouveau Kangourou</button>' +
+      '<button onclick="backToMenu()">Menu</button>';
+  } else {
+    actionsDiv.innerHTML =
+      '<button onclick="resumeGame()">Reprendre</button>' +
+      '<button class="primary" onclick="newGame()">Nouvelle partie</button>';
+  }
+}
+
+function drawHistogram(entries) {
+  const canvas = document.getElementById('hist-canvas');
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 500;
+  const h = canvas.clientHeight || 220;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Compute buckets (5s intervals)
+  const times = entries.map(e => e.timeMs / 1000);
+  const maxT = Math.max(...times);
+  const bucketSize = 5;
+  const nBuckets = Math.max(1, Math.ceil(maxT / bucketSize));
+  const buckets = new Array(nBuckets).fill(0);
+  const bucketColors = [];
+  for (let i = 0; i < nBuckets; i++) bucketColors.push([]);
+  const diffColorMap = {
+    facile: getComputedStyle(document.documentElement).getPropertyValue('--facile').trim(),
+    moyen: getComputedStyle(document.documentElement).getPropertyValue('--moyen').trim(),
+    difficile: getComputedStyle(document.documentElement).getPropertyValue('--difficile').trim(),
+    expert: getComputedStyle(document.documentElement).getPropertyValue('--expert').trim(),
+  };
+  for (const e of entries) {
+    const bi = Math.min(nBuckets - 1, Math.floor(e.timeMs / 1000 / bucketSize));
+    buckets[bi]++;
+    bucketColors[bi].push(e.question.difficulty);
+  }
+  const maxCount = Math.max(...buckets);
+
+  const padL = 35, padR = 10, padT = 10, padB = 30;
+  const chartW = w - padL - padR;
+  const chartH = h - padT - padB;
+  const barW = Math.max(4, chartW / nBuckets - 2);
+
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg').trim();
+  ctx.font = '11px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+
+  // Y axis labels
+  const ySteps = Math.min(maxCount, 5);
+  for (let i = 0; i <= ySteps; i++) {
+    const val = Math.round(maxCount * i / ySteps);
+    const y = padT + chartH - (chartH * i / ySteps);
+    ctx.fillText(val, padL - 5, y + 4);
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(padL, y);
+    ctx.lineTo(w - padR, y);
+    ctx.stroke();
+  }
+
+  // Bars - stacked by difficulty
+  ctx.textAlign = 'center';
+  for (let i = 0; i < nBuckets; i++) {
+    if (buckets[i] === 0) continue;
+    const x = padL + (chartW * i / nBuckets) + 1;
+    const totalH = (buckets[i] / maxCount) * chartH;
+    // Count per difficulty in this bucket
+    const counts = {};
+    for (const d of bucketColors[i]) counts[d] = (counts[d] || 0) + 1;
+    let yOff = 0;
+    for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+      if (!counts[d]) continue;
+      const segH = (counts[d] / buckets[i]) * totalH;
+      ctx.fillStyle = diffColorMap[d];
+      ctx.fillRect(x, padT + chartH - yOff - segH, barW, segH);
+      yOff += segH;
+    }
+    // X label
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--fg').trim();
+    if (nBuckets <= 20 || i % Math.ceil(nBuckets / 20) === 0) {
+      ctx.fillText(i * bucketSize + 's', x + barW / 2, h - padB + 15);
+    }
+  }
+}
+
+function backToMenu() {
+  document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('start-screen').style.display = 'block';
+  document.getElementById('stats-bar').style.display = 'none';
+  document.getElementById('k-nav-bar').style.display = 'none';
 }
 
 function resumeGame() {
