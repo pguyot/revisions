@@ -738,7 +738,6 @@ function startKangourou() {
     ...byDiff.difficile.slice(0, 8),
     ...byDiff.expert.slice(0, 2),
   ];
-  shuffle(kQuestions);
   kAnswers = new Array(26).fill(null);
   kTimes = new Array(26).fill(0);
   kIndex = 0;
