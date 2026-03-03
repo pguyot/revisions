@@ -314,6 +314,9 @@ let questionStartTime = 0;
 let gameStartTime = 0;
 let timerInterval = null;
 let answered = false;
+let nextQuestionTimer = null;
+let pauseStart = 0;
+let totalPausedMs = 0;
 
 // Per-difficulty tracking
 let stats = {};
@@ -345,7 +348,7 @@ function formatTime(ms) {
 }
 
 function updateTimerDisplay() {
-  const elapsed = Date.now() - gameStartTime;
+  const elapsed = Date.now() - gameStartTime - totalPausedMs;
   document.getElementById('timer-display').textContent = formatTime(elapsed);
 }
 
@@ -356,6 +359,8 @@ function startGame() {
   document.getElementById('stats-panel').style.display = 'none';
   score = 0;
   questionCount = 0;
+  totalPausedMs = 0;
+  pauseStart = 0;
   resetStats();
   refillPool();
   gameStartTime = Date.now();
@@ -433,7 +438,7 @@ function handleAnswer(choice, btn) {
     }
   }
   updateScoreDisplay();
-  setTimeout(nextQuestion, isCorrect ? 600 : 1200);
+  nextQuestionTimer = setTimeout(nextQuestion, isCorrect ? 600 : 1200);
 }
 
 function skipQuestion() {
@@ -448,6 +453,9 @@ function skipQuestion() {
 
 function stopGame() {
   clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimer);
+  nextQuestionTimer = null;
+  pauseStart = Date.now();
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('stats-panel').style.display = 'block';
 
@@ -477,9 +485,12 @@ function stopGame() {
 }
 
 function resumeGame() {
+  if (pauseStart) {
+    totalPausedMs += Date.now() - pauseStart;
+    pauseStart = 0;
+  }
   document.getElementById('stats-panel').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
-  gameStartTime = Date.now() - (questionCount > 0 ? Date.now() - gameStartTime : 0);
   timerInterval = setInterval(updateTimerDisplay, 1000);
   if (answered || !current) nextQuestion();
 }

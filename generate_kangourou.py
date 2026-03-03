@@ -12,6 +12,7 @@ import os
 import pathlib
 import re
 import shutil
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -35,6 +36,7 @@ def pdf_url(year: int) -> str:
     if year <= 2010:
         return f"https://www.mathkang.org/pdf/cade{year}.pdf"
     return f"https://www.mathkang.org/pdf/kangourou{year}c.pdf"
+
 OUT_DIR = pathlib.Path("kangourou")
 IMG_DIR = OUT_DIR / "img"
 TMP_DIR = pathlib.Path("/tmp/kangourou_pdf")
@@ -555,6 +557,9 @@ let questionStartTime = 0;
 let gameStartTime = 0;
 let timerInterval = null;
 let answered = false;
+let nextQuestionTimer = null;
+let pauseStart = 0;
+let totalPausedMs = 0;
 
 // Per-difficulty tracking
 let stats = {};
@@ -586,7 +591,7 @@ function formatTime(ms) {
 }
 
 function updateTimerDisplay() {
-  const elapsed = Date.now() - gameStartTime;
+  const elapsed = Date.now() - gameStartTime - totalPausedMs;
   document.getElementById('timer-display').textContent = formatTime(elapsed);
 }
 
@@ -597,6 +602,8 @@ function startGame() {
   document.getElementById('stats-panel').style.display = 'none';
   score = 0;
   questionCount = 0;
+  totalPausedMs = 0;
+  pauseStart = 0;
   resetStats();
   refillPool();
   gameStartTime = Date.now();
@@ -674,7 +681,7 @@ function handleAnswer(choice, btn) {
     }
   }
   updateScoreDisplay();
-  setTimeout(nextQuestion, isCorrect ? 600 : 1200);
+  nextQuestionTimer = setTimeout(nextQuestion, isCorrect ? 600 : 1200);
 }
 
 function skipQuestion() {
@@ -689,6 +696,9 @@ function skipQuestion() {
 
 function stopGame() {
   clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimer);
+  nextQuestionTimer = null;
+  pauseStart = Date.now();
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('stats-panel').style.display = 'block';
 
@@ -718,9 +728,12 @@ function stopGame() {
 }
 
 function resumeGame() {
+  if (pauseStart) {
+    totalPausedMs += Date.now() - pauseStart;
+    pauseStart = 0;
+  }
   document.getElementById('stats-panel').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
-  gameStartTime = Date.now() - (questionCount > 0 ? Date.now() - gameStartTime : 0);
   timerInterval = setInterval(updateTimerDisplay, 1000);
   if (answered || !current) nextQuestion();
 }
@@ -740,6 +753,7 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     all_questions: list[dict] = []
+    skipped_years: list[int] = []
     last_request = 0.0
 
     for year in YEARS:
@@ -764,6 +778,7 @@ def main():
                 pdf_path.write_bytes(pdf_data)
             except Exception as exc:
                 print(f"  SKIP {year}: PDF download failed: {exc}")
+                skipped_years.append(year)
                 continue
         else:
             print(f"  PDF already cached for {year}")
@@ -775,11 +790,13 @@ def main():
             sol_html = fetch(SOL_URL.format(year))
         except Exception as exc:
             print(f"  SKIP {year}: solutions download failed: {exc}")
+            skipped_years.append(year)
             continue
 
         answers = parse_answers(sol_html)
         if len(answers) < 24:
             print(f"  SKIP {year}: only found {len(answers)} answers (need >= 24)")
+            skipped_years.append(year)
             continue
         print(f"  Found {len(answers)} answers")
 
@@ -788,6 +805,7 @@ def main():
             doc = fitz.open(str(pdf_path))
         except Exception as exc:
             print(f"  SKIP {year}: cannot open PDF: {exc}")
+            skipped_years.append(year)
             continue
 
         img_out = IMG_DIR / str(year)
@@ -796,6 +814,7 @@ def main():
 
         if not results:
             print(f"  SKIP {year}: question cropping failed")
+            skipped_years.append(year)
             continue
 
         # Add answers to results
@@ -815,9 +834,13 @@ def main():
     print(f"\n{'='*50}")
     print(f"Total questions: {len(all_questions)}")
 
+    if skipped_years:
+        print(f"ERROR: failed to process years: {skipped_years}")
+        sys.exit(1)
+
     if not all_questions:
         print("ERROR: no questions extracted, aborting")
-        return
+        sys.exit(1)
 
     # --- Generate data.json ---
     data_path = OUT_DIR / "data.json"

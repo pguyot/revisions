@@ -25,7 +25,7 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install pymupdf
+        run: pip install pymupdf==1.27.1
 
       - name: Generate Kangourou game
         run: python generate_kangourou.py
