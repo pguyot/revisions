@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kangourou des Mathématiques — Jeu</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fff;
+      --fg: #222;
+      --card-bg: #f9f9f9;
+      --border: #ddd;
+      --btn-bg: #eee;
+      --btn-hover: #ddd;
+      --facile: #2e7d32;
+      --moyen: #1565c0;
+      --difficile: #e65100;
+      --expert: #b71c1c;
+      --correct: #4caf50;
+      --wrong: #f44336;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --fg: #e0e0e0;
+        --card-bg: #2a2a2a;
+        --border: #444;
+        --btn-bg: #333;
+        --btn-hover: #444;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .stats-bar {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .stats-bar span { white-space: nowrap; }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .badge-facile   { background: var(--facile); }
+    .badge-moyen    { background: var(--moyen); }
+    .badge-difficile{ background: var(--difficile); }
+    .badge-expert   { background: var(--expert); }
+
+    #game-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .question-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+    }
+    .question-img-wrap {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .question-img-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .answers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .answers button {
+      font-size: 1.15rem;
+      font-weight: 600;
+      min-width: 3.2rem;
+      padding: 0.6rem 1.1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .answers button:hover { background: var(--btn-hover); transform: scale(1.05); }
+    .answers button:active { transform: scale(0.97); }
+    .answers button.correct {
+      background: var(--correct) !important;
+      border-color: var(--correct) !important;
+      color: #fff !important;
+    }
+    .answers button.wrong {
+      background: var(--wrong) !important;
+      border-color: var(--wrong) !important;
+      color: #fff !important;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .action-buttons button {
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .action-buttons button:hover { background: var(--btn-hover); }
+
+    /* Start screen */
+    #start-screen {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    #start-screen h2 { font-size: 1.6rem; margin-bottom: 1rem; }
+    #start-screen p { margin-bottom: 1.5rem; color: #666; }
+    #start-screen button {
+      font-size: 1.2rem;
+      padding: 0.75rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--moyen);
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    #start-screen button:hover { opacity: 0.85; }
+
+    /* Statistics panel */
+    #stats-panel {
+      display: none;
+      width: 100%;
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+    #stats-panel h2 { text-align: center; margin-bottom: 1rem; }
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .stats-table th, .stats-table td {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .stats-table th {
+      background: var(--card-bg);
+      font-weight: 600;
+    }
+    .stats-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .stats-actions button {
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .stats-actions button:hover { background: var(--btn-hover); }
+    .stats-actions button.primary {
+      background: var(--moyen);
+      border-color: var(--moyen);
+      color: #fff;
+    }
+    .score-total {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .timer-display {
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.1rem; }
+      .stats-bar { font-size: 0.85rem; gap: 0.7rem; }
+      .answers button { min-width: 2.6rem; padding: 0.5rem 0.8rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Kangourou des Mathématiques</h1>
+    <div class="stats-bar" id="stats-bar" style="display:none">
+      <span>Score : <strong id="score-display">0</strong></span>
+      <span>Question : <strong id="count-display">0</strong></span>
+      <span class="timer-display">Temps : <strong id="timer-display">0:00</strong></span>
+    </div>
+  </header>
+
+  <div id="start-screen">
+    <h2>Entraînement Kangourou — Sujet C</h2>
+    <p>
+      Questions issues des concours Kangourou des mathématiques.<br>
+      Répondez aux questions, passez celles que vous ne savez pas,<br>
+      et cliquez sur <em>Arrêter</em> pour voir vos statistiques.
+    </p>
+    <button onclick="startGame()">Commencer</button>
+  </div>
+
+  <div id="game-area" style="display:none">
+    <div class="question-info">
+      <span id="q-badge" class="badge"></span>
+      <span id="q-info"></span>
+    </div>
+    <div class="question-img-wrap">
+      <img id="q-img" alt="Question" />
+    </div>
+    <div class="answers" id="answers-area"></div>
+    <div class="action-buttons">
+      <button onclick="skipQuestion()">Passer</button>
+      <button onclick="stopGame()">Arrêter</button>
+    </div>
+  </div>
+
+  <div id="stats-panel">
+    <h2>Résultats</h2>
+    <div class="score-total" id="final-score"></div>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Difficulté</th>
+          <th>Tentées</th>
+          <th>Correctes</th>
+          <th>Taux</th>
+          <th>Temps total</th>
+          <th>Temps moyen</th>
+        </tr>
+      </thead>
+      <tbody id="stats-body"></tbody>
+    </table>
+    <div class="stats-actions">
+      <button onclick="resumeGame()">Reprendre</button>
+      <button class="primary" onclick="newGame()">Nouvelle partie</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ALL_QUESTIONS = [{"year": 2003, "number": 1, "difficulty": "facile", "image": "img/2003/q1.png", "answer": "C"}, {"year": 2003, "number": 2, "difficulty": "facile", "image": "img/2003/q2.png", "answer": "A"}, {"year": 2003, "number": 3, "difficulty": "facile", "image": "img/2003/q3.png", "answer": "D"}, {"year": 2003, "number": 4, "difficulty": "facile", "image": "img/2003/q4.png", "answer": "E"}, {"year": 2003, "number": 5, "difficulty": "facile", "image": "img/2003/q5.png", "answer": "C"}, {"year": 2003, "number": 6, "difficulty": "facile", "image": "img/2003/q6.png", "answer": "A"}, {"year": 2003, "number": 7, "difficulty": "facile", "image": "img/2003/q7.png", "answer": "B"}, {"year": 2003, "number": 8, "difficulty": "facile", "image": "img/2003/q8.png", "answer": "D"}, {"year": 2003, "number": 9, "difficulty": "moyen", "image": "img/2003/q9.png", "answer": "B"}, {"year": 2003, "number": 10, "difficulty": "moyen", "image": "img/2003/q10.png", "answer": "B"}, {"year": 2003, "number": 11, "difficulty": "moyen", "image": "img/2003/q11.png", "answer": "D"}, {"year": 2003, "number": 12, "difficulty": "moyen", "image": "img/2003/q12.png", "answer": "E"}, {"year": 2003, "number": 13, "difficulty": "moyen", "image": "img/2003/q13.png", "answer": "C"}, {"year": 2003, "number": 14, "difficulty": "moyen", "image": "img/2003/q14.png", "answer": "D"}, {"year": 2003, "number": 15, "difficulty": "moyen", "image": "img/2003/q15.png", "answer": "C"}, {"year": 2003, "number": 16, "difficulty": "moyen", "image": "img/2003/q16.png", "answer": "B"}, {"year": 2003, "number": 17, "difficulty": "difficile", "image": "img/2003/q17.png", "answer": "C"}, {"year": 2003, "number": 18, "difficulty": "difficile", "image": "img/2003/q18.png", "answer": "D"}, {"year": 2003, "number": 19, "difficulty": "difficile", "image": "img/2003/q19.png", "answer": "E"}, {"year": 2003, "number": 20, "difficulty": "difficile", "image": "img/2003/q20.png", "answer": "B"}, {"year": 2003, "number": 21, "difficulty": "difficile", "image": "img/2003/q21.png", "answer": "D"}, {"year": 2003, "number": 22, "difficulty": "difficile", "image": "img/2003/q22.png", "answer": "B"}, {"year": 2003, "number": 23, "difficulty": "difficile", "image": "img/2003/q23.png", "answer": "B"}, {"year": 2003, "number": 24, "difficulty": "difficile", "image": "img/2003/q24.png", "answer": "C"}, {"year": 2003, "number": 25, "difficulty": "expert", "image": "img/2003/q25.png", "answer": "6"}, {"year": 2003, "number": 26, "difficulty": "expert", "image": "img/2003/q26.png", "answer": "8"}, {"year": 2004, "number": 1, "difficulty": "facile", "image": "img/2004/q1.png", "answer": "C"}, {"year": 2004, "number": 2, "difficulty": "facile", "image": "img/2004/q2.png", "answer": "C"}, {"year": 2004, "number": 3, "difficulty": "facile", "image": "img/2004/q3.png", "answer": "D"}, {"year": 2004, "number": 4, "difficulty": "facile", "image": "img/2004/q4.png", "answer": "D"}, {"year": 2004, "number": 5, "difficulty": "facile", "image": "img/2004/q5.png", "answer": "A"}, {"year": 2004, "number": 6, "difficulty": "facile", "image": "img/2004/q6.png", "answer": "C"}, {"year": 2004, "number": 7, "difficulty": "facile", "image": "img/2004/q7.png", "answer": "B"}, {"year": 2004, "number": 8, "difficulty": "facile", "image": "img/2004/q8.png", "answer": "E"}, {"year": 2004, "number": 9, "difficulty": "moyen", "image": "img/2004/q9.png", "answer": "B"}, {"year": 2004, "number": 10, "difficulty": "moyen", "image": "img/2004/q10.png", "answer": "D"}, {"year": 2004, "number": 11, "difficulty": "moyen", "image": "img/2004/q11.png", "answer": "D"}, {"year": 2004, "number": 12, "difficulty": "moyen", "image": "img/2004/q12.png", "answer": "B"}, {"year": 2004, "number": 13, "difficulty": "moyen", "image": "img/2004/q13.png", "answer": "C"}, {"year": 2004, "number": 14, "difficulty": "moyen", "image": "img/2004/q14.png", "answer": "E"}, {"year": 2004, "number": 15, "difficulty": "moyen", "image": "img/2004/q15.png", "answer": "C"}, {"year": 2004, "number": 16, "difficulty": "moyen", "image": "img/2004/q16.png", "answer": "C"}, {"year": 2004, "number": 17, "difficulty": "difficile", "image": "img/2004/q17.png", "answer": "C"}, {"year": 2004, "number": 18, "difficulty": "difficile", "image": "img/2004/q18.png", "answer": "B"}, {"year": 2004, "number": 19, "difficulty": "difficile", "image": "img/2004/q19.png", "answer": "A"}, {"year": 2004, "number": 20, "difficulty": "difficile", "image": "img/2004/q20.png", "answer": "B"}, {"year": 2004, "number": 21, "difficulty": "difficile", "image": "img/2004/q21.png", "answer": "B"}, {"year": 2004, "number": 22, "difficulty": "difficile", "image": "img/2004/q22.png", "answer": "A"}, {"year": 2004, "number": 23, "difficulty": "difficile", "image": "img/2004/q23.png", "answer": "B"}, {"year": 2004, "number": 24, "difficulty": "difficile", "image": "img/2004/q24.png", "answer": "C"}, {"year": 2004, "number": 25, "difficulty": "expert", "image": "img/2004/q25.png", "answer": "6"}, {"year": 2004, "number": 26, "difficulty": "expert", "image": "img/2004/q26.png", "answer": "4"}, {"year": 2005, "number": 1, "difficulty": "facile", "image": "img/2005/q1.png", "answer": "B"}, {"year": 2005, "number": 2, "difficulty": "facile", "image": "img/2005/q2.png", "answer": "B"}, {"year": 2005, "number": 3, "difficulty": "facile", "image": "img/2005/q3.png", "answer": "B"}, {"year": 2005, "number": 4, "difficulty": "facile", "image": "img/2005/q4.png", "answer": "D"}, {"year": 2005, "number": 5, "difficulty": "facile", "image": "img/2005/q5.png", "answer": "E"}, {"year": 2005, "number": 6, "difficulty": "facile", "image": "img/2005/q6.png", "answer": "E"}, {"year": 2005, "number": 7, "difficulty": "facile", "image": "img/2005/q7.png", "answer": "C"}, {"year": 2005, "number": 8, "difficulty": "facile", "image": "img/2005/q8.png", "answer": "E"}, {"year": 2005, "number": 9, "difficulty": "moyen", "image": "img/2005/q9.png", "answer": "C"}, {"year": 2005, "number": 10, "difficulty": "moyen", "image": "img/2005/q10.png", "answer": "B"}, {"year": 2005, "number": 11, "difficulty": "moyen", "image": "img/2005/q11.png", "answer": "D"}, {"year": 2005, "number": 12, "difficulty": "moyen", "image": "img/2005/q12.png", "answer": "C"}, {"year": 2005, "number": 13, "difficulty": "moyen", "image": "img/2005/q13.png", "answer": "E"}, {"year": 2005, "number": 14, "difficulty": "moyen", "image": "img/2005/q14.png", "answer": "D"}, {"year": 2005, "number": 15, "difficulty": "moyen", "image": "img/2005/q15.png", "answer": "D"}, {"year": 2005, "number": 16, "difficulty": "moyen", "image": "img/2005/q16.png", "answer": "C"}, {"year": 2005, "number": 17, "difficulty": "difficile", "image": "img/2005/q17.png", "answer": "D"}, {"year": 2005, "number": 18, "difficulty": "difficile", "image": "img/2005/q18.png", "answer": "B"}, {"year": 2005, "number": 19, "difficulty": "difficile", "image": "img/2005/q19.png", "answer": "C"}, {"year": 2005, "number": 20, "difficulty": "difficile", "image": "img/2005/q20.png", "answer": "D"}, {"year": 2005, "number": 21, "difficulty": "difficile", "image": "img/2005/q21.png", "answer": "D"}, {"year": 2005, "number": 22, "difficulty": "difficile", "image": "img/2005/q22.png", "answer": "E"}, {"year": 2005, "number": 23, "difficulty": "difficile", "image": "img/2005/q23.png", "answer": "A"}, {"year": 2005, "number": 24, "difficulty": "difficile", "image": "img/2005/q24.png", "answer": "B"}, {"year": 2005, "number": 25, "difficulty": "expert", "image": "img/2005/q25.png", "answer": "8"}, {"year": 2005, "number": 26, "difficulty": "expert", "image": "img/2005/q26.png", "answer": "8"}, {"year": 2006, "number": 1, "difficulty": "facile", "image": "img/2006/q1.png", "answer": "B"}, {"year": 2006, "number": 2, "difficulty": "facile", "image": "img/2006/q2.png", "answer": "D"}, {"year": 2006, "number": 3, "difficulty": "facile", "image": "img/2006/q3.png", "answer": "D"}, {"year": 2006, "number": 4, "difficulty": "facile", "image": "img/2006/q4.png", "answer": "E"}, {"year": 2006, "number": 5, "difficulty": "facile", "image": "img/2006/q5.png", "answer": "D"}, {"year": 2006, "number": 6, "difficulty": "facile", "image": "img/2006/q6.png", "answer": "D"}, {"year": 2006, "number": 7, "difficulty": "facile", "image": "img/2006/q7.png", "answer": "B"}, {"year": 2006, "number": 8, "difficulty": "facile", "image": "img/2006/q8.png", "answer": "C"}, {"year": 2006, "number": 9, "difficulty": "moyen", "image": "img/2006/q9.png", "answer": "D"}, {"year": 2006, "number": 10, "difficulty": "moyen", "image": "img/2006/q10.png", "answer": "B"}, {"year": 2006, "number": 11, "difficulty": "moyen", "image": "img/2006/q11.png", "answer": "D"}, {"year": 2006, "number": 12, "difficulty": "moyen", "image": "img/2006/q12.png", "answer": "B"}, {"year": 2006, "number": 13, "difficulty": "moyen", "image": "img/2006/q13.png", "answer": "B"}, {"year": 2006, "number": 14, "difficulty": "moyen", "image": "img/2006/q14.png", "answer": "C"}, {"year": 2006, "number": 15, "difficulty": "moyen", "image": "img/2006/q15.png", "answer": "B"}, {"year": 2006, "number": 16, "difficulty": "moyen", "image": "img/2006/q16.png", "answer": "D"}, {"year": 2006, "number": 17, "difficulty": "difficile", "image": "img/2006/q17.png", "answer": "A"}, {"year": 2006, "number": 18, "difficulty": "difficile", "image": "img/2006/q18.png", "answer": "A"}, {"year": 2006, "number": 19, "difficulty": "difficile", "image": "img/2006/q19.png", "answer": "E"}, {"year": 2006, "number": 20, "difficulty": "difficile", "image": "img/2006/q20.png", "answer": "D"}, {"year": 2006, "number": 21, "difficulty": "difficile", "image": "img/2006/q21.png", "answer": "B"}, {"year": 2006, "number": 22, "difficulty": "difficile", "image": "img/2006/q22.png", "answer": "E"}, {"year": 2006, "number": 23, "difficulty": "difficile", "image": "img/2006/q23.png", "answer": "D"}, {"year": 2006, "number": 24, "difficulty": "difficile", "image": "img/2006/q24.png", "answer": "D"}, {"year": 2006, "number": 25, "difficulty": "expert", "image": "img/2006/q25.png", "answer": "8"}, {"year": 2006, "number": 26, "difficulty": "expert", "image": "img/2006/q26.png", "answer": "3"}, {"year": 2007, "number": 1, "difficulty": "facile", "image": "img/2007/q1.png", "answer": "B"}, {"year": 2007, "number": 2, "difficulty": "facile", "image": "img/2007/q2.png", "answer": "D"}, {"year": 2007, "number": 3, "difficulty": "facile", "image": "img/2007/q3.png", "answer": "A"}, {"year": 2007, "number": 4, "difficulty": "facile", "image": "img/2007/q4.png", "answer": "C"}, {"year": 2007, "number": 5, "difficulty": "facile", "image": "img/2007/q5.png", "answer": "B"}, {"year": 2007, "number": 6, "difficulty": "facile", "image": "img/2007/q6.png", "answer": "B"}, {"year": 2007, "number": 7, "difficulty": "facile", "image": "img/2007/q7.png", "answer": "E"}, {"year": 2007, "number": 8, "difficulty": "facile", "image": "img/2007/q8.png", "answer": "B"}, {"year": 2007, "number": 9, "difficulty": "moyen", "image": "img/2007/q9.png", "answer": "D"}, {"year": 2007, "number": 10, "difficulty": "moyen", "image": "img/2007/q10.png", "answer": "C"}, {"year": 2007, "number": 11, "difficulty": "moyen", "image": "img/2007/q11.png", "answer": "D"}, {"year": 2007, "number": 12, "difficulty": "moyen", "image": "img/2007/q12.png", "answer": "A"}, {"year": 2007, "number": 13, "difficulty": "moyen", "image": "img/2007/q13.png", "answer": "B"}, {"year": 2007, "number": 14, "difficulty": "moyen", "image": "img/2007/q14.png", "answer": "A"}, {"year": 2007, "number": 15, "difficulty": "moyen", "image": "img/2007/q15.png", "answer": "D"}, {"year": 2007, "number": 16, "difficulty": "moyen", "image": "img/2007/q16.png", "answer": "D"}, {"year": 2007, "number": 17, "difficulty": "difficile", "image": "img/2007/q17.png", "answer": "A"}, {"year": 2007, "number": 18, "difficulty": "difficile", "image": "img/2007/q18.png", "answer": "A"}, {"year": 2007, "number": 19, "difficulty": "difficile", "image": "img/2007/q19.png", "answer": "D"}, {"year": 2007, "number": 20, "difficulty": "difficile", "image": "img/2007/q20.png", "answer": "E"}, {"year": 2007, "number": 21, "difficulty": "difficile", "image": "img/2007/q21.png", "answer": "A"}, {"year": 2007, "number": 22, "difficulty": "difficile", "image": "img/2007/q22.png", "answer": "C"}, {"year": 2007, "number": 23, "difficulty": "difficile", "image": "img/2007/q23.png", "answer": "B"}, {"year": 2007, "number": 24, "difficulty": "difficile", "image": "img/2007/q24.png", "answer": "D"}, {"year": 2007, "number": 25, "difficulty": "expert", "image": "img/2007/q25.png", "answer": "9"}, {"year": 2007, "number": 26, "difficulty": "expert", "image": "img/2007/q26.png", "answer": "8"}, {"year": 2008, "number": 1, "difficulty": "facile", "image": "img/2008/q1.png", "answer": "D"}, {"year": 2008, "number": 2, "difficulty": "facile", "image": "img/2008/q2.png", "answer": "B"}, {"year": 2008, "number": 3, "difficulty": "facile", "image": "img/2008/q3.png", "answer": "C"}, {"year": 2008, "number": 4, "difficulty": "facile", "image": "img/2008/q4.png", "answer": "A"}, {"year": 2008, "number": 5, "difficulty": "facile", "image": "img/2008/q5.png", "answer": "D"}, {"year": 2008, "number": 6, "difficulty": "facile", "image": "img/2008/q6.png", "answer": "D"}, {"year": 2008, "number": 7, "difficulty": "facile", "image": "img/2008/q7.png", "answer": "C"}, {"year": 2008, "number": 8, "difficulty": "facile", "image": "img/2008/q8.png", "answer": "B"}, {"year": 2008, "number": 9, "difficulty": "moyen", "image": "img/2008/q9.png", "answer": "C"}, {"year": 2008, "number": 10, "difficulty": "moyen", "image": "img/2008/q10.png", "answer": "D"}, {"year": 2008, "number": 11, "difficulty": "moyen", "image": "img/2008/q11.png", "answer": "E"}, {"year": 2008, "number": 12, "difficulty": "moyen", "image": "img/2008/q12.png", "answer": "A"}, {"year": 2008, "number": 13, "difficulty": "moyen", "image": "img/2008/q13.png", "answer": "C"}, {"year": 2008, "number": 14, "difficulty": "moyen", "image": "img/2008/q14.png", "answer": "D"}, {"year": 2008, "number": 15, "difficulty": "moyen", "image": "img/2008/q15.png", "answer": "C"}, {"year": 2008, "number": 16, "difficulty": "moyen", "image": "img/2008/q16.png", "answer": "A"}, {"year": 2008, "number": 17, "difficulty": "difficile", "image": "img/2008/q17.png", "answer": "D"}, {"year": 2008, "number": 18, "difficulty": "difficile", "image": "img/2008/q18.png", "answer": "D"}, {"year": 2008, "number": 19, "difficulty": "difficile", "image": "img/2008/q19.png", "answer": "B"}, {"year": 2008, "number": 20, "difficulty": "difficile", "image": "img/2008/q20.png", "answer": "C"}, {"year": 2008, "number": 21, "difficulty": "difficile", "image": "img/2008/q21.png", "answer": "D"}, {"year": 2008, "number": 22, "difficulty": "difficile", "image": "img/2008/q22.png", "answer": "D"}, {"year": 2008, "number": 23, "difficulty": "difficile", "image": "img/2008/q23.png", "answer": "A"}, {"year": 2008, "number": 24, "difficulty": "difficile", "image": "img/2008/q24.png", "answer": "B"}, {"year": 2008, "number": 25, "difficulty": "expert", "image": "img/2008/q25.png", "answer": "8"}, {"year": 2008, "number": 26, "difficulty": "expert", "image": "img/2008/q26.png", "answer": "8"}, {"year": 2009, "number": 1, "difficulty": "facile", "image": "img/2009/q1.png", "answer": "C"}, {"year": 2009, "number": 2, "difficulty": "facile", "image": "img/2009/q2.png", "answer": "D"}, {"year": 2009, "number": 3, "difficulty": "facile", "image": "img/2009/q3.png", "answer": "C"}, {"year": 2009, "number": 4, "difficulty": "facile", "image": "img/2009/q4.png", "answer": "D"}, {"year": 2009, "number": 5, "difficulty": "facile", "image": "img/2009/q5.png", "answer": "B"}, {"year": 2009, "number": 6, "difficulty": "facile", "image": "img/2009/q6.png", "answer": "C"}, {"year": 2009, "number": 7, "difficulty": "facile", "image": "img/2009/q7.png", "answer": "C"}, {"year": 2009, "number": 8, "difficulty": "facile", "image": "img/2009/q8.png", "answer": "C"}, {"year": 2009, "number": 9, "difficulty": "moyen", "image": "img/2009/q9.png", "answer": "C"}, {"year": 2009, "number": 10, "difficulty": "moyen", "image": "img/2009/q10.png", "answer": "D"}, {"year": 2009, "number": 11, "difficulty": "moyen", "image": "img/2009/q11.png", "answer": "C"}, {"year": 2009, "number": 12, "difficulty": "moyen", "image": "img/2009/q12.png", "answer": "A"}, {"year": 2009, "number": 13, "difficulty": "moyen", "image": "img/2009/q13.png", "answer": "B"}, {"year": 2009, "number": 14, "difficulty": "moyen", "image": "img/2009/q14.png", "answer": "C"}, {"year": 2009, "number": 15, "difficulty": "moyen", "image": "img/2009/q15.png", "answer": "B"}, {"year": 2009, "number": 16, "difficulty": "moyen", "image": "img/2009/q16.png", "answer": "A"}, {"year": 2009, "number": 17, "difficulty": "difficile", "image": "img/2009/q17.png", "answer": "D"}, {"year": 2009, "number": 18, "difficulty": "difficile", "image": "img/2009/q18.png", "answer": "A"}, {"year": 2009, "number": 19, "difficulty": "difficile", "image": "img/2009/q19.png", "answer": "E"}, {"year": 2009, "number": 20, "difficulty": "difficile", "image": "img/2009/q20.png", "answer": "B"}, {"year": 2009, "number": 21, "difficulty": "difficile", "image": "img/2009/q21.png", "answer": "B"}, {"year": 2009, "number": 22, "difficulty": "difficile", "image": "img/2009/q22.png", "answer": "A"}, {"year": 2009, "number": 23, "difficulty": "difficile", "image": "img/2009/q23.png", "answer": "B"}, {"year": 2009, "number": 24, "difficulty": "difficile", "image": "img/2009/q24.png", "answer": "B"}, {"year": 2009, "number": 25, "difficulty": "expert", "image": "img/2009/q25.png", "answer": "9"}, {"year": 2009, "number": 26, "difficulty": "expert", "image": "img/2009/q26.png", "answer": "8"}, {"year": 2010, "number": 1, "difficulty": "facile", "image": "img/2010/q1.png", "answer": "B"}, {"year": 2010, "number": 2, "difficulty": "facile", "image": "img/2010/q2.png", "answer": "B"}, {"year": 2010, "number": 3, "difficulty": "facile", "image": "img/2010/q3.png", "answer": "C"}, {"year": 2010, "number": 4, "difficulty": "facile", "image": "img/2010/q4.png", "answer": "D"}, {"year": 2010, "number": 5, "difficulty": "facile", "image": "img/2010/q5.png", "answer": "C"}, {"year": 2010, "number": 6, "difficulty": "facile", "image": "img/2010/q6.png", "answer": "E"}, {"year": 2010, "number": 7, "difficulty": "facile", "image": "img/2010/q7.png", "answer": "E"}, {"year": 2010, "number": 8, "difficulty": "facile", "image": "img/2010/q8.png", "answer": "E"}, {"year": 2010, "number": 9, "difficulty": "moyen", "image": "img/2010/q9.png", "answer": "B"}, {"year": 2010, "number": 10, "difficulty": "moyen", "image": "img/2010/q10.png", "answer": "A"}, {"year": 2010, "number": 11, "difficulty": "moyen", "image": "img/2010/q11.png", "answer": "C"}, {"year": 2010, "number": 12, "difficulty": "moyen", "image": "img/2010/q12.png", "answer": "C"}, {"year": 2010, "number": 13, "difficulty": "moyen", "image": "img/2010/q13.png", "answer": "D"}, {"year": 2010, "number": 14, "difficulty": "moyen", "image": "img/2010/q14.png", "answer": "E"}, {"year": 2010, "number": 15, "difficulty": "moyen", "image": "img/2010/q15.png", "answer": "D"}, {"year": 2010, "number": 16, "difficulty": "moyen", "image": "img/2010/q16.png", "answer": "B"}, {"year": 2010, "number": 17, "difficulty": "difficile", "image": "img/2010/q17.png", "answer": "E"}, {"year": 2010, "number": 18, "difficulty": "difficile", "image": "img/2010/q18.png", "answer": "C"}, {"year": 2010, "number": 19, "difficulty": "difficile", "image": "img/2010/q19.png", "answer": "B"}, {"year": 2010, "number": 20, "difficulty": "difficile", "image": "img/2010/q20.png", "answer": "B"}, {"year": 2010, "number": 21, "difficulty": "difficile", "image": "img/2010/q21.png", "answer": "C"}, {"year": 2010, "number": 22, "difficulty": "difficile", "image": "img/2010/q22.png", "answer": "B"}, {"year": 2010, "number": 23, "difficulty": "difficile", "image": "img/2010/q23.png", "answer": "B"}, {"year": 2010, "number": 24, "difficulty": "difficile", "image": "img/2010/q24.png", "answer": "B"}, {"year": 2010, "number": 25, "difficulty": "expert", "image": "img/2010/q25.png", "answer": "6"}, {"year": 2010, "number": 26, "difficulty": "expert", "image": "img/2010/q26.png", "answer": "7"}, {"year": 2011, "number": 1, "difficulty": "facile", "image": "img/2011/q1.png", "answer": "D"}, {"year": 2011, "number": 2, "difficulty": "facile", "image": "img/2011/q2.png", "answer": "D"}, {"year": 2011, "number": 3, "difficulty": "facile", "image": "img/2011/q3.png", "answer": "C"}, {"year": 2011, "number": 4, "difficulty": "facile", "image": "img/2011/q4.png", "answer": "B"}, {"year": 2011, "number": 5, "difficulty": "facile", "image": "img/2011/q5.png", "answer": "E"}, {"year": 2011, "number": 6, "difficulty": "facile", "image": "img/2011/q6.png", "answer": "A"}, {"year": 2011, "number": 7, "difficulty": "facile", "image": "img/2011/q7.png", "answer": "D"}, {"year": 2011, "number": 8, "difficulty": "facile", "image": "img/2011/q8.png", "answer": "C"}, {"year": 2011, "number": 9, "difficulty": "moyen", "image": "img/2011/q9.png", "answer": "D"}, {"year": 2011, "number": 10, "difficulty": "moyen", "image": "img/2011/q10.png", "answer": "B"}, {"year": 2011, "number": 11, "difficulty": "moyen", "image": "img/2011/q11.png", "answer": "C"}, {"year": 2011, "number": 12, "difficulty": "moyen", "image": "img/2011/q12.png", "answer": "B"}, {"year": 2011, "number": 13, "difficulty": "moyen", "image": "img/2011/q13.png", "answer": "A"}, {"year": 2011, "number": 14, "difficulty": "moyen", "image": "img/2011/q14.png", "answer": "E"}, {"year": 2011, "number": 15, "difficulty": "moyen", "image": "img/2011/q15.png", "answer": "E"}, {"year": 2011, "number": 16, "difficulty": "moyen", "image": "img/2011/q16.png", "answer": "B"}, {"year": 2011, "number": 17, "difficulty": "difficile", "image": "img/2011/q17.png", "answer": "B"}, {"year": 2011, "number": 18, "difficulty": "difficile", "image": "img/2011/q18.png", "answer": "A"}, {"year": 2011, "number": 19, "difficulty": "difficile", "image": "img/2011/q19.png", "answer": "E"}, {"year": 2011, "number": 20, "difficulty": "difficile", "image": "img/2011/q20.png", "answer": "D"}, {"year": 2011, "number": 21, "difficulty": "difficile", "image": "img/2011/q21.png", "answer": "E"}, {"year": 2011, "number": 22, "difficulty": "difficile", "image": "img/2011/q22.png", "answer": "D"}, {"year": 2011, "number": 23, "difficulty": "difficile", "image": "img/2011/q23.png", "answer": "D"}, {"year": 2011, "number": 24, "difficulty": "difficile", "image": "img/2011/q24.png", "answer": "C"}, {"year": 2011, "number": 25, "difficulty": "expert", "image": "img/2011/q25.png", "answer": "2"}, {"year": 2011, "number": 26, "difficulty": "expert", "image": "img/2011/q26.png", "answer": "2"}, {"year": 2012, "number": 1, "difficulty": "facile", "image": "img/2012/q1.png", "answer": "D"}, {"year": 2012, "number": 2, "difficulty": "facile", "image": "img/2012/q2.png", "answer": "C"}, {"year": 2012, "number": 3, "difficulty": "facile", "image": "img/2012/q3.png", "answer": "E"}, {"year": 2012, "number": 4, "difficulty": "facile", "image": "img/2012/q4.png", "answer": "B"}, {"year": 2012, "number": 5, "difficulty": "facile", "image": "img/2012/q5.png", "answer": "E"}, {"year": 2012, "number": 6, "difficulty": "facile", "image": "img/2012/q6.png", "answer": "C"}, {"year": 2012, "number": 7, "difficulty": "facile", "image": "img/2012/q7.png", "answer": "D"}, {"year": 2012, "number": 8, "difficulty": "facile", "image": "img/2012/q8.png", "answer": "C"}, {"year": 2012, "number": 9, "difficulty": "moyen", "image": "img/2012/q9.png", "answer": "E"}, {"year": 2012, "number": 10, "difficulty": "moyen", "image": "img/2012/q10.png", "answer": "D"}, {"year": 2012, "number": 11, "difficulty": "moyen", "image": "img/2012/q11.png", "answer": "D"}, {"year": 2012, "number": 12, "difficulty": "moyen", "image": "img/2012/q12.png", "answer": "D"}, {"year": 2012, "number": 13, "difficulty": "moyen", "image": "img/2012/q13.png", "answer": "C"}, {"year": 2012, "number": 14, "difficulty": "moyen", "image": "img/2012/q14.png", "answer": "D"}, {"year": 2012, "number": 15, "difficulty": "moyen", "image": "img/2012/q15.png", "answer": "B"}, {"year": 2012, "number": 16, "difficulty": "moyen", "image": "img/2012/q16.png", "answer": "D"}, {"year": 2012, "number": 17, "difficulty": "difficile", "image": "img/2012/q17.png", "answer": "E"}, {"year": 2012, "number": 18, "difficulty": "difficile", "image": "img/2012/q18.png", "answer": "E"}, {"year": 2012, "number": 19, "difficulty": "difficile", "image": "img/2012/q19.png", "answer": "C"}, {"year": 2012, "number": 20, "difficulty": "difficile", "image": "img/2012/q20.png", "answer": "C"}, {"year": 2012, "number": 21, "difficulty": "difficile", "image": "img/2012/q21.png", "answer": "D"}, {"year": 2012, "number": 22, "difficulty": "difficile", "image": "img/2012/q22.png", "answer": "D"}, {"year": 2012, "number": 23, "difficulty": "difficile", "image": "img/2012/q23.png", "answer": "E"}, {"year": 2012, "number": 24, "difficulty": "difficile", "image": "img/2012/q24.png", "answer": "B"}, {"year": 2012, "number": 25, "difficulty": "expert", "image": "img/2012/q25.png", "answer": "5"}, {"year": 2012, "number": 26, "difficulty": "expert", "image": "img/2012/q26.png", "answer": "5"}, {"year": 2013, "number": 1, "difficulty": "facile", "image": "img/2013/q1.png", "answer": "B"}, {"year": 2013, "number": 2, "difficulty": "facile", "image": "img/2013/q2.png", "answer": "D"}, {"year": 2013, "number": 3, "difficulty": "facile", "image": "img/2013/q3.png", "answer": "C"}, {"year": 2013, "number": 4, "difficulty": "facile", "image": "img/2013/q4.png", "answer": "E"}, {"year": 2013, "number": 5, "difficulty": "facile", "image": "img/2013/q5.png", "answer": "D"}, {"year": 2013, "number": 6, "difficulty": "facile", "image": "img/2013/q6.png", "answer": "D"}, {"year": 2013, "number": 7, "difficulty": "facile", "image": "img/2013/q7.png", "answer": "E"}, {"year": 2013, "number": 8, "difficulty": "facile", "image": "img/2013/q8.png", "answer": "C"}, {"year": 2013, "number": 9, "difficulty": "moyen", "image": "img/2013/q9.png", "answer": "C"}, {"year": 2013, "number": 10, "difficulty": "moyen", "image": "img/2013/q10.png", "answer": "B"}, {"year": 2013, "number": 11, "difficulty": "moyen", "image": "img/2013/q11.png", "answer": "E"}, {"year": 2013, "number": 12, "difficulty": "moyen", "image": "img/2013/q12.png", "answer": "A"}, {"year": 2013, "number": 13, "difficulty": "moyen", "image": "img/2013/q13.png", "answer": "E"}, {"year": 2013, "number": 14, "difficulty": "moyen", "image": "img/2013/q14.png", "answer": "C"}, {"year": 2013, "number": 15, "difficulty": "moyen", "image": "img/2013/q15.png", "answer": "E"}, {"year": 2013, "number": 16, "difficulty": "moyen", "image": "img/2013/q16.png", "answer": "B"}, {"year": 2013, "number": 17, "difficulty": "difficile", "image": "img/2013/q17.png", "answer": "A"}, {"year": 2013, "number": 18, "difficulty": "difficile", "image": "img/2013/q18.png", "answer": "C"}, {"year": 2013, "number": 19, "difficulty": "difficile", "image": "img/2013/q19.png", "answer": "B"}, {"year": 2013, "number": 20, "difficulty": "difficile", "image": "img/2013/q20.png", "answer": "B"}, {"year": 2013, "number": 21, "difficulty": "difficile", "image": "img/2013/q21.png", "answer": "B"}, {"year": 2013, "number": 22, "difficulty": "difficile", "image": "img/2013/q22.png", "answer": "D"}, {"year": 2013, "number": 23, "difficulty": "difficile", "image": "img/2013/q23.png", "answer": "B"}, {"year": 2013, "number": 24, "difficulty": "difficile", "image": "img/2013/q24.png", "answer": "B"}, {"year": 2013, "number": 25, "difficulty": "expert", "image": "img/2013/q25.png", "answer": "1"}, {"year": 2013, "number": 26, "difficulty": "expert", "image": "img/2013/q26.png", "answer": "9"}, {"year": 2014, "number": 1, "difficulty": "facile", "image": "img/2014/q1.png", "answer": "D"}, {"year": 2014, "number": 2, "difficulty": "facile", "image": "img/2014/q2.png", "answer": "E"}, {"year": 2014, "number": 3, "difficulty": "facile", "image": "img/2014/q3.png", "answer": "C"}, {"year": 2014, "number": 4, "difficulty": "facile", "image": "img/2014/q4.png", "answer": "C"}, {"year": 2014, "number": 5, "difficulty": "facile", "image": "img/2014/q5.png", "answer": "B"}, {"year": 2014, "number": 6, "difficulty": "facile", "image": "img/2014/q6.png", "answer": "E"}, {"year": 2014, "number": 7, "difficulty": "facile", "image": "img/2014/q7.png", "answer": "C"}, {"year": 2014, "number": 8, "difficulty": "facile", "image": "img/2014/q8.png", "answer": "E"}, {"year": 2014, "number": 9, "difficulty": "moyen", "image": "img/2014/q9.png", "answer": "D"}, {"year": 2014, "number": 10, "difficulty": "moyen", "image": "img/2014/q10.png", "answer": "E"}, {"year": 2014, "number": 11, "difficulty": "moyen", "image": "img/2014/q11.png", "answer": "D"}, {"year": 2014, "number": 12, "difficulty": "moyen", "image": "img/2014/q12.png", "answer": "C"}, {"year": 2014, "number": 13, "difficulty": "moyen", "image": "img/2014/q13.png", "answer": "A"}, {"year": 2014, "number": 14, "difficulty": "moyen", "image": "img/2014/q14.png", "answer": "E"}, {"year": 2014, "number": 15, "difficulty": "moyen", "image": "img/2014/q15.png", "answer": "E"}, {"year": 2014, "number": 16, "difficulty": "moyen", "image": "img/2014/q16.png", "answer": "A"}, {"year": 2014, "number": 17, "difficulty": "difficile", "image": "img/2014/q17.png", "answer": "C"}, {"year": 2014, "number": 18, "difficulty": "difficile", "image": "img/2014/q18.png", "answer": "B"}, {"year": 2014, "number": 19, "difficulty": "difficile", "image": "img/2014/q19.png", "answer": "E"}, {"year": 2014, "number": 20, "difficulty": "difficile", "image": "img/2014/q20.png", "answer": "A"}, {"year": 2014, "number": 21, "difficulty": "difficile", "image": "img/2014/q21.png", "answer": "D"}, {"year": 2014, "number": 22, "difficulty": "difficile", "image": "img/2014/q22.png", "answer": "A"}, {"year": 2014, "number": 23, "difficulty": "difficile", "image": "img/2014/q23.png", "answer": "A"}, {"year": 2014, "number": 24, "difficulty": "difficile", "image": "img/2014/q24.png", "answer": "B"}, {"year": 2014, "number": 25, "difficulty": "expert", "image": "img/2014/q25.png", "answer": "1"}, {"year": 2014, "number": 26, "difficulty": "expert", "image": "img/2014/q26.png", "answer": "3"}, {"year": 2015, "number": 1, "difficulty": "facile", "image": "img/2015/q1.png", "answer": "B"}, {"year": 2015, "number": 2, "difficulty": "facile", "image": "img/2015/q2.png", "answer": "B"}, {"year": 2015, "number": 3, "difficulty": "facile", "image": "img/2015/q3.png", "answer": "C"}, {"year": 2015, "number": 4, "difficulty": "facile", "image": "img/2015/q4.png", "answer": "A"}, {"year": 2015, "number": 5, "difficulty": "facile", "image": "img/2015/q5.png", "answer": "D"}, {"year": 2015, "number": 6, "difficulty": "facile", "image": "img/2015/q6.png", "answer": "E"}, {"year": 2015, "number": 7, "difficulty": "facile", "image": "img/2015/q7.png", "answer": "D"}, {"year": 2015, "number": 8, "difficulty": "facile", "image": "img/2015/q8.png", "answer": "E"}, {"year": 2015, "number": 9, "difficulty": "moyen", "image": "img/2015/q9.png", "answer": "D"}, {"year": 2015, "number": 10, "difficulty": "moyen", "image": "img/2015/q10.png", "answer": "B"}, {"year": 2015, "number": 11, "difficulty": "moyen", "image": "img/2015/q11.png", "answer": "B"}, {"year": 2015, "number": 12, "difficulty": "moyen", "image": "img/2015/q12.png", "answer": "A"}, {"year": 2015, "number": 13, "difficulty": "moyen", "image": "img/2015/q13.png", "answer": "B"}, {"year": 2015, "number": 14, "difficulty": "moyen", "image": "img/2015/q14.png", "answer": "E"}, {"year": 2015, "number": 15, "difficulty": "moyen", "image": "img/2015/q15.png", "answer": "C"}, {"year": 2015, "number": 16, "difficulty": "moyen", "image": "img/2015/q16.png", "answer": "C"}, {"year": 2015, "number": 17, "difficulty": "difficile", "image": "img/2015/q17.png", "answer": "D"}, {"year": 2015, "number": 18, "difficulty": "difficile", "image": "img/2015/q18.png", "answer": "B"}, {"year": 2015, "number": 19, "difficulty": "difficile", "image": "img/2015/q19.png", "answer": "C"}, {"year": 2015, "number": 20, "difficulty": "difficile", "image": "img/2015/q20.png", "answer": "A"}, {"year": 2015, "number": 21, "difficulty": "difficile", "image": "img/2015/q21.png", "answer": "E"}, {"year": 2015, "number": 22, "difficulty": "difficile", "image": "img/2015/q22.png", "answer": "C"}, {"year": 2015, "number": 23, "difficulty": "difficile", "image": "img/2015/q23.png", "answer": "C"}, {"year": 2015, "number": 24, "difficulty": "difficile", "image": "img/2015/q24.png", "answer": "E"}, {"year": 2015, "number": 25, "difficulty": "expert", "image": "img/2015/q25.png", "answer": "6"}, {"year": 2015, "number": 26, "difficulty": "expert", "image": "img/2015/q26.png", "answer": "4"}, {"year": 2016, "number": 1, "difficulty": "facile", "image": "img/2016/q1.png", "answer": "D"}, {"year": 2016, "number": 2, "difficulty": "facile", "image": "img/2016/q2.png", "answer": "A"}, {"year": 2016, "number": 3, "difficulty": "facile", "image": "img/2016/q3.png", "answer": "E"}, {"year": 2016, "number": 4, "difficulty": "facile", "image": "img/2016/q4.png", "answer": "C"}, {"year": 2016, "number": 5, "difficulty": "facile", "image": "img/2016/q5.png", "answer": "E"}, {"year": 2016, "number": 6, "difficulty": "facile", "image": "img/2016/q6.png", "answer": "B"}, {"year": 2016, "number": 7, "difficulty": "facile", "image": "img/2016/q7.png", "answer": "D"}, {"year": 2016, "number": 8, "difficulty": "facile", "image": "img/2016/q8.png", "answer": "C"}, {"year": 2016, "number": 9, "difficulty": "moyen", "image": "img/2016/q9.png", "answer": "D"}, {"year": 2016, "number": 10, "difficulty": "moyen", "image": "img/2016/q10.png", "answer": "E"}, {"year": 2016, "number": 11, "difficulty": "moyen", "image": "img/2016/q11.png", "answer": "C"}, {"year": 2016, "number": 12, "difficulty": "moyen", "image": "img/2016/q12.png", "answer": "C"}, {"year": 2016, "number": 13, "difficulty": "moyen", "image": "img/2016/q13.png", "answer": "B"}, {"year": 2016, "number": 14, "difficulty": "moyen", "image": "img/2016/q14.png", "answer": "B"}, {"year": 2016, "number": 15, "difficulty": "moyen", "image": "img/2016/q15.png", "answer": "D"}, {"year": 2016, "number": 16, "difficulty": "moyen", "image": "img/2016/q16.png", "answer": "E"}, {"year": 2016, "number": 17, "difficulty": "difficile", "image": "img/2016/q17.png", "answer": "C"}, {"year": 2016, "number": 18, "difficulty": "difficile", "image": "img/2016/q18.png", "answer": "B"}, {"year": 2016, "number": 19, "difficulty": "difficile", "image": "img/2016/q19.png", "answer": "B"}, {"year": 2016, "number": 20, "difficulty": "difficile", "image": "img/2016/q20.png", "answer": "A"}, {"year": 2016, "number": 21, "difficulty": "difficile", "image": "img/2016/q21.png", "answer": "E"}, {"year": 2016, "number": 22, "difficulty": "difficile", "image": "img/2016/q22.png", "answer": "E"}, {"year": 2016, "number": 23, "difficulty": "difficile", "image": "img/2016/q23.png", "answer": "D"}, {"year": 2016, "number": 24, "difficulty": "difficile", "image": "img/2016/q24.png", "answer": "A"}, {"year": 2016, "number": 25, "difficulty": "expert", "image": "img/2016/q25.png", "answer": "5"}, {"year": 2016, "number": 26, "difficulty": "expert", "image": "img/2016/q26.png", "answer": "6"}, {"year": 2017, "number": 1, "difficulty": "facile", "image": "img/2017/q1.png", "answer": "E"}, {"year": 2017, "number": 2, "difficulty": "facile", "image": "img/2017/q2.png", "answer": "E"}, {"year": 2017, "number": 3, "difficulty": "facile", "image": "img/2017/q3.png", "answer": "C"}, {"year": 2017, "number": 4, "difficulty": "facile", "image": "img/2017/q4.png", "answer": "B"}, {"year": 2017, "number": 5, "difficulty": "facile", "image": "img/2017/q5.png", "answer": "D"}, {"year": 2017, "number": 6, "difficulty": "facile", "image": "img/2017/q6.png", "answer": "C"}, {"year": 2017, "number": 7, "difficulty": "facile", "image": "img/2017/q7.png", "answer": "B"}, {"year": 2017, "number": 8, "difficulty": "facile", "image": "img/2017/q8.png", "answer": "C"}, {"year": 2017, "number": 9, "difficulty": "moyen", "image": "img/2017/q9.png", "answer": "A"}, {"year": 2017, "number": 10, "difficulty": "moyen", "image": "img/2017/q10.png", "answer": "E"}, {"year": 2017, "number": 11, "difficulty": "moyen", "image": "img/2017/q11.png", "answer": "E"}, {"year": 2017, "number": 12, "difficulty": "moyen", "image": "img/2017/q12.png", "answer": "A"}, {"year": 2017, "number": 13, "difficulty": "moyen", "image": "img/2017/q13.png", "answer": "D"}, {"year": 2017, "number": 14, "difficulty": "moyen", "image": "img/2017/q14.png", "answer": "B"}, {"year": 2017, "number": 15, "difficulty": "moyen", "image": "img/2017/q15.png", "answer": "C"}, {"year": 2017, "number": 16, "difficulty": "moyen", "image": "img/2017/q16.png", "answer": "B"}, {"year": 2017, "number": 17, "difficulty": "difficile", "image": "img/2017/q17.png", "answer": "E"}, {"year": 2017, "number": 18, "difficulty": "difficile", "image": "img/2017/q18.png", "answer": "D"}, {"year": 2017, "number": 19, "difficulty": "difficile", "image": "img/2017/q19.png", "answer": "A"}, {"year": 2017, "number": 20, "difficulty": "difficile", "image": "img/2017/q20.png", "answer": "A"}, {"year": 2017, "number": 21, "difficulty": "difficile", "image": "img/2017/q21.png", "answer": "D"}, {"year": 2017, "number": 22, "difficulty": "difficile", "image": "img/2017/q22.png", "answer": "C"}, {"year": 2017, "number": 23, "difficulty": "difficile", "image": "img/2017/q23.png", "answer": "A"}, {"year": 2017, "number": 24, "difficulty": "difficile", "image": "img/2017/q24.png", "answer": "D"}, {"year": 2017, "number": 25, "difficulty": "expert", "image": "img/2017/q25.png", "answer": "6"}, {"year": 2017, "number": 26, "difficulty": "expert", "image": "img/2017/q26.png", "answer": "6"}, {"year": 2018, "number": 1, "difficulty": "facile", "image": "img/2018/q1.png", "answer": "B"}, {"year": 2018, "number": 2, "difficulty": "facile", "image": "img/2018/q2.png", "answer": "B"}, {"year": 2018, "number": 3, "difficulty": "facile", "image": "img/2018/q3.png", "answer": "C"}, {"year": 2018, "number": 4, "difficulty": "facile", "image": "img/2018/q4.png", "answer": "D"}, {"year": 2018, "number": 5, "difficulty": "facile", "image": "img/2018/q5.png", "answer": "D"}, {"year": 2018, "number": 6, "difficulty": "facile", "image": "img/2018/q6.png", "answer": "D"}, {"year": 2018, "number": 7, "difficulty": "facile", "image": "img/2018/q7.png", "answer": "C"}, {"year": 2018, "number": 8, "difficulty": "facile", "image": "img/2018/q8.png", "answer": "B"}, {"year": 2018, "number": 9, "difficulty": "moyen", "image": "img/2018/q9.png", "answer": "B"}, {"year": 2018, "number": 10, "difficulty": "moyen", "image": "img/2018/q10.png", "answer": "C"}, {"year": 2018, "number": 11, "difficulty": "moyen", "image": "img/2018/q11.png", "answer": "A"}, {"year": 2018, "number": 12, "difficulty": "moyen", "image": "img/2018/q12.png", "answer": "B"}, {"year": 2018, "number": 13, "difficulty": "moyen", "image": "img/2018/q13.png", "answer": "B"}, {"year": 2018, "number": 14, "difficulty": "moyen", "image": "img/2018/q14.png", "answer": "E"}, {"year": 2018, "number": 15, "difficulty": "moyen", "image": "img/2018/q15.png", "answer": "C"}, {"year": 2018, "number": 16, "difficulty": "moyen", "image": "img/2018/q16.png", "answer": "D"}, {"year": 2018, "number": 17, "difficulty": "difficile", "image": "img/2018/q17.png", "answer": "B"}, {"year": 2018, "number": 18, "difficulty": "difficile", "image": "img/2018/q18.png", "answer": "A"}, {"year": 2018, "number": 19, "difficulty": "difficile", "image": "img/2018/q19.png", "answer": "E"}, {"year": 2018, "number": 20, "difficulty": "difficile", "image": "img/2018/q20.png", "answer": "D"}, {"year": 2018, "number": 21, "difficulty": "difficile", "image": "img/2018/q21.png", "answer": "E"}, {"year": 2018, "number": 22, "difficulty": "difficile", "image": "img/2018/q22.png", "answer": "E"}, {"year": 2018, "number": 23, "difficulty": "difficile", "image": "img/2018/q23.png", "answer": "D"}, {"year": 2018, "number": 24, "difficulty": "difficile", "image": "img/2018/q24.png", "answer": "E"}, {"year": 2018, "number": 25, "difficulty": "expert", "image": "img/2018/q25.png", "answer": "3"}, {"year": 2018, "number": 26, "difficulty": "expert", "image": "img/2018/q26.png", "answer": "4"}, {"year": 2019, "number": 1, "difficulty": "facile", "image": "img/2019/q1.png", "answer": "D"}, {"year": 2019, "number": 2, "difficulty": "facile", "image": "img/2019/q2.png", "answer": "D"}, {"year": 2019, "number": 3, "difficulty": "facile", "image": "img/2019/q3.png", "answer": "E"}, {"year": 2019, "number": 4, "difficulty": "facile", "image": "img/2019/q4.png", "answer": "A"}, {"year": 2019, "number": 5, "difficulty": "facile", "image": "img/2019/q5.png", "answer": "D"}, {"year": 2019, "number": 6, "difficulty": "facile", "image": "img/2019/q6.png", "answer": "A"}, {"year": 2019, "number": 7, "difficulty": "facile", "image": "img/2019/q7.png", "answer": "D"}, {"year": 2019, "number": 8, "difficulty": "facile", "image": "img/2019/q8.png", "answer": "C"}, {"year": 2019, "number": 9, "difficulty": "moyen", "image": "img/2019/q9.png", "answer": "A"}, {"year": 2019, "number": 10, "difficulty": "moyen", "image": "img/2019/q10.png", "answer": "D"}, {"year": 2019, "number": 11, "difficulty": "moyen", "image": "img/2019/q11.png", "answer": "C"}, {"year": 2019, "number": 12, "difficulty": "moyen", "image": "img/2019/q12.png", "answer": "C"}, {"year": 2019, "number": 13, "difficulty": "moyen", "image": "img/2019/q13.png", "answer": "E"}, {"year": 2019, "number": 14, "difficulty": "moyen", "image": "img/2019/q14.png", "answer": "B"}, {"year": 2019, "number": 15, "difficulty": "moyen", "image": "img/2019/q15.png", "answer": "C"}, {"year": 2019, "number": 16, "difficulty": "moyen", "image": "img/2019/q16.png", "answer": "C"}, {"year": 2019, "number": 17, "difficulty": "difficile", "image": "img/2019/q17.png", "answer": "C"}, {"year": 2019, "number": 18, "difficulty": "difficile", "image": "img/2019/q18.png", "answer": "C"}, {"year": 2019, "number": 19, "difficulty": "difficile", "image": "img/2019/q19.png", "answer": "D"}, {"year": 2019, "number": 20, "difficulty": "difficile", "image": "img/2019/q20.png", "answer": "B"}, {"year": 2019, "number": 21, "difficulty": "difficile", "image": "img/2019/q21.png", "answer": "E"}, {"year": 2019, "number": 22, "difficulty": "difficile", "image": "img/2019/q22.png", "answer": "E"}, {"year": 2019, "number": 23, "difficulty": "difficile", "image": "img/2019/q23.png", "answer": "B"}, {"year": 2019, "number": 24, "difficulty": "difficile", "image": "img/2019/q24.png", "answer": "C"}, {"year": 2019, "number": 25, "difficulty": "expert", "image": "img/2019/q25.png", "answer": "5"}, {"year": 2019, "number": 26, "difficulty": "expert", "image": "img/2019/q26.png", "answer": "7"}, {"year": 2020, "number": 1, "difficulty": "facile", "image": "img/2020/q1.png", "answer": "D"}, {"year": 2020, "number": 2, "difficulty": "facile", "image": "img/2020/q2.png", "answer": "D"}, {"year": 2020, "number": 3, "difficulty": "facile", "image": "img/2020/q3.png", "answer": "C"}, {"year": 2020, "number": 4, "difficulty": "facile", "image": "img/2020/q4.png", "answer": "C"}, {"year": 2020, "number": 5, "difficulty": "facile", "image": "img/2020/q5.png", "answer": "C"}, {"year": 2020, "number": 6, "difficulty": "facile", "image": "img/2020/q6.png", "answer": "E"}, {"year": 2020, "number": 7, "difficulty": "facile", "image": "img/2020/q7.png", "answer": "D"}, {"year": 2020, "number": 8, "difficulty": "facile", "image": "img/2020/q8.png", "answer": "B"}, {"year": 2020, "number": 9, "difficulty": "moyen", "image": "img/2020/q9.png", "answer": "B"}, {"year": 2020, "number": 10, "difficulty": "moyen", "image": "img/2020/q10.png", "answer": "A"}, {"year": 2020, "number": 11, "difficulty": "moyen", "image": "img/2020/q11.png", "answer": "D"}, {"year": 2020, "number": 12, "difficulty": "moyen", "image": "img/2020/q12.png", "answer": "B"}, {"year": 2020, "number": 13, "difficulty": "moyen", "image": "img/2020/q13.png", "answer": "C"}, {"year": 2020, "number": 14, "difficulty": "moyen", "image": "img/2020/q14.png", "answer": "C"}, {"year": 2020, "number": 15, "difficulty": "moyen", "image": "img/2020/q15.png", "answer": "B"}, {"year": 2020, "number": 16, "difficulty": "moyen", "image": "img/2020/q16.png", "answer": "C"}, {"year": 2020, "number": 17, "difficulty": "difficile", "image": "img/2020/q17.png", "answer": "A"}, {"year": 2020, "number": 18, "difficulty": "difficile", "image": "img/2020/q18.png", "answer": "B"}, {"year": 2020, "number": 19, "difficulty": "difficile", "image": "img/2020/q19.png", "answer": "B"}, {"year": 2020, "number": 20, "difficulty": "difficile", "image": "img/2020/q20.png", "answer": "C"}, {"year": 2020, "number": 21, "difficulty": "difficile", "image": "img/2020/q21.png", "answer": "C"}, {"year": 2020, "number": 22, "difficulty": "difficile", "image": "img/2020/q22.png", "answer": "B"}, {"year": 2020, "number": 23, "difficulty": "difficile", "image": "img/2020/q23.png", "answer": "C"}, {"year": 2020, "number": 24, "difficulty": "difficile", "image": "img/2020/q24.png", "answer": "E"}, {"year": 2020, "number": 25, "difficulty": "expert", "image": "img/2020/q25.png", "answer": "8"}, {"year": 2020, "number": 26, "difficulty": "expert", "image": "img/2020/q26.png", "answer": "7"}, {"year": 2021, "number": 1, "difficulty": "facile", "image": "img/2021/q1.png", "answer": "D"}, {"year": 2021, "number": 2, "difficulty": "facile", "image": "img/2021/q2.png", "answer": "D"}, {"year": 2021, "number": 3, "difficulty": "facile", "image": "img/2021/q3.png", "answer": "A"}, {"year": 2021, "number": 4, "difficulty": "facile", "image": "img/2021/q4.png", "answer": "B"}, {"year": 2021, "number": 5, "difficulty": "facile", "image": "img/2021/q5.png", "answer": "A"}, {"year": 2021, "number": 6, "difficulty": "facile", "image": "img/2021/q6.png", "answer": "A"}, {"year": 2021, "number": 7, "difficulty": "facile", "image": "img/2021/q7.png", "answer": "E"}, {"year": 2021, "number": 8, "difficulty": "facile", "image": "img/2021/q8.png", "answer": "B"}, {"year": 2021, "number": 9, "difficulty": "moyen", "image": "img/2021/q9.png", "answer": "E"}, {"year": 2021, "number": 10, "difficulty": "moyen", "image": "img/2021/q10.png", "answer": "B"}, {"year": 2021, "number": 11, "difficulty": "moyen", "image": "img/2021/q11.png", "answer": "D"}, {"year": 2021, "number": 12, "difficulty": "moyen", "image": "img/2021/q12.png", "answer": "E"}, {"year": 2021, "number": 13, "difficulty": "moyen", "image": "img/2021/q13.png", "answer": "C"}, {"year": 2021, "number": 14, "difficulty": "moyen", "image": "img/2021/q14.png", "answer": "B"}, {"year": 2021, "number": 15, "difficulty": "moyen", "image": "img/2021/q15.png", "answer": "D"}, {"year": 2021, "number": 16, "difficulty": "moyen", "image": "img/2021/q16.png", "answer": "C"}, {"year": 2021, "number": 17, "difficulty": "difficile", "image": "img/2021/q17.png", "answer": "C"}, {"year": 2021, "number": 18, "difficulty": "difficile", "image": "img/2021/q18.png", "answer": "B"}, {"year": 2021, "number": 19, "difficulty": "difficile", "image": "img/2021/q19.png", "answer": "D"}, {"year": 2021, "number": 20, "difficulty": "difficile", "image": "img/2021/q20.png", "answer": "B"}, {"year": 2021, "number": 21, "difficulty": "difficile", "image": "img/2021/q21.png", "answer": "D"}, {"year": 2021, "number": 22, "difficulty": "difficile", "image": "img/2021/q22.png", "answer": "C"}, {"year": 2021, "number": 23, "difficulty": "difficile", "image": "img/2021/q23.png", "answer": "A"}, {"year": 2021, "number": 24, "difficulty": "difficile", "image": "img/2021/q24.png", "answer": "B"}, {"year": 2021, "number": 25, "difficulty": "expert", "image": "img/2021/q25.png", "answer": "3"}, {"year": 2021, "number": 26, "difficulty": "expert", "image": "img/2021/q26.png", "answer": "7"}, {"year": 2022, "number": 1, "difficulty": "facile", "image": "img/2022/q1.png", "answer": "E"}, {"year": 2022, "number": 2, "difficulty": "facile", "image": "img/2022/q2.png", "answer": "B"}, {"year": 2022, "number": 3, "difficulty": "facile", "image": "img/2022/q3.png", "answer": "C"}, {"year": 2022, "number": 4, "difficulty": "facile", "image": "img/2022/q4.png", "answer": "A"}, {"year": 2022, "number": 5, "difficulty": "facile", "image": "img/2022/q5.png", "answer": "C"}, {"year": 2022, "number": 6, "difficulty": "facile", "image": "img/2022/q6.png", "answer": "B"}, {"year": 2022, "number": 7, "difficulty": "facile", "image": "img/2022/q7.png", "answer": "C"}, {"year": 2022, "number": 8, "difficulty": "facile", "image": "img/2022/q8.png", "answer": "E"}, {"year": 2022, "number": 9, "difficulty": "moyen", "image": "img/2022/q9.png", "answer": "B"}, {"year": 2022, "number": 10, "difficulty": "moyen", "image": "img/2022/q10.png", "answer": "D"}, {"year": 2022, "number": 11, "difficulty": "moyen", "image": "img/2022/q11.png", "answer": "D"}, {"year": 2022, "number": 12, "difficulty": "moyen", "image": "img/2022/q12.png", "answer": "C"}, {"year": 2022, "number": 13, "difficulty": "moyen", "image": "img/2022/q13.png", "answer": "E"}, {"year": 2022, "number": 14, "difficulty": "moyen", "image": "img/2022/q14.png", "answer": "D"}, {"year": 2022, "number": 15, "difficulty": "moyen", "image": "img/2022/q15.png", "answer": "D"}, {"year": 2022, "number": 16, "difficulty": "moyen", "image": "img/2022/q16.png", "answer": "A"}, {"year": 2022, "number": 17, "difficulty": "difficile", "image": "img/2022/q17.png", "answer": "B"}, {"year": 2022, "number": 18, "difficulty": "difficile", "image": "img/2022/q18.png", "answer": "B"}, {"year": 2022, "number": 19, "difficulty": "difficile", "image": "img/2022/q19.png", "answer": "B"}, {"year": 2022, "number": 20, "difficulty": "difficile", "image": "img/2022/q20.png", "answer": "C"}, {"year": 2022, "number": 21, "difficulty": "difficile", "image": "img/2022/q21.png", "answer": "A"}, {"year": 2022, "number": 22, "difficulty": "difficile", "image": "img/2022/q22.png", "answer": "D"}, {"year": 2022, "number": 23, "difficulty": "difficile", "image": "img/2022/q23.png", "answer": "C"}, {"year": 2022, "number": 24, "difficulty": "difficile", "image": "img/2022/q24.png", "answer": "B"}, {"year": 2022, "number": 25, "difficulty": "expert", "image": "img/2022/q25.png", "answer": "0"}, {"year": 2022, "number": 26, "difficulty": "expert", "image": "img/2022/q26.png", "answer": "1"}, {"year": 2023, "number": 1, "difficulty": "facile", "image": "img/2023/q1.png", "answer": "B"}, {"year": 2023, "number": 2, "difficulty": "facile", "image": "img/2023/q2.png", "answer": "E"}, {"year": 2023, "number": 3, "difficulty": "facile", "image": "img/2023/q3.png", "answer": "A"}, {"year": 2023, "number": 4, "difficulty": "facile", "image": "img/2023/q4.png", "answer": "A"}, {"year": 2023, "number": 5, "difficulty": "facile", "image": "img/2023/q5.png", "answer": "B"}, {"year": 2023, "number": 6, "difficulty": "facile", "image": "img/2023/q6.png", "answer": "A"}, {"year": 2023, "number": 7, "difficulty": "facile", "image": "img/2023/q7.png", "answer": "B"}, {"year": 2023, "number": 8, "difficulty": "facile", "image": "img/2023/q8.png", "answer": "C"}, {"year": 2023, "number": 9, "difficulty": "moyen", "image": "img/2023/q9.png", "answer": "D"}, {"year": 2023, "number": 10, "difficulty": "moyen", "image": "img/2023/q10.png", "answer": "E"}, {"year": 2023, "number": 11, "difficulty": "moyen", "image": "img/2023/q11.png", "answer": "B"}, {"year": 2023, "number": 12, "difficulty": "moyen", "image": "img/2023/q12.png", "answer": "B"}, {"year": 2023, "number": 13, "difficulty": "moyen", "image": "img/2023/q13.png", "answer": "C"}, {"year": 2023, "number": 14, "difficulty": "moyen", "image": "img/2023/q14.png", "answer": "C"}, {"year": 2023, "number": 15, "difficulty": "moyen", "image": "img/2023/q15.png", "answer": "B"}, {"year": 2023, "number": 16, "difficulty": "moyen", "image": "img/2023/q16.png", "answer": "E"}, {"year": 2023, "number": 17, "difficulty": "difficile", "image": "img/2023/q17.png", "answer": "E"}, {"year": 2023, "number": 18, "difficulty": "difficile", "image": "img/2023/q18.png", "answer": "D"}, {"year": 2023, "number": 19, "difficulty": "difficile", "image": "img/2023/q19.png", "answer": "A"}, {"year": 2023, "number": 20, "difficulty": "difficile", "image": "img/2023/q20.png", "answer": "D"}, {"year": 2023, "number": 21, "difficulty": "difficile", "image": "img/2023/q21.png", "answer": "C"}, {"year": 2023, "number": 22, "difficulty": "difficile", "image": "img/2023/q22.png", "answer": "C"}, {"year": 2023, "number": 23, "difficulty": "difficile", "image": "img/2023/q23.png", "answer": "D"}, {"year": 2023, "number": 24, "difficulty": "difficile", "image": "img/2023/q24.png", "answer": "B"}, {"year": 2023, "number": 25, "difficulty": "expert", "image": "img/2023/q25.png", "answer": "6"}, {"year": 2023, "number": 26, "difficulty": "expert", "image": "img/2023/q26.png", "answer": "3"}, {"year": 2024, "number": 1, "difficulty": "facile", "image": "img/2024/q1.png", "answer": "D"}, {"year": 2024, "number": 2, "difficulty": "facile", "image": "img/2024/q2.png", "answer": "C"}, {"year": 2024, "number": 3, "difficulty": "facile", "image": "img/2024/q3.png", "answer": "E"}, {"year": 2024, "number": 4, "difficulty": "facile", "image": "img/2024/q4.png", "answer": "B"}, {"year": 2024, "number": 5, "difficulty": "facile", "image": "img/2024/q5.png", "answer": "D"}, {"year": 2024, "number": 6, "difficulty": "facile", "image": "img/2024/q6.png", "answer": "C"}, {"year": 2024, "number": 7, "difficulty": "facile", "image": "img/2024/q7.png", "answer": "D"}, {"year": 2024, "number": 8, "difficulty": "facile", "image": "img/2024/q8.png", "answer": "C"}, {"year": 2024, "number": 9, "difficulty": "moyen", "image": "img/2024/q9.png", "answer": "B"}, {"year": 2024, "number": 10, "difficulty": "moyen", "image": "img/2024/q10.png", "answer": "A"}, {"year": 2024, "number": 11, "difficulty": "moyen", "image": "img/2024/q11.png", "answer": "A"}, {"year": 2024, "number": 12, "difficulty": "moyen", "image": "img/2024/q12.png", "answer": "C"}, {"year": 2024, "number": 13, "difficulty": "moyen", "image": "img/2024/q13.png", "answer": "D"}, {"year": 2024, "number": 14, "difficulty": "moyen", "image": "img/2024/q14.png", "answer": "D"}, {"year": 2024, "number": 15, "difficulty": "moyen", "image": "img/2024/q15.png", "answer": "D"}, {"year": 2024, "number": 16, "difficulty": "moyen", "image": "img/2024/q16.png", "answer": "D"}, {"year": 2024, "number": 17, "difficulty": "difficile", "image": "img/2024/q17.png", "answer": "E"}, {"year": 2024, "number": 18, "difficulty": "difficile", "image": "img/2024/q18.png", "answer": "A"}, {"year": 2024, "number": 19, "difficulty": "difficile", "image": "img/2024/q19.png", "answer": "B"}, {"year": 2024, "number": 20, "difficulty": "difficile", "image": "img/2024/q20.png", "answer": "E"}, {"year": 2024, "number": 21, "difficulty": "difficile", "image": "img/2024/q21.png", "answer": "B"}, {"year": 2024, "number": 22, "difficulty": "difficile", "image": "img/2024/q22.png", "answer": "E"}, {"year": 2024, "number": 23, "difficulty": "difficile", "image": "img/2024/q23.png", "answer": "D"}, {"year": 2024, "number": 24, "difficulty": "difficile", "image": "img/2024/q24.png", "answer": "B"}, {"year": 2024, "number": 25, "difficulty": "expert", "image": "img/2024/q25.png", "answer": "7"}, {"year": 2024, "number": 26, "difficulty": "expert", "image": "img/2024/q26.png", "answer": "5"}, {"year": 2025, "number": 1, "difficulty": "facile", "image": "img/2025/q1.png", "answer": "C"}, {"year": 2025, "number": 2, "difficulty": "facile", "image": "img/2025/q2.png", "answer": "E"}, {"year": 2025, "number": 3, "difficulty": "facile", "image": "img/2025/q3.png", "answer": "B"}, {"year": 2025, "number": 4, "difficulty": "facile", "image": "img/2025/q4.png", "answer": "D"}, {"year": 2025, "number": 5, "difficulty": "facile", "image": "img/2025/q5.png", "answer": "D"}, {"year": 2025, "number": 6, "difficulty": "facile", "image": "img/2025/q6.png", "answer": "E"}, {"year": 2025, "number": 7, "difficulty": "facile", "image": "img/2025/q7.png", "answer": "D"}, {"year": 2025, "number": 8, "difficulty": "facile", "image": "img/2025/q8.png", "answer": "B"}, {"year": 2025, "number": 9, "difficulty": "moyen", "image": "img/2025/q9.png", "answer": "E"}, {"year": 2025, "number": 10, "difficulty": "moyen", "image": "img/2025/q10.png", "answer": "B"}, {"year": 2025, "number": 11, "difficulty": "moyen", "image": "img/2025/q11.png", "answer": "A"}, {"year": 2025, "number": 12, "difficulty": "moyen", "image": "img/2025/q12.png", "answer": "D"}, {"year": 2025, "number": 13, "difficulty": "moyen", "image": "img/2025/q13.png", "answer": "B"}, {"year": 2025, "number": 14, "difficulty": "moyen", "image": "img/2025/q14.png", "answer": "D"}, {"year": 2025, "number": 15, "difficulty": "moyen", "image": "img/2025/q15.png", "answer": "E"}, {"year": 2025, "number": 16, "difficulty": "moyen", "image": "img/2025/q16.png", "answer": "B"}, {"year": 2025, "number": 17, "difficulty": "difficile", "image": "img/2025/q17.png", "answer": "A"}, {"year": 2025, "number": 18, "difficulty": "difficile", "image": "img/2025/q18.png", "answer": "B"}, {"year": 2025, "number": 19, "difficulty": "difficile", "image": "img/2025/q19.png", "answer": "A"}, {"year": 2025, "number": 20, "difficulty": "difficile", "image": "img/2025/q20.png", "answer": "A"}, {"year": 2025, "number": 21, "difficulty": "difficile", "image": "img/2025/q21.png", "answer": "D"}, {"year": 2025, "number": 22, "difficulty": "difficile", "image": "img/2025/q22.png", "answer": "C"}, {"year": 2025, "number": 23, "difficulty": "difficile", "image": "img/2025/q23.png", "answer": "C"}, {"year": 2025, "number": 24, "difficulty": "difficile", "image": "img/2025/q24.png", "answer": "D"}, {"year": 2025, "number": 25, "difficulty": "expert", "image": "img/2025/q25.png", "answer": "4"}, {"year": 2025, "number": 26, "difficulty": "expert", "image": "img/2025/q26.png", "answer": "5"}];
+
+const SCORING = {
+  facile:    { correct:  3,   wrong: -0.75 },
+  moyen:     { correct:  4,   wrong: -1    },
+  difficile: { correct:  5,   wrong: -1.25 },
+  expert:    { correct: 10,   wrong:  0    },
+};
+
+const DIFF_LABELS = {
+  facile: 'Facile (Q1–8)',
+  moyen: 'Moyen (Q9–16)',
+  difficile: 'Difficile (Q17–24)',
+  expert: 'Expert (Q25–26)',
+};
+
+let pool = [];
+let current = null;
+let score = 0;
+let questionCount = 0;
+let questionStartTime = 0;
+let gameStartTime = 0;
+let timerInterval = null;
+let answered = false;
+let nextQuestionTimer = null;
+let pauseStart = 0;
+let totalPausedMs = 0;
+
+// Per-difficulty tracking
+let stats = {};
+
+function resetStats() {
+  stats = {};
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    stats[d] = { attempted: 0, correct: 0, timeMs: 0 };
+  }
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function refillPool() {
+  pool = shuffle([...ALL_QUESTIONS]);
+}
+
+function formatTime(ms) {
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return m + ':' + String(sec).padStart(2, '0');
+}
+
+function updateTimerDisplay() {
+  const elapsed = Date.now() - gameStartTime - totalPausedMs;
+  document.getElementById('timer-display').textContent = formatTime(elapsed);
+}
+
+function startGame() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  document.getElementById('stats-bar').style.display = 'flex';
+  document.getElementById('stats-panel').style.display = 'none';
+  score = 0;
+  questionCount = 0;
+  totalPausedMs = 0;
+  pauseStart = 0;
+  resetStats();
+  refillPool();
+  gameStartTime = Date.now();
+  timerInterval = setInterval(updateTimerDisplay, 1000);
+  updateScoreDisplay();
+  nextQuestion();
+}
+
+function newGame() {
+  startGame();
+}
+
+function updateScoreDisplay() {
+  document.getElementById('score-display').textContent =
+    Number.isInteger(score) ? score : score.toFixed(2);
+  document.getElementById('count-display').textContent = questionCount;
+}
+
+function nextQuestion() {
+  if (pool.length === 0) refillPool();
+  current = pool.pop();
+  answered = false;
+  questionStartTime = Date.now();
+
+  // Badge
+  const badge = document.getElementById('q-badge');
+  badge.textContent = current.difficulty;
+  badge.className = 'badge badge-' + current.difficulty;
+
+  // Info
+  document.getElementById('q-info').textContent =
+    'Kangourou ' + current.year + ' — Question ' + current.number;
+
+  // Image
+  document.getElementById('q-img').src = current.image;
+
+  // Answer buttons
+  const area = document.getElementById('answers-area');
+  area.innerHTML = '';
+  const isExpert = current.number >= 25;
+  const choices = isExpert
+    ? ['0','1','2','3','4','5','6','7','8','9']
+    : ['A','B','C','D','E'];
+  for (const ch of choices) {
+    const btn = document.createElement('button');
+    btn.textContent = ch;
+    btn.addEventListener('click', () => handleAnswer(ch, btn));
+    area.appendChild(btn);
+  }
+}
+
+function handleAnswer(choice, btn) {
+  if (answered) return;
+  answered = true;
+  const elapsed = Date.now() - questionStartTime;
+  const diff = current.difficulty;
+  stats[diff].attempted++;
+  stats[diff].timeMs += elapsed;
+  questionCount++;
+
+  const isCorrect = choice === current.answer;
+  if (isCorrect) {
+    score += SCORING[diff].correct;
+    stats[diff].correct++;
+    btn.classList.add('correct');
+  } else {
+    score += SCORING[diff].wrong;
+    btn.classList.add('wrong');
+    // Highlight the correct answer
+    const buttons = document.getElementById('answers-area').children;
+    for (const b of buttons) {
+      if (b.textContent === current.answer) {
+        b.classList.add('correct');
+      }
+    }
+  }
+  updateScoreDisplay();
+  nextQuestionTimer = setTimeout(nextQuestion, isCorrect ? 600 : 1200);
+}
+
+function skipQuestion() {
+  if (answered) return;
+  const elapsed = Date.now() - questionStartTime;
+  const diff = current.difficulty;
+  stats[diff].timeMs += elapsed;
+  questionCount++;
+  updateScoreDisplay();
+  nextQuestion();
+}
+
+function stopGame() {
+  clearInterval(timerInterval);
+  clearTimeout(nextQuestionTimer);
+  nextQuestionTimer = null;
+  pauseStart = Date.now();
+  document.getElementById('game-area').style.display = 'none';
+  document.getElementById('stats-panel').style.display = 'block';
+
+  document.getElementById('final-score').textContent =
+    'Score : ' + (Number.isInteger(score) ? score : score.toFixed(2));
+
+  const tbody = document.getElementById('stats-body');
+  tbody.innerHTML = '';
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    const s = stats[d];
+    const tr = document.createElement('tr');
+    const rate = s.attempted > 0
+      ? Math.round(100 * s.correct / s.attempted) + '%'
+      : '—';
+    const avg = s.attempted > 0
+      ? formatTime(Math.round(s.timeMs / s.attempted))
+      : '—';
+    tr.innerHTML =
+      '<td>' + DIFF_LABELS[d] + '</td>' +
+      '<td>' + s.attempted + '</td>' +
+      '<td>' + s.correct + '</td>' +
+      '<td>' + rate + '</td>' +
+      '<td>' + formatTime(s.timeMs) + '</td>' +
+      '<td>' + avg + '</td>';
+    tbody.appendChild(tr);
+  }
+}
+
+function resumeGame() {
+  if (pauseStart) {
+    totalPausedMs += Date.now() - pauseStart;
+    pauseStart = 0;
+  }
+  document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  timerInterval = setInterval(updateTimerDisplay, 1000);
+  if (answered || !current) nextQuestion();
+}
+</script>
+</body>
+</html>
