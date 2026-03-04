@@ -617,6 +617,7 @@ const DIFF_LABELS = {
 };
 
 const KANGOUROU_TIME_MS = 50 * 60 * 1000;
+const MAX_STATS_ENTRIES = 200;
 
 let pool = [];
 let current = null;
@@ -685,7 +686,9 @@ function updateTimerDisplay() {
     }
   } else {
     const elapsed = Date.now() - gameStartTime - totalPausedMs;
-    document.getElementById('timer-display').textContent = formatTime(elapsed);
+    const el = document.getElementById('timer-display');
+    el.textContent = formatTime(elapsed);
+    el.classList.remove('k-countdown');
   }
 }
 
@@ -708,6 +711,7 @@ function startGame() {
   resetStats();
   refillPool();
   gameStartTime = Date.now();
+  updateTimerDisplay();
   timerInterval = setInterval(updateTimerDisplay, 1000);
   updateScoreDisplay();
   nextQuestion();
@@ -748,6 +752,7 @@ function startKangourou() {
   pauseStart = 0;
   resetStats();
   gameStartTime = Date.now();
+  updateTimerDisplay();
   timerInterval = setInterval(updateTimerDisplay, 1000);
   updateKNav();
   showKQuestion(0);
@@ -1031,16 +1036,26 @@ function showStats() {
 
   // Mistakes section
   const mistakesDiv = document.getElementById('stats-mistakes');
-  const mistakes = questionLog.filter(e => !e.correct && !e.skipped);
+  const allMistakes = questionLog.filter(e => !e.correct && !e.skipped);
+  const freeMode = !kangourouMode;
+  const capMistakes = freeMode && allMistakes.length > MAX_STATS_ENTRIES;
+  const mistakes = capMistakes ? allMistakes.slice(-MAX_STATS_ENTRIES) : allMistakes;
   if (mistakes.length > 0) {
-    let h = '<h3>Erreurs</h3><table class="stats-detail-table"><thead><tr>' +
+    let h = '<h3>Erreurs</h3>';
+    if (capMistakes) {
+      h += '<p style="font-size:0.85rem;color:#888">' +
+        allMistakes.length + ' erreurs au total \u2014 ' + MAX_STATS_ENTRIES + ' plus r\u00e9centes affich\u00e9es.' +
+        ' <button onclick="showAllMistakes()" style="border:none;background:none;color:var(--moyen);' +
+        'cursor:pointer;text-decoration:underline;font-size:0.85rem">Tout afficher</button></p>';
+    }
+    h += '<table class="stats-detail-table"><thead><tr>' +
       '<th>Question</th><th>Difficulté</th><th>Votre réponse</th><th>Bonne réponse</th><th>Temps</th>' +
       '</tr></thead><tbody>';
     for (const m of mistakes) {
       const q = m.question;
       const label = 'Kangourou ' + q.year + ' Q' + q.number;
       h += '<tr>' +
-        '<td><a href="' + q.image + '" target="_blank">' + label + '</a></td>' +
+        '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
         '<td><span class="badge badge-' + q.difficulty + '">' + q.difficulty + '</span></td>' +
         '<td><strong style="color:var(--wrong)">' + m.userAnswer + '</strong></td>' +
         '<td><strong style="color:var(--correct)">' + q.answer + '</strong></td>' +
@@ -1071,7 +1086,7 @@ function showStats() {
         const label = 'Kangourou ' + q.year + ' Q' + q.number;
         const res = e.skipped ? 'Passée' : 'Correcte';
         slowHtml += '<tr>' +
-          '<td><a href="' + q.image + '" target="_blank">' + label + '</a></td>' +
+          '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
           '<td>' + formatTime(e.timeMs) + '</td>' +
           '<td>' + res + '</td></tr>';
       }
@@ -1082,7 +1097,9 @@ function showStats() {
 
   // Histogram of answer times
   const histDiv = document.getElementById('stats-histogram');
-  const answered_entries = questionLog.filter(e => !e.skipped);
+  const allAnswered = questionLog.filter(e => !e.skipped);
+  const answered_entries = freeMode && allAnswered.length > MAX_STATS_ENTRIES
+    ? allAnswered.slice(-MAX_STATS_ENTRIES) : allAnswered;
   if (answered_entries.length > 0) {
     histDiv.innerHTML = '<h3>Distribution des temps de réponse</h3>' +
       '<div class="histogram-wrap"><canvas id="hist-canvas"></canvas></div>';
@@ -1102,6 +1119,27 @@ function showStats() {
       '<button onclick="resumeGame()">Reprendre</button>' +
       '<button class="primary" onclick="newGame()">Nouvelle partie</button>';
   }
+}
+
+function showAllMistakes() {
+  const mistakesDiv = document.getElementById('stats-mistakes');
+  const allMistakes = questionLog.filter(e => !e.correct && !e.skipped);
+  let h = '<h3>Erreurs (' + allMistakes.length + ')</h3>' +
+    '<table class="stats-detail-table"><thead><tr>' +
+    '<th>Question</th><th>Difficulté</th><th>Votre réponse</th><th>Bonne réponse</th><th>Temps</th>' +
+    '</tr></thead><tbody>';
+  for (const m of allMistakes) {
+    const q = m.question;
+    const label = 'Kangourou ' + q.year + ' Q' + q.number;
+    h += '<tr>' +
+      '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
+      '<td><span class="badge badge-' + q.difficulty + '">' + q.difficulty + '</span></td>' +
+      '<td><strong style="color:var(--wrong)">' + m.userAnswer + '</strong></td>' +
+      '<td><strong style="color:var(--correct)">' + q.answer + '</strong></td>' +
+      '<td>' + formatTime(m.timeMs) + '</td></tr>';
+  }
+  h += '</tbody></table>';
+  mistakesDiv.innerHTML = h;
 }
 
 function drawHistogram(entries) {
