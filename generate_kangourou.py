@@ -505,25 +505,31 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
     .k-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
+      gap: 0.4rem;
       justify-content: center;
       margin-bottom: 0.5rem;
     }
     .k-nav button {
-      min-width: 2.2rem;
-      padding: 0.25rem 0.4rem;
-      font-size: 0.85rem;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      font-size: 0.8rem;
       font-weight: 600;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      background: var(--btn-bg);
+      border: 2px solid var(--fg);
+      border-radius: 50%;
+      background: transparent;
       color: var(--fg);
       cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .k-nav button:hover { background: var(--btn-hover); }
-    .k-nav button.k-current { border-color: var(--moyen); background: color-mix(in srgb, var(--moyen) 20%, var(--btn-bg)); }
-    .k-nav button.k-answered { background: var(--card-bg); opacity: 0.7; }
-    .k-nav button.k-answered.k-current { opacity: 1; }
+    .k-nav button:hover { background: color-mix(in srgb, var(--fg) 10%, transparent); }
+    .k-nav button.k-current { border-color: var(--moyen); color: var(--moyen); box-shadow: 0 0 0 2px color-mix(in srgb, var(--moyen) 30%, transparent); }
+    .k-nav button.k-answered { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+    .k-nav button.k-answered.k-current { background: var(--moyen); color: #fff; border-color: var(--moyen); }
     .k-countdown { color: var(--wrong); font-weight: 700; }
 
     @media (max-width: 600px) {
@@ -727,23 +733,24 @@ function startKangourou() {
   document.getElementById('score-wrap').style.display = 'none';
   document.getElementById('k-nav-bar').style.display = 'flex';
   document.getElementById('action-buttons').innerHTML =
-    '<button onclick="kPrev()">Pr\u00e9c\u00e9dent</button>' +
     '<button onclick="kSkip()">Passer</button>' +
-    '<button onclick="kNext()">Suivant</button>' +
-    '<button onclick="confirmStopKangourou()">Terminer</button>';
+    '<button onclick="confirmStopKangourou()">Pause</button>';
 
-  // Select 8 facile + 8 moyen + 8 difficile + 2 expert
-  const byDiff = { facile: [], moyen: [], difficile: [], expert: [] };
-  for (const q of ALL_QUESTIONS) byDiff[q.difficulty].push(q);
-  for (const d in byDiff) shuffle(byDiff[d]);
-  kQuestions = [
-    ...byDiff.facile.slice(0, 8),
-    ...byDiff.moyen.slice(0, 8),
-    ...byDiff.difficile.slice(0, 8),
-    ...byDiff.expert.slice(0, 2),
-  ];
-  kAnswers = new Array(26).fill(null);
-  kTimes = new Array(26).fill(0);
+  // For each question number 1-26, pick one random year
+  const byNumber = {};
+  for (const q of ALL_QUESTIONS) {
+    if (!byNumber[q.number]) byNumber[q.number] = [];
+    byNumber[q.number].push(q);
+  }
+  kQuestions = [];
+  for (let n = 1; n <= 26; n++) {
+    const candidates = byNumber[n];
+    if (candidates && candidates.length > 0) {
+      kQuestions.push(candidates[Math.floor(Math.random() * candidates.length)]);
+    }
+  }
+  kAnswers = new Array(kQuestions.length).fill(null);
+  kTimes = new Array(kQuestions.length).fill(0);
   kIndex = 0;
 
   score = 0;
@@ -793,7 +800,7 @@ function showKQuestion(idx) {
   badge.textContent = q.difficulty;
   badge.className = 'badge badge-' + q.difficulty;
   document.getElementById('q-info').textContent =
-    (idx + 1) + '/26 — Kangourou ' + q.year + ' — Q' + q.number;
+    (idx + 1) + '/' + kQuestions.length + ' \u2014 Kangourou ' + q.year + ' \u2014 Q' + q.number;
   document.getElementById('q-img').src = q.image;
 
   const area = document.getElementById('answers-area');
@@ -802,61 +809,121 @@ function showKQuestion(idx) {
   const choices = isExpert
     ? ['0','1','2','3','4','5','6','7','8','9']
     : ['A','B','C','D','E'];
+  const alreadyAnswered = kAnswers[idx] !== null;
   for (const ch of choices) {
     const btn = document.createElement('button');
     btn.textContent = ch;
     if (kAnswers[idx] === ch) btn.classList.add('selected');
+    if (alreadyAnswered) btn.disabled = true;
     btn.addEventListener('click', () => handleKAnswer(ch));
     area.appendChild(btn);
   }
   updateKNav();
-  document.getElementById('count-display').textContent = (idx + 1) + '/26';
+  document.getElementById('count-display').textContent = (idx + 1) + '/' + kQuestions.length;
 }
 
 function handleKAnswer(choice) {
+  if (kAnswers[kIndex] !== null) return; // already answered
   kAnswers[kIndex] = choice;
-  // Re-render buttons to show selection
+  // Highlight selection
   const area = document.getElementById('answers-area');
   for (const btn of area.children) {
     btn.classList.toggle('selected', btn.textContent === choice);
+    btn.disabled = true;
   }
   updateKNav();
-}
-
-function kPrev() {
-  if (kIndex > 0) {
-    saveKTime();
-    showKQuestion(kIndex - 1);
+  // Auto-advance to next unanswered question
+  saveKTime();
+  const next = findNextUnanswered(kIndex);
+  if (next !== -1) {
+    setTimeout(() => showKQuestion(next), 400);
+  } else {
+    // All answered — finish
+    setTimeout(() => finishKangourou(), 400);
   }
 }
 
-function kNext() {
-  if (kIndex < kQuestions.length - 1) {
-    saveKTime();
-    showKQuestion(kIndex + 1);
+function findNextUnanswered(fromIndex) {
+  for (let i = 1; i <= kQuestions.length; i++) {
+    const ni = (fromIndex + i) % kQuestions.length;
+    if (kAnswers[ni] === null) return ni;
   }
+  return -1;
 }
 
 function kSkip() {
-  kAnswers[kIndex] = null;
-  const area = document.getElementById('answers-area');
-  for (const btn of area.children) btn.classList.remove('selected');
-  updateKNav();
-  // Move to next unanswered or next
-  for (let i = 1; i <= kQuestions.length; i++) {
-    const ni = (kIndex + i) % kQuestions.length;
-    if (kAnswers[ni] === null && ni !== kIndex) {
-      saveKTime();
-      showKQuestion(ni);
-      return;
-    }
+  saveKTime();
+  const next = findNextUnanswered(kIndex);
+  if (next !== -1) {
+    showKQuestion(next);
   }
 }
 
 function confirmStopKangourou() {
-  if (confirm('Terminer le mode Kangourou et voir les résultats ?')) {
-    finishKangourou();
+  saveKTime();
+  clearInterval(timerInterval);
+  pauseStart = Date.now();
+  document.getElementById('game-area').style.display = 'none';
+  document.getElementById('stats-panel').style.display = 'block';
+
+  // Show interim stats
+  const answeredCount = kAnswers.filter(a => a !== null).length;
+  document.getElementById('final-score').textContent =
+    answeredCount + '/' + kQuestions.length + ' r\u00e9pondues \u2014 Pause';
+
+  const actionsDiv = document.getElementById('stats-actions');
+  actionsDiv.innerHTML =
+    '<button class="primary" onclick="resumeKangourou()">Reprendre</button>' +
+    '<button onclick="finishKangourou()">Terminer</button>';
+
+  // Compute interim summary table
+  const tempStats = {};
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    tempStats[d] = { attempted: 0, correct: 0, timeMs: 0 };
   }
+  for (let i = 0; i < kQuestions.length; i++) {
+    const q = kQuestions[i];
+    const d = q.difficulty;
+    const ans = kAnswers[i];
+    if (ans !== null) {
+      tempStats[d].attempted++;
+      tempStats[d].timeMs += kTimes[i];
+      if (ans === q.answer) tempStats[d].correct++;
+    }
+  }
+  const tbody = document.getElementById('stats-body');
+  tbody.innerHTML = '';
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    const s = tempStats[d];
+    const tr = document.createElement('tr');
+    const rate = s.attempted > 0
+      ? Math.round(100 * s.correct / s.attempted) + '%' : '\u2014';
+    const avg = s.attempted > 0
+      ? formatTime(Math.round(s.timeMs / s.attempted)) : '\u2014';
+    tr.innerHTML =
+      '<td>' + DIFF_LABELS[d] + '</td>' +
+      '<td>' + s.attempted + '</td>' +
+      '<td>' + s.correct + '</td>' +
+      '<td>' + rate + '</td>' +
+      '<td>' + formatTime(s.timeMs) + '</td>' +
+      '<td>' + avg + '</td>';
+    tbody.appendChild(tr);
+  }
+  document.getElementById('stats-mistakes').innerHTML = '';
+  document.getElementById('stats-slowest').innerHTML = '';
+  document.getElementById('stats-histogram').innerHTML = '';
+}
+
+function resumeKangourou() {
+  if (pauseStart) {
+    totalPausedMs += Date.now() - pauseStart;
+    pauseStart = 0;
+  }
+  document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  timerInterval = setInterval(updateTimerDisplay, 1000);
+  updateTimerDisplay();
+  showKQuestion(kIndex);
 }
 
 function finishKangourou() {
