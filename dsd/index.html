@@ -1630,8 +1630,10 @@ function ttsVoiceChanged() {
 // Pre-load voices and populate selector
 if (window.speechSynthesis) {
   window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged = () => populateVoiceSelector();
+  window.speechSynthesis.addEventListener('voiceschanged', populateVoiceSelector);
   populateVoiceSelector();
+  // Some browsers/OS load premium voices lazily; repopulate on interaction
+  document.getElementById('tts-voice')?.addEventListener('focus', populateVoiceSelector);
 }
 </script>
 </body>
