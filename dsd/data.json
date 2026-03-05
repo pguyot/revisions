@@ -87,7 +87,7 @@
         "title": "Ein Tag im Zoo",
         "text": "Gestern war ich mit meiner Familie im {1}. Es war ein schöner Tag, obwohl es am Morgen noch geregnet hat. Zuerst haben wir die {2} besucht. Die kleinen Affen waren besonders lustig und haben viel geklettert. Danach sind wir zu den Elefanten gegangen. Einer von ihnen hat mit seinem Rüssel Wasser gespritzt und alle haben gelacht. Zum Mittagessen haben wir im Zoo-Café ein {3} gegessen. Mein Bruder hat Pommes genommen, aber ich habe ein Käsebrot bevorzugt. Am Nachmittag haben wir noch die Robben gefüttert. Das war mein {4} Teil des Tages! Ich freue mich schon auf den nächsten Zoobesuch.",
         "wordList": {
-          "A": "Lieblings",
+          "A": "liebster",
           "B": "Zoo",
           "C": "Pferde",
           "D": "Affen",
@@ -198,7 +198,7 @@
           "A": "Tag",
           "B": "Schwimmbad",
           "C": "Dreimeterbrett",
-          "D": "Einmeterbrett",
+          "D": "Strand",
           "E": "Buch",
           "F": "Handy",
           "G": "Kino",
@@ -584,7 +584,7 @@
           },
           {
             "letter": "B",
-            "text": "Umzugshelfer gesucht! Wir helfen beim Tragen und Aufbauen von Möbeln. 15 Euro/Stunde. Tel: 0176-5551234."
+            "text": "Starke Helfer für Ihren Umzug! Wir tragen und bauen Ihre Möbel auf. 15 Euro/Stunde pro Helfer. Tel: 0176-5551234."
           },
           {
             "letter": "C",
@@ -600,7 +600,7 @@
           },
           {
             "letter": "F",
-            "text": "Möbeltransport! Wir bieten günstige Umzugshilfe. 20 Euro/Stunde. Tel: 0221-456789."
+            "text": "Nachhilfe für Studenten! Wir helfen bei Mathe, Physik und Informatik. 12 Euro/Stunde. Tel: 0221-456789."
           },
           {
             "letter": "G",
@@ -739,7 +739,7 @@
           "6": "A",
           "7": "B",
           "8": "C",
-          "9": "D"
+          "9": "H"
         }
       }
     ],
@@ -1790,7 +1790,7 @@
           },
           {
             "letter": "C",
-            "text": "Kostenloser Vortrag zum Klimaschutz"
+            "text": "Kostenloser Vortrag zum Energiesparen"
           },
           {
             "letter": "D",
@@ -2308,7 +2308,7 @@
               "Jemand geht zum Arzt.",
               "Jemand kauft Medikamente ohne Rezept."
             ],
-            "answer": 0
+            "answer": 1
           },
           {
             "id": 2,
