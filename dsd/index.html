@@ -330,6 +330,20 @@
     .progress-dot.dot-done { border-color: var(--correct); background: var(--correct); }
     .progress-dot.dot-wrong { border-color: var(--wrong); background: var(--wrong); }
 
+    /* Score badges */
+    .score-badge {
+      display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px;
+      font-size: 0.75rem; font-weight: 600; margin-left: auto;
+    }
+    .score-badge-perfect { background: var(--correct); color: #fff; }
+    .score-badge-good { background: var(--accent2); color: #222; }
+    .score-badge-tried { background: var(--wrong); color: #fff; }
+    .progress-summary {
+      font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem;
+    }
+    .progress-summary .ps-perfect { color: var(--correct); font-weight: 600; }
+    .progress-summary .ps-tried { color: var(--info); font-weight: 600; }
+
     /* Responsive */
     @media (max-width: 600px) {
       header h1 { font-size: 1.1rem; }
@@ -437,8 +451,50 @@ let selectedShortText = null;
 let exerciseState = {};
 let isChecked = false;
 
+// --- Score persistence (localStorage) ---
+const STORAGE_KEY = 'dsd-exercise-scores';
+
+function loadScores() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function saveScore(exerciseId, pts, total) {
+  const scores = loadScores();
+  const pct = total > 0 ? Math.round(pts / total * 100) : 0;
+  const prev = scores[exerciseId];
+  // Keep best score
+  if (!prev || pct > prev.pct) {
+    scores[exerciseId] = { pts, total, pct, date: Date.now() };
+  }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+}
+
+function getPartStats(section, teil) {
+  if (!DATA) return { perfect: 0, tried: 0, total: 0 };
+  const sets = getDataSets(section, teil);
+  const scores = loadScores();
+  let perfect = 0, tried = 0;
+  sets.forEach(s => {
+    const sc = scores[s.id];
+    if (sc) { tried++; if (sc.pct === 100) perfect++; }
+  });
+  return { perfect, tried, total: sets.length };
+}
+
+function getSectionStats(section) {
+  let perfect = 0, tried = 0, total = 0;
+  for (let teil = 1; teil <= 5; teil++) {
+    const st = getPartStats(section, teil);
+    perfect += st.perfect;
+    tried += st.tried;
+    total += st.total;
+  }
+  return { perfect, tried, total };
+}
+
 // Load data
-fetch('data.json').then(r => r.json()).then(d => { DATA = d; })
+fetch('data.json').then(r => r.json()).then(d => { DATA = d; refreshStartScreen(); })
   .catch(e => console.error('Failed to load data.json:', e));
 
 // --- Navigation ---
@@ -452,6 +508,22 @@ function showScreen(id) {
 function goHome() {
   stopTimer(); ttsPause();
   showScreen('start-screen');
+  refreshStartScreen();
+}
+
+function refreshStartScreen() {
+  if (!DATA) return;
+  document.querySelectorAll('.section-card').forEach(card => {
+    const section = card.onclick.toString().includes("'lv'") ? 'lv' : 'hv';
+    const st = getSectionStats(section);
+    let summaryEl = card.querySelector('.progress-summary');
+    if (!summaryEl) { summaryEl = document.createElement('div'); summaryEl.className = 'progress-summary'; card.appendChild(summaryEl); }
+    if (st.tried > 0) {
+      summaryEl.innerHTML = `<span class="ps-perfect">${st.perfect} perfekt</span> · <span class="ps-tried">${st.tried}/${st.total} versucht</span>`;
+    } else {
+      summaryEl.innerHTML = '';
+    }
+  });
 }
 
 function showParts(section) {
@@ -477,13 +549,19 @@ function showParts(section) {
   ];
 
   const grid = document.getElementById('part-grid');
-  grid.innerHTML = parts.map(p => `
-    <div class="part-card" onclick="showSets('${section}', ${p.teil})">
+  grid.innerHTML = parts.map(p => {
+    const st = getPartStats(section, p.teil);
+    let summary = '';
+    if (st.tried > 0) {
+      summary = `<div class="progress-summary"><span class="ps-perfect">${st.perfect} perfekt</span> · <span class="ps-tried">${st.tried}/${st.total} versucht</span></div>`;
+    }
+    return `<div class="part-card" onclick="showSets('${section}', ${p.teil})">
       <div class="part-icon">${p.icon}</div>
       <h4>Teil ${p.teil}: ${p.name}</h4>
       <p>${p.desc}</p>
-    </div>
-  `).join('');
+      ${summary}
+    </div>`;
+  }).join('');
 
   showScreen('part-screen');
 }
@@ -506,11 +584,20 @@ function showSets(section, teil) {
   document.getElementById('set-back-btn').onclick = () => showParts(section);
 
   const list = document.getElementById('set-list');
-  list.innerHTML = sets.map((s, i) => `
-    <div class="part-card" style="text-align:left; margin-bottom:0.5rem;" onclick="startExercise('${section}', ${teil}, ${i})">
-      <h4>Übung ${i+1}: ${s.title}</h4>
-    </div>
-  `).join('');
+  const scores = loadScores();
+  list.innerHTML = sets.map((s, i) => {
+    const sc = scores[s.id];
+    let badge = '';
+    if (sc) {
+      if (sc.pct === 100) badge = `<span class="score-badge score-badge-perfect">${sc.pct}%</span>`;
+      else if (sc.pct >= 60) badge = `<span class="score-badge score-badge-good">${sc.pct}%</span>`;
+      else badge = `<span class="score-badge score-badge-tried">${sc.pct}%</span>`;
+    }
+    return `<div class="part-card" style="text-align:left; margin-bottom:0.5rem; display:flex; align-items:center;" onclick="startExercise('${section}', ${teil}, ${i})">
+      <h4 style="flex:1">Übung ${i+1}: ${s.title}</h4>
+      ${badge}
+    </div>`;
+  }).join('');
 
   showScreen('set-screen');
 }
@@ -1310,6 +1397,11 @@ function checkHV5(ex) {
 function showResults() {
   document.getElementById('results-panel').style.display = 'block';
   const pct = totalQ > 0 ? Math.round(score / totalQ * 100) : 0;
+
+  // Persist score
+  if (currentExercise && currentExercise.id) {
+    saveScore(currentExercise.id, score, totalQ);
+  }
 
   let emoji = '';
   if (pct === 100) emoji = 'Perfekt! ';
