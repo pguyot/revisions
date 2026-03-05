@@ -1,0 +1,1481 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSD I Prüfungstraining</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fff;
+      --fg: #222;
+      --card-bg: #f9f9f9;
+      --border: #ddd;
+      --btn-bg: #eee;
+      --btn-hover: #ddd;
+      --accent: #c41e3a;
+      --accent2: #ffcc00;
+      --accent3: #000;
+      --correct: #4caf50;
+      --wrong: #f44336;
+      --info: #1565c0;
+      --muted: #888;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --fg: #e0e0e0;
+        --card-bg: #2a2a2a;
+        --border: #444;
+        --btn-bg: #333;
+        --btn-hover: #444;
+        --muted: #999;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 52rem; margin: 0 auto; padding: 1rem; }
+
+    /* Header */
+    header {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 0.5rem; padding: 0.75rem 0; border-bottom: 3px solid var(--accent);
+      margin-bottom: 1rem;
+    }
+    header h1 { font-size: 1.3rem; font-weight: 700; }
+    header h1 .flag { display: inline-block; margin-right: 0.4rem; }
+    .stats-bar {
+      display: flex; gap: 1rem; font-size: 0.9rem; font-variant-numeric: tabular-nums;
+    }
+    .stats-bar span { white-space: nowrap; }
+    .timer-display { color: var(--accent); font-weight: 700; }
+
+    /* Badges */
+    .badge {
+      display: inline-block; padding: 0.15rem 0.55rem; border-radius: 4px;
+      color: #fff; font-size: 0.8rem; font-weight: 600;
+    }
+    .badge-lv { background: var(--info); }
+    .badge-hv { background: #7b1fa2; }
+    .badge-teil { background: #555; font-size: 0.75rem; }
+
+    /* Buttons */
+    .btn {
+      font-size: 1rem; padding: 0.5rem 1.4rem; border: 2px solid var(--border);
+      border-radius: 8px; background: var(--btn-bg); color: var(--fg);
+      cursor: pointer; transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      font-family: inherit;
+    }
+    .btn:hover { background: var(--btn-hover); }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.85; background: var(--accent); }
+    .btn-info { background: var(--info); border-color: var(--info); color: #fff; }
+    .btn-info:hover { opacity: 0.85; background: var(--info); }
+    .btn-correct { background: var(--correct) !important; border-color: var(--correct) !important; color: #fff !important; }
+    .btn-wrong { background: var(--wrong) !important; border-color: var(--wrong) !important; color: #fff !important; }
+    .btn-selected { border-color: var(--info) !important; background: color-mix(in srgb, var(--info) 20%, var(--btn-bg)) !important; }
+
+    /* Start screen */
+    #start-screen { text-align: center; padding: 2rem 1rem; }
+    #start-screen h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    #start-screen p { margin-bottom: 1.5rem; color: var(--muted); }
+    .section-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      max-width: 36rem; margin: 0 auto 1.5rem;
+    }
+    .section-card {
+      border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem;
+      text-align: center; cursor: pointer; transition: border-color 0.2s, transform 0.15s;
+    }
+    .section-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .section-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .section-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* Part selection */
+    .part-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem; margin: 1rem 0;
+    }
+    .part-card {
+      border: 2px solid var(--border); border-radius: 8px; padding: 0.8rem;
+      text-align: center; cursor: pointer; transition: border-color 0.2s;
+    }
+    .part-card:hover { border-color: var(--info); }
+    .part-card h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .part-card p { font-size: 0.78rem; color: var(--muted); }
+    .part-card .part-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+
+    /* Exercise area */
+    #exercise-area { display: none; }
+    .exercise-header {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .exercise-instructions {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.8rem 1rem; margin-bottom: 1rem; font-size: 0.9rem;
+      line-height: 1.5; color: var(--muted);
+    }
+    .exercise-instructions strong { color: var(--fg); }
+
+    /* Text display */
+    .text-box {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1rem 1.2rem; margin-bottom: 1rem; font-size: 0.95rem;
+      line-height: 1.8; white-space: pre-wrap;
+    }
+    .gap { display: inline-block; min-width: 6rem; border-bottom: 2px dashed var(--info);
+      text-align: center; font-weight: 700; color: var(--info); padding: 0 0.3rem;
+      cursor: pointer; transition: background 0.15s; margin: 0 0.15rem;
+    }
+    .gap:hover { background: color-mix(in srgb, var(--info) 10%, transparent); }
+    .gap.filled { border-bottom-style: solid; }
+    .gap.gap-correct { border-color: var(--correct); color: var(--correct); }
+    .gap.gap-wrong { border-color: var(--wrong); color: var(--wrong); }
+
+    /* Word list for Teil 1 */
+    .word-list {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .word-btn {
+      font-size: 0.9rem; padding: 0.35rem 0.8rem; border: 2px solid var(--border);
+      border-radius: 6px; background: var(--btn-bg); color: var(--fg);
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .word-btn:hover { border-color: var(--info); }
+    .word-btn.used { opacity: 0.4; text-decoration: line-through; pointer-events: none; }
+    .word-btn.word-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 20%, var(--btn-bg)); }
+
+    /* Ad cards for Teil 2 */
+    .ad-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem; margin-bottom: 1rem;
+    }
+    .ad-card {
+      border: 2px solid var(--border); border-radius: 8px; padding: 0.7rem;
+      font-size: 0.85rem; cursor: pointer; transition: border-color 0.2s;
+    }
+    .ad-card:hover { border-color: var(--info); }
+    .ad-card.ad-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 10%, var(--btn-bg)); }
+    .ad-card.ad-used { opacity: 0.4; pointer-events: none; }
+    .ad-card .ad-letter {
+      display: inline-block; font-weight: 700; background: var(--info); color: #fff;
+      width: 1.5rem; height: 1.5rem; text-align: center; border-radius: 4px;
+      font-size: 0.8rem; line-height: 1.5rem; margin-right: 0.4rem;
+    }
+    .ad-card.ad-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 10%, var(--btn-bg)); }
+    .ad-card.ad-wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 10%, var(--btn-bg)); }
+
+    /* Person descriptions for matching */
+    .person-list { margin-bottom: 1rem; }
+    .person-item {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      padding: 0.6rem 0.8rem; border: 2px solid var(--border); border-radius: 8px;
+      margin-bottom: 0.5rem; cursor: pointer; transition: border-color 0.2s;
+    }
+    .person-item:hover { border-color: var(--info); }
+    .person-item.person-active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--btn-bg)); }
+    .person-item .person-num {
+      font-weight: 700; min-width: 1.5rem; text-align: center;
+    }
+    .person-item .person-answer {
+      margin-left: auto; font-weight: 700; color: var(--info);
+      min-width: 1.5rem; text-align: center;
+    }
+    .person-item.match-correct { border-color: var(--correct); }
+    .person-item.match-wrong { border-color: var(--wrong); }
+
+    /* Statement list for true/false */
+    .statement-list { margin-bottom: 1rem; }
+    .statement-item {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      padding: 0.6rem 0.8rem; border: 1px solid var(--border); border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .statement-item .stmt-num { font-weight: 700; min-width: 1.5rem; }
+    .statement-item .stmt-text { flex: 1; font-size: 0.9rem; }
+    .tf-buttons { display: flex; gap: 0.4rem; margin-left: 0.5rem; }
+    .tf-btn {
+      font-size: 0.8rem; padding: 0.25rem 0.6rem; border: 2px solid var(--border);
+      border-radius: 6px; background: var(--btn-bg); color: var(--fg);
+      cursor: pointer; transition: all 0.15s; font-family: inherit; font-weight: 600;
+    }
+    .tf-btn:hover { border-color: var(--info); }
+    .tf-btn.tf-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 25%, var(--btn-bg)); }
+    .tf-btn.tf-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 25%, var(--btn-bg)); color: var(--correct); }
+    .tf-btn.tf-wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 25%, var(--btn-bg)); color: var(--wrong); }
+
+    /* MC questions */
+    .mc-list { margin-bottom: 1rem; }
+    .mc-item { margin-bottom: 1rem; }
+    .mc-question { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.95rem; }
+    .mc-options { display: flex; flex-direction: column; gap: 0.3rem; }
+    .mc-opt {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 0.7rem; border: 2px solid var(--border); border-radius: 6px;
+      cursor: pointer; transition: border-color 0.2s; font-size: 0.9rem;
+    }
+    .mc-opt:hover { border-color: var(--info); }
+    .mc-opt.mc-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 15%, var(--btn-bg)); }
+    .mc-opt.mc-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 15%, var(--btn-bg)); }
+    .mc-opt.mc-wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 15%, var(--btn-bg)); }
+    .mc-opt .mc-letter { font-weight: 700; min-width: 1.2rem; }
+
+    /* Heading matching (Teil 5) */
+    .heading-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.5rem; margin-bottom: 1rem;
+    }
+    .heading-card {
+      border: 2px solid var(--border); border-radius: 6px; padding: 0.5rem 0.7rem;
+      font-size: 0.85rem; cursor: pointer; transition: border-color 0.2s;
+    }
+    .heading-card:hover { border-color: var(--info); }
+    .heading-card.hd-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 15%, var(--btn-bg)); }
+    .heading-card.hd-used { opacity: 0.4; pointer-events: none; }
+    .heading-card.hd-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 10%, var(--btn-bg)); }
+    .heading-card.hd-wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 10%, var(--btn-bg)); }
+    .heading-card .hd-letter {
+      display: inline-block; font-weight: 700; margin-right: 0.3rem;
+    }
+
+    /* Short text items */
+    .short-text-item {
+      border: 2px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem;
+      margin-bottom: 0.6rem; cursor: pointer; transition: border-color 0.2s;
+    }
+    .short-text-item:hover { border-color: var(--accent); }
+    .short-text-item.st-active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--btn-bg)); }
+    .short-text-item .st-header {
+      display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;
+    }
+    .short-text-item .st-num { font-weight: 700; }
+    .short-text-item .st-answer { margin-left: auto; font-weight: 700; color: var(--info); }
+    .short-text-item .st-text { font-size: 0.88rem; }
+    .short-text-item.st-correct { border-color: var(--correct); }
+    .short-text-item.st-wrong { border-color: var(--wrong); }
+
+    /* TTS button */
+    .tts-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.9rem; padding: 0.4rem 1rem; border: 2px solid #7b1fa2;
+      border-radius: 8px; background: color-mix(in srgb, #7b1fa2 10%, var(--btn-bg));
+      color: var(--fg); cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .tts-btn:hover { background: color-mix(in srgb, #7b1fa2 20%, var(--btn-bg)); }
+    .tts-btn.speaking { background: #7b1fa2; color: #fff; }
+    .tts-speed {
+      display: inline-flex; align-items: center; gap: 0.3rem; margin-left: 0.5rem;
+      font-size: 0.85rem;
+    }
+    .tts-speed label { color: var(--muted); }
+    .tts-speed select {
+      font-size: 0.85rem; padding: 0.2rem; border-radius: 4px;
+      border: 1px solid var(--border); background: var(--btn-bg); color: var(--fg);
+      font-family: inherit;
+    }
+
+    /* HV scene options (replaces pictures with text descriptions) */
+    .scene-options { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .scene-opt {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 0.8rem; border: 2px solid var(--border); border-radius: 8px;
+      cursor: pointer; transition: border-color 0.2s; font-size: 0.9rem;
+    }
+    .scene-opt:hover { border-color: var(--info); }
+    .scene-opt.so-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 15%, var(--btn-bg)); }
+    .scene-opt.so-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 15%, var(--btn-bg)); }
+    .scene-opt.so-wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 15%, var(--btn-bg)); }
+    .scene-opt .so-letter { font-weight: 700; min-width: 1.2rem; }
+
+    /* Action bar */
+    .action-bar {
+      display: flex; gap: 0.75rem; justify-content: center;
+      flex-wrap: wrap; margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Results panel */
+    #results-panel { display: none; text-align: center; padding: 2rem 1rem; }
+    .results-score {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .results-detail { font-size: 1rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .results-bar {
+      width: 100%; max-width: 20rem; height: 1.2rem; background: var(--card-bg);
+      border-radius: 0.6rem; overflow: hidden; margin: 0 auto 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .results-fill {
+      height: 100%; border-radius: 0.6rem; transition: width 0.5s ease;
+    }
+
+    /* Progress dots */
+    .progress-dots {
+      display: flex; gap: 0.3rem; justify-content: center; margin-bottom: 1rem;
+    }
+    .progress-dot {
+      width: 0.7rem; height: 0.7rem; border-radius: 50%;
+      border: 2px solid var(--border); background: transparent;
+    }
+    .progress-dot.dot-current { border-color: var(--info); background: var(--info); }
+    .progress-dot.dot-done { border-color: var(--correct); background: var(--correct); }
+    .progress-dot.dot-wrong { border-color: var(--wrong); background: var(--wrong); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.1rem; }
+      .section-grid { grid-template-columns: 1fr; }
+      .ad-grid { grid-template-columns: 1fr; }
+      .heading-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1><span class="flag">&#x1F1E9;&#x1F1EA;</span> DSD I Training</h1>
+    <div class="stats-bar" id="stats-bar" style="display:none">
+      <span id="score-wrap">Punkte: <strong id="score-display">0</strong>/<strong id="total-display">0</strong></span>
+      <span class="timer-display" id="timer-wrap">Zeit: <strong id="timer-display">0:00</strong></span>
+    </div>
+  </header>
+
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <h2>DSD I Prüfungstraining</h2>
+    <p>Übe für das Deutsche Sprachdiplom Stufe I (A2/B1).<br>Wähle einen Prüfungsteil aus:</p>
+    <div class="section-grid">
+      <div class="section-card" onclick="showParts('lv')">
+        <h3>Leseverstehen</h3>
+        <p>Lesen und Verstehen<br>5 Teile &middot; 24 Aufgaben</p>
+      </div>
+      <div class="section-card" onclick="showParts('hv')">
+        <h3>Hörverstehen</h3>
+        <p>Hören und Verstehen<br>5 Teile &middot; 24 Aufgaben</p>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="font-size:1.1rem; padding: 0.6rem 2rem;" onclick="startFullExam()">Komplette Prüfung</button>
+  </div>
+
+  <!-- Part Selection -->
+  <div id="part-screen" style="display:none">
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+      <button class="btn" onclick="goHome()">&larr; Zurück</button>
+      <h2 id="part-screen-title"></h2>
+    </div>
+    <p id="part-screen-desc" style="color:var(--muted); margin-bottom:1rem;"></p>
+    <div class="part-grid" id="part-grid"></div>
+  </div>
+
+  <!-- Set Selection -->
+  <div id="set-screen" style="display:none">
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+      <button class="btn" id="set-back-btn">&larr; Zurück</button>
+      <h2 id="set-screen-title"></h2>
+    </div>
+    <div id="set-list"></div>
+  </div>
+
+  <!-- Exercise Area -->
+  <div id="exercise-area">
+    <div class="exercise-header" id="exercise-header"></div>
+    <div class="progress-dots" id="progress-dots"></div>
+    <div class="exercise-instructions" id="exercise-instructions"></div>
+    <div id="tts-controls" style="display:none; margin-bottom:1rem; text-align:center;">
+      <button class="tts-btn" id="tts-play-btn" onclick="ttsPlay()">
+        <span id="tts-icon">&#9654;</span> Anhören
+      </button>
+      <span class="tts-speed">
+        <label>Tempo:</label>
+        <select id="tts-speed" onchange="ttsSpeedChanged()">
+          <option value="0.6">Langsam</option>
+          <option value="0.8" selected>Normal</option>
+          <option value="1.0">Schnell</option>
+        </select>
+      </span>
+    </div>
+    <div id="exercise-content"></div>
+    <div class="action-bar" id="action-bar"></div>
+  </div>
+
+  <!-- Results -->
+  <div id="results-panel">
+    <h2 id="results-title">Ergebnis</h2>
+    <div class="results-score" id="results-score"></div>
+    <div class="results-bar"><div class="results-fill" id="results-fill"></div></div>
+    <div class="results-detail" id="results-detail"></div>
+    <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+      <button class="btn" onclick="goHome()">Hauptmenü</button>
+      <button class="btn btn-primary" id="results-retry-btn">Nochmal versuchen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let DATA = null;
+let currentSection = null; // 'lv' or 'hv'
+let currentTeil = null;    // 1-5
+let currentSetIdx = 0;
+let currentExercise = null;
+let score = 0;
+let totalQ = 0;
+let timerInterval = null;
+let timerSeconds = 0;
+let ttsUtterance = null;
+let selectedGap = null;
+let selectedPerson = null;
+let selectedShortText = null;
+let exerciseState = {};
+let isChecked = false;
+
+// Load data
+fetch('data.json').then(r => r.json()).then(d => { DATA = d; });
+
+// --- Navigation ---
+function showScreen(id) {
+  for (const s of ['start-screen','part-screen','set-screen','exercise-area','results-panel'])
+    document.getElementById(s).style.display = 'none';
+  document.getElementById(id).style.display = '';
+  document.getElementById('stats-bar').style.display = id === 'exercise-area' ? '' : 'none';
+}
+
+function goHome() {
+  stopTimer(); ttsPause();
+  showScreen('start-screen');
+}
+
+function showParts(section) {
+  currentSection = section;
+  const isLV = section === 'lv';
+  document.getElementById('part-screen-title').textContent = isLV ? 'Leseverstehen' : 'Hörverstehen';
+  document.getElementById('part-screen-desc').textContent = isLV
+    ? 'Wähle einen Teil zum Üben (60 Minuten in der Prüfung):'
+    : 'Wähle einen Teil zum Üben (40 Minuten in der Prüfung):';
+
+  const parts = isLV ? [
+    { teil: 1, icon: '📝', name: 'Lückentext', desc: 'Wörter einsetzen + Titel wählen' },
+    { teil: 2, icon: '🔗', name: 'Zuordnung', desc: 'Personen & Anzeigen zuordnen' },
+    { teil: 3, icon: '✅', name: 'Richtig/Falsch', desc: 'Aussagen beurteilen' },
+    { teil: 4, icon: '🔤', name: 'Multiple Choice', desc: 'Richtige Antwort wählen (A/B/C)' },
+    { teil: 5, icon: '🏷️', name: 'Überschriften', desc: 'Texte & Überschriften zuordnen' },
+  ] : [
+    { teil: 1, icon: '🎧', name: 'Szenen', desc: 'Kurze Dialoge verstehen' },
+    { teil: 2, icon: '📢', name: 'Durchsagen', desc: 'Ansagen verstehen' },
+    { teil: 3, icon: '🎤', name: 'Interview', desc: 'Richtig oder Falsch?' },
+    { teil: 4, icon: '📖', name: 'Bericht', desc: 'Längerer Text, Multiple Choice' },
+    { teil: 5, icon: '🏷️', name: 'Zuordnung', desc: 'Texte & Überschriften zuordnen' },
+  ];
+
+  const grid = document.getElementById('part-grid');
+  grid.innerHTML = parts.map(p => `
+    <div class="part-card" onclick="showSets('${section}', ${p.teil})">
+      <div class="part-icon">${p.icon}</div>
+      <h4>Teil ${p.teil}: ${p.name}</h4>
+      <p>${p.desc}</p>
+    </div>
+  `).join('');
+
+  showScreen('part-screen');
+}
+
+function showSets(section, teil) {
+  currentSection = section;
+  currentTeil = teil;
+  const key = getDataKey(section, teil);
+  const sets = getDataSets(section, teil);
+
+  const isLV = section === 'lv';
+  const teilNames = isLV
+    ? ['', 'Lückentext', 'Zuordnung', 'Richtig/Falsch', 'Multiple Choice', 'Überschriften']
+    : ['', 'Szenen', 'Durchsagen', 'Interview', 'Bericht', 'Zuordnung'];
+
+  document.getElementById('set-screen-title').textContent =
+    `${isLV ? 'Leseverstehen' : 'Hörverstehen'} — Teil ${teil}: ${teilNames[teil]}`;
+
+  document.getElementById('set-back-btn').onclick = () => showParts(section);
+
+  const list = document.getElementById('set-list');
+  list.innerHTML = sets.map((s, i) => `
+    <div class="part-card" style="text-align:left; margin-bottom:0.5rem;" onclick="startExercise('${section}', ${teil}, ${i})">
+      <h4>Übung ${i+1}: ${s.title}</h4>
+    </div>
+  `).join('');
+
+  showScreen('set-screen');
+}
+
+function startFullExam() {
+  // TODO: full exam mode; for now go to LV
+  showParts('lv');
+}
+
+// --- Data helpers ---
+function getDataKey(section, teil) {
+  const sectionKey = section === 'lv' ? 'leseverstehen' : 'hoerverstehen';
+  return sectionKey + '.teil' + teil;
+}
+
+function getDataSets(section, teil) {
+  const sectionKey = section === 'lv' ? 'leseverstehen' : 'hoerverstehen';
+  return DATA[sectionKey]['teil' + teil];
+}
+
+// --- Start exercise ---
+function startExercise(section, teil, setIdx) {
+  currentSection = section;
+  currentTeil = teil;
+  currentSetIdx = setIdx;
+  const sets = getDataSets(section, teil);
+  currentExercise = sets[setIdx];
+  score = 0;
+  totalQ = 0;
+  isChecked = false;
+  exerciseState = {};
+  selectedGap = null;
+  selectedPerson = null;
+  selectedShortText = null;
+
+  startTimer();
+  showScreen('exercise-area');
+  renderExercise();
+}
+
+// --- Render exercise ---
+function renderExercise() {
+  const s = currentSection;
+  const t = currentTeil;
+  const ex = currentExercise;
+  const isLV = s === 'lv';
+
+  // Header
+  const badge = isLV ? '<span class="badge badge-lv">Leseverstehen</span>'
+                      : '<span class="badge badge-hv">Hörverstehen</span>';
+  document.getElementById('exercise-header').innerHTML =
+    `${badge} <span class="badge badge-teil">Teil ${t}</span> <strong>${ex.title}</strong>`;
+
+  // TTS controls
+  document.getElementById('tts-controls').style.display = isLV ? 'none' : '';
+
+  // Instructions
+  const instrEl = document.getElementById('exercise-instructions');
+
+  if (isLV && t === 1) renderLV1(ex, instrEl);
+  else if (isLV && t === 2) renderLV2(ex, instrEl);
+  else if (isLV && t === 3) renderLV3(ex, instrEl);
+  else if (isLV && t === 4) renderLV4(ex, instrEl);
+  else if (isLV && t === 5) renderLV5(ex, instrEl);
+  else if (!isLV && t === 1) renderHV1(ex, instrEl);
+  else if (!isLV && t === 2) renderHV2(ex, instrEl);
+  else if (!isLV && t === 3) renderHV3(ex, instrEl);
+  else if (!isLV && t === 4) renderHV4(ex, instrEl);
+  else if (!isLV && t === 5) renderHV5(ex, instrEl);
+
+  updateScoreDisplay();
+}
+
+// --- LV Teil 1: Lückentext ---
+function renderLV1(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Lies den Text. Setze die richtigen Wörter aus der Liste in die Lücken ein. Wähle dann die passende Überschrift.';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { gaps: {}, title: null };
+
+  // Render text with gaps
+  let textHtml = escHtml(ex.text);
+  for (let i = 1; i <= 4; i++) {
+    textHtml = textHtml.replace(`{${i}}`, `<span class="gap" id="gap-${i}" onclick="selectGap(${i})">(${i}) ___</span>`);
+  }
+
+  // Word list
+  const wordHtml = Object.entries(ex.wordList).map(([letter, word]) =>
+    `<button class="word-btn" id="word-${letter}" onclick="selectWord('${letter}')">${letter}: ${word}</button>`
+  ).join('');
+
+  // Title question
+  const titleHtml = ex.titleOptions.map((opt, i) =>
+    `<button class="btn" id="title-${i}" onclick="selectTitle(${i})" style="margin:0.2rem;">${i+1}. ${opt}</button>`
+  ).join('');
+
+  content.innerHTML = `
+    <div class="text-box" id="lv1-text">${textHtml}</div>
+    <div style="text-align:center; margin-bottom:0.5rem; font-weight:600;">Wortliste:</div>
+    <div class="word-list" id="word-list">${wordHtml}</div>
+    <div style="text-align:center; margin-top:1rem; margin-bottom:0.5rem; font-weight:600;">Aufgabe 5: Welche Überschrift passt?</div>
+    <div style="display:flex; flex-wrap:wrap; gap:0.3rem; justify-content:center;" id="title-options">${titleHtml}</div>
+  `;
+
+  renderActionBar(['check']);
+  renderProgressDots(5);
+}
+
+function selectGap(num) {
+  selectedGap = num;
+  document.querySelectorAll('.gap').forEach(g => g.classList.remove('filled'));
+  const g = document.getElementById('gap-' + num);
+  if (g) g.style.outline = '2px solid var(--accent)';
+  // Deselect outline from others
+  document.querySelectorAll('.gap').forEach(el => {
+    if (el.id !== 'gap-' + num) el.style.outline = '';
+  });
+}
+
+function selectWord(letter) {
+  if (isChecked) return;
+  if (!selectedGap) {
+    // Auto-select first empty gap
+    for (let i = 1; i <= 4; i++) {
+      if (!exerciseState.gaps[i]) { selectedGap = i; break; }
+    }
+    if (!selectedGap) return;
+  }
+
+  // Remove word from any other gap
+  for (const [g, l] of Object.entries(exerciseState.gaps)) {
+    if (l === letter) {
+      exerciseState.gaps[g] = null;
+      const gapEl = document.getElementById('gap-' + g);
+      if (gapEl) { gapEl.textContent = `(${g}) ___`; gapEl.classList.remove('filled'); }
+    }
+  }
+
+  exerciseState.gaps[selectedGap] = letter;
+  const gapEl = document.getElementById('gap-' + selectedGap);
+  const word = currentExercise.wordList[letter];
+  if (gapEl) { gapEl.textContent = `(${selectedGap}) ${word}`; gapEl.classList.add('filled'); }
+
+  // Update used state
+  document.querySelectorAll('.word-btn').forEach(btn => btn.classList.remove('used', 'word-selected'));
+  for (const l of Object.values(exerciseState.gaps)) {
+    if (l) document.getElementById('word-' + l)?.classList.add('used');
+  }
+
+  // Advance to next empty gap
+  selectedGap = null;
+  for (let i = 1; i <= 4; i++) {
+    if (!exerciseState.gaps[i]) { selectGap(i); break; }
+  }
+  gapEl.style.outline = '';
+
+  updateProgressDots();
+}
+
+function selectTitle(idx) {
+  if (isChecked) return;
+  exerciseState.title = idx;
+  document.querySelectorAll('#title-options .btn').forEach((b, i) => {
+    b.classList.toggle('btn-selected', i === idx);
+  });
+  updateProgressDots();
+}
+
+// --- LV Teil 2: Zuordnung ---
+function renderLV2(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Lies die Beschreibungen und die Anzeigen. Klicke auf eine Person, dann auf die passende Anzeige. Jeder Buchstabe kann nur einmal verwendet werden.';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { matches: {} };
+
+  const personsHtml = ex.descriptions.map(d => `
+    <div class="person-item" id="person-${d.id}" onclick="selectPerson(${d.id})">
+      <span class="person-num">${d.id}.</span>
+      <span>${d.text}</span>
+      <span class="person-answer" id="person-ans-${d.id}">?</span>
+    </div>
+  `).join('');
+
+  const adsHtml = ex.ads.map(a => `
+    <div class="ad-card" id="ad-${a.letter}" onclick="selectAd('${a.letter}')">
+      <span class="ad-letter">${a.letter}</span> ${a.text}
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div style="font-weight:600; margin-bottom:0.5rem;">Personen:</div>
+    <div class="person-list" id="person-list">${personsHtml}</div>
+    <div style="font-weight:600; margin-bottom:0.5rem;">Anzeigen:</div>
+    <div class="ad-grid" id="ad-grid">${adsHtml}</div>
+  `;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.descriptions.length);
+}
+
+function selectPerson(id) {
+  if (isChecked) return;
+  selectedPerson = id;
+  document.querySelectorAll('.person-item').forEach(el => el.classList.remove('person-active'));
+  document.getElementById('person-' + id)?.classList.add('person-active');
+}
+
+function selectAd(letter) {
+  if (isChecked || !selectedPerson) return;
+
+  // Remove ad from any other person
+  for (const [pid, l] of Object.entries(exerciseState.matches)) {
+    if (l === letter) {
+      exerciseState.matches[pid] = null;
+      const ansEl = document.getElementById('person-ans-' + pid);
+      if (ansEl) ansEl.textContent = '?';
+    }
+  }
+
+  exerciseState.matches[selectedPerson] = letter;
+  const ansEl = document.getElementById('person-ans-' + selectedPerson);
+  if (ansEl) ansEl.textContent = letter;
+
+  // Update ad used state
+  document.querySelectorAll('.ad-card').forEach(el => el.classList.remove('ad-used', 'ad-selected'));
+  for (const l of Object.values(exerciseState.matches)) {
+    if (l) document.getElementById('ad-' + l)?.classList.add('ad-used');
+  }
+
+  // Advance to next unmatched person
+  const descs = currentExercise.descriptions;
+  selectedPerson = null;
+  document.querySelectorAll('.person-item').forEach(el => el.classList.remove('person-active'));
+  for (const d of descs) {
+    if (!exerciseState.matches[d.id]) {
+      selectPerson(d.id);
+      break;
+    }
+  }
+
+  updateProgressDots();
+}
+
+// --- LV Teil 3: Richtig/Falsch ---
+function renderLV3(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Lies den Text und die Aussagen. Entscheide: <strong>richtig</strong> oder <strong>falsch</strong>?';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { answers: {} };
+
+  const stmtsHtml = ex.statements.map(s => `
+    <div class="statement-item" id="stmt-${s.id}">
+      <span class="stmt-num">${s.id}.</span>
+      <span class="stmt-text">${s.text}</span>
+      <div class="tf-buttons">
+        <button class="tf-btn" id="tf-${s.id}-r" onclick="selectTF(${s.id}, true)">Richtig</button>
+        <button class="tf-btn" id="tf-${s.id}-f" onclick="selectTF(${s.id}, false)">Falsch</button>
+      </div>
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="text-box">${escHtml(ex.text)}</div>
+    <div class="statement-list">${stmtsHtml}</div>
+  `;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.statements.length);
+}
+
+function selectTF(id, value) {
+  if (isChecked) return;
+  exerciseState.answers[id] = value;
+  document.getElementById(`tf-${id}-r`).classList.toggle('tf-selected', value === true);
+  document.getElementById(`tf-${id}-f`).classList.toggle('tf-selected', value === false);
+  updateProgressDots();
+}
+
+// --- LV Teil 4: Multiple Choice ---
+function renderLV4(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Lies den Text und die Fragen. Wähle die richtige Antwort (A, B oder C).';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { answers: {} };
+  const letters = ['A', 'B', 'C'];
+
+  const qHtml = ex.questions.map(q => `
+    <div class="mc-item" id="mc-item-${q.id}">
+      <div class="mc-question">${q.id}. ${q.question}</div>
+      <div class="mc-options">
+        ${q.options.map((opt, i) => `
+          <div class="mc-opt" id="mc-${q.id}-${i}" onclick="selectMC(${q.id}, ${i})">
+            <span class="mc-letter">${letters[i]}</span> ${opt}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="text-box">${escHtml(ex.text)}</div>
+    <div class="mc-list">${qHtml}</div>
+  `;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.questions.length);
+}
+
+function selectMC(qid, idx) {
+  if (isChecked) return;
+  exerciseState.answers[qid] = idx;
+  const q = currentExercise.questions ? currentExercise.questions.find(q => q.id === qid) : null;
+  const count = q ? q.options.length : 3;
+  for (let i = 0; i < count; i++) {
+    document.getElementById(`mc-${qid}-${i}`)?.classList.toggle('mc-selected', i === idx);
+  }
+  updateProgressDots();
+}
+
+// --- LV Teil 5: Heading matching ---
+function renderLV5(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Lies die Texte und die Überschriften. Welche Überschrift passt zu welchem Text? Klicke auf einen Text, dann auf die passende Überschrift.';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { matches: {} };
+
+  const textsHtml = ex.texts.map(t => `
+    <div class="short-text-item" id="st-${t.id}" onclick="selectShortText(${t.id})">
+      <div class="st-header">
+        <span class="st-num">Text ${t.id}</span>
+        <span class="st-answer" id="st-ans-${t.id}">?</span>
+      </div>
+      <div class="st-text">${t.text}</div>
+    </div>
+  `).join('');
+
+  const hdHtml = ex.headings.map(h => `
+    <div class="heading-card" id="hd-${h.letter}" onclick="selectHeading('${h.letter}')">
+      <span class="hd-letter">${h.letter}:</span> ${h.text}
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div style="font-weight:600; margin-bottom:0.5rem;">Texte:</div>
+    ${textsHtml}
+    <div style="font-weight:600; margin-bottom:0.5rem; margin-top:1rem;">Überschriften:</div>
+    <div class="heading-list">${hdHtml}</div>
+  `;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.texts.length);
+}
+
+function selectShortText(id) {
+  if (isChecked) return;
+  selectedShortText = id;
+  document.querySelectorAll('.short-text-item').forEach(el => el.classList.remove('st-active'));
+  document.getElementById('st-' + id)?.classList.add('st-active');
+}
+
+function selectHeading(letter) {
+  if (isChecked || !selectedShortText) return;
+
+  // Remove heading from other text
+  for (const [tid, l] of Object.entries(exerciseState.matches)) {
+    if (l === letter) {
+      exerciseState.matches[tid] = null;
+      const ansEl = document.getElementById('st-ans-' + tid);
+      if (ansEl) ansEl.textContent = '?';
+    }
+  }
+
+  exerciseState.matches[selectedShortText] = letter;
+  const ansEl = document.getElementById('st-ans-' + selectedShortText);
+  if (ansEl) ansEl.textContent = letter;
+
+  // Update used state
+  document.querySelectorAll('.heading-card').forEach(el => el.classList.remove('hd-used', 'hd-selected'));
+  for (const l of Object.values(exerciseState.matches)) {
+    if (l) document.getElementById('hd-' + l)?.classList.add('hd-used');
+  }
+
+  // Advance
+  const texts = currentExercise.texts;
+  selectedShortText = null;
+  document.querySelectorAll('.short-text-item').forEach(el => el.classList.remove('st-active'));
+  for (const t of texts) {
+    if (!exerciseState.matches[t.id]) {
+      selectShortText(t.id);
+      break;
+    }
+  }
+
+  updateProgressDots();
+}
+
+// --- HV Teil 1: Scenes ---
+function renderHV1(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Du hörst fünf kurze Szenen. Höre jede Szene an und wähle die richtige Beschreibung (A, B oder C).';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { current: 0, answers: {} };
+  renderHV1Scene(ex, content, 0);
+}
+
+function renderHV1Scene(ex, container, idx) {
+  const scene = ex.scenes[idx];
+  exerciseState.currentScene = idx;
+  exerciseState.currentSpokenText = scene.spokenText;
+  const letters = ['A', 'B', 'C'];
+
+  const optsHtml = scene.options.map((opt, i) => `
+    <div class="scene-opt" id="so-${i}" onclick="selectSceneOpt(${i})">
+      <span class="so-letter">${letters[i]}</span> ${opt}
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div style="text-align:center; font-weight:600; margin-bottom:0.5rem;">
+      Szene ${idx + 1} von ${ex.scenes.length}
+    </div>
+    <div class="scene-options">${optsHtml}</div>
+  `;
+
+  if (exerciseState.answers[idx] !== undefined) {
+    document.getElementById('so-' + exerciseState.answers[idx])?.classList.add('so-selected');
+  }
+
+  const isLast = idx === ex.scenes.length - 1;
+  const hasNext = idx < ex.scenes.length - 1;
+  const hasPrev = idx > 0;
+
+  let buttons = [];
+  if (hasPrev) buttons.push(`<button class="btn" onclick="hv1Nav(${idx - 1})">&larr; Vorherige</button>`);
+  if (hasNext) buttons.push(`<button class="btn btn-info" onclick="hv1Nav(${idx + 1})">Nächste &rarr;</button>`);
+  if (isLast) buttons.push(`<button class="btn btn-primary" onclick="checkExercise()">Auswerten</button>`);
+  buttons.push(`<button class="btn" onclick="goHome()">Beenden</button>`);
+
+  document.getElementById('action-bar').innerHTML = buttons.join('');
+  renderProgressDots(ex.scenes.length);
+  updateProgressDots();
+}
+
+function selectSceneOpt(idx) {
+  if (isChecked) return;
+  exerciseState.answers[exerciseState.currentScene] = idx;
+  document.querySelectorAll('.scene-opt').forEach((el, i) => el.classList.toggle('so-selected', i === idx));
+  updateProgressDots();
+}
+
+function hv1Nav(idx) {
+  renderHV1Scene(currentExercise, document.getElementById('exercise-content'), idx);
+}
+
+// --- HV Teil 2: Announcements ---
+function renderHV2(ex, instrEl) {
+  instrEl.innerHTML = '<strong>Aufgabe:</strong> Du hörst vier Durchsagen. Höre jede Durchsage an und beantworte die Frage.';
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { current: 0, answers: {} };
+  renderHV2Announcement(ex, content, 0);
+}
+
+function renderHV2Announcement(ex, container, idx) {
+  const ann = ex.announcements[idx];
+  exerciseState.currentScene = idx;
+  exerciseState.currentSpokenText = ann.spokenText;
+  const letters = ['A', 'B', 'C'];
+
+  const optsHtml = ann.options.map((opt, i) => `
+    <div class="mc-opt" id="hv2-opt-${i}" onclick="selectHV2Opt(${i})">
+      <span class="mc-letter">${letters[i]}</span> ${opt}
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div style="text-align:center; font-weight:600; margin-bottom:0.5rem;">
+      Durchsage ${idx + 1} von ${ex.announcements.length}
+    </div>
+    <div class="mc-item">
+      <div class="mc-question">${ann.id}. ${ann.question}</div>
+      <div class="mc-options">${optsHtml}</div>
+    </div>
+  `;
+
+  if (exerciseState.answers[idx] !== undefined) {
+    document.getElementById('hv2-opt-' + exerciseState.answers[idx])?.classList.add('mc-selected');
+  }
+
+  const isLast = idx === ex.announcements.length - 1;
+  let buttons = [];
+  if (idx > 0) buttons.push(`<button class="btn" onclick="hv2Nav(${idx-1})">&larr; Vorherige</button>`);
+  if (!isLast) buttons.push(`<button class="btn btn-info" onclick="hv2Nav(${idx+1})">Nächste &rarr;</button>`);
+  if (isLast) buttons.push(`<button class="btn btn-primary" onclick="checkExercise()">Auswerten</button>`);
+  buttons.push(`<button class="btn" onclick="goHome()">Beenden</button>`);
+
+  document.getElementById('action-bar').innerHTML = buttons.join('');
+  renderProgressDots(ex.announcements.length);
+  updateProgressDots();
+}
+
+function selectHV2Opt(idx) {
+  if (isChecked) return;
+  exerciseState.answers[exerciseState.currentScene] = idx;
+  document.querySelectorAll('.mc-opt').forEach((el, i) => el.classList.toggle('mc-selected', i === idx));
+  updateProgressDots();
+}
+
+function hv2Nav(idx) { renderHV2Announcement(currentExercise, document.getElementById('exercise-content'), idx); }
+
+// --- HV Teil 3: Interview true/false ---
+function renderHV3(ex, instrEl) {
+  instrEl.innerHTML = `<strong>Aufgabe:</strong> ${ex.intro} Höre das Interview an und entscheide: <strong>richtig</strong> oder <strong>falsch</strong>?`;
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { answers: {}, currentSpokenText: ex.spokenText };
+  // Store spoken text for TTS
+  exerciseState.currentSpokenText = ex.spokenText;
+
+  const stmtsHtml = ex.statements.map(s => `
+    <div class="statement-item" id="stmt-${s.id}">
+      <span class="stmt-num">${s.id}.</span>
+      <span class="stmt-text">${s.text}</span>
+      <div class="tf-buttons">
+        <button class="tf-btn" id="tf-${s.id}-r" onclick="selectTF(${s.id}, true)">Richtig</button>
+        <button class="tf-btn" id="tf-${s.id}-f" onclick="selectTF(${s.id}, false)">Falsch</button>
+      </div>
+    </div>
+  `).join('');
+
+  content.innerHTML = `<div class="statement-list">${stmtsHtml}</div>`;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.statements.length);
+}
+
+// --- HV Teil 4: Longer text MC ---
+function renderHV4(ex, instrEl) {
+  instrEl.innerHTML = `<strong>Aufgabe:</strong> ${ex.intro} Höre den Bericht an und beantworte die Fragen.`;
+
+  exerciseState = { answers: {}, currentSpokenText: ex.spokenText };
+  const content = document.getElementById('exercise-content');
+  const letters = ['A', 'B', 'C'];
+
+  const qHtml = ex.questions.map(q => `
+    <div class="mc-item" id="mc-item-${q.id}">
+      <div class="mc-question">${q.id}. ${q.question}</div>
+      <div class="mc-options">
+        ${q.options.map((opt, i) => `
+          <div class="mc-opt" id="mc-${q.id}-${i}" onclick="selectMC(${q.id}, ${i})">
+            <span class="mc-letter">${letters[i]}</span> ${opt}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  content.innerHTML = `<div class="mc-list">${qHtml}</div>`;
+
+  renderActionBar(['check']);
+  renderProgressDots(ex.questions.length);
+}
+
+// --- HV Teil 5: Matching headings ---
+function renderHV5(ex, instrEl) {
+  instrEl.innerHTML = `<strong>Aufgabe:</strong> ${ex.intro} Höre jeden Text an und ordne die richtige Überschrift zu.`;
+
+  const content = document.getElementById('exercise-content');
+  exerciseState = { current: 0, matches: {} };
+  renderHV5Scene(ex, content, 0);
+}
+
+function renderHV5Scene(ex, container, idx) {
+  const scene = ex.scenes[idx];
+  exerciseState.currentScene = idx;
+  exerciseState.currentSpokenText = scene.spokenText;
+
+  const hdHtml = ex.headings.map(h => {
+    let cls = 'heading-card';
+    // Check if used by another scene
+    for (const [si, l] of Object.entries(exerciseState.matches)) {
+      if (l === h.letter && parseInt(si) !== idx) cls += ' hd-used';
+    }
+    if (exerciseState.matches[idx] === h.letter) cls += ' hd-selected';
+    return `<div class="${cls}" id="hv5-hd-${h.letter}" onclick="selectHV5Heading('${h.letter}')">
+      <span class="hd-letter">${h.letter}:</span> ${h.text}
+    </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div style="text-align:center; font-weight:600; margin-bottom:0.5rem;">
+      Text ${idx + 1} von ${ex.scenes.length}
+    </div>
+    <div style="font-weight:600; margin-bottom:0.5rem; margin-top:1rem;">Welche Überschrift passt?</div>
+    <div class="heading-list">${hdHtml}</div>
+  `;
+
+  const isLast = idx === ex.scenes.length - 1;
+  let buttons = [];
+  if (idx > 0) buttons.push(`<button class="btn" onclick="hv5Nav(${idx-1})">&larr; Vorheriger</button>`);
+  if (!isLast) buttons.push(`<button class="btn btn-info" onclick="hv5Nav(${idx+1})">Nächster &rarr;</button>`);
+  if (isLast) buttons.push(`<button class="btn btn-primary" onclick="checkExercise()">Auswerten</button>`);
+  buttons.push(`<button class="btn" onclick="goHome()">Beenden</button>`);
+
+  document.getElementById('action-bar').innerHTML = buttons.join('');
+  renderProgressDots(ex.scenes.length);
+  updateProgressDots();
+}
+
+function selectHV5Heading(letter) {
+  if (isChecked) return;
+  exerciseState.matches[exerciseState.currentScene] = letter;
+  // Refresh
+  renderHV5Scene(currentExercise, document.getElementById('exercise-content'), exerciseState.currentScene);
+}
+
+function hv5Nav(idx) { renderHV5Scene(currentExercise, document.getElementById('exercise-content'), idx); }
+
+// --- Check / Evaluate ---
+function checkExercise() {
+  isChecked = true;
+  const s = currentSection;
+  const t = currentTeil;
+  const ex = currentExercise;
+  score = 0;
+  totalQ = 0;
+
+  if (s === 'lv' && t === 1) checkLV1(ex);
+  else if (s === 'lv' && t === 2) checkLV2(ex);
+  else if (s === 'lv' && t === 3) checkLV3(ex);
+  else if (s === 'lv' && t === 4) checkLV4(ex);
+  else if (s === 'lv' && t === 5) checkLV5(ex);
+  else if (s === 'hv' && t === 1) checkHV1(ex);
+  else if (s === 'hv' && t === 2) checkHV2(ex);
+  else if (s === 'hv' && t === 3) checkHV3(ex);
+  else if (s === 'hv' && t === 4) checkHV4(ex);
+  else if (s === 'hv' && t === 5) checkHV5(ex);
+
+  updateScoreDisplay();
+  stopTimer();
+  showResults();
+}
+
+function checkLV1(ex) {
+  totalQ = 5;
+  // Check gaps
+  for (let i = 1; i <= 4; i++) {
+    const userAns = exerciseState.gaps[i];
+    const correct = ex.answers[String(i)];
+    const gapEl = document.getElementById('gap-' + i);
+    if (userAns === correct) {
+      score++;
+      gapEl?.classList.add('gap-correct');
+    } else {
+      gapEl?.classList.add('gap-wrong');
+      // Show correct
+      if (gapEl) gapEl.title = `Richtig: ${correct} (${ex.wordList[correct]})`;
+    }
+  }
+  // Check title
+  if (exerciseState.title === ex.titleAnswer) {
+    score++;
+    document.getElementById('title-' + ex.titleAnswer)?.classList.add('btn-correct');
+  } else {
+    if (exerciseState.title !== null)
+      document.getElementById('title-' + exerciseState.title)?.classList.add('btn-wrong');
+    document.getElementById('title-' + ex.titleAnswer)?.classList.add('btn-correct');
+  }
+}
+
+function checkLV2(ex) {
+  totalQ = ex.descriptions.length;
+  for (const d of ex.descriptions) {
+    const userAns = exerciseState.matches[d.id];
+    const correct = ex.answers[String(d.id)];
+    const personEl = document.getElementById('person-' + d.id);
+    if (userAns === correct) {
+      score++;
+      personEl?.classList.add('match-correct');
+    } else {
+      personEl?.classList.add('match-wrong');
+      const ansEl = document.getElementById('person-ans-' + d.id);
+      if (ansEl) ansEl.textContent = `${userAns || '?'} → ${correct}`;
+    }
+  }
+  // Highlight correct ads
+  for (const [id, letter] of Object.entries(ex.answers)) {
+    document.getElementById('ad-' + letter)?.classList.add('ad-correct');
+  }
+}
+
+function checkLV3(ex) {
+  checkTFStatements(ex.statements);
+}
+
+function checkTFStatements(statements) {
+  totalQ = statements.length;
+  for (const s of statements) {
+    const userAns = exerciseState.answers[s.id];
+    const correct = s.answer;
+    if (userAns === correct) {
+      score++;
+      document.getElementById(`tf-${s.id}-${correct ? 'r' : 'f'}`)?.classList.add('tf-correct');
+    } else {
+      if (userAns !== undefined) {
+        document.getElementById(`tf-${s.id}-${userAns ? 'r' : 'f'}`)?.classList.add('tf-wrong');
+      }
+      document.getElementById(`tf-${s.id}-${correct ? 'r' : 'f'}`)?.classList.add('tf-correct');
+    }
+  }
+}
+
+function checkLV4(ex) {
+  checkMCQuestions(ex.questions);
+}
+
+function checkMCQuestions(questions) {
+  totalQ = questions.length;
+  for (const q of questions) {
+    const userAns = exerciseState.answers[q.id];
+    const correct = q.answer;
+    if (userAns === correct) {
+      score++;
+      document.getElementById(`mc-${q.id}-${correct}`)?.classList.add('mc-correct');
+    } else {
+      if (userAns !== undefined) {
+        document.getElementById(`mc-${q.id}-${userAns}`)?.classList.add('mc-wrong');
+      }
+      document.getElementById(`mc-${q.id}-${correct}`)?.classList.add('mc-correct');
+    }
+  }
+}
+
+function checkLV5(ex) {
+  totalQ = ex.texts.length;
+  for (const t of ex.texts) {
+    const userAns = exerciseState.matches[t.id];
+    const correct = ex.answers[String(t.id)];
+    const stEl = document.getElementById('st-' + t.id);
+    const ansEl = document.getElementById('st-ans-' + t.id);
+    if (userAns === correct) {
+      score++;
+      stEl?.classList.add('st-correct');
+    } else {
+      stEl?.classList.add('st-wrong');
+      if (ansEl) ansEl.textContent = `${userAns || '?'} → ${correct}`;
+    }
+    // Highlight correct heading
+    document.getElementById('hd-' + correct)?.classList.add('hd-correct');
+  }
+}
+
+function checkHV1(ex) {
+  totalQ = ex.scenes.length;
+  for (let i = 0; i < ex.scenes.length; i++) {
+    const userAns = exerciseState.answers[i];
+    if (userAns === ex.scenes[i].answer) score++;
+  }
+  // Show detailed result on current scene view
+  const idx = exerciseState.currentScene || 0;
+  showHV1Result(ex, idx);
+}
+
+function showHV1Result(ex, idx) {
+  const scene = ex.scenes[idx];
+  const userAns = exerciseState.answers[idx];
+  document.querySelectorAll('.scene-opt').forEach((el, i) => {
+    el.classList.remove('so-selected');
+    if (i === scene.answer) el.classList.add('so-correct');
+    else if (i === userAns && userAns !== scene.answer) el.classList.add('so-wrong');
+  });
+}
+
+function checkHV2(ex) {
+  totalQ = ex.announcements.length;
+  for (let i = 0; i < ex.announcements.length; i++) {
+    if (exerciseState.answers[i] === ex.announcements[i].answer) score++;
+  }
+}
+
+function checkHV3(ex) {
+  checkTFStatements(ex.statements);
+}
+
+function checkHV4(ex) {
+  checkMCQuestions(ex.questions);
+}
+
+function checkHV5(ex) {
+  totalQ = ex.scenes.length;
+  for (let i = 0; i < ex.scenes.length; i++) {
+    if (exerciseState.matches[i] === ex.scenes[i].answer) score++;
+  }
+}
+
+// --- Results ---
+function showResults() {
+  document.getElementById('results-panel').style.display = '';
+  const pct = totalQ > 0 ? Math.round(score / totalQ * 100) : 0;
+
+  let emoji = '';
+  if (pct === 100) emoji = 'Perfekt! ';
+  else if (pct >= 80) emoji = 'Sehr gut! ';
+  else if (pct >= 60) emoji = 'Gut! ';
+  else emoji = 'Weiter üben! ';
+
+  document.getElementById('results-title').textContent = emoji;
+  document.getElementById('results-score').textContent = `${score} / ${totalQ} Punkte`;
+  document.getElementById('results-detail').textContent =
+    `${pct}% richtig — Zeit: ${formatTime(timerSeconds)}`;
+
+  const fill = document.getElementById('results-fill');
+  fill.style.width = '0%';
+  fill.style.background = pct >= 80 ? 'var(--correct)' : pct >= 50 ? 'var(--accent2)' : 'var(--wrong)';
+  requestAnimationFrame(() => { fill.style.width = pct + '%'; });
+
+  document.getElementById('results-retry-btn').onclick = () =>
+    startExercise(currentSection, currentTeil, currentSetIdx);
+}
+
+// --- UI helpers ---
+function renderActionBar(buttons) {
+  const bar = document.getElementById('action-bar');
+  let html = '';
+  if (buttons.includes('check'))
+    html += '<button class="btn btn-primary" onclick="checkExercise()">Auswerten</button>';
+  html += '<button class="btn" onclick="goHome()">Beenden</button>';
+  bar.innerHTML = html;
+}
+
+function renderProgressDots(count) {
+  const dots = document.getElementById('progress-dots');
+  dots.innerHTML = Array.from({length: count}, (_, i) =>
+    `<div class="progress-dot" id="dot-${i}"></div>`
+  ).join('');
+}
+
+function updateProgressDots() {
+  const s = currentSection;
+  const t = currentTeil;
+  const dots = document.querySelectorAll('.progress-dot');
+  let answered = [];
+
+  if (s === 'lv' && t === 1) {
+    for (let i = 0; i < 4; i++) answered[i] = !!exerciseState.gaps[i+1];
+    answered[4] = exerciseState.title !== null && exerciseState.title !== undefined;
+  } else if ((s === 'lv' && t === 2)) {
+    const descs = currentExercise.descriptions;
+    descs.forEach((d, i) => answered[i] = !!exerciseState.matches[d.id]);
+  } else if ((s === 'lv' && t === 3) || (s === 'hv' && t === 3)) {
+    const stmts = currentExercise.statements;
+    stmts.forEach((st, i) => answered[i] = exerciseState.answers[st.id] !== undefined);
+  } else if ((s === 'lv' && t === 4) || (s === 'hv' && t === 4)) {
+    const qs = currentExercise.questions;
+    qs.forEach((q, i) => answered[i] = exerciseState.answers[q.id] !== undefined);
+  } else if (s === 'lv' && t === 5) {
+    const texts = currentExercise.texts;
+    texts.forEach((t, i) => answered[i] = !!exerciseState.matches[t.id]);
+  } else if (s === 'hv' && t === 1) {
+    const scenes = currentExercise.scenes;
+    scenes.forEach((_, i) => answered[i] = exerciseState.answers[i] !== undefined);
+  } else if (s === 'hv' && t === 2) {
+    const anns = currentExercise.announcements;
+    anns.forEach((_, i) => answered[i] = exerciseState.answers[i] !== undefined);
+  } else if (s === 'hv' && t === 5) {
+    const scenes = currentExercise.scenes;
+    scenes.forEach((_, i) => answered[i] = !!exerciseState.matches[i]);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.classList.remove('dot-current', 'dot-done');
+    if (answered[i]) dot.classList.add('dot-done');
+    // For multi-scene exercises, highlight current
+    if ((s === 'hv' && (t === 1 || t === 2 || t === 5)) && i === exerciseState.currentScene) {
+      dot.classList.add('dot-current');
+    }
+  });
+}
+
+function updateScoreDisplay() {
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('total-display').textContent = totalQ;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// --- Timer ---
+function startTimer() {
+  timerSeconds = 0;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    document.getElementById('timer-display').textContent = formatTime(timerSeconds);
+  }, 1000);
+}
+
+function stopTimer() { clearInterval(timerInterval); }
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// --- TTS ---
+function getTTSText() {
+  // For HV exercises, get the spoken text
+  if (exerciseState.currentSpokenText) return exerciseState.currentSpokenText;
+  return '';
+}
+
+function ttsPlay() {
+  const text = getTTSText();
+  if (!text) return;
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    document.getElementById('tts-play-btn').classList.remove('speaking');
+    document.getElementById('tts-icon').textContent = '\u25B6';
+    return;
+  }
+
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsUtterance.lang = 'de-DE';
+  ttsUtterance.rate = parseFloat(document.getElementById('tts-speed').value);
+
+  // Try to find a German voice
+  const voices = window.speechSynthesis.getVoices();
+  const deVoice = voices.find(v => v.lang.startsWith('de'));
+  if (deVoice) ttsUtterance.voice = deVoice;
+
+  ttsUtterance.onstart = () => {
+    document.getElementById('tts-play-btn').classList.add('speaking');
+    document.getElementById('tts-icon').textContent = '\u23F8';
+  };
+  ttsUtterance.onend = () => {
+    document.getElementById('tts-play-btn').classList.remove('speaking');
+    document.getElementById('tts-icon').textContent = '\u25B6';
+  };
+
+  window.speechSynthesis.speak(ttsUtterance);
+}
+
+function ttsPause() {
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    document.getElementById('tts-play-btn')?.classList.remove('speaking');
+    const icon = document.getElementById('tts-icon');
+    if (icon) icon.textContent = '\u25B6';
+  }
+}
+
+function ttsSpeedChanged() {
+  // If currently speaking, restart with new speed
+  if (window.speechSynthesis.speaking) {
+    ttsPause();
+    ttsPlay();
+  }
+}
+
+// Pre-load voices
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+</script>
+</body>
+</html>
