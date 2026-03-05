@@ -467,13 +467,14 @@ function saveScore(exerciseId, pts, total) {
   if (!prev || pct > prev.pct) {
     scores[exerciseId] = { pts, total, pct, date: Date.now() };
   }
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(scores)); }
+  catch (e) { console.warn('Could not save score:', e); }
 }
 
-function getPartStats(section, teil) {
+function getPartStats(section, teil, scores) {
   if (!DATA) return { perfect: 0, tried: 0, total: 0 };
   const sets = getDataSets(section, teil);
-  const scores = loadScores();
+  if (!scores) scores = loadScores();
   let perfect = 0, tried = 0;
   sets.forEach(s => {
     const sc = scores[s.id];
@@ -483,9 +484,10 @@ function getPartStats(section, teil) {
 }
 
 function getSectionStats(section) {
+  const scores = loadScores();
   let perfect = 0, tried = 0, total = 0;
   for (let teil = 1; teil <= 5; teil++) {
-    const st = getPartStats(section, teil);
+    const st = getPartStats(section, teil, scores);
     perfect += st.perfect;
     tried += st.tried;
     total += st.total;
@@ -1541,7 +1543,7 @@ function ttsPlay() {
       if (n.includes('premium')) return 4;
       if (n.includes('enhanced')) return 3;
       if (n.includes('compact') || n.includes('network')) return 0;
-      return v.localService ? 1 : 2;
+      return v.default ? 1 : 2;
     };
     deVoices.sort((a, b) => rankVoice(b) - rankVoice(a));
     ttsUtterance.voice = deVoices[0];
