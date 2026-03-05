@@ -1321,6 +1321,22 @@ def main():
     TMP_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    # --- Check if game data already exists ---
+    data_path = OUT_DIR / "data.json"
+    html_path = OUT_DIR / "index.html"
+    if data_path.exists() and html_path.exists():
+        try:
+            existing = json.loads(data_path.read_text())
+            # Verify all referenced images exist
+            all_present = existing and all(
+                (OUT_DIR / q["image"]).exists() for q in existing
+            )
+            if all_present:
+                print(f"Game data already complete ({len(existing)} questions). Nothing to do.")
+                return
+        except (json.JSONDecodeError, KeyError):
+            pass  # regenerate on corrupt data
+
     all_questions: list[dict] = []
     skipped_years: list[int] = []
     last_request = 0.0
@@ -1412,12 +1428,10 @@ def main():
         sys.exit(1)
 
     # --- Generate data.json ---
-    data_path = OUT_DIR / "data.json"
     data_path.write_text(json.dumps(all_questions, ensure_ascii=False, indent=2))
     print(f"Wrote {data_path}")
 
     # --- Generate game HTML ---
-    html_path = OUT_DIR / "index.html"
     html_path.write_text(generate_game_html(all_questions))
     print(f"Wrote {html_path}")
 
