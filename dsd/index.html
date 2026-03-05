@@ -438,7 +438,8 @@ let exerciseState = {};
 let isChecked = false;
 
 // Load data
-fetch('data.json').then(r => r.json()).then(d => { DATA = d; });
+fetch('data.json').then(r => r.json()).then(d => { DATA = d; })
+  .catch(e => console.error('Failed to load data.json:', e));
 
 // --- Navigation ---
 function showScreen(id) {
@@ -488,6 +489,7 @@ function showParts(section) {
 }
 
 function showSets(section, teil) {
+  if (!DATA) { alert('Daten werden noch geladen. Bitte versuche es gleich nochmal.'); return; }
   currentSection = section;
   currentTeil = teil;
   const key = getDataKey(section, teil);
