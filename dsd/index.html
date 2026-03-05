@@ -416,6 +416,12 @@
           <option value="1.0">Schnell</option>
         </select>
       </span>
+      <span class="tts-speed">
+        <label>Stimme:</label>
+        <select id="tts-voice" onchange="ttsVoiceChanged()">
+          <option value="">Automatisch</option>
+        </select>
+      </span>
     </div>
     <div id="exercise-content"></div>
     <div class="action-bar" id="action-bar"></div>
@@ -1533,21 +1539,9 @@ function ttsPlay() {
   ttsUtterance.lang = 'de-DE';
   ttsUtterance.rate = parseFloat(document.getElementById('tts-speed').value);
 
-  // Pick best available German voice, preferring premium/enhanced voices
-  const voices = window.speechSynthesis.getVoices();
-  const deVoices = voices.filter(v => v.lang.startsWith('de'));
-  if (deVoices.length) {
-    // Score voices: prefer Premium > Enhanced > non-default > default
-    const rankVoice = v => {
-      const n = v.name.toLowerCase();
-      if (n.includes('premium')) return 4;
-      if (n.includes('enhanced')) return 3;
-      if (n.includes('compact') || n.includes('network')) return 0;
-      return v.default ? 1 : 2;
-    };
-    deVoices.sort((a, b) => rankVoice(b) - rankVoice(a));
-    ttsUtterance.voice = deVoices[0];
-  }
+  // Use the voice selected in the dropdown (or auto-pick best)
+  const selVoice = getSelectedVoice();
+  if (selVoice) ttsUtterance.voice = selVoice;
 
   ttsUtterance.onstart = () => {
     document.getElementById('tts-play-btn').classList.add('speaking');
@@ -1578,10 +1572,66 @@ function ttsSpeedChanged() {
   }
 }
 
-// Pre-load voices
+// --- Voice selector ---
+const VOICE_STORAGE_KEY = 'dsd_tts_voice';
+
+function rankVoice(v) {
+  const n = v.name.toLowerCase();
+  if (n.includes('premium')) return 4;
+  if (n.includes('enhanced')) return 3;
+  if (n.includes('compact') || n.includes('network')) return 0;
+  return v.default ? 1 : 2;
+}
+
+function getDeVoices() {
+  return window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('de'));
+}
+
+function getSelectedVoice() {
+  const sel = document.getElementById('tts-voice');
+  const uri = sel ? sel.value : '';
+  const voices = getDeVoices();
+  if (uri) {
+    const match = voices.find(v => v.voiceURI === uri);
+    if (match) return match;
+  }
+  // Auto-pick best
+  if (voices.length) {
+    voices.sort((a, b) => rankVoice(b) - rankVoice(a));
+    return voices[0];
+  }
+  return null;
+}
+
+function populateVoiceSelector() {
+  const sel = document.getElementById('tts-voice');
+  if (!sel) return;
+  const voices = getDeVoices().sort((a, b) => rankVoice(b) - rankVoice(a));
+  const saved = (() => { try { return localStorage.getItem(VOICE_STORAGE_KEY); } catch { return null; } })();
+  sel.innerHTML = '<option value="">Automatisch</option>';
+  voices.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v.voiceURI;
+    opt.textContent = v.name + (v.default ? ' ★' : '');
+    if (saved && v.voiceURI === saved) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function ttsVoiceChanged() {
+  const sel = document.getElementById('tts-voice');
+  try { localStorage.setItem(VOICE_STORAGE_KEY, sel.value); } catch {}
+  if (window.speechSynthesis.speaking) {
+    ttsPause();
+    ttsPlay();
+  }
+}
+
+// Pre-load voices and populate selector
 if (window.speechSynthesis) {
   window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => populateVoiceSelector();
+  populateVoiceSelector();
 }
 </script>
 </body>
