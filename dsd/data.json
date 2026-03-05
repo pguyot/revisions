@@ -5,28 +5,244 @@
         "id": "lv1-1",
         "title": "Klassenfahrt nach Hamburg",
         "text": "Letztes Jahr hat unsere Klasse eine {1} nach Hamburg gemacht. Wir sind mit dem Zug gefahren und waren drei Tage dort. Am ersten Tag haben wir den {2} besucht. Das ist ein sehr großer Hafen und man kann dort riesige Schiffe sehen. Am zweiten Tag waren wir im Miniatur Wunderland. Das ist die größte {3} der Welt. Es gibt dort kleine Züge, Autos und sogar einen kleinen Flughafen. Am letzten Tag haben wir eine Bootsfahrt auf der Alster gemacht. Das {4} hat leider nicht so gut mitgespielt, aber es hat trotzdem Spaß gemacht. Hamburg ist eine tolle Stadt!",
-        "wordList": {"A": "Modelleisenbahn", "B": "Wetter", "C": "Klassenfahrt", "D": "Hafen", "E": "Schule", "F": "Ferien", "G": "Museum", "H": "Reise"},
-        "answers": {"1": "C", "2": "D", "3": "A", "4": "B"},
-        "titleOptions": ["Eine Reise ans Meer", "Drei Tage in Hamburg", "Mit dem Schiff unterwegs"],
+        "wordList": {
+          "A": "Modelleisenbahn",
+          "B": "Wetter",
+          "C": "Klassenfahrt",
+          "D": "Hafen",
+          "E": "Schule",
+          "F": "Ferien",
+          "G": "Museum",
+          "H": "Reise"
+        },
+        "answers": {
+          "1": "C",
+          "2": "D",
+          "3": "A",
+          "4": "B"
+        },
+        "titleOptions": [
+          "Eine Reise ans Meer",
+          "Drei Tage in Hamburg",
+          "Mit dem Schiff unterwegs"
+        ],
         "titleAnswer": 1
       },
       {
         "id": "lv1-2",
         "title": "Mein neues Hobby",
         "text": "Seit drei Monaten lerne ich {1}. Am Anfang war es sehr schwer, weil meine Finger immer wehgetan haben. Aber mein {2} hat gesagt, dass das ganz normal ist. Jetzt kann ich schon drei Lieder spielen. Am liebsten übe ich abends in meinem Zimmer. Meine Eltern finden es toll, dass ich ein {3} spiele. Nächsten Monat gibt es ein kleines Konzert in unserer Schule. Ich bin ein bisschen {4}, aber ich freue mich auch sehr darauf. Vielleicht gründe ich bald eine Band mit meinen Freunden.",
-        "wordList": {"A": "Instrument", "B": "nervös", "C": "Lehrer", "D": "Gitarre", "E": "Klavier", "F": "Sänger", "G": "müde", "H": "Musik"},
-        "answers": {"1": "D", "2": "C", "3": "A", "4": "B"},
-        "titleOptions": ["Musik in der Schule", "Gitarre lernen macht Spaß", "Meine Band"],
+        "wordList": {
+          "A": "Instrument",
+          "B": "nervös",
+          "C": "Lehrer",
+          "D": "Gitarre",
+          "E": "Klavier",
+          "F": "Sänger",
+          "G": "müde",
+          "H": "Musik"
+        },
+        "answers": {
+          "1": "D",
+          "2": "C",
+          "3": "A",
+          "4": "B"
+        },
+        "titleOptions": [
+          "Musik in der Schule",
+          "Gitarre lernen macht Spaß",
+          "Meine Band"
+        ],
         "titleAnswer": 1
       },
       {
         "id": "lv1-3",
         "title": "Sport im Winter",
         "text": "Im Winter fahre ich jedes Jahr mit meiner {1} in die Berge. Wir übernachten in einer kleinen Hütte. Am Morgen stehen wir früh auf und gehen zum Skifahren. Mein Vater fährt am besten, aber ich werde jedes Jahr {2}. Meine kleine Schwester lernt gerade Snowboard fahren. Nachmittags trinken wir heiße {3} in der Hütte und spielen Karten. Abends kochen wir zusammen. Das ist immer sehr lustig, weil mein Bruder nicht gut {4} kann. Der Winterurlaub ist meine Lieblingswoche im ganzen Jahr.",
-        "wordList": {"A": "besser", "B": "Schokolade", "C": "kochen", "D": "Familie", "E": "Freunde", "F": "schneller", "G": "Suppe", "H": "schwimmen"},
-        "answers": {"1": "D", "2": "A", "3": "B", "4": "C"},
-        "titleOptions": ["Skifahren lernen", "Winterurlaub in den Bergen", "Kochen mit der Familie"],
+        "wordList": {
+          "A": "besser",
+          "B": "Schokolade",
+          "C": "kochen",
+          "D": "Familie",
+          "E": "Freunde",
+          "F": "schneller",
+          "G": "Suppe",
+          "H": "schwimmen"
+        },
+        "answers": {
+          "1": "D",
+          "2": "A",
+          "3": "B",
+          "4": "C"
+        },
+        "titleOptions": [
+          "Skifahren lernen",
+          "Winterurlaub in den Bergen",
+          "Kochen mit der Familie"
+        ],
         "titleAnswer": 1
+      },
+      {
+        "id": "lv1-4",
+        "title": "Ein Tag im Zoo",
+        "text": "Gestern war ich mit meiner Familie im {1}. Es war ein schöner Tag, obwohl es am Morgen noch geregnet hat. Zuerst haben wir die {2} besucht. Die kleinen Affen waren besonders lustig und haben viel geklettert. Danach sind wir zu den Elefanten gegangen. Einer von ihnen hat mit seinem Rüssel Wasser gespritzt und alle haben gelacht. Zum Mittagessen haben wir im Zoo-Café ein {3} gegessen. Mein Bruder hat Pommes genommen, aber ich habe ein Käsebrot bevorzugt. Am Nachmittag haben wir noch die Robben gefüttert. Das war mein {4} Teil des Tages! Ich freue mich schon auf den nächsten Zoobesuch.",
+        "wordList": {
+          "A": "liebster",
+          "B": "Zoo",
+          "C": "Pferde",
+          "D": "Affen",
+          "E": "Picknick",
+          "F": "Sandwich",
+          "G": "Schule",
+          "H": "Park"
+        },
+        "answers": {
+          "1": "B",
+          "2": "D",
+          "3": "F",
+          "4": "A"
+        },
+        "titleOptions": [
+          "Ein Ausflug in den Park",
+          "Ein Tag im Zoo",
+          "Besuch im Museum"
+        ],
+        "titleAnswer": 1
+      },
+      {
+        "id": "lv1-5",
+        "title": "Mein erstes Konzert",
+        "text": "Letzte Woche war ich zum ersten Mal bei einem {1}. Meine Lieblingsband hat in unserer Stadt gespielt. Ich war so aufgeregt! Meine Freundin und ich haben uns schon zwei Stunden vorher vor der {2} getroffen. Als die Band endlich auf die Bühne kam, haben alle laut gejubelt. Die Musik war so laut, dass ich fast nichts mehr hören konnte. Nach dem Konzert haben wir noch ein {3} gekauft. Ich trage es jeden Tag, weil es mich an diesen tollen Abend erinnert. Das war wirklich ein unvergessliches {4}!",
+        "wordList": {
+          "A": "Erlebnis",
+          "B": "Konzert",
+          "C": "Halle",
+          "D": "Stadion",
+          "E": "T-Shirt",
+          "F": "Buch",
+          "G": "Eis",
+          "H": "Ticket"
+        },
+        "answers": {
+          "1": "B",
+          "2": "C",
+          "3": "E",
+          "4": "A"
+        },
+        "titleOptions": [
+          "Ein spannender Film",
+          "Mein erstes Konzert",
+          "Ein Besuch im Theater"
+        ],
+        "titleAnswer": 1
+      },
+      {
+        "id": "lv1-6",
+        "title": "Ein Wochenende auf dem Bauernhof",
+        "text": "Meine Klasse hat ein Wochenende auf einem {1} verbracht. Wir haben in einem großen Haus geschlafen und jeden Morgen früh aufstehen müssen. Am ersten Tag haben wir die Tiere gefüttert. Ich habe den Kühen Heu gegeben und die {2} gestreichelt. Am Nachmittag haben wir Äpfel gepflückt und daraus Apfelsaft gemacht. Das war lecker! Am zweiten Tag sind wir mit dem Traktor gefahren. Das war mein {3}, weil ich noch nie auf einem Traktor gesessen habe. Zum Abendessen gab es frische Milch und selbstgemachtes Brot. Das war ein tolles {4}!",
+        "wordList": {
+          "A": "Highlight",
+          "B": "Bauernhof",
+          "C": "Ziegen",
+          "D": "Pferde",
+          "E": "Abenteuer",
+          "F": "Urlaub",
+          "G": "Schweine",
+          "H": "Haus"
+        },
+        "answers": {
+          "1": "B",
+          "2": "C",
+          "3": "A",
+          "4": "E"
+        },
+        "titleOptions": [
+          "Ein Tag im Freizeitpark",
+          "Ein Wochenende auf dem Bauernhof",
+          "Ferien am Meer"
+        ],
+        "titleAnswer": 1
+      },
+      {
+        "id": "lv1-7",
+        "title": "Mein neues Hobby: Fotografie",
+        "text": "Seit einem Monat habe ich ein neues {1}: Fotografie. Mein Onkel hat mir seine alte Kamera geschenkt, und seitdem fotografiere ich alles. Besonders gerne mache ich Fotos von der {2}, wenn die Sonne untergeht. Meine Freunde sagen, dass meine Bilder sehr schön aussehen. Letztes Wochenende war ich im Park und habe Vögel fotografiert. Einer hat sogar direkt in die Kamera geschaut! Ich möchte später mal meine Fotos in einer {3} ausstellen. Vielleicht werde ich sogar mal {4}!",
+        "wordList": {
+          "A": "Natur",
+          "B": "Hobby",
+          "C": "Ausstellung",
+          "D": "Berufsfotograf",
+          "E": "Schule",
+          "F": "Stadt",
+          "G": "Zeitung",
+          "H": "Musik"
+        },
+        "answers": {
+          "1": "B",
+          "2": "A",
+          "3": "C",
+          "4": "D"
+        },
+        "titleOptions": [
+          "Mein neues Hobby: Fotografie",
+          "Ich lerne Gitarre spielen",
+          "Ich spiele Fußball"
+        ],
+        "titleAnswer": 0
+      },
+      {
+        "id": "lv1-8",
+        "title": "Ein Tag im Schwimmbad",
+        "text": "Im Sommer gehe ich fast jeden Tag ins {1}. Dort treffe ich meine Freunde, und wir verbringen den ganzen Nachmittag zusammen. Am liebsten springe ich vom {2}. Das ist immer ein bisschen aufregend, aber es macht riesigen Spaß! Manchmal spielen wir auch Wasserball oder schwimmen um die Wette. Wenn ich müde bin, lege ich mich auf eine Liege und lese ein {3}. Zum Schluss kaufen wir uns noch ein Eis. Das ist mein perfekter {4}!",
+        "wordList": {
+          "A": "Tag",
+          "B": "Schwimmbad",
+          "C": "Dreimeterbrett",
+          "D": "Strand",
+          "E": "Buch",
+          "F": "Handy",
+          "G": "Kino",
+          "H": "Park"
+        },
+        "answers": {
+          "1": "B",
+          "2": "C",
+          "3": "E",
+          "4": "A"
+        },
+        "titleOptions": [
+          "Ein Tag im Schwimmbad",
+          "Ein Ausflug zum See",
+          "Ein Besuch im Fitnessstudio"
+        ],
+        "titleAnswer": 0
+      },
+      {
+        "id": "lv1-9",
+        "title": "Mein Schulprojekt: Ein Gemüsebeet",
+        "text": "In der Schule haben wir ein {1} gestartet: Wir haben ein Gemüsebeet angelegt. Jeder in der Klasse hat etwas gepflanzt. Ich habe Tomaten und Gurken ausgesät. Jeden Tag müssen wir das Beet gießen und Unkraut entfernen. Nach ein paar Wochen konnten wir die ersten {2} ernten. Die waren so lecker! Unser Lehrer hat gesagt, dass wir das Gemüse in der Schulküche verwenden dürfen. Letzte Woche haben wir daraus eine Suppe gekocht. Das war das erste Mal, dass ich etwas gegessen habe, das ich selbst gepflanzt habe. Das war ein tolles {3} und ich habe viel gelernt. Vielleicht werde ich später mal {4}.",
+        "wordList": {
+          "A": "Gärtner",
+          "B": "Projekt",
+          "C": "Gemüse",
+          "D": "Obst",
+          "E": "Erlebnis",
+          "F": "Experiment",
+          "G": "Koch",
+          "H": "Bauer"
+        },
+        "answers": {
+          "1": "B",
+          "2": "C",
+          "3": "E",
+          "4": "A"
+        },
+        "titleOptions": [
+          "Mein Schulprojekt: Ein Gemüsebeet",
+          "Wir bauen ein Vogelhaus",
+          "Ein Ausflug in den Wald"
+        ],
+        "titleAnswer": 0
       }
     ],
     "teil2": [
@@ -34,43 +250,497 @@
         "id": "lv2-1",
         "title": "Schwarzes Brett in der Schule",
         "descriptions": [
-          {"id": 6, "text": "Maria möchte nachmittags etwas Geld verdienen. Sie mag Kinder und kann gut mit ihnen spielen."},
-          {"id": 7, "text": "Tom sucht jemanden, der ihm bei den Mathematik-Hausaufgaben helfen kann. Er hat am Dienstag und Donnerstag Zeit."},
-          {"id": 8, "text": "Lisa hat ein altes Fahrrad und braucht ein neues. Sie möchte nicht zu viel Geld ausgeben."},
-          {"id": 9, "text": "Jan möchte einen neuen Sport ausprobieren. Er hat mittwochs nachmittags frei."}
+          {
+            "id": 6,
+            "text": "Maria möchte nachmittags etwas Geld verdienen. Sie mag Kinder und kann gut mit ihnen spielen."
+          },
+          {
+            "id": 7,
+            "text": "Tom sucht jemanden, der ihm bei den Mathematik-Hausaufgaben helfen kann. Er hat am Dienstag und Donnerstag Zeit."
+          },
+          {
+            "id": 8,
+            "text": "Lisa hat ein altes Fahrrad und braucht ein neues. Sie möchte nicht zu viel Geld ausgeben."
+          },
+          {
+            "id": 9,
+            "text": "Jan möchte einen neuen Sport ausprobieren. Er hat mittwochs nachmittags frei."
+          }
         ],
         "ads": [
-          {"letter": "A", "text": "Fußballverein sucht Spieler! Training jeden Samstag um 10 Uhr auf dem Sportplatz. Für Jungen und Mädchen ab 12 Jahren. Anmeldung bei Herrn Schmidt."},
-          {"letter": "B", "text": "Nachhilfe in Mathe und Physik! Ich bin Studentin und gebe günstige Nachhilfe. Termine: Mo, Di, Do. Ruf mich an: 0176-5553421."},
-          {"letter": "C", "text": "Babysitter gesucht! Wir suchen jemanden für unsere Tochter (4 Jahre), montags bis donnerstags von 15 bis 17 Uhr. 8 Euro pro Stunde. Familie Müller, Tel: 0221-9987654."},
-          {"letter": "D", "text": "Gebrauchte Fahrräder zu verkaufen! Verschiedene Modelle, ab 50 Euro. Guter Zustand! Komm vorbei: Fahrradladen Klein, Hauptstraße 12."},
-          {"letter": "E", "text": "Schulband sucht Sänger/Sängerin! Wir proben jeden Freitag nach der Schule im Musikraum. Du solltest gerne singen und Spaß an Musik haben."},
-          {"letter": "F", "text": "Schwimmkurs für Anfänger! Jeden Mittwoch von 15 bis 16:30 Uhr im Hallenbad. Anmeldung im Sekretariat. Kostenlos für Schüler!"},
-          {"letter": "G", "text": "Flohmarkt in der Schule! Am 15. März verkaufen Schüler Bücher, Spiele und Kleidung. Wenn du mitmachen willst, melde dich bei Frau Weber."},
-          {"letter": "H", "text": "Theatergruppe: Wir spielen dieses Jahr „Der kleine Prinz“. Wer mitspielen möchte, kommt am Montag um 16 Uhr in die Aula."}
+          {
+            "letter": "A",
+            "text": "Fußballverein sucht Spieler! Training jeden Samstag um 10 Uhr auf dem Sportplatz. Für Jungen und Mädchen ab 12 Jahren. Anmeldung bei Herrn Schmidt."
+          },
+          {
+            "letter": "B",
+            "text": "Nachhilfe in Mathe und Physik! Ich bin Studentin und gebe günstige Nachhilfe. Termine: Mo, Di, Do. Ruf mich an: 0176-5553421."
+          },
+          {
+            "letter": "C",
+            "text": "Babysitter gesucht! Wir suchen jemanden für unsere Tochter (4 Jahre), montags bis donnerstags von 15 bis 17 Uhr. 8 Euro pro Stunde. Familie Müller, Tel: 0221-9987654."
+          },
+          {
+            "letter": "D",
+            "text": "Gebrauchte Fahrräder zu verkaufen! Verschiedene Modelle, ab 50 Euro. Guter Zustand! Komm vorbei: Fahrradladen Klein, Hauptstraße 12."
+          },
+          {
+            "letter": "E",
+            "text": "Schulband sucht Sänger/Sängerin! Wir proben jeden Freitag nach der Schule im Musikraum. Du solltest gerne singen und Spaß an Musik haben."
+          },
+          {
+            "letter": "F",
+            "text": "Schwimmkurs für Anfänger! Jeden Mittwoch von 15 bis 16:30 Uhr im Hallenbad. Anmeldung im Sekretariat. Kostenlos für Schüler!"
+          },
+          {
+            "letter": "G",
+            "text": "Flohmarkt in der Schule! Am 15. März verkaufen Schüler Bücher, Spiele und Kleidung. Wenn du mitmachen willst, melde dich bei Frau Weber."
+          },
+          {
+            "letter": "H",
+            "text": "Theatergruppe: Wir spielen dieses Jahr „Der kleine Prinz“. Wer mitspielen möchte, kommt am Montag um 16 Uhr in die Aula."
+          }
         ],
-        "answers": {"6": "C", "7": "B", "8": "D", "9": "F"}
+        "answers": {
+          "6": "C",
+          "7": "B",
+          "8": "D",
+          "9": "F"
+        }
       },
       {
         "id": "lv2-2",
         "title": "Anzeigen am Jugendhaus",
         "descriptions": [
-          {"id": 6, "text": "Sophie liebt Tiere und möchte in den Ferien mit Tieren arbeiten."},
-          {"id": 7, "text": "Markus sucht einen Kurs, um besser Deutsch zu lernen. Er hat samstags Zeit."},
-          {"id": 8, "text": "Anna möchte lernen, wie man Kuchen und Brot backt."},
-          {"id": 9, "text": "Felix braucht Hilfe bei einem Schulprojekt über Umweltschutz."}
+          {
+            "id": 6,
+            "text": "Sophie liebt Tiere und möchte in den Ferien mit Tieren arbeiten."
+          },
+          {
+            "id": 7,
+            "text": "Markus sucht einen Kurs, um besser Deutsch zu lernen. Er hat samstags Zeit."
+          },
+          {
+            "id": 8,
+            "text": "Anna möchte lernen, wie man Kuchen und Brot backt."
+          },
+          {
+            "id": 9,
+            "text": "Felix braucht Hilfe bei einem Schulprojekt über Umweltschutz."
+          }
         ],
         "ads": [
-          {"letter": "A", "text": "Tierheim sucht Helfer! Wir brauchen Freiwillige, die in den Sommerferien mit Hunden spazieren gehen und bei der Pflege helfen. Melde dich bei Frau Braun!"},
-          {"letter": "B", "text": "Backkurs für Jugendliche! Jeden Samstag von 10 bis 13 Uhr lernt ihr, wie man Brot, Kuchen und Pizza macht. Anmeldung bis 20. März. Kosten: 5 Euro pro Termin."},
-          {"letter": "C", "text": "Fotokurs: Lerne, wie man tolle Fotos mit dem Handy macht! Drei Nachmittage im April. Treffpunkt: Jugendhaus, Raum 3."},
-          {"letter": "D", "text": "Deutschkurs am Samstag! Von 9 bis 12 Uhr. Grammatik, Wortschatz und Sprechen. Für alle Niveaus. Im Gemeindezentrum, Zimmer 5."},
-          {"letter": "E", "text": "Umwelt-AG: Wir treffen uns jeden Donnerstag und arbeiten an Projekten zum Thema Nachhaltigkeit. Komm vorbei und mach mit!"},
-          {"letter": "F", "text": "Tanzkurs Hip-Hop! Montags von 17 bis 18:30 Uhr in der Turnhalle. Für Anfänger und Fortgeschrittene."},
-          {"letter": "G", "text": "Computerkurs für Anfänger: Lerne Word, Excel und PowerPoint. Jeden Mittwoch, 15–17 Uhr. Kostenlos!"},
-          {"letter": "H", "text": "Leseclub: Wir lesen gemeinsam ein Buch pro Monat und diskutieren darüber. Nächstes Treffen: 12. April, 16 Uhr in der Bibliothek."}
+          {
+            "letter": "A",
+            "text": "Tierheim sucht Helfer! Wir brauchen Freiwillige, die in den Sommerferien mit Hunden spazieren gehen und bei der Pflege helfen. Melde dich bei Frau Braun!"
+          },
+          {
+            "letter": "B",
+            "text": "Backkurs für Jugendliche! Jeden Samstag von 10 bis 13 Uhr lernt ihr, wie man Brot, Kuchen und Pizza macht. Anmeldung bis 20. März. Kosten: 5 Euro pro Termin."
+          },
+          {
+            "letter": "C",
+            "text": "Fotokurs: Lerne, wie man tolle Fotos mit dem Handy macht! Drei Nachmittage im April. Treffpunkt: Jugendhaus, Raum 3."
+          },
+          {
+            "letter": "D",
+            "text": "Deutschkurs am Samstag! Von 9 bis 12 Uhr. Grammatik, Wortschatz und Sprechen. Für alle Niveaus. Im Gemeindezentrum, Zimmer 5."
+          },
+          {
+            "letter": "E",
+            "text": "Umwelt-AG: Wir treffen uns jeden Donnerstag und arbeiten an Projekten zum Thema Nachhaltigkeit. Komm vorbei und mach mit!"
+          },
+          {
+            "letter": "F",
+            "text": "Tanzkurs Hip-Hop! Montags von 17 bis 18:30 Uhr in der Turnhalle. Für Anfänger und Fortgeschrittene."
+          },
+          {
+            "letter": "G",
+            "text": "Computerkurs für Anfänger: Lerne Word, Excel und PowerPoint. Jeden Mittwoch, 15–17 Uhr. Kostenlos!"
+          },
+          {
+            "letter": "H",
+            "text": "Leseclub: Wir lesen gemeinsam ein Buch pro Monat und diskutieren darüber. Nächstes Treffen: 12. April, 16 Uhr in der Bibliothek."
+          }
         ],
-        "answers": {"6": "A", "7": "D", "8": "B", "9": "E"}
+        "answers": {
+          "6": "A",
+          "7": "D",
+          "8": "B",
+          "9": "E"
+        }
+      },
+      {
+        "id": "lv2-3",
+        "title": "Angebote im Jugendzentrum",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Anna möchte gerne kochen lernen. Sie hat dienstags und donnerstags nachmittags Zeit."
+          },
+          {
+            "id": 7,
+            "text": "Paul sucht einen günstigen Computer. Er braucht ihn für die Schule und möchte nicht mehr als 150 Euro ausgeben."
+          },
+          {
+            "id": 8,
+            "text": "Sophie liebt Tiere und möchte sich ehrenamtlich engagieren. Sie hat samstags frei."
+          },
+          {
+            "id": 9,
+            "text": "Lukas möchte gerne Gitarre spielen lernen. Er hat montags und mittwochs nach der Schule Zeit."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Kochkurs für Jugendliche! Lerne einfache Gerichte zuzubereiten. Jeden Dienstag und Donnerstag von 16 bis 18 Uhr. Kosten: 5 Euro pro Termin."
+          },
+          {
+            "letter": "B",
+            "text": "Gebrauchte Elektronik zu verkaufen! Laptop (200 Euro), Tablet (120 Euro), PC (150 Euro). Bei Interesse: jugendzentrum@mail.de."
+          },
+          {
+            "letter": "C",
+            "text": "Tierheim sucht Helfer! Wir brauchen Unterstützung bei der Pflege von Hunden und Katzen. Samstags von 10 bis 14 Uhr. Melde dich bei Frau Bauer."
+          },
+          {
+            "letter": "D",
+            "text": "Gitarrenunterricht für Anfänger! Jeden Montag und Mittwoch von 15 bis 16:30 Uhr. 10 Euro pro Stunde. Anmeldung im Jugendzentrum."
+          },
+          {
+            "letter": "E",
+            "text": "Tanzkurs: Hip-Hop für Jugendliche! Jeden Freitag von 17 bis 19 Uhr. Keine Vorkenntnisse nötig. Komm einfach vorbei!"
+          },
+          {
+            "letter": "F",
+            "text": "Flohmarkt im Jugendzentrum! Verkaufe deine alten Sachen oder stöbere nach Schnäppchen. Samstag, 10. April, ab 11 Uhr."
+          },
+          {
+            "letter": "G",
+            "text": "Malkurs für Jugendliche! Lerne verschiedene Techniken kennen. Jeden Mittwoch von 16 bis 18 Uhr. Material wird gestellt."
+          },
+          {
+            "letter": "H",
+            "text": "Filmabend im Jugendzentrum! Jeden Donnerstag um 18 Uhr. Eintritt frei. Dieses Mal: „Die unendliche Geschichte“."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "D"
+        }
+      },
+      {
+        "id": "lv2-4",
+        "title": "Ferienjobs gesucht",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Emma möchte in den Sommerferien jobben. Sie mag Hunde und hat keine Angst vor körperlicher Arbeit."
+          },
+          {
+            "id": 7,
+            "text": "Finn sucht einen Ferienjob im Büro. Er kann gut mit dem Computer umgehen und tippt schnell."
+          },
+          {
+            "id": 8,
+            "text": "Mia liebt Bücher und möchte in einer Buchhandlung arbeiten. Sie hat montags bis freitags Zeit."
+          },
+          {
+            "id": 9,
+            "text": "Ben möchte im Garten arbeiten. Er hat Erfahrung mit Pflanzen und arbeitet gerne draußen."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Tierpension sucht Aushilfe! Wir brauchen Hilfe bei der Betreuung von Hunden. Aufgaben: Gassi gehen, Füttern, Stall säubern. 10 Euro/Stunde. Tel: 030-123456."
+          },
+          {
+            "letter": "B",
+            "text": "Bürojob in den Ferien! Wir suchen jemanden für Datenpflege und einfache Büroarbeiten. 8 Euro/Stunde. Mo-Fr, 9-15 Uhr. Bewerbung an: info@firma.de."
+          },
+          {
+            "letter": "C",
+            "text": "Buchhandlung sucht Ferienaushilfe! Aufgaben: Bücher einräumen, Kunden beraten, Kasse bedienen. 9 Euro/Stunde. Mo-Fr, 10-18 Uhr. Bei Interesse melden!"
+          },
+          {
+            "letter": "D",
+            "text": "Gärtnerei sucht Helfer! Wir brauchen Unterstützung bei der Pflanzenpflege und im Verkauf. 9,50 Euro/Stunde. Mo-Sa, 8-16 Uhr. Tel: 040-987654."
+          },
+          {
+            "letter": "E",
+            "text": "Eisdiele sucht Aushilfe! Wir brauchen Hilfe beim Bedienen und Kassieren. 8,50 Euro/Stunde. Mo-So, 14-20 Uhr. Bewerbung vor Ort."
+          },
+          {
+            "letter": "F",
+            "text": "Schwimmbad sucht Aufsichtsperson! Du solltest sicher schwimmen können. 10 Euro/Stunde. Mo-Fr, 12-18 Uhr. Tel: 0221-5554321."
+          },
+          {
+            "letter": "G",
+            "text": "Supermarkt sucht Regaleinräumer! Aufgaben: Waren sortieren, Regale auffüllen. 8 Euro/Stunde. Mo-Sa, 6-12 Uhr. Bewerbung an: personal@markt.de."
+          },
+          {
+            "letter": "H",
+            "text": "Fahrradwerkstatt sucht Mechaniker-Azubi! Du solltest handwerklich begabt sein. 9 Euro/Stunde. Mo-Fr, 9-17 Uhr. Tel: 069-11223344."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "D"
+        }
+      },
+      {
+        "id": "lv2-5",
+        "title": "Freizeitaktivitäten gesucht",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Lena möchte gerne zeichnen lernen. Sie hat dienstags und donnerstags nachmittags Zeit."
+          },
+          {
+            "id": 7,
+            "text": "Max sucht einen Sport, bei dem er sich auspowern kann. Er hat montags und mittwochs frei."
+          },
+          {
+            "id": 8,
+            "text": "Sophia liebt Musik und möchte ein Instrument lernen. Sie hat freitags nach der Schule Zeit."
+          },
+          {
+            "id": 9,
+            "text": "Tim möchte gerne programmieren lernen. Er hat samstags Zeit und interessiert sich für Spieleentwicklung."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Zeichenkurs für Anfänger! Lerne die Grundlagen des Zeichnens. Jeden Dienstag und Donnerstag von 16 bis 18 Uhr. Material wird gestellt. Kosten: 5 Euro pro Termin."
+          },
+          {
+            "letter": "B",
+            "text": "Parkour-Training! Für alle, die sich bewegen wollen. Jeden Montag und Mittwoch von 17 bis 19 Uhr im Stadtpark. Keine Anmeldung nötig."
+          },
+          {
+            "letter": "C",
+            "text": "Klavierunterricht für Jugendliche! Jeden Freitag von 15 bis 16:30 Uhr. 12 Euro pro Stunde. Anmeldung bei Frau Meier: 0176-12345678."
+          },
+          {
+            "letter": "D",
+            "text": "Programmierkurs: Spieleentwicklung mit Python! Jeden Samstag von 10 bis 12 Uhr. Für Anfänger geeignet. Kosten: 8 Euro pro Termin."
+          },
+          {
+            "letter": "E",
+            "text": "Tanzkurs: Modern Dance! Jeden Donnerstag von 18 bis 20 Uhr. Für Jugendliche ab 14 Jahren. Komm einfach vorbei!"
+          },
+          {
+            "letter": "F",
+            "text": "Fußballtraining für Jugendliche! Jeden Mittwoch und Freitag von 16 bis 18 Uhr auf dem Sportplatz. Anmeldung bei Herrn Schulz."
+          },
+          {
+            "letter": "G",
+            "text": "Fotografie-Workshop! Lerne die Grundlagen der Fotografie. Jeden Samstag von 14 bis 16 Uhr. Eigene Kamera mitbringen. Kosten: 10 Euro."
+          },
+          {
+            "letter": "H",
+            "text": "Schachclub für Jugendliche! Jeden Dienstag von 17 bis 19 Uhr im Jugendzentrum. Für Anfänger und Fortgeschrittene."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "D"
+        }
+      },
+      {
+        "id": "lv2-6",
+        "title": "Wohnungssuche und Umzugshilfe",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Sarah sucht ein möbliertes Zimmer in der Nähe der Uni. Sie hat ein Budget von maximal 400 Euro."
+          },
+          {
+            "id": 7,
+            "text": "David braucht Hilfe beim Umzug. Er hat viele schwere Möbel und sucht kräftige Helfer."
+          },
+          {
+            "id": 8,
+            "text": "Lisa möchte eine Wohnung mit Garten mieten. Sie hat ein Haustier und sucht etwas Ruhiges."
+          },
+          {
+            "id": 9,
+            "text": "Tom sucht eine WG für Studenten. Er möchte nicht mehr als 350 Euro warm zahlen und sucht nette Mitbewohner."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Möbliertes Zimmer zu vermieten! 350 Euro warm, inkl. Internet. 10 Minuten zur Uni. Tel: 030-987654."
+          },
+          {
+            "letter": "B",
+            "text": "Starke Helfer für Ihren Umzug! Wir tragen und bauen Ihre Möbel auf. 15 Euro/Stunde pro Helfer. Tel: 0176-5551234."
+          },
+          {
+            "letter": "C",
+            "text": "Haus mit Garten zu vermieten! 3 Zimmer, 800 Euro warm, Haustiere erlaubt. Ruhige Lage. Tel: 040-123456."
+          },
+          {
+            "letter": "D",
+            "text": "WG-Zimmer frei! 300 Euro warm, inkl. Nebenkosten. Nette Mitbewohner, zentral gelegen. Bewerbung an: wg@mail.de."
+          },
+          {
+            "letter": "E",
+            "text": "Studentenwohnheim: Zimmer ab 450 Euro. Gemeinschaftsküche und Waschraum. Bewerbung online unter: www.wohnheim.de."
+          },
+          {
+            "letter": "F",
+            "text": "Nachhilfe für Studenten! Wir helfen bei Mathe, Physik und Informatik. 12 Euro/Stunde. Tel: 0221-456789."
+          },
+          {
+            "letter": "G",
+            "text": "Wohnung zu vermieten! 2 Zimmer, 650 Euro warm, Balkon. Keine Haustiere. Tel: 069-112233."
+          },
+          {
+            "letter": "H",
+            "text": "WG sucht neuen Mitbewohner! 350 Euro warm, inkl. Internet. Wir sind drei Studenten und suchen einen vierten. Melde dich bei Paul: 0176-99988877."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "D"
+        }
+      },
+      {
+        "id": "lv2-7",
+        "title": "Angebote im Jugendzentrum",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Anna möchte gerne kochen lernen. Sie hat dienstags und freitags Zeit und sucht einen Kurs für Anfänger."
+          },
+          {
+            "id": 7,
+            "text": "Paul sucht einen Job für die Sommerferien. Er ist handwerklich begabt und möchte gerne etwas Praktisches machen."
+          },
+          {
+            "id": 8,
+            "text": "Sophie liebt Tiere und möchte sich ehrenamtlich engagieren. Sie hat samstags Zeit und sucht eine passende Tätigkeit."
+          },
+          {
+            "id": 9,
+            "text": "Max möchte seine Englischkenntnisse verbessern. Er sucht einen Sprachkurs, der zweimal pro Woche stattfindet."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Kochkurs für Jugendliche! Jeden Dienstag und Freitag von 16 bis 18 Uhr. Wir lernen einfache Gerichte zuzubereiten. Anmeldung im Jugendzentrum."
+          },
+          {
+            "letter": "B",
+            "text": "Ferienjob gesucht? Wir suchen Helfer für unseren Bauhof. Aufgaben: Gartenarbeit, Möbel aufbauen, Reparaturen. Bewirb dich bis 30. Juni!"
+          },
+          {
+            "letter": "C",
+            "text": "Tierheim sucht Freiwillige! Wir brauchen Hilfe beim Füttern und Spazierenführen der Hunde. Samstags von 10 bis 14 Uhr. Komm vorbei!"
+          },
+          {
+            "letter": "D",
+            "text": "Englisch-Konversationskurs! Montags und donnerstags von 17 bis 18:30 Uhr. Für Schüler mit Grundkenntnissen. Maximal 10 Teilnehmer."
+          },
+          {
+            "letter": "E",
+            "text": "Theaterworkshop! Jeden Mittwoch von 15 bis 17 Uhr. Wir proben ein modernes Stück. Keine Vorkenntnisse nötig."
+          },
+          {
+            "letter": "F",
+            "text": "Computerkurs für Senioren. Wir suchen junge Helfer, die Geduld haben und gerne erklären. Dienstags und donnerstags von 14 bis 16 Uhr."
+          },
+          {
+            "letter": "G",
+            "text": "Fußballturnier! Am 10. Juli im Stadtpark. Teams können sich bis zum 1. Juli anmelden. Preis: Eintrittskarten für ein Bundesligaspiel."
+          },
+          {
+            "letter": "H",
+            "text": "Kreativwerkstatt: Wir bauen Vogelhäuschen und Insektenhotels. Material wird gestellt. Jeden Samstag von 11 bis 13 Uhr."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "D"
+        }
+      },
+      {
+        "id": "lv2-8",
+        "title": "Anzeigen in der Schülerzeitung",
+        "descriptions": [
+          {
+            "id": 6,
+            "text": "Lena möchte ein Instrument lernen. Sie hat mittwochs und freitags nachmittags Zeit und sucht einen günstigen Kurs."
+          },
+          {
+            "id": 7,
+            "text": "Finn sucht einen Tandempartner, um sein Spanisch zu verbessern. Er spricht fließend Deutsch und möchte sich regelmäßig treffen."
+          },
+          {
+            "id": 8,
+            "text": "Mia hat alte Schulbücher und möchte sie verkaufen. Sie sucht eine einfache Möglichkeit, sie loszuwerden."
+          },
+          {
+            "id": 9,
+            "text": "Ben möchte sich sportlich betätigen. Er sucht einen Kurs, der zweimal pro Woche stattfindet und nicht zu teuer ist."
+          }
+        ],
+        "ads": [
+          {
+            "letter": "A",
+            "text": "Gitarrenunterricht für Anfänger! Jeden Mittwoch und Freitag von 16 bis 17 Uhr. Nur 5 Euro pro Stunde. Anmeldung bei Herrn Bauer."
+          },
+          {
+            "letter": "B",
+            "text": "Tandempartner gesucht! Ich komme aus Spanien und möchte mein Deutsch verbessern. Im Gegenzug helfe ich dir mit Spanisch. Treffen nach Absprache."
+          },
+          {
+            "letter": "C",
+            "text": "Bücherflohmarkt in der Schule! Am 5. Mai kannst du deine alten Bücher verkaufen. Anmeldung bis zum 30. April bei Frau Meier."
+          },
+          {
+            "letter": "D",
+            "text": "Schwimmkurs für Jugendliche! Montags und donnerstags von 17 bis 18 Uhr im Hallenbad. Kosten: 30 Euro pro Monat."
+          },
+          {
+            "letter": "E",
+            "text": "Schachclub sucht Mitglieder! Wir treffen uns jeden Dienstag und Donnerstag von 15 bis 17 Uhr im Raum 204. Alle Spielstärken willkommen."
+          },
+          {
+            "letter": "F",
+            "text": "Französisch-Kurs für Fortgeschrittene. Jeden Montag und Mittwoch von 16 bis 17:30 Uhr. Kleine Gruppen, erfahrene Lehrerin."
+          },
+          {
+            "letter": "G",
+            "text": "Klavierunterricht bei einer Musikstudentin. Einzel- oder Gruppenunterricht möglich. Termine nach Vereinbarung. Preis: 10 Euro pro Stunde."
+          },
+          {
+            "letter": "H",
+            "text": "Lauftreff für Jugendliche! Jeden Dienstag und Freitag um 16 Uhr im Stadtpark. Kostenlos und ohne Anmeldung."
+          }
+        ],
+        "answers": {
+          "6": "A",
+          "7": "B",
+          "8": "C",
+          "9": "H"
+        }
       }
     ],
     "teil3": [
@@ -79,11 +749,31 @@
         "title": "Schüler und ihre Handys",
         "text": "Fast alle Jugendlichen in Deutschland besitzen ein Smartphone. Eine neue Studie zeigt, dass 95 Prozent der 12- bis 19-Jährigen ein eigenes Handy haben. Die meisten benutzen es vor allem, um mit Freunden zu chatten und Videos anzuschauen. Durchschnittlich verbringen Jugendliche etwa drei Stunden pro Tag am Handy.\n\nViele Schulen haben strenge Regeln für die Handynutzung. In den meisten Schulen müssen die Schüler ihre Handys während des Unterrichts ausschalten oder in der Tasche lassen. Einige Lehrer erlauben es aber, das Handy im Unterricht zu benutzen, zum Beispiel um Wörter nachzuschlagen oder Informationen zu suchen.\n\nExperten sagen, dass Smartphones auch Probleme verursachen können. Manche Jugendliche können sich nicht mehr gut konzentrieren, weil sie ständig auf ihr Handy schauen. Andere schlafen schlecht, weil sie abends noch lange am Handy sind. Ärzte empfehlen, das Handy eine Stunde vor dem Schlafengehen wegzulegen.\n\nAber es gibt auch viele positive Seiten. Mit dem Smartphone können Jugendliche neue Sprachen lernen, kreative Videos machen und sich über wichtige Themen informieren. Außerdem ist es praktisch, um den Schulweg zu planen oder bei den Hausaufgaben zu helfen.",
         "statements": [
-          {"id": 10, "text": "Mehr als 90 Prozent der Jugendlichen in Deutschland haben ein Smartphone.", "answer": true},
-          {"id": 11, "text": "In allen deutschen Schulen dürfen Schüler ihr Handy im Unterricht benutzen.", "answer": false},
-          {"id": 12, "text": "Jugendliche nutzen ihr Handy vor allem zum Telefonieren.", "answer": false},
-          {"id": 13, "text": "Ärzte empfehlen, das Handy abends früh genug wegzulegen.", "answer": true},
-          {"id": 14, "text": "Smartphones können Jugendlichen beim Sprachenlernen helfen.", "answer": true}
+          {
+            "id": 10,
+            "text": "Mehr als 90 Prozent der Jugendlichen in Deutschland haben ein Smartphone.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "In allen deutschen Schulen dürfen Schüler ihr Handy im Unterricht benutzen.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Jugendliche nutzen ihr Handy vor allem zum Telefonieren.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Ärzte empfehlen, das Handy abends früh genug wegzulegen.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Smartphones können Jugendlichen beim Sprachenlernen helfen.",
+            "answer": true
+          }
         ]
       },
       {
@@ -91,11 +781,31 @@
         "title": "Fahrrad fahren in der Stadt",
         "text": "Immer mehr Menschen in deutschen Städten fahren mit dem Fahrrad zur Arbeit oder zur Schule. In Städten wie Münster oder Freiburg gibt es besonders viele Radfahrer. Münster wird sogar die „Fahrradhauptstadt“ Deutschlands genannt, weil dort mehr Fahrräder als Autos unterwegs sind.\n\nViele Städte bauen neue Fahrradwege, damit das Radfahren sicherer wird. In Berlin gibt es jetzt zum Beispiel breite Fahrradstraßen, auf denen Autos nur langsam fahren dürfen. Auch in Köln und München werden immer mehr Radwege gebaut.\n\nFür Jugendliche ist das Fahrrad besonders praktisch. Man braucht keinen Führerschein und es kostet nichts, damit zu fahren. Außerdem ist Radfahren gut für die Gesundheit und für die Umwelt. Eine Studie hat gezeigt, dass Schüler, die mit dem Fahrrad zur Schule fahren, sich im Unterricht besser konzentrieren können.\n\nIm Winter fahren allerdings weniger Menschen Fahrrad, weil es kalt und dunkel ist. Experten raten, im Winter helle Kleidung zu tragen und gute Lichter am Fahrrad zu haben. Auch ein Helm ist wichtig – nicht nur im Winter, sondern das ganze Jahr über.",
         "statements": [
-          {"id": 10, "text": "In Münster gibt es mehr Fahrräder als Autos.", "answer": true},
-          {"id": 11, "text": "In Berlin dürfen keine Autos auf den Fahrradstraßen fahren.", "answer": false},
-          {"id": 12, "text": "Jugendliche brauchen einen Führerschein, um Fahrrad zu fahren.", "answer": false},
-          {"id": 13, "text": "Radfahren zur Schule kann die Konzentration verbessern.", "answer": true},
-          {"id": 14, "text": "Im Winter sollte man helle Kleidung beim Radfahren tragen.", "answer": true}
+          {
+            "id": 10,
+            "text": "In Münster gibt es mehr Fahrräder als Autos.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "In Berlin dürfen keine Autos auf den Fahrradstraßen fahren.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Jugendliche brauchen einen Führerschein, um Fahrrad zu fahren.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Radfahren zur Schule kann die Konzentration verbessern.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Im Winter sollte man helle Kleidung beim Radfahren tragen.",
+            "answer": true
+          }
         ]
       },
       {
@@ -103,11 +813,223 @@
         "title": "Schulessen in Deutschland",
         "text": "In vielen deutschen Schulen gibt es eine Mensa, wo die Schüler mittags essen können. Das Essen kostet meistens zwischen drei und fünf Euro. Jeden Tag gibt es verschiedene Gerichte, zum Beispiel Nudeln, Reis mit Gemüse oder Schnitzel mit Kartoffeln. Oft gibt es auch ein vegetarisches Gericht.\n\nEine Umfrage hat gezeigt, dass viele Schüler nicht zufrieden mit dem Schulessen sind. Sie finden, dass es oft nicht gut schmeckt und dass es zu wenig Auswahl gibt. Besonders Obst und Salat wünschen sich viele Schüler öfter. Manche Schüler bringen deshalb lieber ein Pausenbrot von zu Hause mit.\n\nEinige Schulen versuchen jetzt, das Essen besser zu machen. Sie kochen mit frischen Zutaten aus der Region und fragen die Schüler, was sie gerne essen möchten. An einer Schule in Hamburg dürfen die Schüler sogar selbst in der Küche mithelfen. Das macht nicht nur Spaß, sondern die Schüler lernen auch, wie man gesund kocht.\n\nExperten sagen, dass ein gutes Mittagessen wichtig für das Lernen ist. Wer gut isst, kann sich nachmittags besser konzentrieren und hat mehr Energie.",
         "statements": [
-          {"id": 10, "text": "Das Schulessen in Deutschland ist meistens kostenlos.", "answer": false},
-          {"id": 11, "text": "Viele Schüler sind mit dem Schulessen zufrieden.", "answer": false},
-          {"id": 12, "text": "Manche Schüler bringen ihr eigenes Essen mit.", "answer": true},
-          {"id": 13, "text": "In einer Hamburger Schule kochen die Schüler mit.", "answer": true},
-          {"id": 14, "text": "Gutes Essen hilft beim Lernen.", "answer": true}
+          {
+            "id": 10,
+            "text": "Das Schulessen in Deutschland ist meistens kostenlos.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Viele Schüler sind mit dem Schulessen zufrieden.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Manche Schüler bringen ihr eigenes Essen mit.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "In einer Hamburger Schule kochen die Schüler mit.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Gutes Essen hilft beim Lernen.",
+            "answer": true
+          }
+        ]
+      },
+      {
+        "id": "lv3-4",
+        "title": "Urlaub in den Bergen",
+        "text": "Jedes Jahr fahren viele Deutsche in die Berge, um dort ihren Urlaub zu verbringen. Besonders beliebt sind die Alpen, die sich über mehrere Länder erstrecken. Viele Familien mieten dort eine Ferienwohnung oder übernachten in einem Hotel. Im Winter fahren die meisten Urlauber Ski oder Snowboard, während im Sommer Wandern und Mountainbiking die beliebtesten Aktivitäten sind.\n\nEin Vorteil des Bergurlaubs ist die frische Luft und die schöne Natur. Viele Menschen fühlen sich dort entspannter als in der Stadt. Allerdings kann das Wetter in den Bergen schnell umschlagen. Plötzliche Gewitter oder Schneefälle sind keine Seltenheit, besonders in höheren Lagen. Deshalb ist es wichtig, immer warme Kleidung und Regenjacken dabei zu haben.\n\nFür Kinder gibt es in vielen Bergregionen spezielle Angebote. Einige Hotels haben Spielzimmer oder bieten Kinderbetreuung an. In manchen Orten können Kinder auch an geführten Wanderungen teilnehmen. Viele Familien schätzen es, dass ihre Kinder in den Bergen viel Zeit an der frischen Luft verbringen und neue Erfahrungen sammeln.\n\nTrotz der vielen Vorteile gibt es auch Nachteile. Die Anreise in die Berge kann lang und anstrengend sein, besonders wenn man mit öffentlichen Verkehrsmitteln fährt. Außerdem sind die Preise für Unterkünfte und Skipässe oft sehr hoch. Trotzdem planen viele Deutsche jedes Jahr wieder einen Urlaub in den Bergen.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Die Alpen sind ein beliebtes Reiseziel für deutsche Urlauber.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Im Sommer fahren die meisten Urlauber in den Bergen Ski.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Das Wetter in den Bergen ist immer stabil und vorhersehbar.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Viele Hotels in den Bergen bieten spezielle Programme für Kinder an.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Die Anreise in die Berge ist immer kurz und bequem.",
+            "answer": false
+          }
+        ]
+      },
+      {
+        "id": "lv3-5",
+        "title": "Haustiere in Deutschland",
+        "text": "In Deutschland leben viele Menschen mit Haustieren zusammen. Besonders beliebt sind Hunde und Katzen. Fast jeder dritte Haushalt hat mindestens ein Haustier. Viele Familien entscheiden sich für einen Hund, weil er als treuer Begleiter gilt. Katzen sind ebenfalls sehr beliebt, da sie unabhängiger sind und weniger Pflege benötigen.\n\nHaustiere bringen viele Vorteile mit sich. Studien zeigen, dass Menschen mit Haustieren oft weniger gestresst sind. Hunde motivieren ihre Besitzer, regelmäßig spazieren zu gehen, was gut für die Gesundheit ist. Auch Kinder profitieren davon, mit Tieren aufzuwachsen. Sie lernen Verantwortung zu übernehmen und entwickeln oft mehr Mitgefühl.\n\nAllerdings gibt es auch Herausforderungen. Haustiere kosten Geld – nicht nur für Futter, sondern auch für Tierarztbesuche und Versicherungen. In vielen Mietwohnungen sind Haustiere nicht erlaubt, was die Suche nach einer passenden Wohnung erschweren kann. Außerdem brauchen Tiere viel Zeit und Aufmerksamkeit, was für berufstätige Menschen manchmal schwierig ist.\n\nTrotz der Herausforderungen sind Haustiere für viele Deutsche ein wichtiger Teil des Lebens. Sie geben Gesellschaft, sorgen für Bewegung und bringen Freude in den Alltag. Viele Tierbesitzer sagen, dass sie ohne ihr Haustier nicht mehr leben möchten.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Fast jeder dritte Haushalt in Deutschland hat ein Haustier.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Katzen sind beliebter als Hunde, weil sie mehr Pflege brauchen.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Haustiere können helfen, Stress zu reduzieren.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "In allen Mietwohnungen in Deutschland sind Haustiere erlaubt.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Haustiere kosten nur wenig Geld, weil Futter günstig ist.",
+            "answer": false
+          }
+        ]
+      },
+      {
+        "id": "lv3-6",
+        "title": "Fahrradfahren in der Stadt",
+        "text": "In vielen deutschen Städten wird das Fahrrad immer beliebter. Immer mehr Menschen nutzen es, um zur Arbeit zu fahren oder Besorgungen zu machen. Besonders in Großstädten wie Berlin oder Münster gibt es viele Fahrradfahrer. Die Städte investieren viel Geld in den Ausbau von Fahrradwegen, um die Sicherheit zu erhöhen.\n\nEin großer Vorteil des Fahrradfahrens ist die Umweltfreundlichkeit. Fahrräder verursachen keine Abgase und tragen so zum Umweltschutz bei. Außerdem ist Radfahren gut für die Gesundheit. Es stärkt das Herz-Kreislauf-System und hilft, fit zu bleiben. Viele Menschen sparen auch Geld, weil sie kein Auto oder öffentliche Verkehrsmittel nutzen müssen.\n\nAllerdings gibt es auch Probleme. In vielen Städten sind die Fahrradwege noch nicht gut ausgebaut, was zu gefährlichen Situationen führen kann. Besonders im Winter ist Radfahren oft schwierig, weil die Wege glatt oder mit Schnee bedeckt sind. Außerdem gibt es in manchen Städten zu wenig Fahrradparkplätze, sodass die Räder oft geklaut werden.\n\nTrotz dieser Herausforderungen setzen immer mehr Städte auf das Fahrrad als umweltfreundliches Verkehrsmittel. Einige Städte bieten sogar kostenlose Fahrradverleihsysteme an, um das Radfahren noch attraktiver zu machen. Viele Experten sind der Meinung, dass das Fahrrad in Zukunft eine noch größere Rolle im Stadtverkehr spielen wird.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "In deutschen Großstädten nutzen immer mehr Menschen das Fahrrad.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Fahrradfahren ist schlecht für die Umwelt, weil es Abgase produziert.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Im Winter ist Radfahren in vielen Städten problemlos möglich.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Einige Städte bieten kostenlose Fahrradverleihsysteme an.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Fahrradwege in deutschen Städten sind immer sicher und gut ausgebaut.",
+            "answer": false
+          }
+        ]
+      },
+      {
+        "id": "lv3-7",
+        "title": "Schüleraustausch in Deutschland",
+        "text": "Ein Schüleraustausch ist für viele Jugendliche in Deutschland eine spannende Möglichkeit, ein anderes Land kennenzulernen. Besonders beliebt sind Austauschprogramme in die USA, nach Frankreich oder Spanien. Die Schüler leben für einige Wochen oder Monate in einer Gastfamilie und besuchen dort die Schule. Das Ziel ist es, die Sprache und Kultur des Landes besser zu verstehen.\n\nEin Schüleraustausch hat viele Vorteile. Die Jugendlichen verbessern ihre Sprachkenntnisse und werden selbstständiger. Sie lernen, sich in einer fremden Umgebung zurechtzufinden und neue Freundschaften zu schließen. Viele Austauschschüler berichten, dass sie nach dem Austausch offener und toleranter geworden sind.\n\nAllerdings gibt es auch Herausforderungen. Manche Schüler haben Heimweh oder haben Schwierigkeiten, sich an die neue Schule und die Gastfamilie zu gewöhnen. Auch die Kosten können ein Problem sein. Ein Austauschprogramm ist oft teuer, und nicht alle Familien können sich das leisten. Einige Organisationen bieten jedoch Stipendien an, um mehr Schülern die Teilnahme zu ermöglichen.\n\nTrotz der Herausforderungen ist ein Schüleraustausch eine wertvolle Erfahrung. Viele Jugendliche sagen später, dass es die beste Zeit ihres Lebens war. Sie haben nicht nur eine neue Sprache gelernt, sondern auch viel über sich selbst und andere Kulturen erfahren.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Viele deutsche Schüler machen einen Austausch in die USA oder nach Frankreich.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Ein Schüleraustausch dauert immer ein ganzes Jahr.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Austauschschüler verbessern ihre Sprachkenntnisse und werden selbstständiger.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Alle Familien können sich einen Schüleraustausch problemlos leisten.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Ein Schüleraustausch ist immer einfach und ohne Probleme.",
+            "answer": false
+          }
+        ]
+      },
+      {
+        "id": "lv3-8",
+        "title": "Vegetarische Ernährung",
+        "text": "Immer mehr Menschen in Deutschland ernähren sich vegetarisch. Das bedeutet, dass sie kein Fleisch essen. Einige verzichten auch auf Fisch, Eier oder Milchprodukte. Die Gründe dafür sind unterschiedlich. Viele Vegetarier möchten etwas für die Umwelt tun, weil die Fleischproduktion viel Wasser und Energie verbraucht. Andere entscheiden sich aus gesundheitlichen Gründen oder aus Liebe zu Tieren für eine vegetarische Ernährung.\n\nEine vegetarische Ernährung kann viele Vorteile haben. Studien zeigen, dass Vegetarier seltener an Übergewicht oder Herzkrankheiten leiden. Sie essen oft mehr Obst und Gemüse, was gut für die Gesundheit ist. Außerdem gibt es heute viele leckere vegetarische Alternativen zu Fleisch, sodass man auf nichts verzichten muss.\n\nAllerdings gibt es auch Herausforderungen. In manchen Restaurants oder Kantinen ist das vegetarische Angebot noch begrenzt. Auch unterwegs kann es schwierig sein, etwas Passendes zu finden. Einige Menschen haben auch Bedenken, dass eine vegetarische Ernährung nicht genug Nährstoffe liefert. Experten raten deshalb, auf eine ausgewogene Ernährung zu achten und gegebenenfalls Nahrungsergänzungsmittel zu nehmen.\n\nTrotz der Herausforderungen wird die vegetarische Ernährung immer beliebter. Viele Supermärkte haben heute ein großes Angebot an vegetarischen Produkten. Auch in Schulen und Kantinen gibt es immer öfter vegetarische Gerichte. Viele Menschen sind der Meinung, dass eine vegetarische Ernährung nicht nur gut für die Gesundheit, sondern auch für die Umwelt ist.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Immer mehr Menschen in Deutschland ernähren sich vegetarisch.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Vegetarier essen nie Fisch oder Eier.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Die Fleischproduktion verbraucht viel Wasser und Energie.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Vegetarier leiden häufiger an Übergewicht als Fleischesser.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "In allen Restaurants gibt es ein großes vegetarisches Angebot.",
+            "answer": false
+          }
+        ]
+      },
+      {
+        "id": "lv3-9",
+        "title": "Ehrenamtliches Engagement",
+        "text": "In Deutschland engagieren sich viele Menschen ehrenamtlich. Das bedeutet, dass sie ihre Zeit und Energie für eine gute Sache einsetzen, ohne dafür bezahlt zu werden. Beliebte Bereiche sind zum Beispiel die Freiwillige Feuerwehr, Sportvereine oder soziale Einrichtungen. Viele Jugendliche arbeiten in Jugendzentren oder helfen älteren Menschen.\n\nEhrenamtliches Engagement hat viele Vorteile. Die Helfer sammeln wertvolle Erfahrungen und lernen neue Menschen kennen. Sie können ihre Fähigkeiten einbringen und etwas Sinnvolles tun. Für viele ist es auch eine Möglichkeit, sich in der Gesellschaft einzubringen und Verantwortung zu übernehmen. Unternehmen schätzen ehrenamtliches Engagement oft, weil es zeigt, dass jemand teamfähig und engagiert ist.\n\nAllerdings gibt es auch Herausforderungen. Ehrenamtliche Arbeit kostet Zeit, die nicht jeder hat. Besonders berufstätige Menschen oder Eltern mit kleinen Kindern haben oft wenig freie Zeit. Auch die Organisation kann schwierig sein, wenn viele Ehrenamtliche zusammenarbeiten. Trotzdem gibt es viele Menschen, die regelmäßig Zeit für ehrenamtliche Tätigkeiten finden.\n\nDie deutsche Regierung fördert ehrenamtliches Engagement durch verschiedene Programme. Zum Beispiel gibt es den Bundesfreiwilligendienst, bei dem junge und ältere Menschen für ein Jahr in sozialen oder ökologischen Projekten mitarbeiten können. Viele Städte und Gemeinden vergeben auch Auszeichnungen für besonders engagierte Bürger. Ehrenamtliche Arbeit ist ein wichtiger Teil des gesellschaftlichen Lebens in Deutschland.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Viele Menschen in Deutschland engagieren sich ehrenamtlich.",
+            "answer": true
+          },
+          {
+            "id": 11,
+            "text": "Ehrenamtliche Arbeit wird immer gut bezahlt.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Ehrenamtliches Engagement kann helfen, neue Fähigkeiten zu lernen.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Nur junge Menschen können sich ehrenamtlich engagieren.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Die deutsche Regierung fördert ehrenamtliches Engagement nicht.",
+            "answer": false
+          }
         ]
       }
     ],
@@ -117,12 +1039,66 @@
         "title": "Mein Austauschjahr in Deutschland",
         "text": "Ich heiße Carlos und komme aus Spanien. Letztes Jahr habe ich ein Austauschjahr in Deutschland gemacht. Ich habe zehn Monate in einer kleinen Stadt in Bayern gewohnt und dort die Schule besucht.\n\nAm Anfang war es sehr schwer für mich. Ich konnte zwar schon ein bisschen Deutsch, aber die Leute in Bayern sprechen einen Dialekt, den ich überhaupt nicht verstanden habe. In der Schule war es besser, weil die Lehrer Hochdeutsch gesprochen haben. Trotzdem hatte ich in den ersten Wochen oft Probleme, dem Unterricht zu folgen.\n\nMeine Gastfamilie war sehr nett. Ich hatte ein eigenes Zimmer und die Familie hat mich wie ein Familienmitglied behandelt. Wir haben zusammen gegessen, Ausflüge gemacht und ich habe sogar Weihnachten mit ihnen gefeiert. Das war ganz anders als in Spanien – in Deutschland feiert man schon am 24. Dezember und nicht erst am 6. Januar.\n\nNach drei Monaten konnte ich schon viel besser Deutsch sprechen. Ich hatte Freunde gefunden und fühlte mich wohl. Das Beste war, dass ich einen guten Freund gefunden habe, Marco. Wir haben zusammen Fußball gespielt und er hat mir viel über die deutsche Kultur erzählt.\n\nAls ich im Sommer nach Spanien zurückgekommen bin, war ich traurig. Ich vermisse meine Gastfamilie und meine Freunde. Aber wir schreiben uns regelmäßig und ich möchte nächstes Jahr wieder nach Deutschland fahren – diesmal als Tourist!",
         "questions": [
-          {"id": 15, "question": "Warum war der Anfang in Deutschland schwer für Carlos?", "options": ["Weil seine Gastfamilie nicht nett war.", "Weil er den bayerischen Dialekt nicht verstehen konnte.", "Weil er kein Deutsch gelernt hatte."], "answer": 1},
-          {"id": 16, "question": "Wie war der Unterricht in der Schule?", "options": ["Die Lehrer haben Hochdeutsch gesprochen.", "Die Lehrer haben nur Bayerisch gesprochen.", "Carlos durfte nicht am Unterricht teilnehmen."], "answer": 0},
-          {"id": 17, "question": "Wie hat die Gastfamilie Carlos behandelt?", "options": ["Sie haben ihn ignoriert.", "Sie haben ihn wie einen Gast behandelt.", "Sie haben ihn wie ein Familienmitglied behandelt."], "answer": 2},
-          {"id": 18, "question": "Was war anders an Weihnachten in Deutschland?", "options": ["Man feiert am 24. Dezember.", "Man feiert nicht.", "Man feiert am 6. Januar."], "answer": 0},
-          {"id": 19, "question": "Wann konnte Carlos besser Deutsch sprechen?", "options": ["Sofort am Anfang.", "Nach drei Monaten.", "Erst als er zurück in Spanien war."], "answer": 1},
-          {"id": 20, "question": "Was möchte Carlos in der Zukunft machen?", "options": ["Er möchte nie wieder nach Deutschland.", "Er möchte in Deutschland studieren.", "Er möchte als Tourist nach Deutschland reisen."], "answer": 2}
+          {
+            "id": 15,
+            "question": "Warum war der Anfang in Deutschland schwer für Carlos?",
+            "options": [
+              "Weil seine Gastfamilie nicht nett war.",
+              "Weil er den bayerischen Dialekt nicht verstehen konnte.",
+              "Weil er kein Deutsch gelernt hatte."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Wie war der Unterricht in der Schule?",
+            "options": [
+              "Die Lehrer haben Hochdeutsch gesprochen.",
+              "Die Lehrer haben nur Bayerisch gesprochen.",
+              "Carlos durfte nicht am Unterricht teilnehmen."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 17,
+            "question": "Wie hat die Gastfamilie Carlos behandelt?",
+            "options": [
+              "Sie haben ihn ignoriert.",
+              "Sie haben ihn wie einen Gast behandelt.",
+              "Sie haben ihn wie ein Familienmitglied behandelt."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 18,
+            "question": "Was war anders an Weihnachten in Deutschland?",
+            "options": [
+              "Man feiert am 24. Dezember.",
+              "Man feiert nicht.",
+              "Man feiert am 6. Januar."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 19,
+            "question": "Wann konnte Carlos besser Deutsch sprechen?",
+            "options": [
+              "Sofort am Anfang.",
+              "Nach drei Monaten.",
+              "Erst als er zurück in Spanien war."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was möchte Carlos in der Zukunft machen?",
+            "options": [
+              "Er möchte nie wieder nach Deutschland.",
+              "Er möchte in Deutschland studieren.",
+              "Er möchte als Tourist nach Deutschland reisen."
+            ],
+            "answer": 2
+          }
         ]
       },
       {
@@ -130,12 +1106,468 @@
         "title": "Die Schülerzeitung",
         "text": "Mein Name ist Lena und ich bin 14 Jahre alt. Seit einem Jahr arbeite ich bei der Schülerzeitung unserer Schule mit. Die Zeitung heißt „Schulblatt“ und erscheint jeden Monat.\n\nAlles hat angefangen, als meine Deutschlehrerin mich gefragt hat, ob ich einen Artikel über unser Schulfest schreiben möchte. Ich habe es ausprobiert und es hat mir so gut gefallen, dass ich in der Redaktion geblieben bin. Jetzt bin ich sogar stellvertretende Chefredakteurin.\n\nWir sind insgesamt acht Schüler in der Redaktion. Wir treffen uns jeden Mittwoch nach der Schule und besprechen, welche Themen wir in der nächsten Ausgabe behandeln wollen. Jeder schreibt dann seinen Artikel zu Hause und bringt ihn zum nächsten Treffen mit. Dann korrigieren wir die Texte gemeinsam.\n\nAm meisten Spaß macht mir, Interviews zu führen. Letzten Monat habe ich unseren Schulleiter interviewt. Er hat erzählt, dass er als Schüler selbst auch bei einer Schülerzeitung mitgemacht hat. Das fand ich überraschend!\n\nManchmal ist es stressig, weil ich neben der Schülerzeitung auch noch viel für die Schule lernen muss. Aber ich habe gelernt, meine Zeit besser einzuteilen. Und ich weiß jetzt, dass ich später Journalistin werden möchte. Die Schülerzeitung hat mir gezeigt, dass Schreiben meine Leidenschaft ist.",
         "questions": [
-          {"id": 15, "question": "Wie ist Lena zur Schülerzeitung gekommen?", "options": ["Sie hat sich selbst beworben.", "Ihre Deutschlehrerin hat sie gefragt.", "Ihre Freundin hat sie mitgenommen."], "answer": 1},
-          {"id": 16, "question": "Welche Position hat Lena jetzt?", "options": ["Chefredakteurin.", "Stellvertretende Chefredakteurin.", "Fotografin."], "answer": 1},
-          {"id": 17, "question": "Wann trifft sich die Redaktion?", "options": ["Jeden Montag.", "Jeden Mittwoch.", "Jeden Freitag."], "answer": 1},
-          {"id": 18, "question": "Was macht Lena am liebsten bei der Zeitung?", "options": ["Fotos machen.", "Artikel korrigieren.", "Interviews führen."], "answer": 2},
-          {"id": 19, "question": "Was war überraschend am Interview mit dem Schulleiter?", "options": ["Er liest keine Zeitungen.", "Er war selbst bei einer Schülerzeitung.", "Er findet die Schülerzeitung schlecht."], "answer": 1},
-          {"id": 20, "question": "Was möchte Lena später beruflich machen?", "options": ["Lehrerin.", "Journalistin.", "Schulleiter."], "answer": 1}
+          {
+            "id": 15,
+            "question": "Wie ist Lena zur Schülerzeitung gekommen?",
+            "options": [
+              "Sie hat sich selbst beworben.",
+              "Ihre Deutschlehrerin hat sie gefragt.",
+              "Ihre Freundin hat sie mitgenommen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Welche Position hat Lena jetzt?",
+            "options": [
+              "Chefredakteurin.",
+              "Stellvertretende Chefredakteurin.",
+              "Fotografin."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Wann trifft sich die Redaktion?",
+            "options": [
+              "Jeden Montag.",
+              "Jeden Mittwoch.",
+              "Jeden Freitag."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was macht Lena am liebsten bei der Zeitung?",
+            "options": [
+              "Fotos machen.",
+              "Artikel korrigieren.",
+              "Interviews führen."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 19,
+            "question": "Was war überraschend am Interview mit dem Schulleiter?",
+            "options": [
+              "Er liest keine Zeitungen.",
+              "Er war selbst bei einer Schülerzeitung.",
+              "Er findet die Schülerzeitung schlecht."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was möchte Lena später beruflich machen?",
+            "options": [
+              "Lehrerin.",
+              "Journalistin.",
+              "Schulleiter."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "lv4-3",
+        "title": "Ein Tag im Leben einer Tierärztin",
+        "text": "Anna ist Tierärztin und arbeitet in einer kleinen Praxis auf dem Land. Ihr Tag beginnt früh um 6 Uhr, wenn sie die ersten Patienten empfängt. Heute hat sie viel zu tun: Ein Hund mit einer Pfotenverletzung, eine Katze mit Fieber und ein Kaninchen, das nicht frisst.\n\nNach der Sprechstunde fährt Anna zu einem Bauernhof, um die Kühe zu untersuchen. Der Bauer macht sich Sorgen, weil eine Kuh seit zwei Tagen keine Milch gibt. Anna untersucht das Tier gründlich und stellt fest, dass es eine leichte Entzündung hat. Sie gibt dem Bauern Medikamente und erklärt, wie er die Kuh behandeln soll.\n\nMittags isst Anna schnell ein Sandwich in ihrem Auto, während sie zu einer Pferdezucht fährt. Dort muss sie ein junges Pferd impfen. Der Besitzer erzählt, dass das Pferd in den letzten Tagen sehr unruhig war. Anna beruhigt das Tier und gibt ihm die Spritze.\n\nAm Nachmittag ist Anna wieder in ihrer Praxis. Sie schreibt Berichte, bestellt Medikamente und ruft einige Besitzer an, um nach ihren Tieren zu fragen. Um 18 Uhr ist endlich Feierabend. Anna ist müde, aber glücklich. Sie liebt ihren Beruf, auch wenn er manchmal anstrengend ist.\n\nZu Hause wartet ihr eigener Hund, Max, auf sie. Anna geht mit ihm spazieren und genießt die Ruhe. Morgen wird wieder ein langer Tag, aber sie freut sich schon darauf.",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Warum beginnt Annas Tag früh?",
+            "options": [
+              "Weil sie lange schlafen möchte.",
+              "Weil sie die ersten Patienten um 6 Uhr empfängt.",
+              "Weil sie erst mittags arbeiten muss."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Was ist das Problem der Kuh auf dem Bauernhof?",
+            "options": [
+              "Sie gibt keine Milch mehr.",
+              "Sie frisst nicht.",
+              "Sie hat eine Pfotenverletzung."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 17,
+            "question": "Was macht Anna auf der Pferdezucht?",
+            "options": [
+              "Sie untersucht eine kranke Kuh.",
+              "Sie impft ein junges Pferd.",
+              "Sie isst ein Sandwich."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Wie verbringt Anna ihren Nachmittag in der Praxis?",
+            "options": [
+              "Sie schläft im Auto.",
+              "Sie schreibt Berichte und bestellt Medikamente.",
+              "Sie fährt zu einem Bauernhof."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Wie fühlt sich Anna nach der Arbeit?",
+            "options": [
+              "Sie ist traurig und will den Beruf wechseln.",
+              "Sie ist müde, aber glücklich.",
+              "Sie hat keine Lust, mit ihrem Hund spazieren zu gehen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was macht Anna nach der Arbeit?",
+            "options": [
+              "Sie geht mit ihrem Hund Max spazieren.",
+              "Sie schläft sofort ein.",
+              "Sie fährt noch einmal in die Praxis."
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "lv4-4",
+        "title": "Ein Wochenende im Gebirge",
+        "text": "Lena und Tom haben sich für ein Wochenende im Gebirge entschieden. Sie wollen wandern und die Natur genießen. Am Freitagabend packen sie ihre Rucksäcke: Wanderschuhe, Regenjacken, eine Karte und genug Wasser. Am Samstagmorgen fahren sie früh los, denn die Fahrt dauert drei Stunden.\n\nAls sie ankommen, ist das Wetter perfekt: Die Sonne scheint und es ist nicht zu heiß. Sie starten ihre Wanderung um 10 Uhr. Der Weg ist steil, aber die Aussicht ist wunderschön. Nach zwei Stunden machen sie eine Pause und essen ihr mitgebrachtes Picknick. Lena erzählt, dass sie früher oft mit ihren Eltern gewandert ist, aber seit sie studiert, hat sie keine Zeit mehr dafür.\n\nPlötzlich beginnt es zu regnen. Die beiden ziehen schnell ihre Regenjacken an und suchen Schutz unter einem Felsen. Tom lacht und sagt: „Das gehört doch zum Abenteuer!“ Nach 20 Minuten hört der Regen auf und sie können weiterwandern.\n\nAm späten Nachmittag erreichen sie die Hütte, in der sie übernachten wollen. Die Hütte ist gemütlich und es gibt warme Suppe. Lena und Tom setzen sich zu anderen Wanderern und erzählen von ihrem Tag. Ein älterer Mann gibt ihnen Tipps für die Wanderung am nächsten Tag.\n\nAm Sonntag wandern sie einen anderen Weg zurück. Diesmal ist es einfacher, weil es bergab geht. Sie sehen Rehe und hören Vögel singen. Als sie am Auto ankommen, sind beide müde, aber glücklich. „Das war das beste Wochenende seit langem“, sagt Tom. Lena nickt und freut sich schon auf das nächste Abenteuer.",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Was packen Lena und Tom für ihre Wanderung ein?",
+            "options": [
+              "Schwimmsachen und Sonnencreme.",
+              "Wanderschuhe, Regenjacken und eine Karte.",
+              "Ein Zelt und Schlafsäcke."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Wie lange dauert die Fahrt ins Gebirge?",
+            "options": [
+              "Eine Stunde.",
+              "Drei Stunden.",
+              "Fünf Stunden."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Was passiert während der Wanderung?",
+            "options": [
+              "Es beginnt zu regnen.",
+              "Lena verliert ihre Karte.",
+              "Tom verletzt sich am Fuß."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 18,
+            "question": "Was essen Lena und Tom in der Hütte?",
+            "options": [
+              "Pizza.",
+              "Warme Suppe.",
+              "Ein Picknick."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was sehen Lena und Tom auf dem Rückweg?",
+            "options": [
+              "Einen Bären.",
+              "Rehe und Vögel.",
+              "Ein Gewitter."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Wie fühlen sich Lena und Tom am Ende des Wochenendes?",
+            "options": [
+              "Sie sind enttäuscht.",
+              "Sie sind müde, aber glücklich.",
+              "Sie wollen nie wieder wandern."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "lv4-5",
+        "title": "Ein neues Hobby: Urban Gardening",
+        "text": "Seit einem Jahr hat Sarah ein neues Hobby: Urban Gardening. Sie lebt in einer kleinen Wohnung in der Stadt und hat keinen Garten. Aber das hält sie nicht auf. Auf ihrem Balkon wachsen jetzt Tomaten, Kräuter und sogar ein kleiner Apfelbaum.\n\nAlles begann, als Sarah einen Dokumentarfilm über nachhaltiges Leben gesehen hat. Sie war beeindruckt, wie man auch in der Stadt Gemüse anbauen kann. Also hat sie sich Bücher ausgeliehen und im Internet recherchiert. Ihr erster Versuch war ein Topf mit Basilikum. Leider ist die Pflanze nach zwei Wochen eingegangen, weil sie zu viel Wasser bekommen hat. Aber Sarah hat nicht aufgegeben.\n\nMittlerweile hat sie viel gelernt. Sie weiß, welche Pflanzen viel Sonne brauchen und welche im Schatten wachsen. Sie hat auch gelernt, wie man Kompost herstellt, um die Pflanzen zu düngen. Ihre Nachbarn sind neugierig geworden und fragen oft nach Tipps. Einige haben sogar angefangen, selbst Gemüse anzubauen.\n\nSarahs größter Erfolg war die Ernte ihrer Tomaten. Sie hat sie mit ihren Freunden geteilt und alle waren begeistert. „Es schmeckt viel besser als aus dem Supermarkt“, hat ihr Freund Markus gesagt. Jetzt plant Sarah, im nächsten Jahr mehr Platz zu nutzen. Vielleicht kann sie sogar ein kleines Gewächshaus auf dem Balkon aufstellen.\n\nFür Sarah ist Urban Gardening mehr als nur ein Hobby. Es ist eine Möglichkeit, etwas für die Umwelt zu tun und gleichzeitig leckeres Essen zu produzieren. Sie freut sich schon auf die nächste Ernte.",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Wo lebt Sarah?",
+            "options": [
+              "In einem Haus mit Garten.",
+              "In einer kleinen Wohnung in der Stadt.",
+              "Auf einem Bauernhof."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Wie hat Sarah mit Urban Gardening angefangen?",
+            "options": [
+              "Sie hat einen Kurs besucht.",
+              "Sie hat einen Dokumentarfilm gesehen.",
+              "Ihre Nachbarn haben sie überredet."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Was ist beim ersten Versuch schiefgegangen?",
+            "options": [
+              "Die Pflanze hat zu wenig Wasser bekommen.",
+              "Die Pflanze hat zu viel Wasser bekommen.",
+              "Die Pflanze hat keine Sonne bekommen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was hat Sarah über Pflanzen gelernt?",
+            "options": [
+              "Alle Pflanzen brauchen viel Sonne.",
+              "Manche Pflanzen wachsen im Schatten.",
+              "Pflanzen brauchen kein Wasser."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was war Sarahs größter Erfolg?",
+            "options": [
+              "Ein kleiner Apfelbaum.",
+              "Die Ernte ihrer Tomaten.",
+              "Ein Gewächshaus auf dem Balkon."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Warum macht Sarah Urban Gardening?",
+            "options": [
+              "Weil es ihr langweilig ist.",
+              "Weil sie etwas für die Umwelt tun will.",
+              "Weil ihre Nachbarn es von ihr verlangen."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "lv4-6",
+        "title": "Mein erstes Konzert",
+        "text": "Letzte Woche war ich zum ersten Mal bei einem großen Konzert. Meine Lieblingsband, die „Rocksterne“, hat in unserer Stadt gespielt. Ich war so aufgeregt, weil ich die Band schon seit zwei Jahren höre und alle ihre Lieder kenne.\n\nMeine Freundin Lena hat mir die Karte zum Geburtstag geschenkt. Wir haben uns schon um 17 Uhr vor der Halle getroffen, obwohl das Konzert erst um 20 Uhr begann. Wir wollten unbedingt ganz vorne stehen! Als die Band endlich auf die Bühne kam, war die Stimmung unglaublich. Alle haben gesungen, getanzt und mit den Händen gewinkt.\n\nMein Lieblingslied war „Frei sein“. Als die Band es gespielt hat, hat Lena meine Hand genommen und wir haben zusammen mitgesungen. Ich war so glücklich! Nach dem Konzert haben wir noch lange über die Lieder und die Show geredet. Lena hat gesagt, dass sie nächstes Jahr wieder mit mir zu einem Konzert gehen will.\n\nZu Hause habe ich meiner Mutter alles erzählt. Sie hat gelacht und gesagt: „Du bist ja ganz rot im Gesicht!“ Ich glaube, ich werde nie vergessen, wie schön dieser Abend war.",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Warum war das Mädchen so aufgeregt?",
+            "options": [
+              "Weil sie zum ersten Mal allein verreist ist.",
+              "Weil ihre Lieblingsband in der Stadt gespielt hat.",
+              "Weil sie eine Prüfung bestanden hat."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Wer hat ihr die Konzertkarte geschenkt?",
+            "options": [
+              "Ihre Mutter.",
+              "Ihre Freundin Lena.",
+              "Ihr Bruder."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Wann haben die Mädchen sich vor der Halle getroffen?",
+            "options": [
+              "Um 20 Uhr.",
+              "Um 17 Uhr.",
+              "Um 19 Uhr."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was haben die Leute während des Konzerts gemacht?",
+            "options": [
+              "Sie haben nur zugehört.",
+              "Sie haben gesungen, getanzt und gewinkt.",
+              "Sie haben geschlafen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Welches Lied war ihr Lieblingslied?",
+            "options": [
+              "„Herzschlag“.",
+              "„Frei sein“.",
+              "„Sternenlicht“."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was hat Lena für die Zukunft geplant?",
+            "options": [
+              "Sie will nie wieder zu einem Konzert gehen.",
+              "Sie will nächstes Jahr wieder mit ihr zu einem Konzert gehen.",
+              "Sie will eine eigene Band gründen."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "lv4-7",
+        "title": "Ein Tag im Schwimmbad",
+        "text": "Am Wochenende war ich mit meinen Freunden im Schwimmbad. Es war ein sehr heißer Tag und wir wollten unbedingt ins Wasser. Schon um 10 Uhr waren wir da, weil wir wussten, dass es später voll wird.\n\nZuerst haben wir uns in der Sonne auf unsere Handtücher gelegt und uns eingecremt. Dann sind wir ins Wasser gesprungen. Das Wasser war kalt, aber nach ein paar Minuten hat es sich gut angefühlt. Mein Freund Tom hat versucht, vom 3-Meter-Brett zu springen, aber er ist hingefallen. Alle haben gelacht, aber er hat sich nicht wehgetan.\n\nMittags haben wir uns Pommes und Eis gekauft. Ich habe ein großes Eis mit Schokolade und Nüssen genommen. Danach haben wir noch eine Runde Wasserball gespielt. Ich war im Team mit Lisa und wir haben gewonnen! Am Ende waren wir alle müde und haben uns noch einmal in die Sonne gelegt.\n\nAuf dem Heimweg haben wir uns überlegt, was wir nächste Woche machen wollen. Vielleicht gehen wir ins Kino oder spielen Fußball. Ich freue mich schon darauf!",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Warum sind die Freunde früh ins Schwimmbad gegangen?",
+            "options": [
+              "Weil sie keine Lust auf Menschenmassen hatten.",
+              "Weil sie Angst vor der Hitze hatten.",
+              "Weil sie wussten, dass es später voll wird."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 16,
+            "question": "Was hat Tom im Schwimmbad gemacht?",
+            "options": [
+              "Er ist vom 3-Meter-Brett gesprungen und hingefallen.",
+              "Er hat ein Eis gegessen.",
+              "Er hat Wasserball gespielt."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 17,
+            "question": "Was haben die Freunde mittags gegessen?",
+            "options": [
+              "Pizza und Salat.",
+              "Pommes und Eis.",
+              "Burger und Cola."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was hat das Mädchen zum Eis gewählt?",
+            "options": [
+              "Vanille mit Erdbeeren.",
+              "Schokolade mit Nüssen.",
+              "Zitrone mit Sahne."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Welches Spiel haben die Freunde gespielt?",
+            "options": [
+              "Fußball.",
+              "Wasserball.",
+              "Tennis."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was wollen die Freunde nächste Woche machen?",
+            "options": [
+              "Sie wollen ins Kino gehen oder Fußball spielen.",
+              "Sie wollen eine Reise machen.",
+              "Sie wollen zu Hause bleiben."
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "lv4-8",
+        "title": "Mein Schulpraktikum",
+        "text": "Letzten Monat habe ich ein zweiwöchiges Praktikum in einer Tierarztpraxis gemacht. Ich möchte später Tierärztin werden und wollte sehen, ob mir der Beruf gefällt.\n\nAm ersten Tag war ich sehr nervös. Die Tierärztin, Frau Berger, hat mir alles gezeigt. Ich durfte ihr bei kleinen Aufgaben helfen, zum Beispiel beim Füttern der Tiere oder beim Saubermachen der Käfige. Am zweiten Tag hat ein Hund eine Spritze bekommen. Ich habe zugesehen, aber ich hatte ein bisschen Angst, dass der Hund wehtut.\n\nAm meisten Spaß hat mir die Arbeit mit den Katzen gemacht. Eine kleine schwarze Katze namens Luna hat mir besonders gefallen. Sie war sehr verspielt und hat immer mit mir gespielt, wenn ich in ihrem Käfig war. Frau Berger hat gesagt, dass ich Talent habe und mir viel erklärt.\n\nAm letzten Tag habe ich ein Zertifikat bekommen. Meine Eltern waren stolz auf mich und haben gesagt, dass ich das gut gemacht habe. Jetzt weiß ich, dass ich wirklich Tierärztin werden will. Vielleicht mache ich nächstes Jahr noch ein Praktikum in einem Zoo!",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Warum hat das Mädchen ein Praktikum gemacht?",
+            "options": [
+              "Weil sie später Tierärztin werden will.",
+              "Weil ihre Eltern es wollten.",
+              "Weil sie keine Lust auf Schule hatte."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 16,
+            "question": "Wie lange hat das Praktikum gedauert?",
+            "options": [
+              "Eine Woche.",
+              "Zwei Wochen.",
+              "Einen Monat."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Was hat das Mädchen am ersten Tag gemacht?",
+            "options": [
+              "Sie hat Tiere operiert.",
+              "Sie hat Frau Berger bei kleinen Aufgaben geholfen.",
+              "Sie hat nur zugesehen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Warum hatte das Mädchen Angst?",
+            "options": [
+              "Weil ein Hund eine Spritze bekommen hat.",
+              "Weil eine Katze sie gekratzt hat.",
+              "Weil Frau Berger streng war."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 19,
+            "question": "Welches Tier hat ihr besonders gefallen?",
+            "options": [
+              "Ein weißer Hund.",
+              "Eine schwarze Katze namens Luna.",
+              "Ein Vogel."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was möchte das Mädchen nächstes Jahr machen?",
+            "options": [
+              "Sie will ein Praktikum im Zoo machen.",
+              "Sie will nicht mehr zur Schule gehen.",
+              "Sie will in einem Supermarkt arbeiten."
+            ],
+            "answer": 0
+          }
         ]
       }
     ],
@@ -144,43 +1576,497 @@
         "id": "lv5-1",
         "title": "Freizeitangebote",
         "texts": [
-          {"id": 21, "text": "Am Samstag findet im Stadtpark ein großes Konzert statt. Drei lokale Bands spielen Rock- und Popmusik. Der Eintritt ist frei. Bei Regen findet das Konzert in der Stadthalle statt. Getränke und Essen kann man dort kaufen."},
-          {"id": 22, "text": "Das neue Jugendzentrum bietet ab Oktober einen Kochkurs an. Jeden Donnerstag von 16 bis 18 Uhr lernen Jugendliche, wie man gesunde und leckere Gerichte aus verschiedenen Ländern zubereitet. Die Teilnahme kostet 3 Euro pro Termin."},
-          {"id": 23, "text": "Die Stadtbibliothek hat jetzt auch samstags geöffnet! Von 10 bis 14 Uhr können Besucher Bücher ausleihen, im Leseraum arbeiten oder die neuen Computer benutzen. Für Jugendliche gibt es auch eine gemütliche Ecke mit Manga und Comics."},
-          {"id": 24, "text": "Du möchtest etwas für die Umwelt tun? Dann komm zur Müllsammelaktion am Flussufer! Am 20. Oktober treffen wir uns um 9 Uhr am Parkplatz. Handschuhe und Müllsäcke bekommt ihr von uns. Nach der Aktion gibt es Kuchen und Getränke."}
+          {
+            "id": 21,
+            "text": "Am Samstag findet im Stadtpark ein großes Konzert statt. Drei lokale Bands spielen Rock- und Popmusik. Der Eintritt ist frei. Bei Regen findet das Konzert in der Stadthalle statt. Getränke und Essen kann man dort kaufen."
+          },
+          {
+            "id": 22,
+            "text": "Das neue Jugendzentrum bietet ab Oktober einen Kochkurs an. Jeden Donnerstag von 16 bis 18 Uhr lernen Jugendliche, wie man gesunde und leckere Gerichte aus verschiedenen Ländern zubereitet. Die Teilnahme kostet 3 Euro pro Termin."
+          },
+          {
+            "id": 23,
+            "text": "Die Stadtbibliothek hat jetzt auch samstags geöffnet! Von 10 bis 14 Uhr können Besucher Bücher ausleihen, im Leseraum arbeiten oder die neuen Computer benutzen. Für Jugendliche gibt es auch eine gemütliche Ecke mit Manga und Comics."
+          },
+          {
+            "id": 24,
+            "text": "Du möchtest etwas für die Umwelt tun? Dann komm zur Müllsammelaktion am Flussufer! Am 20. Oktober treffen wir uns um 9 Uhr am Parkplatz. Handschuhe und Müllsäcke bekommt ihr von uns. Nach der Aktion gibt es Kuchen und Getränke."
+          }
         ],
         "headings": [
-          {"letter": "A", "text": "Neue Öffnungszeiten in der Bibliothek"},
-          {"letter": "B", "text": "Fußballturnier für Schüler"},
-          {"letter": "C", "text": "Kochen lernen im Jugendzentrum"},
-          {"letter": "D", "text": "Gemeinsam die Natur schützen"},
-          {"letter": "E", "text": "Kostenlose Musik im Park"},
-          {"letter": "F", "text": "Neue Computerspiele ausprobieren"},
-          {"letter": "G", "text": "Theateraufführung in der Schule"},
-          {"letter": "H", "text": "Wanderung in den Bergen"}
+          {
+            "letter": "A",
+            "text": "Neue Öffnungszeiten in der Bibliothek"
+          },
+          {
+            "letter": "B",
+            "text": "Fußballturnier für Schüler"
+          },
+          {
+            "letter": "C",
+            "text": "Kochen lernen im Jugendzentrum"
+          },
+          {
+            "letter": "D",
+            "text": "Gemeinsam die Natur schützen"
+          },
+          {
+            "letter": "E",
+            "text": "Kostenlose Musik im Park"
+          },
+          {
+            "letter": "F",
+            "text": "Neue Computerspiele ausprobieren"
+          },
+          {
+            "letter": "G",
+            "text": "Theateraufführung in der Schule"
+          },
+          {
+            "letter": "H",
+            "text": "Wanderung in den Bergen"
+          }
         ],
-        "answers": {"21": "E", "22": "C", "23": "A", "24": "D"}
+        "answers": {
+          "21": "E",
+          "22": "C",
+          "23": "A",
+          "24": "D"
+        }
       },
       {
         "id": "lv5-2",
         "title": "Nachrichten für Jugendliche",
         "texts": [
-          {"id": 21, "text": "In einer Schule in Bremen haben Schüler einen Roboter gebaut, der beim Aufräumen hilft. Der Roboter kann kleine Gegenstände vom Boden aufheben und in eine Box legen. Die Schüler haben zwei Monate daran gearbeitet und wollen den Roboter bei einem Wettbewerb zeigen."},
-          {"id": 22, "text": "Eine 15-jährige Schülerin aus München hat einen Roman geschrieben. Das Buch heißt „Sternennacht“ und handelt von einer Jugendlichen, die in eine andere Welt reist. Ein Verlag hat das Buch angenommen und es erscheint nächsten Monat."},
-          {"id": 23, "text": "Ab nächstem Jahr sollen alle Schulbusse in Niedersachsen kostenlos sein. Die Landesregierung möchte, dass mehr Kinder den Bus nehmen und weniger Eltern ihre Kinder mit dem Auto bringen. Das soll auch besser für die Umwelt sein."},
-          {"id": 24, "text": "Der Zoo in Leipzig hat ein neues Tropenhaus eröffnet. Besucher können dort exotische Pflanzen und Tiere sehen. Es gibt auch einen Regenwald-Pfad, auf dem man über Brücken durch die Baumkronen laufen kann. Der Eintritt für Schüler kostet 5 Euro."}
+          {
+            "id": 21,
+            "text": "In einer Schule in Bremen haben Schüler einen Roboter gebaut, der beim Aufräumen hilft. Der Roboter kann kleine Gegenstände vom Boden aufheben und in eine Box legen. Die Schüler haben zwei Monate daran gearbeitet und wollen den Roboter bei einem Wettbewerb zeigen."
+          },
+          {
+            "id": 22,
+            "text": "Eine 15-jährige Schülerin aus München hat einen Roman geschrieben. Das Buch heißt „Sternennacht“ und handelt von einer Jugendlichen, die in eine andere Welt reist. Ein Verlag hat das Buch angenommen und es erscheint nächsten Monat."
+          },
+          {
+            "id": 23,
+            "text": "Ab nächstem Jahr sollen alle Schulbusse in Niedersachsen kostenlos sein. Die Landesregierung möchte, dass mehr Kinder den Bus nehmen und weniger Eltern ihre Kinder mit dem Auto bringen. Das soll auch besser für die Umwelt sein."
+          },
+          {
+            "id": 24,
+            "text": "Der Zoo in Leipzig hat ein neues Tropenhaus eröffnet. Besucher können dort exotische Pflanzen und Tiere sehen. Es gibt auch einen Regenwald-Pfad, auf dem man über Brücken durch die Baumkronen laufen kann. Der Eintritt für Schüler kostet 5 Euro."
+          }
         ],
         "headings": [
-          {"letter": "A", "text": "Kostenloser Transport zur Schule"},
-          {"letter": "B", "text": "Junge Autorin veröffentlicht erstes Buch"},
-          {"letter": "C", "text": "Neues Schwimmbad für Jugendliche"},
-          {"letter": "D", "text": "Schüler erfinden hilfreichen Roboter"},
-          {"letter": "E", "text": "Regenwald-Erlebnis im Zoo"},
-          {"letter": "F", "text": "Schule organisiert Spendenlauf"},
-          {"letter": "G", "text": "Neue App für Hausaufgaben"},
-          {"letter": "H", "text": "Musikfestival am Wochenende"}
+          {
+            "letter": "A",
+            "text": "Kostenloser Transport zur Schule"
+          },
+          {
+            "letter": "B",
+            "text": "Junge Autorin veröffentlicht erstes Buch"
+          },
+          {
+            "letter": "C",
+            "text": "Neues Schwimmbad für Jugendliche"
+          },
+          {
+            "letter": "D",
+            "text": "Schüler erfinden hilfreichen Roboter"
+          },
+          {
+            "letter": "E",
+            "text": "Regenwald-Erlebnis im Zoo"
+          },
+          {
+            "letter": "F",
+            "text": "Schule organisiert Spendenlauf"
+          },
+          {
+            "letter": "G",
+            "text": "Neue App für Hausaufgaben"
+          },
+          {
+            "letter": "H",
+            "text": "Musikfestival am Wochenende"
+          }
         ],
-        "answers": {"21": "D", "22": "B", "23": "A", "24": "E"}
+        "answers": {
+          "21": "D",
+          "22": "B",
+          "23": "A",
+          "24": "E"
+        }
+      },
+      {
+        "id": "lv5-3",
+        "title": "Schulprojekte",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Unsere Schule organisiert einen Tag der offenen Tür. Eltern und Geschwister können am 15. November von 14 bis 18 Uhr die Klassenzimmer besichtigen, mit Lehrern sprechen und sich über die verschiedenen AGs informieren."
+          },
+          {
+            "id": 22,
+            "text": "Im Kunstunterricht gestalten die Schüler Plakate zum Thema Umweltschutz. Die besten Werke werden im Rathaus ausgestellt. Die Ausstellung ist vom 5. bis 19. Dezember für alle Besucher kostenlos zugänglich."
+          },
+          {
+            "id": 23,
+            "text": "Die Klasse 8b sammelt alte Handys und Tablets für ein Recycling-Projekt. Bis zum 30. November können Geräte im Sekretariat abgegeben werden. Die Aktion soll helfen, Elektroschrott zu reduzieren."
+          },
+          {
+            "id": 24,
+            "text": "Am 10. Dezember findet in der Aula ein Weihnachtskonzert statt. Schüler aller Klassenstufen präsentieren Lieder und Musikstücke. Der Eintritt kostet 2 Euro, der Erlös geht an eine Kinderhilfsorganisation."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Ausstellung von Schülerarbeiten"
+          },
+          {
+            "letter": "B",
+            "text": "Schulkonzert für einen guten Zweck"
+          },
+          {
+            "letter": "C",
+            "text": "Elternabend mit Lehrergesprächen"
+          },
+          {
+            "letter": "D",
+            "text": "Schulfest mit Spielen und Essen"
+          },
+          {
+            "letter": "E",
+            "text": "Tag der offenen Tür in der Schule"
+          },
+          {
+            "letter": "F",
+            "text": "Sammelaktion für Elektrogeräte"
+          },
+          {
+            "letter": "G",
+            "text": "Sportwettbewerb zwischen Klassen"
+          },
+          {
+            "letter": "H",
+            "text": "Theaterworkshop für Schüler"
+          }
+        ],
+        "answers": {
+          "21": "E",
+          "22": "A",
+          "23": "F",
+          "24": "B"
+        }
+      },
+      {
+        "id": "lv5-4",
+        "title": "Stadtleben",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Ab sofort gibt es jeden Freitag einen Flohmarkt auf dem Marktplatz. Von 8 bis 14 Uhr können Privatpersonen ihre Sachen verkaufen. Eine Standgebühr wird nicht erhoben, aber eine Anmeldung ist erforderlich."
+          },
+          {
+            "id": 22,
+            "text": "Die Stadtverwaltung sucht ehrenamtliche Helfer für das Stadtfest am 3. Juli. Gesucht werden Personen, die beim Aufbau, bei der Kinderbetreuung oder beim Aufräumen helfen. Interessierte können sich bis 15. Juni melden."
+          },
+          {
+            "id": 23,
+            "text": "Im Bürgerzentrum findet am 20. Mai ein Vortrag zum Thema Energiesparen statt. Ein Experte erklärt, wie man im Haushalt Strom und Heizkosten sparen kann. Der Eintritt ist frei, eine Anmeldung ist nicht nötig."
+          },
+          {
+            "id": 24,
+            "text": "Die neue Eisdiele in der Hauptstraße hat eröffnet! Neben klassischen Sorten wie Vanille und Schokolade gibt es auch exotische Geschmacksrichtungen wie Mango und Kokos. Geöffnet täglich von 12 bis 20 Uhr."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Neues Café mit besonderem Angebot"
+          },
+          {
+            "letter": "B",
+            "text": "Flohmarkt ohne Standgebühren"
+          },
+          {
+            "letter": "C",
+            "text": "Kostenloser Vortrag zum Energiesparen"
+          },
+          {
+            "letter": "D",
+            "text": "Stadtfest sucht Helfer"
+          },
+          {
+            "letter": "E",
+            "text": "Neueröffnung einer Eisdiele"
+          },
+          {
+            "letter": "F",
+            "text": "Fahrradtour durch die Stadt"
+          },
+          {
+            "letter": "G",
+            "text": "Konzert im Park"
+          },
+          {
+            "letter": "H",
+            "text": "Ausstellung moderner Kunst"
+          }
+        ],
+        "answers": {
+          "21": "B",
+          "22": "D",
+          "23": "C",
+          "24": "E"
+        }
+      },
+      {
+        "id": "lv5-5",
+        "title": "Hobbys und Interessen",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Der Fotoclub trifft sich jeden Mittwoch um 18 Uhr im Jugendzentrum. Anfänger lernen die Grundlagen der Fotografie, Fortgeschrittene können ihre Bilder in der Gruppe besprechen. Eine Kamera ist nicht zwingend nötig."
+          },
+          {
+            "id": 22,
+            "text": "Im Schwimmbad findet am 12. August ein Schnuppertag für Wassergymnastik statt. Von 15 bis 16 Uhr kann man die Sportart unter Anleitung ausprobieren. Die Teilnahme ist kostenlos, eine Anmeldung ist nicht erforderlich."
+          },
+          {
+            "id": 23,
+            "text": "Die Stadtbücherei veranstaltet einen Lesewettbewerb für Kinder und Jugendliche. Wer bis zum 30. September ein Buch liest und eine kurze Zusammenfassung schreibt, kann tolle Preise gewinnen. Die besten Texte werden veröffentlicht."
+          },
+          {
+            "id": 24,
+            "text": "Am 5. November öffnet die neue Kletterhalle ihre Türen. Von 10 bis 18 Uhr kann man die Anlage kostenlos testen. Es gibt Routen für Anfänger und Profis. Helm und Kletterschuhe können vor Ort ausgeliehen werden."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Tanzkurs für Jugendliche"
+          },
+          {
+            "letter": "B",
+            "text": "Fotografie für Anfänger und Fortgeschrittene"
+          },
+          {
+            "letter": "C",
+            "text": "Kostenloser Klettertag in neuer Halle"
+          },
+          {
+            "letter": "D",
+            "text": "Lesewettbewerb in der Bücherei"
+          },
+          {
+            "letter": "E",
+            "text": "Wassergymnastik zum Ausprobieren"
+          },
+          {
+            "letter": "F",
+            "text": "Malkurs für Kinder"
+          },
+          {
+            "letter": "G",
+            "text": "Schachturnier im Park"
+          },
+          {
+            "letter": "H",
+            "text": "Musikworkshop für Gitarre"
+          }
+        ],
+        "answers": {
+          "21": "B",
+          "22": "E",
+          "23": "D",
+          "24": "C"
+        }
+      },
+      {
+        "id": "lv5-6",
+        "title": "Gesundheit und Fitness",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Das Fitnessstudio bietet im September einen kostenlosen Probetag an. Interessierte können alle Geräte nutzen und an einem Schnupperkurs teilnehmen. Eine Anmeldung ist nicht nötig, aber Sportkleidung sollte mitgebracht werden."
+          },
+          {
+            "id": 22,
+            "text": "Die Apotheke am Marktplatz veranstaltet am 18. Oktober einen Vortrag zum Thema gesunde Ernährung. Eine Ernährungsberaterin erklärt, wie man sich ausgewogen ernährt und gibt Tipps für den Alltag."
+          },
+          {
+            "id": 23,
+            "text": "Im Park findet jeden Samstag um 10 Uhr ein Lauftreff statt. Teilnehmer aller Fitnesslevel sind willkommen. Die Strecke ist 5 km lang, aber man kann auch kürzere Runden laufen. Treffpunkt ist der Brunnen am Eingang."
+          },
+          {
+            "id": 24,
+            "text": "Das Krankenhaus lädt am 3. November zu einem Tag der offenen Tür ein. Besucher können die verschiedenen Abteilungen besichtigen, an Führungen teilnehmen und sich über Gesundheitsfragen informieren. Für Kinder gibt es ein spezielles Programm."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Kostenloser Fitness-Probetag"
+          },
+          {
+            "letter": "B",
+            "text": "Vortrag über gesunde Ernährung"
+          },
+          {
+            "letter": "C",
+            "text": "Yogakurs im Park"
+          },
+          {
+            "letter": "D",
+            "text": "Lauftreff für alle Leistungsstufen"
+          },
+          {
+            "letter": "E",
+            "text": "Tag der offenen Tür im Krankenhaus"
+          },
+          {
+            "letter": "F",
+            "text": "Schwimmkurs für Erwachsene"
+          },
+          {
+            "letter": "G",
+            "text": "Kochkurs für vegetarische Gerichte"
+          },
+          {
+            "letter": "H",
+            "text": "Radrennen durch die Stadt"
+          }
+        ],
+        "answers": {
+          "21": "A",
+          "22": "B",
+          "23": "D",
+          "24": "E"
+        }
+      },
+      {
+        "id": "lv5-7",
+        "title": "Schulprojekte und Aktivitäten",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Unsere Schule organisiert am nächsten Freitag einen Projekttag zum Thema 'Gesunde Ernährung'. Alle Schüler können in verschiedenen Workshops mitmachen, z. B. Smoothies mixen oder ein gesundes Frühstück zubereiten. Die Ergebnisse werden in der Aula ausgestellt."
+          },
+          {
+            "id": 22,
+            "text": "Der Schulsportverein bietet ab nächster Woche ein neues Angebot an: Jeden Dienstag von 15 bis 17 Uhr findet ein offenes Basketballtraining statt. Alle Schüler ab der 7. Klasse sind willkommen. Es sind keine Vorkenntnisse nötig!"
+          },
+          {
+            "id": 23,
+            "text": "Die Schülerzeitung sucht dringend neue Mitglieder! Wenn du gerne schreibst, fotografierst oder Layouts gestaltest, melde dich bei Frau Meier. Die nächste Ausgabe erscheint im Dezember und hat das Thema 'Schule der Zukunft'."
+          },
+          {
+            "id": 24,
+            "text": "Am 5. November findet in der Turnhalle ein großes Schulfest statt. Es gibt Spiele, eine Tombola und ein Konzert der Schulband. Eltern und Geschwister sind herzlich eingeladen. Der Eintritt kostet 2 Euro, der Erlös geht an das Schultheater."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Neue AG für junge Journalisten"
+          },
+          {
+            "letter": "B",
+            "text": "Fußballturnier gegen andere Schulen"
+          },
+          {
+            "letter": "C",
+            "text": "Workshops zum Thema Ernährung"
+          },
+          {
+            "letter": "D",
+            "text": "Kostenlose Nachhilfe in Mathe"
+          },
+          {
+            "letter": "E",
+            "text": "Basketballtraining für Anfänger"
+          },
+          {
+            "letter": "F",
+            "text": "Schulfest mit Programm für die ganze Familie"
+          },
+          {
+            "letter": "G",
+            "text": "Ausflug in den Kletterpark"
+          },
+          {
+            "letter": "H",
+            "text": "Theatergruppe sucht Schauspieler"
+          }
+        ],
+        "answers": {
+          "21": "C",
+          "22": "E",
+          "23": "A",
+          "24": "F"
+        }
+      },
+      {
+        "id": "lv5-8",
+        "title": "Veranstaltungen in der Stadt",
+        "texts": [
+          {
+            "id": 21,
+            "text": "Am Wochenende öffnet der neue Trödelmarkt auf dem Marktplatz seine Tore. Von 9 bis 16 Uhr können Besucher nach alten Schätzen stöbern. Für Kinder gibt es eine Malstation und eine kleine Eisenbahn zum Mitfahren."
+          },
+          {
+            "id": 22,
+            "text": "Die Volkshochschule bietet ab September einen Kurs 'Fotografie für Anfänger' an. Jeden Mittwoch von 18 bis 20 Uhr lernt ihr die Grundlagen der Kamera und wie man tolle Bilder macht. Die Kursgebühr beträgt 60 Euro."
+          },
+          {
+            "id": 23,
+            "text": "Das Kino 'Lichtblick' zeigt am kommenden Sonntag einen Filmklassiker: 'Die unendliche Geschichte'. Der Film beginnt um 15 Uhr. Der Eintritt kostet nur 5 Euro, für Schüler sogar nur 3 Euro."
+          },
+          {
+            "id": 24,
+            "text": "Am 12. Oktober findet im Bürgerzentrum ein Vortrag zum Thema 'Energiesparen im Haushalt' statt. Experten erklären, wie man Strom und Heizkosten sparen kann. Der Eintritt ist frei, eine Anmeldung ist nicht nötig."
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Konzert der Stadtkapelle"
+          },
+          {
+            "letter": "B",
+            "text": "Flohmarkt mit Kinderprogramm"
+          },
+          {
+            "letter": "C",
+            "text": "Tanzkurs für Jugendliche"
+          },
+          {
+            "letter": "D",
+            "text": "Fotokurs für Einsteiger"
+          },
+          {
+            "letter": "E",
+            "text": "Klassiker im Kino"
+          },
+          {
+            "letter": "F",
+            "text": "Ausstellung moderner Kunst"
+          },
+          {
+            "letter": "G",
+            "text": "Tipps zum Stromsparen"
+          },
+          {
+            "letter": "H",
+            "text": "Kochkurs: Italienische Küche"
+          }
+        ],
+        "answers": {
+          "21": "B",
+          "22": "D",
+          "23": "E",
+          "24": "G"
+        }
       }
     ]
   },
@@ -297,6 +2183,342 @@
             "answer": 1
           }
         ]
+      },
+      {
+        "id": "hv1-3",
+        "title": "Alltagsszenen",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Hallo, ich möchte bitte ein Ticket nach Berlin. – Einfach oder hin und zurück? – Hin und zurück, bitte. – Das macht dann 42 Euro. – Hier, bitte. Wann fährt der nächste Zug? – In 20 Minuten von Gleis 3.",
+            "options": [
+              "Jemand kauft ein Ticket für eine Busfahrt.",
+              "Jemand kauft ein Zugticket nach Berlin.",
+              "Jemand reserviert einen Platz im Restaurant."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, wo finde ich die Milch? – Die Milch steht im Kühlregal hinten links. – Danke! Und wo sind die Eier? – Direkt daneben, im zweiten Regal von oben.",
+            "options": [
+              "Jemand sucht Produkte im Supermarkt.",
+              "Jemand fragt nach dem Weg zur Apotheke.",
+              "Jemand bestellt Essen im Café."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 3,
+            "spokenText": "Kannst du mir bitte helfen? Mein Computer geht nicht an. – Hast du ihn schon eingesteckt? – Oh, stimmt! Jetzt funktioniert er. Danke! – Kein Problem.",
+            "options": [
+              "Jemand hat Probleme mit seinem Handy.",
+              "Jemand braucht Hilfe mit seinem Computer.",
+              "Jemand sucht sein Ladekabel."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 4,
+            "spokenText": "Guten Tag, ich hätte gerne eine Pizza Margherita und einen Salat. – Kommt sofort. Möchten Sie etwas zu trinken? – Ja, eine Cola, bitte. – Sehr gerne.",
+            "options": [
+              "Jemand bestellt in einer Bäckerei.",
+              "Jemand bestellt Essen in einem Restaurant.",
+              "Jemand kauft ein Ticket für ein Konzert."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 5,
+            "spokenText": "Mama, ich habe meine Hausaufgaben vergessen! – Warum hast du sie nicht gemacht? – Ich hatte keine Zeit. – Dann musst du sie jetzt schnell machen, bevor wir gehen. – Okay, ich beeile mich!",
+            "options": [
+              "Ein Kind hat sein Pausenbrot vergessen.",
+              "Ein Kind hat seine Hausaufgaben nicht gemacht.",
+              "Ein Kind hat seine Sporttasche verloren."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv1-4",
+        "title": "Alltagsszenen",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Guten Morgen! Ich hätte gerne zwei Kaffee zum Mitnehmen. – Mit Milch und Zucker? – Einen mit Milch, den anderen schwarz. – Das macht 4,50 Euro. – Hier, bitte.",
+            "options": [
+              "Jemand bestellt Kaffee im Café.",
+              "Jemand kauft Brot in der Bäckerei.",
+              "Jemand reserviert einen Tisch im Restaurant."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, wo ist die nächste U-Bahn-Station? – Gehen Sie diese Straße geradeaus und dann die zweite links. Die Station ist direkt vor Ihnen. – Vielen Dank!",
+            "options": [
+              "Jemand fragt nach dem Weg zum Bahnhof.",
+              "Jemand fragt nach der nächsten U-Bahn-Station.",
+              "Jemand sucht ein Taxi."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Kannst du mir bitte die Butter geben? – Hier, bitte. Möchtest du auch noch Brot? – Ja, gerne. Danke! – Kein Problem.",
+            "options": [
+              "Jemand bittet um Salz beim Essen.",
+              "Jemand fragt nach Butter und Brot.",
+              "Jemand möchte ein Glas Wasser."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 4,
+            "spokenText": "Hallo, ich möchte mein Paket abholen. – Können Sie mir bitte Ihren Ausweis zeigen? – Ja, hier. – Danke, hier ist Ihr Paket. – Vielen Dank!",
+            "options": [
+              "Jemand holt ein Paket bei der Post ab.",
+              "Jemand schickt ein Paket.",
+              "Jemand kauft Briefmarken."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 5,
+            "spokenText": "Papa, darf ich heute bei meiner Freundin übernachten? – Wie alt ist sie denn? – Sie ist 14, genau wie ich. – Okay, aber sei um 10 Uhr zu Hause. – Danke, Papa!",
+            "options": [
+              "Ein Kind möchte ins Kino gehen.",
+              "Ein Kind möchte bei einer Freundin übernachten.",
+              "Ein Kind bittet um Taschengeld."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv1-5",
+        "title": "Alltagsszenen",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Guten Tag, ich brauche bitte ein Rezept für meine Tabletten. – Haben Sie Ihre Versichertenkarte dabei? – Ja, hier. – Danke, ich drucke es gleich aus.",
+            "options": [
+              "Jemand holt ein Rezept in der Apotheke.",
+              "Jemand geht zum Arzt.",
+              "Jemand kauft Medikamente ohne Rezept."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, wie spät fährt der nächste Bus nach Köln? – Der nächste fährt in 15 Minuten von Haltestelle B. – Vielen Dank! – Gern geschehen.",
+            "options": [
+              "Jemand fragt nach dem Zug nach Köln.",
+              "Jemand fragt nach dem Bus nach Köln.",
+              "Jemand sucht ein Taxi nach Köln."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Kannst du mir bitte die Hausaufgaben erklären? – Welches Fach ist es? – Mathe. Ich verstehe die Aufgabe nicht. – Okay, ich zeige es dir.",
+            "options": [
+              "Jemand bittet um Hilfe bei den Hausaufgaben.",
+              "Jemand fragt nach dem Stundenplan.",
+              "Jemand möchte ein Buch ausleihen."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 4,
+            "spokenText": "Hallo, ich möchte mein Handy aufladen. Haben Sie ein Ladekabel? – Ja, hier bitte. Die Steckdose ist dort hinten. – Danke! – Kein Problem.",
+            "options": [
+              "Jemand sucht eine Steckdose für seinen Laptop.",
+              "Jemand möchte sein Handy aufladen.",
+              "Jemand kauft ein neues Handy."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 5,
+            "spokenText": "Mama, ich habe mein Portemonnaie verloren! – Wo hast du es zuletzt gehabt? – Im Supermarkt, glaube ich. – Dann rufen wir dort an.",
+            "options": [
+              "Ein Kind hat sein Handy verloren.",
+              "Ein Kind hat sein Portemonnaie verloren.",
+              "Ein Kind hat seine Jacke vergessen."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv1-6",
+        "title": "Alltagsszenen",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Guten Tag, ich hätte gerne zwei Kinokarten für den Film um 18 Uhr. – Tut mir leid, der Film ist schon ausverkauft. – Oh, dann vielleicht für 20 Uhr? – Ja, das geht. Das macht 18 Euro.",
+            "options": [
+              "Jemand kauft Tickets für ein Konzert.",
+              "Jemand reserviert Kinokarten.",
+              "Jemand bucht eine Theaterkarte."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, wo finde ich die Toiletten? – Die Toiletten sind im Erdgeschoss, gleich links neben dem Eingang. – Danke! – Bitte sehr.",
+            "options": [
+              "Jemand sucht die Garderobe.",
+              "Jemand fragt nach den Toiletten.",
+              "Jemand möchte etwas trinken."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Kannst du mir bitte helfen, den Tisch zu decken? – Ja, klar. Wo sind die Teller? – Im Schrank oben rechts. – Okay, ich hole sie.",
+            "options": [
+              "Jemand bittet um Hilfe beim Kochen.",
+              "Jemand möchte den Tisch decken.",
+              "Jemand sucht das Besteck."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 4,
+            "spokenText": "Hallo, ich möchte mein Fahrrad reparieren lassen. – Was ist das Problem? – Die Kette ist kaputt. – Okay, das können wir machen. Kommen Sie morgen wieder.",
+            "options": [
+              "Jemand möchte sein Auto reparieren lassen.",
+              "Jemand bringt sein Fahrrad zur Reparatur.",
+              "Jemand kauft ein neues Fahrrad."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 5,
+            "spokenText": "Papa, darf ich heute Abend länger fernsehen? – Wie lange denn? – Bis 21 Uhr. – Okay, aber nur heute. – Danke, Papa!",
+            "options": [
+              "Ein Kind möchte länger aufbleiben.",
+              "Ein Kind bittet um mehr Taschengeld.",
+              "Ein Kind möchte ein neues Spielzeug."
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "hv1-7",
+        "title": "Im Einkaufszentrum",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Hallo, ich suche ein Geschenk für meine Mutter. Sie mag Schmuck. – Dann schauen Sie doch mal in der Parfümerie im ersten Stock. Dort gibt es schöne Ketten und Ohrringe. – Danke, das probiere ich aus!",
+            "options": [
+              "Jemand sucht ein Geschenk für seinen Vater.",
+              "Jemand sucht ein Geschenk für seine Mutter.",
+              "Jemand möchte ein Buch kaufen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, wo finde ich die Sportabteilung? – Die ist im Untergeschoss, gleich neben den Schuhen. – Vielen Dank! Und wo ist die Rolltreppe? – Direkt hinter Ihnen.",
+            "options": [
+              "Jemand sucht die Buchhandlung.",
+              "Jemand sucht die Sportabteilung.",
+              "Jemand möchte zur Toilette."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Schatz, was möchtest du zum Mittagessen? – Ich hätte Lust auf Pizza. – Gut, dann gehen wir ins italienische Restaurant hier im Center. – Super, ich liebe ihre Salate!",
+            "options": [
+              "Die Personen planen ein Frühstück.",
+              "Die Personen entscheiden sich für Pizza.",
+              "Die Personen möchten Sushi essen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 4,
+            "spokenText": "Kann ich Ihnen helfen? – Ja, ich suche eine Hose in Größe 38. – Welche Farbe bevorzugen Sie? – Blau oder schwarz. – Dann kommen Sie bitte mit, ich zeige Ihnen unsere Auswahl.",
+            "options": [
+              "Jemand sucht ein Hemd.",
+              "Jemand sucht eine Hose.",
+              "Jemand möchte eine Jacke anprobieren."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 5,
+            "spokenText": "Oh nein, ich habe mein Portemonnaie vergessen! – Kein Problem, ich bezahle heute. – Wirklich? Das ist sehr nett von dir! – Keine Ursache, wir sind doch Freunde.",
+            "options": [
+              "Jemand hat sein Handy verloren.",
+              "Jemand hat sein Portemonnaie vergessen.",
+              "Jemand möchte etwas zurückgeben."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv1-8",
+        "title": "Freizeitaktivitäten",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Was machst du am Wochenende? – Ich gehe mit Freunden ins Kino. Wir schauen den neuen Actionfilm. – Cool! Darf ich mitkommen? – Klar, je mehr, desto besser!",
+            "options": [
+              "Jemand plant einen Museumsbesuch.",
+              "Jemand geht ins Kino.",
+              "Jemand möchte schwimmen gehen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 2,
+            "spokenText": "Hast du Lust, morgen mit mir Fahrrad zu fahren? – Ja, gerne! Aber nur, wenn das Wetter gut ist. – Ich schaue später die Vorhersage. – Perfekt, ich bringe Snacks mit.",
+            "options": [
+              "Jemand möchte wandern gehen.",
+              "Jemand plant eine Fahrradtour.",
+              "Jemand lädt zum Grillen ein."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Können wir heute Nachmittag Fußball spielen? – Tut mir leid, ich habe schon einen Termin beim Zahnarzt. – Oh, das ist schade. Vielleicht morgen? – Ja, morgen passt es besser.",
+            "options": [
+              "Jemand möchte Basketball spielen.",
+              "Jemand hat keine Zeit für Fußball.",
+              "Jemand geht zum Arzt."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 4,
+            "spokenText": "Was liest du da? – Ein spannendes Buch über Abenteuer in den Bergen. – Klingt interessant! Darf ich es ausleihen, wenn du fertig bist? – Natürlich, ich gebe es dir nächste Woche.",
+            "options": [
+              "Jemand liest einen Krimi.",
+              "Jemand liest ein Abenteuerbuch.",
+              "Jemand schaut einen Film."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 5,
+            "spokenText": "Möchtest du am Samstag mit mir in den Park gehen? – Ja, gerne! Soll ich etwas zu essen mitbringen? – Das wäre toll. Ich bringe Getränke mit. – Super, dann treffen wir uns um 14 Uhr.",
+            "options": [
+              "Jemand plant ein Picknick im Park.",
+              "Jemand möchte ins Café gehen.",
+              "Jemand lädt zu einer Party ein."
+            ],
+            "answer": 0
+          }
+        ]
       }
     ],
     "teil2": [
@@ -308,28 +2530,44 @@
             "id": 6,
             "spokenText": "Achtung, eine wichtige Durchsage! Wegen des starken Regens fällt der Sportunterricht heute Nachmittag auf dem Außenplatz aus. Die Klassen 7a und 7b haben stattdessen Sportunterricht in der Turnhalle. Bitte bringt eure Hallenschuhe mit.",
             "question": "Was passiert mit dem Sportunterricht?",
-            "options": ["Er fällt ganz aus.", "Er findet in der Turnhalle statt.", "Er wird auf morgen verschoben."],
+            "options": [
+              "Er fällt ganz aus.",
+              "Er findet in der Turnhalle statt.",
+              "Er wird auf morgen verschoben."
+            ],
             "answer": 1
           },
           {
             "id": 7,
             "spokenText": "Liebe Schülerinnen und Schüler, die Cafeteria ist heute leider geschlossen, weil die Küche repariert wird. Ihr könnt aber eure Mittagspause in der Aula verbringen. Dort gibt es Automaten mit Getränken und Snacks. Morgen ist die Cafeteria wieder geöffnet.",
             "question": "Warum ist die Cafeteria geschlossen?",
-            "options": ["Weil es Ferien gibt.", "Weil die Küche repariert wird.", "Weil es kein Essen mehr gibt."],
+            "options": [
+              "Weil es Ferien gibt.",
+              "Weil die Küche repariert wird.",
+              "Weil es kein Essen mehr gibt."
+            ],
             "answer": 1
           },
           {
             "id": 8,
             "spokenText": "Achtung, bitte hört zu! Am Freitag findet unser jährlicher Vorlesetag statt. Jede Klasse soll ein Buch auswählen und daraus vorlesen. Die besten Vorleser jeder Klasse nehmen am großen Wettbewerb in der Aula teil. Anmeldungen bitte bis Mittwoch bei eurer Klassenlehrerin.",
             "question": "Was findet am Freitag statt?",
-            "options": ["Ein Sportwettbewerb.", "Ein Vorlesewettbewerb.", "Ein Musikwettbewerb."],
+            "options": [
+              "Ein Sportwettbewerb.",
+              "Ein Vorlesewettbewerb.",
+              "Ein Musikwettbewerb."
+            ],
             "answer": 1
           },
           {
             "id": 9,
             "spokenText": "Hier eine Information für alle Schüler der neunten Klasse: Die geplante Exkursion ins Deutsche Museum findet nicht am Dienstag, sondern am Donnerstag statt. Der Bus fährt um 8 Uhr am Schultor ab. Bitte seid pünktlich und vergesst eure Schülerausweise nicht!",
             "question": "Was hat sich bei der Exkursion geändert?",
-            "options": ["Das Ziel der Exkursion.", "Der Tag der Exkursion.", "Die Uhrzeit der Abfahrt."],
+            "options": [
+              "Das Ziel der Exkursion.",
+              "Der Tag der Exkursion.",
+              "Die Uhrzeit der Abfahrt."
+            ],
             "answer": 1
           }
         ]
@@ -342,29 +2580,245 @@
             "id": 6,
             "spokenText": "Sehr geehrte Fahrgäste, der Zug nach München hat leider 20 Minuten Verspätung. Er kommt voraussichtlich um 14 Uhr 35 auf Gleis 3 an. Wir bitten um Ihr Verständnis.",
             "question": "Was erfahren die Fahrgäste?",
-            "options": ["Der Zug fährt von einem anderen Gleis ab.", "Der Zug hat Verspätung.", "Der Zug fällt heute aus."],
+            "options": [
+              "Der Zug fährt von einem anderen Gleis ab.",
+              "Der Zug hat Verspätung.",
+              "Der Zug fällt heute aus."
+            ],
             "answer": 1
           },
           {
             "id": 7,
             "spokenText": "Liebe Besucher des Schwimmbads, wir möchten Sie darauf hinweisen, dass das Schwimmbad ab nächster Woche montags geschlossen bleibt. An allen anderen Tagen sind wir wie gewohnt von 8 bis 21 Uhr für Sie da.",
             "question": "Was ändert sich im Schwimmbad?",
-            "options": ["Es schließt komplett.", "Es ist montags geschlossen.", "Es hat neue Öffnungszeiten an jedem Tag."],
+            "options": [
+              "Es schließt komplett.",
+              "Es ist montags geschlossen.",
+              "Es hat neue Öffnungszeiten an jedem Tag."
+            ],
             "answer": 1
           },
           {
             "id": 8,
             "spokenText": "Achtung, eine Durchsage für die Eltern der Grundschule: Das Sommerfest findet am Samstag, den 15. Juli statt. Wir brauchen noch Eltern, die beim Kuchenverkauf helfen. Bitte melden Sie sich im Sekretariat.",
             "question": "Wofür werden Eltern gesucht?",
-            "options": ["Für den Kuchenverkauf.", "Für den Unterricht.", "Für eine Busfahrt."],
+            "options": [
+              "Für den Kuchenverkauf.",
+              "Für den Unterricht.",
+              "Für eine Busfahrt."
+            ],
             "answer": 0
           },
           {
             "id": 9,
             "spokenText": "Willkommen im Einkaufszentrum am Marktplatz! Heute haben wir ein besonderes Angebot: Alle Kinderbücher sind 30 Prozent reduziert. Das Angebot gilt nur heute! Sie finden die Bücher im zweiten Stock, in der Buchhandlung Lesewelt.",
             "question": "Was ist das besondere Angebot?",
-            "options": ["Kinderbücher sind günstiger.", "Spielzeug ist kostenlos.", "Kleidung ist billiger."],
+            "options": [
+              "Kinderbücher sind günstiger.",
+              "Spielzeug ist kostenlos.",
+              "Kleidung ist billiger."
+            ],
             "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "hv2-3",
+        "title": "Schulveranstaltungen",
+        "announcements": [
+          {
+            "id": 6,
+            "spokenText": "Liebe Schülerinnen und Schüler, heute findet um 15 Uhr in der Aula die Informationsveranstaltung zum Schüleraustausch mit Frankreich statt. Alle Interessierten der Klassen 8 bis 10 sind herzlich eingeladen. Bitte meldet euch bis morgen bei Frau Schmidt an.",
+            "question": "Wer ist zur Informationsveranstaltung eingeladen?",
+            "options": [
+              "Nur die Klasse 10.",
+              "Schüler der Klassen 8 bis 10.",
+              "Alle Schüler der Schule."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 7,
+            "spokenText": "Achtung, eine wichtige Durchsage! Wegen eines Stromausfalls in der Sporthalle fällt der Schwimmunterricht heute aus. Die Klasse 6b hat stattdessen Theorieunterricht im Raum 204. Bitte bringt eure Sporttaschen trotzdem mit, falls die Halle später wieder nutzbar ist.",
+            "question": "Was passiert mit dem Schwimmunterricht?",
+            "options": [
+              "Er findet wie geplant statt.",
+              "Er fällt aus und es gibt Theorieunterricht.",
+              "Er wird auf nächste Woche verschoben."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 8,
+            "spokenText": "Hier eine Erinnerung für alle Teilnehmer des Schulchors: Die Probe heute Nachmittag findet nicht in Raum 101, sondern in der Aula statt. Wir beginnen wie gewohnt um 14:30 Uhr. Bitte bringt eure Noten mit und seid pünktlich!",
+            "question": "Wo findet die Chorprobe statt?",
+            "options": [
+              "In Raum 101.",
+              "In der Aula.",
+              "Im Musiksaal."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 9,
+            "spokenText": "Liebe Schüler, morgen ist der letzte Tag, um eure Bücher für die Sommerferien in der Schulbibliothek abzugeben. Wer seine Bücher nicht zurückgibt, muss eine Gebühr zahlen. Die Bibliothek ist heute bis 16 Uhr geöffnet.",
+            "question": "Was passiert, wenn Bücher nicht zurückgegeben werden?",
+            "options": [
+              "Man darf keine neuen Bücher ausleihen.",
+              "Man muss eine Gebühr zahlen.",
+              "Man wird vom Unterricht ausgeschlossen."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv2-4",
+        "title": "Schulalltag",
+        "announcements": [
+          {
+            "id": 6,
+            "spokenText": "Achtung, eine Durchsage für die Klasse 5a: Der Mathematikunterricht fällt heute aus, weil Herr Bauer krank ist. Ihr habt stattdessen eine Freistunde. Bitte bleibt im Schulgebäude und nutzt die Zeit für Hausaufgaben oder Lesen.",
+            "question": "Was passiert mit dem Mathematikunterricht der Klasse 5a?",
+            "options": [
+              "Er findet in einem anderen Raum statt.",
+              "Er fällt aus und es gibt eine Freistunde.",
+              "Er wird von einer anderen Lehrkraft übernommen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 7,
+            "spokenText": "Liebe Schülerinnen und Schüler, die Mensa ist heute wegen einer Hygienekontrolle geschlossen. Ihr könnt euer Mittagessen in der Cafeteria kaufen oder euch etwas von zu Hause mitbringen. Morgen ist die Mensa wieder geöffnet.",
+            "question": "Warum ist die Mensa geschlossen?",
+            "options": [
+              "Weil es keine Lebensmittel mehr gibt.",
+              "Wegen einer Hygienekontrolle.",
+              "Weil die Köche streiken."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 8,
+            "spokenText": "Hier eine wichtige Information für alle Schüler der Oberstufe: Die Anmeldung für die Abiturprüfungen endet am Freitag. Bitte gebt eure Unterlagen bis dahin im Sekretariat ab. Wer die Frist verpasst, kann nicht an den Prüfungen teilnehmen.",
+            "question": "Was passiert, wenn man die Anmeldefrist verpasst?",
+            "options": [
+              "Man muss eine Strafe zahlen.",
+              "Man kann nicht an den Prüfungen teilnehmen.",
+              "Man bekommt eine zweite Chance."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 9,
+            "spokenText": "Achtung, eine Durchsage für die Klasse 7c: Der Ausflug in den Zoo findet nicht wie geplant am Mittwoch, sondern am Donnerstag statt. Treffpunkt ist um 8 Uhr vor dem Schultor. Bitte bringt wetterfeste Kleidung und ein Picknick mit.",
+            "question": "Was hat sich beim Ausflug geändert?",
+            "options": [
+              "Der Treffpunkt.",
+              "Der Tag des Ausflugs.",
+              "Das Ziel des Ausflugs."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv2-5",
+        "title": "Schulorganisation",
+        "announcements": [
+          {
+            "id": 6,
+            "spokenText": "Liebe Schüler, morgen findet der jährliche Tag der offenen Tür statt. Alle Eltern und Interessierten sind eingeladen, unsere Schule kennenzulernen. Bitte helft mit, die Klassenzimmer zu dekorieren und die Gäste zu führen. Meldet euch bei eurem Klassenlehrer.",
+            "question": "Was findet morgen statt?",
+            "options": [
+              "Ein Schulfest.",
+              "Der Tag der offenen Tür.",
+              "Ein Sportturnier."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 7,
+            "spokenText": "Achtung, eine wichtige Durchsage! Wegen eines Wasserrohrbruchs ist das Erdgeschoss der Schule heute gesperrt. Alle Unterrichtsstunden finden in den oberen Stockwerken statt. Bitte nutzt die Treppen und vermeidet das Erdgeschoss.",
+            "question": "Warum ist das Erdgeschoss gesperrt?",
+            "options": [
+              "Wegen eines Brandes.",
+              "Wegen eines Wasserrohrbruchs.",
+              "Wegen einer Baustelle."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 8,
+            "spokenText": "Hier eine Information für alle Teilnehmer des Schüleraustauschs: Die Abfahrt nach Spanien wurde auf 7 Uhr vorverlegt. Bitte seid pünktlich am Schultor. Vergesst nicht eure Reisepässe und das unterschriebene Einverständnisformular!",
+            "question": "Was hat sich bei der Abfahrt geändert?",
+            "options": [
+              "Der Treffpunkt.",
+              "Die Uhrzeit.",
+              "Das Reiseziel."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 9,
+            "spokenText": "Liebe Schülerinnen und Schüler, die Schulbibliothek ist diese Woche wegen Inventur geschlossen. Ihr könnt aber weiterhin Bücher über die Online-Plattform ausleihen. Die Bibliothek öffnet wieder am Montag.",
+            "question": "Warum ist die Bibliothek geschlossen?",
+            "options": [
+              "Wegen einer Renovierung.",
+              "Wegen Inventur.",
+              "Wegen Personalmangels."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv2-6",
+        "title": "Sicherheit und Termine",
+        "announcements": [
+          {
+            "id": 6,
+            "spokenText": "Achtung, eine wichtige Durchsage! Heute findet um 10 Uhr eine Feueralarmübung statt. Bitte verlasst das Gebäude sofort, wenn der Alarm ertönt, und begebt euch zum Sammelplatz auf dem Schulhof. Bleibt ruhig und folgt den Anweisungen der Lehrer.",
+            "question": "Was findet heute um 10 Uhr statt?",
+            "options": [
+              "Ein Test der Schulglocke.",
+              "Eine Feueralarmübung.",
+              "Ein Probealarm für Unwetter."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 7,
+            "spokenText": "Liebe Schüler, morgen ist der letzte Schultag vor den Herbstferien. Der Unterricht endet für alle um 12 Uhr. Bitte räumt eure Schließfächer auf und nehmt alle persönlichen Gegenstände mit nach Hause. Wir wünschen euch schöne Ferien!",
+            "question": "Wann endet der Unterricht am letzten Schultag?",
+            "options": [
+              "Um 13 Uhr.",
+              "Um 12 Uhr.",
+              "Um 11 Uhr."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 8,
+            "spokenText": "Hier eine Erinnerung für alle Schüler der Klasse 9: Die Berufsberatung findet heute in Raum 305 statt. Bitte bringt eure Lebensläufe und Zeugniskopien mit. Die Veranstaltung beginnt um 14 Uhr und dauert zwei Stunden.",
+            "question": "Was müssen die Schüler der Klasse 9 mitbringen?",
+            "options": [
+              "Sportkleidung.",
+              "Lebensläufe und Zeugniskopien.",
+              "Ein selbstgebackenes Gericht."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 9,
+            "spokenText": "Achtung, eine Durchsage für alle Fahrschüler: Wegen einer Baustelle auf der Hauptstraße fährt der Schulbus heute eine andere Route. Bitte steigt an der Haltestelle ‚Am Markt‘ ein. Die Abfahrtszeit bleibt unverändert.",
+            "question": "Was hat sich bei der Busroute geändert?",
+            "options": [
+              "Die Abfahrtszeit.",
+              "Die Haltestelle.",
+              "Die Buslinie."
+            ],
+            "answer": 1
           }
         ]
       }
@@ -376,11 +2830,31 @@
         "intro": "Du hörst jetzt ein Interview mit Max, einem Schüler der 9. Klasse. Er erzählt über das Schülerradio an seiner Schule.",
         "spokenText": "Interviewer: Max, du machst beim Schülerradio mit. Wie bist du dazu gekommen?\n\nMax: Das war eigentlich Zufall. Mein Freund Tim hat mich gefragt, ob ich Lust habe, und ich fand die Idee cool. Wir senden jeden Freitag in der großen Pause über die Lautsprecher in der Schule.\n\nInterviewer: Was sendet ihr denn so?\n\nMax: Hauptsächlich Musik, die sich die Schüler wünschen können. Aber wir machen auch kurze Berichte über das, was in der Schule passiert. Zum Beispiel über Sportturniere oder Projekte. Manchmal interviewen wir auch Lehrer.\n\nInterviewer: Und wie viele Schüler machen mit?\n\nMax: Wir sind sechs Leute im Team. Aber nicht alle sind bei jeder Sendung dabei. Pro Sendung sind wir meistens zu dritt. Einer wählt die Musik aus, einer moderiert und einer kümmert sich um die Technik.\n\nInterviewer: Möchtest du später beim Radio arbeiten?\n\nMax: Nein, eigentlich nicht. Ich möchte Informatik studieren. Aber das Schülerradio macht mir trotzdem großen Spaß, weil ich gerne mit Technik arbeite.",
         "statements": [
-          {"id": 10, "text": "Max hat alleine die Idee gehabt, beim Schülerradio mitzumachen.", "answer": false},
-          {"id": 11, "text": "Das Schülerradio sendet jeden Tag.", "answer": false},
-          {"id": 12, "text": "Die Schüler können sich Musik wünschen.", "answer": true},
-          {"id": 13, "text": "Bei jeder Sendung sind alle sechs Teammitglieder dabei.", "answer": false},
-          {"id": 14, "text": "Max möchte später Informatik studieren.", "answer": true}
+          {
+            "id": 10,
+            "text": "Max hat alleine die Idee gehabt, beim Schülerradio mitzumachen.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Das Schülerradio sendet jeden Tag.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Die Schüler können sich Musik wünschen.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Bei jeder Sendung sind alle sechs Teammitglieder dabei.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Max möchte später Informatik studieren.",
+            "answer": true
+          }
         ]
       },
       {
@@ -389,11 +2863,163 @@
         "intro": "Du hörst jetzt ein Interview mit Yuki, einer Austauschschülerin aus Japan, die seit sechs Monaten in Deutschland ist.",
         "spokenText": "Interviewer: Yuki, du bist jetzt seit einem halben Jahr in Deutschland. Wie gefällt es dir?\n\nYuki: Es gefällt mir sehr gut! Am Anfang war alles neu und ein bisschen schwierig, aber jetzt fühle ich mich hier wie zu Hause.\n\nInterviewer: Was war am Anfang besonders schwierig?\n\nYuki: Das Essen war anders als in Japan. In Japan essen wir viel Reis und Fisch. Hier gibt es oft Brot und Kartoffeln. Aber jetzt mag ich deutsches Essen sehr gerne, besonders Schnitzel!\n\nInterviewer: Und wie war es in der Schule?\n\nYuki: In Japan ist die Schule viel strenger. Hier dürfen die Schüler ihre Meinung sagen und mit den Lehrern diskutieren. Das war für mich am Anfang überraschend, aber ich finde es gut.\n\nInterviewer: Vermisst du etwas aus Japan?\n\nYuki: Ja, ich vermisse meine Familie und meine Freunde. Und natürlich das japanische Essen! Aber ich habe hier auch neue Freunde gefunden. Meine beste Freundin hier heißt Laura.\n\nInterviewer: Was nimmst du aus Deutschland mit nach Japan?\n\nYuki: Ich nehme viele schöne Erinnerungen mit. Und ich habe gelernt, selbstständiger zu sein. In Japan wohne ich bei meinen Eltern und meine Mutter macht alles für mich. Hier habe ich gelernt, selbst zu kochen und aufzuräumen.",
         "statements": [
-          {"id": 10, "text": "Yuki ist seit einem Jahr in Deutschland.", "answer": false},
-          {"id": 11, "text": "Am Anfang fand Yuki das Essen in Deutschland anders.", "answer": true},
-          {"id": 12, "text": "Yuki findet die Schule in Deutschland strenger als in Japan.", "answer": false},
-          {"id": 13, "text": "Yuki hat in Deutschland neue Freunde gefunden.", "answer": true},
-          {"id": 14, "text": "Yuki hat in Deutschland gelernt, selbstständiger zu sein.", "answer": true}
+          {
+            "id": 10,
+            "text": "Yuki ist seit einem Jahr in Deutschland.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Am Anfang fand Yuki das Essen in Deutschland anders.",
+            "answer": true
+          },
+          {
+            "id": 12,
+            "text": "Yuki findet die Schule in Deutschland strenger als in Japan.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Yuki hat in Deutschland neue Freunde gefunden.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Yuki hat in Deutschland gelernt, selbstständiger zu sein.",
+            "answer": true
+          }
+        ]
+      },
+      {
+        "id": "hv3-3",
+        "title": "Interview: Schulprojekt Umweltschutz",
+        "intro": "Du hörst jetzt ein Interview mit Lena, einer Schülerin der 8. Klasse. Sie berichtet über ein Umweltschutzprojekt an ihrer Schule.",
+        "spokenText": "Interviewer: Lena, du bist Teil des Umweltschutzprojekts an deiner Schule. Wie seid ihr darauf gekommen?\n\nLena: Unsere Lehrerin für Biologie hat uns im Unterricht von den Problemen mit Plastikmüll erzählt. Da haben wir beschlossen, etwas dagegen zu tun. Jetzt sammeln wir jeden Monat Müll in der Umgebung der Schule.\n\nInterviewer: Und was macht ihr mit dem gesammelten Müll?\n\nLena: Wir trennen ihn natürlich. Papier, Plastik und Glas kommen in verschiedene Container. Außerdem basteln wir aus einigen Dingen, wie alten Flaschen, neue Sachen für den Schulgarten. Letztes Mal haben wir daraus Blumentöpfe gemacht.\n\nInterviewer: Wie viele Schüler machen bei dem Projekt mit?\n\nLena: Anfangs waren es nur zehn, aber jetzt sind wir schon über dreißig. Viele aus den unteren Klassen sind dazugekommen, weil sie das Projekt toll finden.\n\nInterviewer: Habt ihr auch Unterstützung von außerhalb?\n\nLena: Ja, die Stadt hilft uns manchmal mit Müllsäcken und Handschuhen. Und eine lokale Firma spendet uns jedes Jahr neue Mülltonnen für die Schule.\n\nInterviewer: Was ist dein persönliches Ziel mit dem Projekt?\n\nLena: Ich möchte, dass unsere Schule irgendwann komplett plastikfrei wird. Vielleicht schaffen wir das in ein paar Jahren, wenn alle mithelfen.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Lena hat das Projekt allein ins Leben gerufen.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Das Projekt entstand nach einer Unterrichtsstunde über Plastikmüll.",
+            "answer": true
+          },
+          {
+            "id": 12,
+            "text": "Der gesammelte Müll wird einfach verbrannt.",
+            "answer": false
+          },
+          {
+            "id": 13,
+            "text": "Mehr als 20 Schüler beteiligen sich am Projekt.",
+            "answer": true
+          },
+          {
+            "id": 14,
+            "text": "Lena möchte, dass die Schule komplett plastikfrei wird.",
+            "answer": true
+          }
+        ]
+      },
+      {
+        "id": "hv3-4",
+        "title": "Interview: Schulchor",
+        "intro": "Du hörst jetzt ein Interview mit Tom, einem Schüler der 7. Klasse. Er erzählt über den Schulchor.",
+        "spokenText": "Interviewer: Tom, du singst im Schulchor. Wie lange machst du das schon?\n\nTom: Seit zwei Jahren. Ich habe in der 5. Klasse angefangen, weil ich gerne singe. Jetzt bin ich schon in der zweiten Stimme und helfe manchmal auch den neuen Schülern.\n\nInterviewer: Wie oft probt ihr?\n\nTom: Wir treffen uns zweimal in der Woche nach der Schule. Dienstags und donnerstags für je eine Stunde. Vor Konzerten proben wir manchmal auch am Wochenende.\n\nInterviewer: Was singt ihr denn so?\n\nTom: Alles Mögliche! Poplieder, klassische Stücke und manchmal auch Musicals. Letztes Jahr haben wir sogar ein Lied in drei Sprachen gesungen: Deutsch, Englisch und Spanisch.\n\nInterviewer: Tretet ihr auch außerhalb der Schule auf?\n\nTom: Ja, wir singen oft bei Schulveranstaltungen, wie dem Sommerfest oder dem Weihnachtsmarkt. Letztes Mal waren wir sogar im Altenheim und haben für die Bewohner gesungen.\n\nInterviewer: Möchtest du später mal professionell singen?\n\nTom: Nein, ich möchte lieber Arzt werden. Aber Singen macht mir Spaß, und ich werde auf jeden Fall weitermachen.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Tom singt erst seit einem Jahr im Schulchor.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Der Chor probt dreimal pro Woche.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Der Chor singt Lieder in verschiedenen Sprachen.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Der Chor tritt nur bei Schulveranstaltungen auf.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Tom möchte später Arzt werden.",
+            "answer": true
+          }
+        ]
+      },
+      {
+        "id": "hv3-5",
+        "title": "Interview: Schulzeitung",
+        "intro": "Du hörst jetzt ein Interview mit Sarah, einer Schülerin der 9. Klasse. Sie berichtet über die Schulzeitung.",
+        "spokenText": "Interviewer: Sarah, du bist Redakteurin der Schulzeitung. Wie bist du dazu gekommen?\n\nSarah: Ich schreibe schon immer gerne. Als ich gehört habe, dass die Schulzeitung neue Mitglieder sucht, habe ich mich sofort beworben. Jetzt bin ich seit einem Jahr dabei.\n\nInterviewer: Wie oft erscheint die Zeitung?\n\nSarah: Einmal im Monat. Wir arbeiten immer vier Wochen an einer Ausgabe und dann wird sie gedruckt und in der Schule verteilt.\n\nInterviewer: Was steht denn so in der Zeitung?\n\nSarah: Wir berichten über Schulveranstaltungen, wie den Sporttag oder das Schulfest. Außerdem schreiben wir über aktuelle Themen, die die Schüler interessieren, zum Beispiel über Umwelt oder soziale Medien. Manchmal gibt es auch Interviews mit Lehrern oder Schülern.\n\nInterviewer: Wie viele Schüler arbeiten an der Zeitung mit?\n\nSarah: Wir sind ein Team von acht Leuten. Jeder hat seine Aufgabe: Manche schreiben Artikel, andere machen Fotos oder kümmern sich um das Layout.\n\nInterviewer: Möchtest du später Journalistin werden?\n\nSarah: Ja, das wäre mein Traum. Ich finde es spannend, über verschiedene Themen zu schreiben und Menschen zu interviewen.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Sarah schreibt seit zwei Jahren für die Schulzeitung.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Die Schulzeitung erscheint alle zwei Wochen.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "In der Zeitung gibt es auch Interviews mit Lehrern.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Das Team besteht aus mehr als zehn Mitgliedern.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Sarah möchte später Journalistin werden.",
+            "answer": true
+          }
+        ]
+      },
+      {
+        "id": "hv3-6",
+        "title": "Interview: Schüleraustausch",
+        "intro": "Du hörst jetzt ein Interview mit Paul, einem Schüler der 10. Klasse. Er erzählt von seinem Schüleraustausch in Spanien.",
+        "spokenText": "Interviewer: Paul, du warst im Schüleraustausch in Spanien. Wie lange bist du dort geblieben?\n\nPaul: Drei Wochen. Ich war bei einer Gastfamilie in Barcelona und bin jeden Tag mit meiner Austauschpartnerin zur Schule gegangen.\n\nInterviewer: Wie war das für dich?\n\nPaul: Am Anfang war es komisch, weil ich kaum Spanisch konnte. Aber nach ein paar Tagen habe ich mich eingelebt. Meine Gastfamilie war sehr nett und hat mir viel geholfen.\n\nInterviewer: Was hast du in der Schule gemacht?\n\nPaul: Ich habe am normalen Unterricht teilgenommen, aber die Lehrer haben Rücksicht darauf genommen, dass ich nicht alles verstand. Besonders gut gefallen hat mir der Sportunterricht, weil wir oft draußen waren.\n\nInterviewer: Was hast du in deiner Freizeit gemacht?\n\nPaul: Meine Austauschpartnerin hat mir die Stadt gezeigt. Wir waren am Strand, in Museen und haben viel zusammen unternommen. Am Wochenende sind wir sogar nach Madrid gefahren.\n\nInterviewer: Würdest du so einen Austausch weiterempfehlen?\n\nPaul: Auf jeden Fall! Es war eine tolle Erfahrung. Ich habe nicht nur mein Spanisch verbessert, sondern auch viele neue Freunde gefunden.",
+        "statements": [
+          {
+            "id": 10,
+            "text": "Paul war zwei Wochen in Spanien.",
+            "answer": false
+          },
+          {
+            "id": 11,
+            "text": "Paul konnte von Anfang an gut Spanisch sprechen.",
+            "answer": false
+          },
+          {
+            "id": 12,
+            "text": "Paul hat am normalen Unterricht in Spanien teilgenommen.",
+            "answer": true
+          },
+          {
+            "id": 13,
+            "text": "Paul war nur in Barcelona unterwegs.",
+            "answer": false
+          },
+          {
+            "id": 14,
+            "text": "Paul würde den Austausch weiterempfehlen.",
+            "answer": true
+          }
         ]
       }
     ],
@@ -404,12 +3030,66 @@
         "intro": "Du hörst jetzt einen Bericht über einen besonderen Hund an einer Schule.",
         "spokenText": "An der Friedrich-Schiller-Schule in Köln gibt es seit diesem Schuljahr etwas Besonderes: einen Schulhund. Der Hund heißt Bello und ist ein fünf Jahre alter Golden Retriever. Er gehört der Lehrerin Frau Hartmann und kommt dreimal pro Woche mit in die Schule.\n\nBello hat eine spezielle Ausbildung gemacht, bevor er in die Schule durfte. Er hat gelernt, ruhig zu bleiben, wenn es laut ist, und er ist an viele Menschen gewöhnt. Die Ausbildung hat ein ganzes Jahr gedauert.\n\nWarum gibt es einen Hund in der Schule? Studien haben gezeigt, dass Tiere im Klassenzimmer den Schülern helfen. Wenn Bello da ist, sind die Schüler ruhiger und konzentrierter. Besonders schüchterne Kinder profitieren davon. Manche Schüler, die sonst im Unterricht nicht sprechen, fangen an zu reden, wenn Bello neben ihnen sitzt.\n\nAber nicht alle waren am Anfang begeistert. Einige Eltern hatten Bedenken, zum Beispiel wegen Allergien. Die Schule hat deshalb klare Regeln aufgestellt: Bello darf nur in bestimmte Klassenzimmer und die Räume werden extra gründlich geputzt. Kinder mit Allergien können in andere Klassen wechseln.\n\nDie Schüler selbst sind begeistert. Viele sagen, dass sie sich auf die Tage freuen, an denen Bello in der Schule ist. Ein Schüler hat gesagt: Seit Bello da ist, gehe ich viel lieber zur Schule. Bello ist der beste Lehrer!",
         "questions": [
-          {"id": 15, "question": "Wie oft kommt Bello in die Schule?", "options": ["Jeden Tag.", "Dreimal pro Woche.", "Einmal pro Woche."], "answer": 1},
-          {"id": 16, "question": "Was musste Bello machen, bevor er in die Schule durfte?", "options": ["Er musste eine spezielle Ausbildung machen.", "Er musste einen Test beim Tierarzt bestehen.", "Er musste von den Schülern ausgewählt werden."], "answer": 0},
-          {"id": 17, "question": "Wie wirkt Bello auf die Schüler?", "options": ["Die Schüler werden lauter.", "Die Schüler sind ruhiger und konzentrierter.", "Die Schüler wollen nicht mehr lernen."], "answer": 1},
-          {"id": 18, "question": "Warum hatten einige Eltern Bedenken?", "options": ["Weil der Hund zu laut ist.", "Wegen möglicher Allergien.", "Weil der Hund gefährlich sein könnte."], "answer": 1},
-          {"id": 19, "question": "Was hat die Schule gegen Allergieprobleme gemacht?", "options": ["Den Hund wieder nach Hause geschickt.", "Klare Regeln aufgestellt und Räume extra geputzt.", "Allen Schülern Medizin gegeben."], "answer": 1},
-          {"id": 20, "question": "Wie finden die Schüler den Schulhund?", "options": ["Sie sind begeistert.", "Sie haben Angst vor ihm.", "Sie finden ihn langweilig."], "answer": 0}
+          {
+            "id": 15,
+            "question": "Wie oft kommt Bello in die Schule?",
+            "options": [
+              "Jeden Tag.",
+              "Dreimal pro Woche.",
+              "Einmal pro Woche."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Was musste Bello machen, bevor er in die Schule durfte?",
+            "options": [
+              "Er musste eine spezielle Ausbildung machen.",
+              "Er musste einen Test beim Tierarzt bestehen.",
+              "Er musste von den Schülern ausgewählt werden."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 17,
+            "question": "Wie wirkt Bello auf die Schüler?",
+            "options": [
+              "Die Schüler werden lauter.",
+              "Die Schüler sind ruhiger und konzentrierter.",
+              "Die Schüler wollen nicht mehr lernen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Warum hatten einige Eltern Bedenken?",
+            "options": [
+              "Weil der Hund zu laut ist.",
+              "Wegen möglicher Allergien.",
+              "Weil der Hund gefährlich sein könnte."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was hat die Schule gegen Allergieprobleme gemacht?",
+            "options": [
+              "Den Hund wieder nach Hause geschickt.",
+              "Klare Regeln aufgestellt und Räume extra geputzt.",
+              "Allen Schülern Medizin gegeben."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Wie finden die Schüler den Schulhund?",
+            "options": [
+              "Sie sind begeistert.",
+              "Sie haben Angst vor ihm.",
+              "Sie finden ihn langweilig."
+            ],
+            "answer": 0
+          }
         ]
       },
       {
@@ -418,12 +3098,338 @@
         "intro": "Du hörst jetzt einen Bericht über ein Gartenprojekt an einer Schule.",
         "spokenText": "Die Anna-Freud-Schule in Berlin hat ein besonderes Projekt: einen Schulgarten. Auf einer Fläche von 200 Quadratmetern bauen Schüler Gemüse und Obst an. Das Projekt gibt es seit drei Jahren und es wird immer beliebter.\n\nJede Woche arbeiten die Schüler zwei Stunden im Garten. Im Frühling pflanzen sie Tomaten, Gurken, Salat und Kräuter. Im Sommer kümmern sie sich um die Pflanzen und im Herbst können sie ernten. Die Ernte wird dann in der Schulküche verwendet.\n\nDie Biologielehrerin Frau Klein hat das Projekt gestartet. Sie erzählt: Viele Kinder in der Stadt wissen gar nicht, wie Gemüse wächst. Sie kennen Tomaten nur aus dem Supermarkt. Im Schulgarten lernen sie, woher unser Essen kommt.\n\nDas Besondere am Schulgarten ist, dass er auch Schülern hilft, die Probleme in der Schule haben. Im Garten können sie etwas mit den Händen machen und sehen sofort ein Ergebnis. Das gibt ihnen Selbstvertrauen. Ein Schüler, der vorher oft den Unterricht gestört hat, ist jetzt der beste Gärtner der Schule.\n\nNächstes Jahr möchte die Schule den Garten noch größer machen. Sie planen auch, Bienen zu halten. Dafür brauchen sie aber noch Geld. Deshalb verkaufen die Schüler jetzt Marmelade und Kräutersalz, das sie selbst hergestellt haben.",
         "questions": [
-          {"id": 15, "question": "Wie groß ist der Schulgarten?", "options": ["100 Quadratmeter.", "200 Quadratmeter.", "300 Quadratmeter."], "answer": 1},
-          {"id": 16, "question": "Was passiert mit der Ernte?", "options": ["Sie wird verkauft.", "Sie wird in der Schulküche verwendet.", "Sie wird weggeworfen."], "answer": 1},
-          {"id": 17, "question": "Warum hat Frau Klein das Projekt gestartet?", "options": ["Weil sie einen Preis gewinnen wollte.", "Weil viele Kinder nicht wissen, wie Gemüse wächst.", "Weil die Schule Geld sparen wollte."], "answer": 1},
-          {"id": 18, "question": "Wie hilft der Garten schwierigen Schülern?", "options": ["Sie müssen zur Strafe im Garten arbeiten.", "Sie können etwas mit den Händen machen und sehen Ergebnisse.", "Sie dürfen nicht mehr im Unterricht sein."], "answer": 1},
-          {"id": 19, "question": "Was plant die Schule für nächstes Jahr?", "options": ["Den Garten schließen.", "Bienen halten.", "Tiere im Garten haben."], "answer": 1},
-          {"id": 20, "question": "Warum verkaufen die Schüler Marmelade?", "options": ["Weil sie Geld für den Garten brauchen.", "Weil es eine Schulaufgabe ist.", "Weil sie zu viel Obst haben."], "answer": 0}
+          {
+            "id": 15,
+            "question": "Wie groß ist der Schulgarten?",
+            "options": [
+              "100 Quadratmeter.",
+              "200 Quadratmeter.",
+              "300 Quadratmeter."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Was passiert mit der Ernte?",
+            "options": [
+              "Sie wird verkauft.",
+              "Sie wird in der Schulküche verwendet.",
+              "Sie wird weggeworfen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Warum hat Frau Klein das Projekt gestartet?",
+            "options": [
+              "Weil sie einen Preis gewinnen wollte.",
+              "Weil viele Kinder nicht wissen, wie Gemüse wächst.",
+              "Weil die Schule Geld sparen wollte."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Wie hilft der Garten schwierigen Schülern?",
+            "options": [
+              "Sie müssen zur Strafe im Garten arbeiten.",
+              "Sie können etwas mit den Händen machen und sehen Ergebnisse.",
+              "Sie dürfen nicht mehr im Unterricht sein."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was plant die Schule für nächstes Jahr?",
+            "options": [
+              "Den Garten schließen.",
+              "Bienen halten.",
+              "Tiere im Garten haben."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Warum verkaufen die Schüler Marmelade?",
+            "options": [
+              "Weil sie Geld für den Garten brauchen.",
+              "Weil es eine Schulaufgabe ist.",
+              "Weil sie zu viel Obst haben."
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "hv4-3",
+        "title": "Bericht: Urban Gardening",
+        "intro": "Du hörst jetzt einen Bericht über Gärten in der Stadt.",
+        "spokenText": "In vielen deutschen Städten gibt es immer mehr Projekte für Urban Gardening. Das bedeutet, dass Menschen in der Stadt Gemüse und Blumen anbauen. Ein bekanntes Beispiel ist der Prinzessinnengarten in Berlin. Dort können Menschen gemeinsam gärtnern, auch wenn sie keine eigenen Gärten haben.\n\nDer Prinzessinnengarten wurde 2009 gegründet. Damals war das Gelände eine Brache mit viel Müll. Freiwillige haben den Platz gesäubert und Hochbeete gebaut. Heute wachsen dort über 500 verschiedene Pflanzen, darunter Tomaten, Kräuter und Salate. Die Ernte wird unter den Helfern aufgeteilt oder im Garten-Café verkauft.\n\nUrban Gardening hat viele Vorteile. Es bringt Menschen zusammen und macht die Stadt grüner. Außerdem lernen die Teilnehmer, wie Lebensmittel angebaut werden. Besonders für Kinder ist das spannend, weil sie sehen, wo ihr Essen herkommt.\n\nAllerdings gibt es auch Herausforderungen. In einigen Städten fehlt der Platz für solche Projekte. Manchmal gibt es Konflikte mit Anwohnern, die sich über Lärm oder Unordnung beschweren. Trotzdem werden die Gärten immer beliebter. Immer mehr Menschen wollen nachhaltiger leben und sich für die Umwelt engagieren.\n\nEin Teilnehmer sagt: „Hier kann ich mich entspannen und etwas Sinnvolles tun. Es ist toll, mit anderen zusammenzuarbeiten und am Ende die Früchte unserer Arbeit zu ernten.“",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Wo befindet sich der Prinzessinnengarten?",
+            "options": [
+              "In Hamburg.",
+              "In München.",
+              "In Berlin."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 16,
+            "question": "Was war das Gelände des Prinzessinnengartens früher?",
+            "options": [
+              "Ein Park.",
+              "Eine Brache mit Müll.",
+              "Ein Spielplatz."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Wie viele verschiedene Pflanzen wachsen im Prinzessinnengarten?",
+            "options": [
+              "Über 100.",
+              "Über 300.",
+              "Über 500."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 18,
+            "question": "Welchen Vorteil hat Urban Gardening für Kinder?",
+            "options": [
+              "Sie lernen, wo Lebensmittel herkommen.",
+              "Sie müssen nicht mehr zur Schule gehen.",
+              "Sie bekommen kostenloses Essen."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 19,
+            "question": "Welche Herausforderung gibt es beim Urban Gardening?",
+            "options": [
+              "Es fehlt an freiwilligen Helfern.",
+              "Es gibt oft Konflikte mit Anwohnern.",
+              "Die Pflanzen wachsen nicht gut."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Warum machen Menschen beim Urban Gardening mit?",
+            "options": [
+              "Weil sie Geld verdienen wollen.",
+              "Weil sie nachhaltiger leben möchten.",
+              "Weil sie keine andere Freizeitbeschäftigung haben."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv4-4",
+        "title": "Bericht: Fahrradfreundliche Stadt",
+        "intro": "Du hörst jetzt einen Bericht über eine fahrradfreundliche Stadt in Deutschland.",
+        "spokenText": "Münster in Nordrhein-Westfalen gilt als eine der fahrradfreundlichsten Städte Deutschlands. Über 500.000 Fahrräder gibt es dort – mehr als Einwohner. Fast die Hälfte aller Wege in der Stadt werden mit dem Rad zurückgelegt.\n\nDie Stadt hat viel dafür getan, dass Radfahren sicher und bequem ist. Es gibt über 450 Kilometer Radwege, viele davon sind breit und gut ausgebaut. An Kreuzungen haben Radfahrer oft Vorrang, und es gibt spezielle Ampeln für Fahrräder. Außerdem gibt es viele Fahrradparkhäuser, in denen man sein Rad sicher abstellen kann.\n\nEin besonderes Projekt ist das Fahrradverleihsystem „StadtRAD Münster“. Mit einer App kann man sich ein Fahrrad ausleihen und an einer anderen Station wieder abgeben. Das ist besonders für Touristen praktisch, aber auch viele Einwohner nutzen den Service.\n\nTrotz aller Vorteile gibt es auch Kritik. Einige Radfahrer finden, dass die Radwege zu schmal sind, besonders wenn viele Menschen unterwegs sind. Andere bemängeln, dass Autofahrer sich nicht immer an die Regeln halten und Radwege zuparken.\n\nDie Stadt arbeitet ständig an Verbesserungen. Zum Beispiel werden neue Radschnellwege gebaut, auf denen man ohne Ampeln und Staus schnell durch die Stadt kommt. Ein Einwohner sagt: „Ich fahre jeden Tag mit dem Rad zur Arbeit. Es ist schneller als das Auto und ich tue etwas für meine Gesundheit.“",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Wie viele Fahrräder gibt es in Münster?",
+            "options": [
+              "Mehr als Einwohner.",
+              "Genauso viele wie Einwohner.",
+              "Weniger als Einwohner."
+            ],
+            "answer": 0
+          },
+          {
+            "id": 16,
+            "question": "Wie viele Kilometer Radwege gibt es in Münster?",
+            "options": [
+              "Über 200 Kilometer.",
+              "Über 300 Kilometer.",
+              "Über 450 Kilometer."
+            ],
+            "answer": 2
+          },
+          {
+            "id": 17,
+            "question": "Was ist das „StadtRAD Münster“?",
+            "options": [
+              "Ein Fahrradgeschäft.",
+              "Ein Fahrradverleihsystem.",
+              "Ein Radrennen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Welche Kritik gibt es am Radwegenetz?",
+            "options": [
+              "Die Radwege sind zu breit.",
+              "Die Radwege sind oft zu schmal.",
+              "Es gibt zu viele Radwege."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was wird für Radfahrer an Kreuzungen gemacht?",
+            "options": [
+              "Sie müssen immer warten.",
+              "Sie haben oft Vorrang.",
+              "Sie dürfen nicht fahren."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Warum fährt der Einwohner im Bericht mit dem Rad zur Arbeit?",
+            "options": [
+              "Weil es billiger ist.",
+              "Weil es schneller ist und gesund.",
+              "Weil er kein Auto hat."
+            ],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv4-5",
+        "title": "Bericht: Jugend forscht",
+        "intro": "Du hörst jetzt einen Bericht über den Wettbewerb „Jugend forscht“.",
+        "spokenText": "„Jugend forscht“ ist ein bekannter Wettbewerb für junge Menschen in Deutschland, die sich für Naturwissenschaften und Technik interessieren. Jedes Jahr nehmen über 10.000 Schülerinnen und Schüler teil. Sie präsentieren ihre eigenen Forschungsprojekte in Bereichen wie Biologie, Chemie, Physik oder Informatik.\n\nDer Wettbewerb wurde 1965 gegründet und hat schon viele junge Talente gefördert. Die Teilnehmer arbeiten oft monatelang an ihren Projekten. Sie experimentieren, bauen Modelle oder entwickeln neue Ideen. Die besten Projekte werden auf Regional- und Landesebene vorgestellt. Die Sieger dürfen dann beim Bundesfinale antreten.\n\nEin Beispiel ist das Projekt von Lena und Paul. Die beiden 16-Jährigen haben eine App entwickelt, die Blinden hilft, sich in der Stadt zu orientieren. Die App nutzt Sprachbefehle und Vibrationen, um Hindernisse anzuzeigen. Ihr Projekt hat beim Regionalwettbewerb den ersten Platz belegt.\n\n„Jugend forscht“ bietet nicht nur Preise, sondern auch Kontakte zu Universitäten und Unternehmen. Viele Teilnehmer bekommen später Stipendien oder Ausbildungsplätze. Ein ehemaliger Teilnehmer sagt: „Der Wettbewerb hat mir gezeigt, dass Forschung spannend ist. Heute studiere ich Physik und möchte später in der Forschung arbeiten.“\n\nAllerdings ist die Teilnahme nicht immer einfach. Viele Schüler arbeiten neben der Schule an ihren Projekten und brauchen viel Unterstützung von Lehrern oder Eltern. Trotzdem lohnt es sich, wie viele Teilnehmer finden.",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Wie viele Schüler nehmen jährlich an „Jugend forscht“ teil?",
+            "options": [
+              "Über 5.000.",
+              "Über 10.000.",
+              "Über 15.000."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Wann wurde „Jugend forscht“ gegründet?",
+            "options": [
+              "1955.",
+              "1965.",
+              "1975."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Was haben Lena und Paul entwickelt?",
+            "options": [
+              "Ein neues Computerspiel.",
+              "Eine App für Blinde.",
+              "Ein Roboterauto."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was können Sieger von „Jugend forscht“ gewinnen?",
+            "options": [
+              "Nur Geldpreise.",
+              "Kontakte zu Universitäten und Unternehmen.",
+              "Eine Reise ins Ausland."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Was sagt der ehemalige Teilnehmer über den Wettbewerb?",
+            "options": [
+              "Er fand ihn langweilig.",
+              "Er hat ihm gezeigt, dass Forschung spannend ist.",
+              "Er würde nicht noch einmal teilnehmen."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Welche Herausforderung gibt es bei der Teilnahme?",
+            "options": [
+              "Man braucht viel Zeit neben der Schule.",
+              "Man muss alleine arbeiten.",
+              "Man darf keine Hilfe annehmen."
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "hv4-6",
+        "title": "Bericht: Secondhand-Läden",
+        "intro": "Du hörst jetzt einen Bericht über Secondhand-Läden in Deutschland.",
+        "spokenText": "Secondhand-Läden werden in Deutschland immer beliebter. Immer mehr Menschen kaufen gebrauchte Kleidung, Möbel oder Elektronik, statt neue Sachen zu kaufen. Das spart Geld und ist gut für die Umwelt.\n\nEin bekanntes Beispiel ist die Kette „Secondhand-Kaufhaus“. Dort kann man fast alles finden: von Kleidung über Bücher bis hin zu Haushaltsgeräten. Die Sachen werden vorher geprüft und gereinigt, sodass sie in gutem Zustand sind. Viele Kunden schätzen die günstigen Preise und die Möglichkeit, nachhaltig einzukaufen.\n\nBesonders junge Leute kaufen gerne Secondhand. Sie finden es cool, einzigartige Stücke zu tragen, die nicht jeder hat. Auch für Familien mit kleinem Budget sind Secondhand-Läden eine gute Alternative. Ein Vater sagt: „Ich kaufe fast alle Spielsachen für meine Kinder gebraucht. Die sind oft noch wie neu und kosten nur einen Bruchteil.“\n\nAllerdings gibt es auch Kritik. Manche Kunden finden, dass die Läden unordentlich sind und man lange suchen muss. Andere bemängeln, dass nicht alle Sachen in gutem Zustand sind. Trotzdem wächst die Nachfrage.\n\nEinige Städte fördern Secondhand-Läden sogar mit speziellen Projekten. In Berlin gibt es zum Beispiel „Kleiderkreise“, wo Menschen ihre alten Kleidungsstücke tauschen können. Eine Teilnehmerin sagt: „Ich finde es toll, dass man hier nicht nur kaufen, sondern auch tauschen kann. So wird Mode nachhaltiger.“",
+        "questions": [
+          {
+            "id": 15,
+            "question": "Was kann man in Secondhand-Läden kaufen?",
+            "options": [
+              "Nur Kleidung.",
+              "Fast alles, von Kleidung bis Elektronik.",
+              "Nur Möbel."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 16,
+            "question": "Warum kaufen viele Menschen Secondhand?",
+            "options": [
+              "Weil es teurer ist.",
+              "Weil es Geld spart und nachhaltig ist.",
+              "Weil es keine neuen Sachen gibt."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 17,
+            "question": "Wer kauft besonders gerne Secondhand?",
+            "options": [
+              "Nur ältere Menschen.",
+              "Besonders junge Leute.",
+              "Nur Familien mit Kindern."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 18,
+            "question": "Was sagt der Vater im Bericht über Secondhand-Spielzeug?",
+            "options": [
+              "Es ist oft kaputt.",
+              "Es ist wie neu und günstig.",
+              "Es ist teurer als neues Spielzeug."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 19,
+            "question": "Welche Kritik gibt es an Secondhand-Läden?",
+            "options": [
+              "Die Läden sind zu teuer.",
+              "Man muss lange suchen und nicht alles ist in gutem Zustand.",
+              "Es gibt zu viele Läden."
+            ],
+            "answer": 1
+          },
+          {
+            "id": 20,
+            "question": "Was gibt es in Berlin zum Thema Secondhand?",
+            "options": [
+              "Nur einen großen Secondhand-Laden.",
+              "„Kleiderkreise“, wo man Kleidung tauschen kann.",
+              "Ein Verbot für Secondhand-Läden."
+            ],
+            "answer": 1
+          }
         ]
       }
     ],
@@ -455,14 +3461,38 @@
           }
         ],
         "headings": [
-          {"letter": "A", "text": "Bücherei bietet jetzt mehr als Bücher"},
-          {"letter": "B", "text": "Neues Schwimmbad in der Stadt"},
-          {"letter": "C", "text": "Neuer Skatepark für Jugendliche"},
-          {"letter": "D", "text": "Schulausflug ins Museum"},
-          {"letter": "E", "text": "Wetter: Morgens kühl, nachmittags warm"},
-          {"letter": "F", "text": "Schülerin gewinnt Wissenschaftswettbewerb"},
-          {"letter": "G", "text": "Konzert am Wochenende"},
-          {"letter": "H", "text": "Neue Busverbindung zum Bahnhof"}
+          {
+            "letter": "A",
+            "text": "Bücherei bietet jetzt mehr als Bücher"
+          },
+          {
+            "letter": "B",
+            "text": "Neues Schwimmbad in der Stadt"
+          },
+          {
+            "letter": "C",
+            "text": "Neuer Skatepark für Jugendliche"
+          },
+          {
+            "letter": "D",
+            "text": "Schulausflug ins Museum"
+          },
+          {
+            "letter": "E",
+            "text": "Wetter: Morgens kühl, nachmittags warm"
+          },
+          {
+            "letter": "F",
+            "text": "Schülerin gewinnt Wissenschaftswettbewerb"
+          },
+          {
+            "letter": "G",
+            "text": "Konzert am Wochenende"
+          },
+          {
+            "letter": "H",
+            "text": "Neue Busverbindung zum Bahnhof"
+          }
         ]
       },
       {
@@ -492,14 +3522,282 @@
           }
         ],
         "headings": [
-          {"letter": "A", "text": "Neue Sportanlage eröffnet"},
-          {"letter": "B", "text": "Kostenlose Fahrräder für die Stadt"},
-          {"letter": "C", "text": "Schule bekommt neue Computer"},
-          {"letter": "D", "text": "Großes Fest im Jugendzentrum"},
-          {"letter": "E", "text": "Neue Regeln für den Schulbus"},
-          {"letter": "F", "text": "Zoo sucht junge Helfer"},
-          {"letter": "G", "text": "Jugendliche lesen wieder mehr"},
-          {"letter": "H", "text": "Kochkurs für Anfänger"}
+          {
+            "letter": "A",
+            "text": "Neue Sportanlage eröffnet"
+          },
+          {
+            "letter": "B",
+            "text": "Kostenlose Fahrräder für die Stadt"
+          },
+          {
+            "letter": "C",
+            "text": "Schule bekommt neue Computer"
+          },
+          {
+            "letter": "D",
+            "text": "Großes Fest im Jugendzentrum"
+          },
+          {
+            "letter": "E",
+            "text": "Neue Regeln für den Schulbus"
+          },
+          {
+            "letter": "F",
+            "text": "Zoo sucht junge Helfer"
+          },
+          {
+            "letter": "G",
+            "text": "Jugendliche lesen wieder mehr"
+          },
+          {
+            "letter": "H",
+            "text": "Kochkurs für Anfänger"
+          }
+        ]
+      },
+      {
+        "id": "hv5-3",
+        "title": "Kurze Berichte",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 21,
+            "spokenText": "In unserem Zoo gibt es seit gestern ein neues Gehege für Pinguine. Die Tiere kommen aus Südamerika und haben viel Platz zum Schwimmen. Besucher können sie täglich von 9 bis 18 Uhr beobachten. Besonders für Kinder ist das ein Highlight.",
+            "answer": "B"
+          },
+          {
+            "id": 22,
+            "spokenText": "Die Stadtverwaltung informiert: Ab Montag wird die Hauptstraße für zwei Wochen gesperrt. Es werden neue Fahrradwege gebaut. Autofahrer müssen eine Umleitung nehmen. Radfahrer freuen sich über die Verbesserung.",
+            "answer": "H"
+          },
+          {
+            "id": 23,
+            "spokenText": "Das Theaterstück 'Romeo und Julia' wird am Wochenende in unserer Schule aufgeführt. Die Schüler der 11. Klasse haben monatelang geprobt. Karten gibt es für 5 Euro im Sekretariat. Kommt zahlreich!",
+            "answer": "D"
+          },
+          {
+            "id": 24,
+            "spokenText": "Achtung, Autofahrer! Ab morgen gilt auf der Autobahn A3 zwischen Köln und Düsseldorf eine Geschwindigkeitsbegrenzung von 100 km/h. Grund sind Bauarbeiten an der Brücke. Die Regelung gilt vorerst für drei Monate.",
+            "answer": "G"
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Neue Tiere im Tierpark"
+          },
+          {
+            "letter": "B",
+            "text": "Pinguine ziehen in den Zoo"
+          },
+          {
+            "letter": "C",
+            "text": "Schulprojekt: Umweltaktion"
+          },
+          {
+            "letter": "D",
+            "text": "Schüler führen Theaterstück auf"
+          },
+          {
+            "letter": "E",
+            "text": "Neues Restaurant eröffnet"
+          },
+          {
+            "letter": "F",
+            "text": "Fußballturnier am Wochenende"
+          },
+          {
+            "letter": "G",
+            "text": "Tempolimit auf der Autobahn"
+          },
+          {
+            "letter": "H",
+            "text": "Straßensperrung wegen Bauarbeiten"
+          }
+        ]
+      },
+      {
+        "id": "hv5-4",
+        "title": "Kurze Berichte",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 21,
+            "spokenText": "Unsere Schule veranstaltet nächste Woche einen Spendenlauf. Alle Schüler laufen Runden im Park und sammeln Geld für ein neues Schulprojekt. Eltern und Freunde können die Läufer unterstützen. Jede Runde zählt!",
+            "answer": "C"
+          },
+          {
+            "id": 22,
+            "spokenText": "Die Bibliothek hat ein neues digitales Angebot: Ab sofort kann man E-Books und Hörbücher online ausleihen. Man braucht nur einen Bibliotheksausweis. Das Angebot ist kostenlos und rund um die Uhr verfügbar.",
+            "answer": "A"
+          },
+          {
+            "id": 23,
+            "spokenText": "Der Wetterbericht für das Wochenende: Samstag sonnig und warm mit bis zu 22 Grad. Am Sonntag wird es regnerisch und kühler. Wer plant, draußen zu sein, sollte einen Regenschirm mitnehmen.",
+            "answer": "E"
+          },
+          {
+            "id": 24,
+            "spokenText": "Das Jugendzentrum sucht ehrenamtliche Helfer für den Sommer. Man kann bei der Organisation von Festen oder Sportaktivitäten mitmachen. Interessierte können sich ab sofort melden. Erfahrung ist nicht nötig!",
+            "answer": "F"
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Bibliothek startet Online-Ausleihe"
+          },
+          {
+            "letter": "B",
+            "text": "Neuer Sportplatz eröffnet"
+          },
+          {
+            "letter": "C",
+            "text": "Spendenlauf für Schulprojekt"
+          },
+          {
+            "letter": "D",
+            "text": "Konzert im Stadtpark"
+          },
+          {
+            "letter": "E",
+            "text": "Wetter: Wochenende mit Sonne und Regen"
+          },
+          {
+            "letter": "F",
+            "text": "Jugendzentrum sucht Helfer"
+          },
+          {
+            "letter": "G",
+            "text": "Schulausflug in den Freizeitpark"
+          },
+          {
+            "letter": "H",
+            "text": "Neue Regeln für Schuluniformen"
+          }
+        ]
+      },
+      {
+        "id": "hv5-5",
+        "title": "Kurze Berichte",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 21,
+            "spokenText": "In unserer Schule findet nächste Woche ein Vortrag über gesunde Ernährung statt. Eine Ernährungsberaterin erklärt, wie man sich richtig ernährt. Der Vortrag ist für alle Schüler ab der 7. Klasse. Eltern sind auch willkommen.",
+            "answer": "H"
+          },
+          {
+            "id": 22,
+            "spokenText": "Die Stadt hat beschlossen, mehr Bäume zu pflanzen. In den nächsten Monaten werden in verschiedenen Stadtteilen neue Bäume gesetzt. Die Aktion soll die Luft verbessern und die Stadt grüner machen.",
+            "answer": "B"
+          },
+          {
+            "id": 23,
+            "spokenText": "Das Freibad hat ab sofort längere Öffnungszeiten. Es ist jetzt täglich von 7 bis 21 Uhr geöffnet. Der Eintritt bleibt gleich. Besonders am Abend ist es jetzt ein beliebter Treffpunkt.",
+            "answer": "D"
+          },
+          {
+            "id": 24,
+            "spokenText": "Achtung, Bahnfahrer! Die S-Bahn-Linie S5 fällt am Wochenende wegen Bauarbeiten aus. Es gibt Ersatzbusse, die zwischen den Stationen fahren. Die Fahrt dauert aber länger als sonst.",
+            "answer": "G"
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Neues Kino in der Stadt"
+          },
+          {
+            "letter": "B",
+            "text": "Stadt pflanzt mehr Bäume"
+          },
+          {
+            "letter": "C",
+            "text": "Schulwettbewerb: Beste Klassenfahrt"
+          },
+          {
+            "letter": "D",
+            "text": "Freibad mit längeren Öffnungszeiten"
+          },
+          {
+            "letter": "E",
+            "text": "Neue Buslinie zum Flughafen"
+          },
+          {
+            "letter": "F",
+            "text": "Kostenlose Konzerte im Sommer"
+          },
+          {
+            "letter": "G",
+            "text": "S-Bahn fällt am Wochenende aus"
+          },
+          {
+            "letter": "H",
+            "text": "Vortrag über gesunde Ernährung"
+          }
+        ]
+      },
+      {
+        "id": "hv5-6",
+        "title": "Kurze Berichte",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 21,
+            "spokenText": "Unser Sportverein bietet ab nächster Woche einen neuen Kurs an: Yoga für Anfänger. Der Kurs findet jeden Dienstag und Donnerstag statt. Die Teilnahme kostet 5 Euro pro Stunde. Anmeldungen sind ab sofort möglich.",
+            "answer": "C"
+          },
+          {
+            "id": 22,
+            "spokenText": "Die Stadtbibliothek veranstaltet am Samstag einen Vorlesetag für Kinder. Eine bekannte Kinderbuchautorin liest aus ihrem neuen Buch vor. Die Veranstaltung ist kostenlos und beginnt um 10 Uhr.",
+            "answer": "A"
+          },
+          {
+            "id": 23,
+            "spokenText": "Der Tierpark hat ein neues Zuhause für die Affen gebaut. Die Tiere haben jetzt mehr Platz und können klettern. Besucher können das neue Gehege ab sofort besichtigen. Der Eintritt bleibt gleich.",
+            "answer": "F"
+          },
+          {
+            "id": 24,
+            "spokenText": "Achtung, Autofahrer! In der Innenstadt gibt es ab Montag eine neue Einbahnstraße. Die Umleitung ist ausgeschildert. Die Änderung soll den Verkehr in der Stadt verbessern.",
+            "answer": "H"
+          }
+        ],
+        "headings": [
+          {
+            "letter": "A",
+            "text": "Vorlesetag in der Bibliothek"
+          },
+          {
+            "letter": "B",
+            "text": "Neues Schwimmbad im Stadtteil"
+          },
+          {
+            "letter": "C",
+            "text": "Yoga-Kurs für Anfänger"
+          },
+          {
+            "letter": "D",
+            "text": "Schulausflug zum Bauernhof"
+          },
+          {
+            "letter": "E",
+            "text": "Wetter: Heißer Sommer erwartet"
+          },
+          {
+            "letter": "F",
+            "text": "Tierpark baut neues Affenhaus"
+          },
+          {
+            "letter": "G",
+            "text": "Fußballturnier für Jugendliche"
+          },
+          {
+            "letter": "H",
+            "text": "Neue Einbahnstraße in der Innenstadt"
+          }
         ]
       }
     ]
