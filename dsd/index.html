@@ -416,12 +416,7 @@
           <option value="1.0">Schnell</option>
         </select>
       </span>
-      <span class="tts-speed">
-        <label for="tts-voice">Stimme:</label>
-        <select id="tts-voice" onchange="ttsVoiceChanged()">
-          <option value="">Automatisch</option>
-        </select>
-      </span>
+      <audio id="tts-audio" preload="auto"></audio>
     </div>
     <div id="exercise-content"></div>
     <div class="action-bar" id="action-bar"></div>
@@ -450,7 +445,7 @@ let score = 0;
 let totalQ = 0;
 let timerInterval = null;
 let timerSeconds = 0;
-let ttsUtterance = null;
+let ttsManifest = null;
 let selectedGap = null;
 let selectedPerson = null;
 let selectedShortText = null;
@@ -501,9 +496,11 @@ function getSectionStats(section) {
   return { perfect, tried, total };
 }
 
-// Load data
+// Load data and audio manifest
 fetch('data.json').then(r => r.json()).then(d => { DATA = d; refreshStartScreen(); })
   .catch(e => console.error('Failed to load data.json:', e));
+fetch('audio/manifest.json').then(r => r.json()).then(m => { ttsManifest = m; })
+  .catch(e => console.warn('Audio manifest not found, TTS disabled:', e));
 
 // --- Navigation ---
 function showScreen(id) {
@@ -1014,7 +1011,6 @@ function renderHV1(ex, instrEl) {
 function renderHV1Scene(ex, container, idx) {
   const scene = ex.scenes[idx];
   exerciseState.currentScene = idx;
-  exerciseState.currentSpokenText = scene.spokenText;
   const letters = ['A', 'B', 'C'];
 
   const optsHtml = scene.options.map((opt, i) => `
@@ -1072,7 +1068,6 @@ function renderHV2(ex, instrEl) {
 function renderHV2Announcement(ex, container, idx) {
   const ann = ex.announcements[idx];
   exerciseState.currentScene = idx;
-  exerciseState.currentSpokenText = ann.spokenText;
   const letters = ['A', 'B', 'C'];
 
   const optsHtml = ann.options.map((opt, i) => `
@@ -1121,9 +1116,7 @@ function renderHV3(ex, instrEl) {
   instrEl.innerHTML = `<strong>Aufgabe:</strong> ${ex.intro} Höre das Interview an und entscheide: <strong>richtig</strong> oder <strong>falsch</strong>?`;
 
   const content = document.getElementById('exercise-content');
-  exerciseState = { answers: {}, currentSpokenText: ex.spokenText };
-  // Store spoken text for TTS
-  exerciseState.currentSpokenText = ex.spokenText;
+  exerciseState = { answers: {} };
 
   const stmtsHtml = ex.statements.map(s => `
     <div class="statement-item" id="stmt-${s.id}">
@@ -1146,7 +1139,7 @@ function renderHV3(ex, instrEl) {
 function renderHV4(ex, instrEl) {
   instrEl.innerHTML = `<strong>Aufgabe:</strong> ${ex.intro} Höre den Bericht an und beantworte die Fragen.`;
 
-  exerciseState = { answers: {}, currentSpokenText: ex.spokenText };
+  exerciseState = { answers: {} };
   const content = document.getElementById('exercise-content');
   const letters = ['A', 'B', 'C'];
 
@@ -1181,7 +1174,6 @@ function renderHV5(ex, instrEl) {
 function renderHV5Scene(ex, container, idx) {
   const scene = ex.scenes[idx];
   exerciseState.currentScene = idx;
-  exerciseState.currentSpokenText = scene.spokenText;
 
   const hdHtml = ex.headings.map(h => {
     let cls = 'heading-card';
@@ -1517,123 +1509,68 @@ function formatTime(s) {
   return m + ':' + (sec < 10 ? '0' : '') + sec;
 }
 
-// --- TTS ---
-function getTTSText() {
-  // For HV exercises, get the spoken text
-  if (exerciseState.currentSpokenText) return exerciseState.currentSpokenText;
-  return '';
+// --- TTS (pre-generated audio) ---
+function getAudioKey() {
+  const t = currentTeil;
+  const idx = currentSetIdx;
+  const sub = exerciseState.currentScene;
+  if (sub !== undefined && sub !== null) return `teil${t}/${idx}/${sub}`;
+  return `teil${t}/${idx}`;
 }
 
 function ttsPlay() {
-  const text = getTTSText();
-  if (!text) return;
+  if (!ttsManifest) return;
+  const audio = document.getElementById('tts-audio');
+  if (!audio) return;
 
-  if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
+  // Toggle: if playing, stop
+  if (!audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
     document.getElementById('tts-play-btn').classList.remove('speaking');
     document.getElementById('tts-icon').textContent = '\u25B6';
     return;
   }
 
-  ttsUtterance = new SpeechSynthesisUtterance(text);
-  ttsUtterance.lang = 'de-DE';
-  ttsUtterance.rate = parseFloat(document.getElementById('tts-speed').value);
+  const key = getAudioKey();
+  const fname = ttsManifest[key];
+  if (!fname) return;
 
-  // Use the voice selected in the dropdown (or auto-pick best)
-  const selVoice = getSelectedVoice();
-  if (selVoice) ttsUtterance.voice = selVoice;
+  audio.src = 'audio/' + fname;
+  audio.playbackRate = parseFloat(document.getElementById('tts-speed').value);
 
-  ttsUtterance.onstart = () => {
+  audio.onplay = () => {
     document.getElementById('tts-play-btn').classList.add('speaking');
     document.getElementById('tts-icon').textContent = '\u23F8';
   };
-  ttsUtterance.onend = () => {
+  audio.onended = () => {
+    document.getElementById('tts-play-btn').classList.remove('speaking');
+    document.getElementById('tts-icon').textContent = '\u25B6';
+  };
+  audio.onerror = () => {
     document.getElementById('tts-play-btn').classList.remove('speaking');
     document.getElementById('tts-icon').textContent = '\u25B6';
   };
 
-  window.speechSynthesis.speak(ttsUtterance);
+  audio.play();
 }
 
 function ttsPause() {
-  if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    document.getElementById('tts-play-btn')?.classList.remove('speaking');
-    const icon = document.getElementById('tts-icon');
-    if (icon) icon.textContent = '\u25B6';
+  const audio = document.getElementById('tts-audio');
+  if (audio && !audio.paused) {
+    audio.pause();
+    audio.currentTime = 0;
   }
+  document.getElementById('tts-play-btn')?.classList.remove('speaking');
+  const icon = document.getElementById('tts-icon');
+  if (icon) icon.textContent = '\u25B6';
 }
 
 function ttsSpeedChanged() {
-  // If currently speaking, restart with new speed
-  if (window.speechSynthesis.speaking) {
-    ttsPause();
-    ttsPlay();
+  const audio = document.getElementById('tts-audio');
+  if (audio && !audio.paused) {
+    audio.playbackRate = parseFloat(document.getElementById('tts-speed').value);
   }
-}
-
-// --- Voice selector ---
-const VOICE_STORAGE_KEY = 'dsd_tts_voice';
-
-function rankVoice(v) {
-  const n = v.name.toLowerCase();
-  if (n.includes('premium')) return 4;
-  if (n.includes('enhanced')) return 3;
-  if (n.includes('compact') || n.includes('network')) return 0;
-  return v.default ? 1 : 2;
-}
-
-function getDeVoices() {
-  return window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('de'));
-}
-
-function getSelectedVoice() {
-  const sel = document.getElementById('tts-voice');
-  const uri = sel ? sel.value : '';
-  const voices = getDeVoices();
-  if (uri) {
-    const match = voices.find(v => v.voiceURI === uri);
-    if (match) return match;
-  }
-  // Auto-pick best
-  if (voices.length) {
-    voices.sort((a, b) => rankVoice(b) - rankVoice(a));
-    return voices[0];
-  }
-  return null;
-}
-
-function populateVoiceSelector() {
-  const sel = document.getElementById('tts-voice');
-  if (!sel) return;
-  const voices = getDeVoices().sort((a, b) => rankVoice(b) - rankVoice(a));
-  const saved = (() => { try { return localStorage.getItem(VOICE_STORAGE_KEY); } catch { return null; } })();
-  sel.innerHTML = '<option value="">Automatisch</option>';
-  voices.forEach(v => {
-    const opt = document.createElement('option');
-    opt.value = v.voiceURI;
-    opt.textContent = v.name + (v.default ? ' ★' : '');
-    if (saved && v.voiceURI === saved) opt.selected = true;
-    sel.appendChild(opt);
-  });
-}
-
-function ttsVoiceChanged() {
-  const sel = document.getElementById('tts-voice');
-  try { localStorage.setItem(VOICE_STORAGE_KEY, sel.value); } catch {}
-  if (window.speechSynthesis.speaking) {
-    ttsPause();
-    ttsPlay();
-  }
-}
-
-// Pre-load voices and populate selector
-if (window.speechSynthesis) {
-  window.speechSynthesis.getVoices();
-  window.speechSynthesis.addEventListener('voiceschanged', populateVoiceSelector);
-  populateVoiceSelector();
-  // Some browsers/OS load premium voices lazily; repopulate on interaction
-  document.getElementById('tts-voice')?.addEventListener('focus', populateVoiceSelector);
 }
 </script>
 </body>
