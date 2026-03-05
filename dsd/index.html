@@ -1439,10 +1439,21 @@ function ttsPlay() {
   ttsUtterance.lang = 'de-DE';
   ttsUtterance.rate = parseFloat(document.getElementById('tts-speed').value);
 
-  // Try to find a German voice
+  // Pick best available German voice, preferring premium/enhanced voices
   const voices = window.speechSynthesis.getVoices();
-  const deVoice = voices.find(v => v.lang.startsWith('de'));
-  if (deVoice) ttsUtterance.voice = deVoice;
+  const deVoices = voices.filter(v => v.lang.startsWith('de'));
+  if (deVoices.length) {
+    // Score voices: prefer Premium > Enhanced > non-default > default
+    const score = v => {
+      const n = v.name.toLowerCase();
+      if (n.includes('premium')) return 4;
+      if (n.includes('enhanced')) return 3;
+      if (n.includes('compact') || n.includes('network')) return 0;
+      return v.localService ? 1 : 2;
+    };
+    deVoices.sort((a, b) => score(b) - score(a));
+    ttsUtterance.voice = deVoices[0];
+  }
 
   ttsUtterance.onstart = () => {
     document.getElementById('tts-play-btn').classList.add('speaking');
