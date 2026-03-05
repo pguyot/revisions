@@ -445,7 +445,7 @@ fetch('data.json').then(r => r.json()).then(d => { DATA = d; })
 function showScreen(id) {
   for (const s of ['start-screen','part-screen','set-screen','exercise-area','results-panel'])
     document.getElementById(s).style.display = 'none';
-  document.getElementById(id).style.display = '';
+  document.getElementById(id).style.display = 'block';
   document.getElementById('stats-bar').style.display = id === 'exercise-area' ? '' : 'none';
 }
 
@@ -1308,7 +1308,7 @@ function checkHV5(ex) {
 
 // --- Results ---
 function showResults() {
-  document.getElementById('results-panel').style.display = '';
+  document.getElementById('results-panel').style.display = 'block';
   const pct = totalQ > 0 ? Math.round(score / totalQ * 100) : 0;
 
   let emoji = '';
