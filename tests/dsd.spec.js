@@ -6,10 +6,9 @@ const { test, expect } = require('@playwright/test');
 /** Navigate to the DSD app and wait for data to load. */
 async function openApp(page) {
   await page.goto('/dsd/');
-  // Wait for data.json to load by checking that section cards are clickable
+  // Wait for data.json to load — DATA is a let variable, not on window
+  await page.waitForFunction(() => typeof DATA !== 'undefined' && DATA !== null, null, { timeout: 5000 });
   await expect(page.locator('.section-card').first()).toBeVisible();
-  // Give the fetch a moment to complete
-  await page.waitForFunction(() => window['DATA'] !== null, null, { timeout: 5000 });
 }
 
 /** Navigate: Start → Part → Exercise list → start exercise at given indices. */
@@ -20,12 +19,19 @@ async function startExercise(page, section, teil, exerciseIdx) {
   await expect(page.locator('#part-screen')).toBeVisible();
 
   // Click part card
-  await page.locator('.part-card').nth(teil - 1).click();
+  await page.locator('#part-screen .part-card').nth(teil - 1).click();
   await expect(page.locator('#set-screen')).toBeVisible();
 
   // Click exercise
   await page.locator('#set-list .part-card').nth(exerciseIdx).click();
-  await expect(page.locator('#exercise-area')).toBeVisible();
+  await expect(page.locator('#exercise-content')).toBeVisible();
+  // Ensure currentExercise is set
+  await page.waitForFunction(() => typeof currentExercise !== 'undefined' && currentExercise !== null, null, { timeout: 5000 });
+}
+
+/** Read currentExercise from page (let-scoped, not on window). */
+function evalExercise(page, fn) {
+  return page.evaluate(fn);
 }
 
 // ─── Navigation tests ───────────────────────────────────────────────────────
@@ -43,27 +49,28 @@ test.describe('Navigation', () => {
     await openApp(page);
     await page.locator('.section-card').first().click();
     await expect(page.locator('#part-screen')).toBeVisible();
-    await expect(page.locator('.part-card')).toHaveCount(5);
+    await expect(page.locator('#part-screen .part-card')).toHaveCount(5);
   });
 
   test('clicking Hörverstehen shows 5 parts', async ({ page }) => {
     await openApp(page);
     await page.locator('.section-card').last().click();
     await expect(page.locator('#part-screen')).toBeVisible();
-    await expect(page.locator('.part-card')).toHaveCount(5);
+    await expect(page.locator('#part-screen .part-card')).toHaveCount(5);
   });
 
   test('Zurück button returns from parts to start', async ({ page }) => {
     await openApp(page);
     await page.locator('.section-card').first().click();
-    await page.locator('button', { hasText: 'Zurück' }).click();
+    await expect(page.locator('#part-screen')).toBeVisible();
+    await page.locator('#part-screen button', { hasText: 'Zurück' }).click();
     await expect(page.locator('#start-screen')).toBeVisible();
   });
 
   test('clicking a part shows exercise list', async ({ page }) => {
     await openApp(page);
     await page.locator('.section-card').first().click();
-    await page.locator('.part-card').first().click();
+    await page.locator('#part-screen .part-card').first().click();
     await expect(page.locator('#set-screen')).toBeVisible();
     // Should have at least one exercise
     const exercises = page.locator('#set-list .part-card');
@@ -100,8 +107,7 @@ test.describe('LV Teil 1 – Lückentext', () => {
 
     // Get the correct answers from the app's data
     const answers = await page.evaluate(() => {
-      const ex = window['currentExercise'];
-      return { gaps: ex.answers, titleAnswer: ex.titleAnswer };
+      return { gaps: currentExercise.answers, titleAnswer: currentExercise.titleAnswer };
     });
 
     // Fill each gap with correct word
@@ -142,8 +148,7 @@ test.describe('LV Teil 2 – Zuordnung', () => {
     await startExercise(page, 'lv', 2, 0);
 
     const answers = await page.evaluate(() => {
-      const ex = window['currentExercise'];
-      return { answers: ex.answers, descIds: ex.descriptions.map(d => d.id) };
+      return { answers: currentExercise.answers, descIds: currentExercise.descriptions.map(d => d.id) };
     });
 
     for (const id of answers.descIds) {
@@ -176,7 +181,7 @@ test.describe('LV Teil 3 – Richtig/Falsch', () => {
     await startExercise(page, 'lv', 3, 0);
 
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
 
     for (const s of statements) {
@@ -193,7 +198,7 @@ test.describe('LV Teil 3 – Richtig/Falsch', () => {
     await startExercise(page, 'lv', 3, 0);
 
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
 
     // Answer all wrong
@@ -227,7 +232,7 @@ test.describe('LV Teil 4 – Multiple Choice', () => {
     await startExercise(page, 'lv', 4, 0);
 
     const questions = await page.evaluate(() =>
-      window['currentExercise'].questions.map(q => ({ id: q.id, answer: q.answer }))
+      currentExercise.questions.map(q => ({ id: q.id, answer: q.answer }))
     );
 
     for (const q of questions) {
@@ -255,8 +260,7 @@ test.describe('LV Teil 5 – Überschriften', () => {
     await startExercise(page, 'lv', 5, 0);
 
     const data = await page.evaluate(() => {
-      const ex = window['currentExercise'];
-      return { answers: ex.answers, textIds: ex.texts.map(t => t.id) };
+      return { answers: currentExercise.answers, textIds: currentExercise.texts.map(t => t.id) };
     });
 
     for (const id of data.textIds) {
@@ -288,11 +292,11 @@ test.describe('HV Teil 1 – Szenen', () => {
     await openApp(page);
     await startExercise(page, 'hv', 1, 0);
 
-    const sceneCount = await page.evaluate(() => window['currentExercise'].scenes.length);
+    const sceneCount = await page.evaluate(() => currentExercise.scenes.length);
 
     // Navigate through all scenes, picking correct answer
     for (let i = 0; i < sceneCount; i++) {
-      const answer = await page.evaluate((idx) => window['currentExercise'].scenes[idx].answer, i);
+      const answer = await page.evaluate((idx) => currentExercise.scenes[idx].answer, i);
       await page.locator(`#so-${answer}`).click();
 
       if (i < sceneCount - 1) {
@@ -320,10 +324,10 @@ test.describe('HV Teil 2 – Durchsagen', () => {
     await openApp(page);
     await startExercise(page, 'hv', 2, 0);
 
-    const annCount = await page.evaluate(() => window['currentExercise'].announcements.length);
+    const annCount = await page.evaluate(() => currentExercise.announcements.length);
 
     for (let i = 0; i < annCount; i++) {
-      const answer = await page.evaluate((idx) => window['currentExercise'].announcements[idx].answer, i);
+      const answer = await page.evaluate((idx) => currentExercise.announcements[idx].answer, i);
       await page.locator(`#hv2-opt-${answer}`).click();
 
       if (i < annCount - 1) {
@@ -352,7 +356,7 @@ test.describe('HV Teil 3 – Interview', () => {
     await startExercise(page, 'hv', 3, 0);
 
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
 
     for (const s of statements) {
@@ -379,7 +383,7 @@ test.describe('HV Teil 4 – Bericht', () => {
     await startExercise(page, 'hv', 4, 0);
 
     const questions = await page.evaluate(() =>
-      window['currentExercise'].questions.map(q => ({ id: q.id, answer: q.answer }))
+      currentExercise.questions.map(q => ({ id: q.id, answer: q.answer }))
     );
 
     for (const q of questions) {
@@ -406,10 +410,10 @@ test.describe('HV Teil 5 – Zuordnung', () => {
     await openApp(page);
     await startExercise(page, 'hv', 5, 0);
 
-    const sceneCount = await page.evaluate(() => window['currentExercise'].scenes.length);
+    const sceneCount = await page.evaluate(() => currentExercise.scenes.length);
 
     for (let i = 0; i < sceneCount; i++) {
-      const answer = await page.evaluate((idx) => window['currentExercise'].scenes[idx].answer, i);
+      const answer = await page.evaluate((idx) => currentExercise.scenes[idx].answer, i);
       await page.locator(`#hv5-hd-${answer}`).click();
 
       if (i < sceneCount - 1) {
@@ -431,7 +435,7 @@ test.describe('Score persistence', () => {
 
     // Answer all correctly
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -444,7 +448,7 @@ test.describe('Score persistence', () => {
       const data = JSON.parse(localStorage.getItem('dsd-exercise-scores') || '{}');
       return data;
     });
-    const exerciseId = await page.evaluate(() => window['currentExercise'].id);
+    const exerciseId = await page.evaluate(() => currentExercise.id);
     expect(stored[exerciseId]).toBeDefined();
     expect(stored[exerciseId].pct).toBe(100);
   });
@@ -454,11 +458,11 @@ test.describe('Score persistence', () => {
     await startExercise(page, 'lv', 3, 0);
 
     // Get exercise id for verification
-    const exerciseId = await page.evaluate(() => window['currentExercise'].id);
+    const exerciseId = await page.evaluate(() => currentExercise.id);
 
     // Answer all correctly
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -469,7 +473,7 @@ test.describe('Score persistence', () => {
     // Go home and navigate back to exercise list
     await page.locator('button', { hasText: 'Hauptmenü' }).click();
     await page.locator('.section-card').first().click();
-    await page.locator('.part-card').nth(2).click(); // Teil 3
+    await page.locator('#part-screen .part-card').nth(2).click(); // Teil 3
 
     // The first exercise should show a perfect badge
     const badge = page.locator('#set-list .part-card').first().locator('.score-badge');
@@ -484,7 +488,7 @@ test.describe('Score persistence', () => {
 
     // Answer all correctly
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -496,7 +500,7 @@ test.describe('Score persistence', () => {
     await page.locator('.section-card').first().click();
 
     // Teil 3 card should show progress
-    const teil3Card = page.locator('.part-card').nth(2);
+    const teil3Card = page.locator('#part-screen .part-card').nth(2);
     const summary = teil3Card.locator('.progress-summary');
     await expect(summary).toBeVisible();
     await expect(summary).toContainText('1 perfekt');
@@ -509,7 +513,7 @@ test.describe('Score persistence', () => {
 
     // Answer all correctly
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -532,7 +536,7 @@ test.describe('Score persistence', () => {
     // First: get a perfect score
     await startExercise(page, 'lv', 3, 0);
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -542,10 +546,10 @@ test.describe('Score persistence', () => {
 
     // Second: retry with all wrong answers
     await page.locator('#results-retry-btn').click();
-    await expect(page.locator('#exercise-area')).toBeVisible();
+    await expect(page.locator('#exercise-content')).toBeVisible();
 
     const statements2 = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements2) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'f' : 'r'}`).click(); // wrong
@@ -557,7 +561,7 @@ test.describe('Score persistence', () => {
       const data = JSON.parse(localStorage.getItem('dsd-exercise-scores') || '{}');
       return data;
     });
-    const exerciseId = await page.evaluate(() => window['currentExercise'].id);
+    const exerciseId = await page.evaluate(() => currentExercise.id);
     expect(stored[exerciseId].pct).toBe(100);
   });
 });
@@ -579,7 +583,7 @@ test.describe('Timer', () => {
 
     // Submit and check timer is in results
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -599,7 +603,7 @@ test.describe('Results display', () => {
 
     // Answer all wrong → "Weiter üben"
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'f' : 'r'}`).click();
@@ -614,7 +618,7 @@ test.describe('Results display', () => {
     await startExercise(page, 'lv', 3, 0);
 
     const statements = await page.evaluate(() =>
-      window['currentExercise'].statements.map(s => ({ id: s.id, answer: s.answer }))
+      currentExercise.statements.map(s => ({ id: s.id, answer: s.answer }))
     );
     for (const s of statements) {
       await page.locator(`#tf-${s.id}-${s.answer ? 'r' : 'f'}`).click();
@@ -624,7 +628,7 @@ test.describe('Results display', () => {
 
     // Click retry
     await page.locator('#results-retry-btn').click();
-    await expect(page.locator('#exercise-area')).toBeVisible();
+    await expect(page.locator('#exercise-content')).toBeVisible();
     // Should be back in the exercise with fresh state
     expect(await page.locator('.statement-item').count()).toBeGreaterThan(0);
     // No tf-selected buttons (fresh state)
@@ -644,7 +648,7 @@ test.describe('Data integrity', () => {
     for (let teil = 1; teil <= 5; teil++) {
       const setCount = await page.evaluate((t) => {
         const key = 'teil' + t;
-        return window['DATA'].leseverstehen[key].length;
+        return DATA.leseverstehen[key].length;
       }, teil);
 
       for (let i = 0; i < setCount; i++) {
@@ -669,7 +673,7 @@ test.describe('Data integrity', () => {
     for (let teil = 1; teil <= 5; teil++) {
       const setCount = await page.evaluate((t) => {
         const key = 'teil' + t;
-        return window['DATA'].hoerverstehen[key].length;
+        return DATA.hoerverstehen[key].length;
       }, teil);
 
       for (let i = 0; i < setCount; i++) {
