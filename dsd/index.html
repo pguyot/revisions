@@ -368,11 +368,11 @@
     <h2>DSD I Prüfungstraining</h2>
     <p>Übe für das Deutsche Sprachdiplom Stufe I (A2/B1).<br>Wähle einen Prüfungsteil aus:</p>
     <div class="section-grid">
-      <div class="section-card" onclick="showParts('lv')">
+      <div class="section-card" data-section="lv" onclick="showParts('lv')">
         <h3>Leseverstehen</h3>
         <p>Lesen und Verstehen<br>5 Teile &middot; 24 Aufgaben</p>
       </div>
-      <div class="section-card" onclick="showParts('hv')">
+      <div class="section-card" data-section="hv" onclick="showParts('hv')">
         <h3>Hörverstehen</h3>
         <p>Hören und Verstehen<br>5 Teile &middot; 24 Aufgaben</p>
       </div>
@@ -514,7 +514,7 @@ function goHome() {
 function refreshStartScreen() {
   if (!DATA) return;
   document.querySelectorAll('.section-card').forEach(card => {
-    const section = card.onclick.toString().includes("'lv'") ? 'lv' : 'hv';
+    const section = card.dataset.section || (card.onclick.toString().includes("'lv'") ? 'lv' : 'hv');
     const st = getSectionStats(section);
     let summaryEl = card.querySelector('.progress-summary');
     if (!summaryEl) { summaryEl = document.createElement('div'); summaryEl.className = 'progress-summary'; card.appendChild(summaryEl); }
@@ -1536,14 +1536,14 @@ function ttsPlay() {
   const deVoices = voices.filter(v => v.lang.startsWith('de'));
   if (deVoices.length) {
     // Score voices: prefer Premium > Enhanced > non-default > default
-    const score = v => {
+    const rankVoice = v => {
       const n = v.name.toLowerCase();
       if (n.includes('premium')) return 4;
       if (n.includes('enhanced')) return 3;
       if (n.includes('compact') || n.includes('network')) return 0;
       return v.localService ? 1 : 2;
     };
-    deVoices.sort((a, b) => score(b) - score(a));
+    deVoices.sort((a, b) => rankVoice(b) - rankVoice(a));
     ttsUtterance.voice = deVoices[0];
   }
 
