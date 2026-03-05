@@ -208,3 +208,10 @@ __marimo__/
 
 # Generated site output
 _site/
+
+# Node
+node_modules/
+
+# Playwright
+test-results/
+playwright-report/
