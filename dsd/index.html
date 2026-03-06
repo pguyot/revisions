@@ -2,7 +2,11 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DSD">
+  <link rel="manifest" href="manifest.json">
   <title>DSD I Prüfungstraining</title>
   <style>
     :root {
@@ -39,6 +43,7 @@
       color: var(--fg);
       line-height: 1.6;
       min-height: 100vh;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     .container { max-width: 52rem; margin: 0 auto; padding: 1rem; }
 

@@ -1,0 +1,8 @@
+{
+  "name": "DSD I Prüfungstraining",
+  "short_name": "DSD",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c41e3a"
+}
