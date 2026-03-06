@@ -1,0 +1,515 @@
+{
+  "leseverstehen": {
+    "teil1": [
+      {
+        "id": "lv1-m1",
+        "source": "Modellsatz",
+        "title": "Der Schulgarten",
+        "text": "An unserer Schule gibt es seit diesem Jahr einen {1}. Die Idee hatte unsere Biologielehrerin Frau Meier. Zusammen mit den Schülern der 7. Klasse hat sie hinter der Turnhalle ein Stück Land {2}. Dort wachsen jetzt Tomaten, Gurken und verschiedene Kräuter. Jeden Dienstag nach dem Unterricht kümmern sich die Schüler um die {3}. Sie gießen die Pflanzen und entfernen Unkraut. Im Herbst konnten sie zum ersten Mal eigenes {4} ernten. Die Schulküche hat daraus eine leckere Suppe gekocht. Jetzt wollen noch mehr Schüler beim Schulgarten mitmachen.",
+        "wordList": {
+          "A": "Pflanzen",
+          "B": "Schulgarten",
+          "C": "Gemüse",
+          "D": "vorbereitet",
+          "E": "Spielplatz",
+          "F": "Obst",
+          "G": "gebaut",
+          "H": "Blumen"
+        },
+        "answers": {"1": "B", "2": "D", "3": "A", "4": "C"},
+        "titleOptions": [
+          "Kochen in der Schulküche",
+          "Vom Klassenzimmer in den Garten",
+          "Sport hinter der Turnhalle"
+        ],
+        "titleAnswer": 1
+      },
+      {
+        "id": "lv1-m2",
+        "source": "Modellsatz",
+        "title": "Meine erste Zugfahrt allein",
+        "text": "Letzten Samstag bin ich zum ersten Mal allein mit dem Zug gefahren. Ich wollte meine {1} in Frankfurt besuchen. Am Bahnhof habe ich mir eine {2} am Automaten gekauft. Das war gar nicht so schwer. Dann musste ich auf dem richtigen {3} warten. Der Zug hatte zehn Minuten Verspätung, aber das war nicht schlimm. Im Zug habe ich am Fenster gesessen und die {4} angeschaut. Nach zwei Stunden war ich in Frankfurt. Meine Oma hat mich am Bahnhof abgeholt. Ich war sehr stolz, dass alles geklappt hat!",
+        "wordList": {
+          "A": "Fahrkarte",
+          "B": "Großmutter",
+          "C": "Landschaft",
+          "D": "Bahnsteig",
+          "E": "Freundin",
+          "F": "Zeitung",
+          "G": "Platz",
+          "H": "Ausgang"
+        },
+        "answers": {"1": "B", "2": "A", "3": "D", "4": "C"},
+        "titleOptions": [
+          "Probleme mit dem Zug",
+          "Allein unterwegs nach Frankfurt",
+          "Ein Besuch am Flughafen"
+        ],
+        "titleAnswer": 1
+      },
+      {
+        "id": "lv1-m3",
+        "source": "Modellsatz",
+        "title": "Das Schulfest",
+        "text": "Nächste Woche feiert unsere Schule ihr 50-jähriges {1}. Es gibt ein großes Fest mit vielen Aktivitäten. Jede Klasse hat eine {2} vorbereitet. Meine Klasse macht einen Stand mit selbstgemachten Kuchen und Limonade. Die 8b organisiert ein kleines {3}, bei dem man tolle Preise gewinnen kann. Am Abend gibt es dann ein Konzert der Schulband. Alle Eltern, ehemalige Schüler und {4} aus der Umgebung sind herzlich eingeladen. Der Eintritt ist frei.",
+        "wordList": {
+          "A": "Jubiläum",
+          "B": "Nachbarn",
+          "C": "Aufgabe",
+          "D": "Quiz",
+          "E": "Überraschung",
+          "F": "Prüfung",
+          "G": "Lehrer",
+          "H": "Turnier"
+        },
+        "answers": {"1": "A", "2": "E", "3": "D", "4": "B"},
+        "titleOptions": [
+          "Die Schulband spielt",
+          "50 Jahre unsere Schule",
+          "Kuchen backen für die Klasse"
+        ],
+        "titleAnswer": 1
+      }
+    ],
+    "teil2": [
+      {
+        "id": "lv2-m1",
+        "source": "Modellsatz",
+        "title": "Jugendzentrum Pinnwand",
+        "descriptions": [
+          {"id": 106, "text": "Sophie sucht eine Möglichkeit, regelmäßig Sport zu machen. Sie hat am Wochenende Zeit."},
+          {"id": 107, "text": "Lukas möchte alte Sachen verkaufen, die er nicht mehr braucht."},
+          {"id": 108, "text": "Anna interessiert sich für Fotografie und möchte das gerne lernen."},
+          {"id": 109, "text": "Felix sucht einen Platz, wo er nachmittags seine Hausaufgaben machen kann."}
+        ],
+        "ads": [
+          {"letter": "A", "text": "Volleyball für Jugendliche! Jeden Samstag von 10 bis 12 Uhr in der Sporthalle am Marktplatz. Anfänger willkommen! Bringt Sportschuhe mit."},
+          {"letter": "B", "text": "Flohmarkt im Jugendzentrum! Am 5. April von 9 bis 14 Uhr. Tischmiete: 5 Euro. Anmeldung bis 1. April an der Info-Theke."},
+          {"letter": "C", "text": "Neue Lernräume im Jugendzentrum! Montag bis Freitag von 14 bis 18 Uhr könnt ihr in Ruhe lernen. WLAN und Drucker sind kostenlos."},
+          {"letter": "D", "text": "Fotokurs für Einsteiger! Jeden Mittwoch von 16 bis 17:30 Uhr. Ihr lernt, wie man mit dem Handy tolle Fotos macht. Anmeldung bei Frau Vogel."},
+          {"letter": "E", "text": "Kinoabend jeden Freitagabend! Um 19 Uhr zeigen wir aktuelle Filme. Eintritt: 2 Euro inkl. Popcorn."},
+          {"letter": "F", "text": "Gitarrenkurs für Anfänger! Dienstags von 15 bis 16 Uhr im Musikraum. Gitarren können ausgeliehen werden."},
+          {"letter": "G", "text": "Nähwerkstatt: Lerne, wie man Kleidung repariert oder eigene Taschen näht. Jeden Donnerstag von 16 bis 18 Uhr."},
+          {"letter": "H", "text": "Lesenacht im Jugendzentrum! Am 20. März ab 19 Uhr. Bringt euer Lieblingsbuch und einen Schlafsack mit."}
+        ],
+        "answers": {"106": "A", "107": "B", "108": "D", "109": "C"}
+      },
+      {
+        "id": "lv2-m2",
+        "source": "Modellsatz",
+        "title": "Angebote in der Stadt",
+        "descriptions": [
+          {"id": 110, "text": "Mia möchte schwimmen lernen. Sie hat nur am Nachmittag Zeit."},
+          {"id": 111, "text": "Noah will seine Englischkenntnisse verbessern. Er lernt gerne in einer Gruppe."},
+          {"id": 112, "text": "Emma sucht ein Geschenk für ihre Mutter, die gerne liest."},
+          {"id": 113, "text": "Ben möchte mit seinem Hund einen Kurs besuchen."}
+        ],
+        "ads": [
+          {"letter": "A", "text": "Buchhandlung Lesezeit: Große Auswahl an Romanen und Krimis. Geschenkgutscheine erhältlich! Öffnungszeiten: Mo-Sa 9-18 Uhr."},
+          {"letter": "B", "text": "Hundeschule am Park: Kurse für Welpen und erwachsene Hunde. Samstags von 10 bis 11 Uhr. Anmeldung unter 0221-4455667."},
+          {"letter": "C", "text": "Schwimmkurs im Hallenbad: Für Kinder und Jugendliche, Montag und Mittwoch 15-16 Uhr. Kosten: 40 Euro für 8 Termine."},
+          {"letter": "D", "text": "Englisch-Konversationsgruppe: Jeden Dienstag 17-18 Uhr in der Volkshochschule. Für Fortgeschrittene. Keine Anmeldung nötig."},
+          {"letter": "E", "text": "Fahrradwerkstatt: Bring dein Fahrrad vorbei! Wir reparieren alles. Öffnungszeiten: Di-Fr 10-17 Uhr."},
+          {"letter": "F", "text": "Tanzkurs für Anfänger: Hip-Hop und Streetdance. Freitags 16-17:30 Uhr im Kulturzentrum. Ab 12 Jahren."},
+          {"letter": "G", "text": "Kletterhalle Gipfelstürmer: Schnupperkurs jeden Samstag um 14 Uhr. Ausrüstung wird gestellt. Anmeldung online."},
+          {"letter": "H", "text": "Malschule Farbenfroh: Aquarell und Ölmalerei für Jugendliche. Donnerstags 15-17 Uhr. Material inklusive."}
+        ],
+        "answers": {"110": "C", "111": "D", "112": "A", "113": "B"}
+      }
+    ],
+    "teil3": [
+      {
+        "id": "lv3-m1",
+        "source": "Modellsatz",
+        "title": "Schuluniformen - ja oder nein?",
+        "text": "In vielen Ländern tragen Schüler eine Schuluniform. In Deutschland ist das normalerweise nicht so. Aber immer wieder wird darüber diskutiert, ob Schuluniformen auch in Deutschland eingeführt werden sollten.\n\nBefürworter sagen, dass Uniformen Vorteile haben. Wenn alle die gleiche Kleidung tragen, gibt es weniger Streit um Markenkleidung. Niemand wird ausgelacht, weil er nicht die teuersten Schuhe hat. Außerdem spart man morgens Zeit, weil man nicht lange überlegen muss, was man anzieht.\n\nGegner von Schuluniformen finden, dass Jugendliche durch ihre Kleidung ihre Persönlichkeit ausdrücken können. Wenn alle gleich aussehen, geht ein Stück Individualität verloren. Manche sagen auch, dass Uniformen zusätzliches Geld kosten, das nicht alle Familien haben.\n\nEine Umfrage unter 1000 Schülern hat ergeben, dass 40 Prozent für Schuluniformen sind. Die anderen 60 Prozent möchten lieber selbst entscheiden, was sie in der Schule tragen. Am Ende ist es eine Frage, bei der es keine richtige oder falsche Antwort gibt.",
+        "statements": [
+          {"id": 210, "text": "In Deutschland tragen die meisten Schüler eine Schuluniform.", "answer": false},
+          {"id": 211, "text": "Mit Schuluniformen gibt es weniger Streit um teure Kleidung.", "answer": true},
+          {"id": 212, "text": "Gegner meinen, Uniformen schränken die Individualität ein.", "answer": true},
+          {"id": 213, "text": "Die Mehrheit der befragten Schüler ist für Schuluniformen.", "answer": false},
+          {"id": 214, "text": "Schuluniformen sparen morgens Zeit bei der Kleiderwahl.", "answer": true}
+        ]
+      },
+      {
+        "id": "lv3-m2",
+        "source": "Modellsatz",
+        "title": "Haustiere in der Großstadt",
+        "text": "Immer mehr Menschen in deutschen Großstädten haben ein Haustier. Besonders beliebt sind Katzen und Hunde. In Berlin leben schätzungsweise 200.000 Hunde. Aber ist die Stadt wirklich ein guter Ort für Tiere?\n\nFür Hundebesitzer gibt es in vielen Städten spezielle Hundewiesen, wo die Tiere frei laufen dürfen. In Parks müssen Hunde aber oft an der Leine bleiben. Manche Vermieter erlauben keine Haustiere in der Wohnung, was die Suche nach einer Wohnung schwieriger macht.\n\nKatzen haben es in der Stadt oft leichter als Hunde. Sie brauchen weniger Platz und keinen täglichen Spaziergang. Allerdings leben Stadtkatzen meist nur in der Wohnung und können nicht nach draußen gehen. Tierärzte empfehlen, Wohnungskatzen genug Spielzeug und Klettermöglichkeiten zu geben.\n\nExperten betonen, dass ein Haustier viel Verantwortung bedeutet. Man muss sich jeden Tag um das Tier kümmern, auch wenn man mal keine Lust hat. Trotzdem sagen viele Tierbesitzer, dass ihr Leben mit einem Haustier schöner und weniger einsam ist.",
+        "statements": [
+          {"id": 215, "text": "In Berlin leben etwa 200.000 Katzen.", "answer": false},
+          {"id": 216, "text": "Auf speziellen Hundewiesen dürfen Hunde ohne Leine laufen.", "answer": true},
+          {"id": 217, "text": "Alle Vermieter erlauben Haustiere in der Wohnung.", "answer": false},
+          {"id": 218, "text": "Wohnungskatzen brauchen nach Ansicht von Tierärzten Spielzeug.", "answer": true},
+          {"id": 219, "text": "Ein Haustier zu haben bedeutet wenig Arbeit.", "answer": false}
+        ]
+      }
+    ],
+    "teil4": [
+      {
+        "id": "lv4-m1",
+        "source": "Modellsatz",
+        "title": "Mein Leben als Austauschschülerin in Japan",
+        "text": "Ich heiße Lena und bin 16 Jahre alt. Vor einem Jahr bin ich für sechs Monate nach Japan gegangen, um dort die Schule zu besuchen. Es war die aufregendste Zeit meines Lebens.\n\nAm Anfang war alles sehr fremd. Die japanische Schrift konnte ich überhaupt nicht lesen, und die Sprache klang ganz anders als alles, was ich kannte. Meine Gastfamilie, die Familie Tanaka, sprach nur wenig Englisch. Also mussten wir uns am Anfang mit Händen und Füßen verständigen.\n\nDie Schule in Japan ist ganz anders als in Deutschland. Der Unterricht beginnt um 8:30 Uhr und endet erst um 15:30 Uhr. Danach machen die meisten Schüler noch bei einem Klub mit - ich war im Kalligrafie-Klub. Außerdem müssen die Schüler selbst die Klassenzimmer und Flure putzen. Das fand ich am Anfang komisch, aber eigentlich ist es eine gute Idee.\n\nDas Essen war für mich eine große Überraschung. Zum Frühstück gibt es in Japan oft Reis, Suppe und Fisch. Am Anfang habe ich das nicht gemocht, aber nach ein paar Wochen fand ich es lecker. Besonders gerne esse ich jetzt Ramen, eine japanische Nudelsuppe.\n\nNach sechs Monaten konnte ich schon recht gut Japanisch sprechen. Ich habe viele Freunde gefunden und fühlte mich wohl. Jetzt bin ich wieder in Deutschland, aber ich möchte unbedingt zurück nach Japan - am liebsten für ein ganzes Jahr!",
+        "questions": [
+          {"id": 315, "question": "Wie lange war Lena in Japan?", "options": ["Ein ganzes Jahr.", "Sechs Monate.", "Drei Monate."], "answer": 1},
+          {"id": 316, "question": "Wie hat sich Lena am Anfang mit ihrer Gastfamilie verständigt?", "options": ["Sie haben nur Japanisch gesprochen.", "Sie haben sich mit Gesten verständigt.", "Sie haben eine Übersetzungs-App benutzt."], "answer": 1},
+          {"id": 317, "question": "Was machen japanische Schüler nach dem Unterricht?", "options": ["Sie gehen sofort nach Hause.", "Sie nehmen an einem Klub teil.", "Sie haben noch mehr Unterricht."], "answer": 1},
+          {"id": 318, "question": "Was fand Lena am Anfang komisch?", "options": ["Dass die Schüler die Schule putzen.", "Dass der Unterricht so kurz ist.", "Dass es keine Klubs gibt."], "answer": 0},
+          {"id": 319, "question": "Was hat Lena beim Essen überrascht?", "options": ["Dass es mittags kein Essen gab.", "Dass es morgens Reis und Fisch gab.", "Dass das Essen sehr teuer war."], "answer": 1},
+          {"id": 320, "question": "Was möchte Lena in Zukunft machen?", "options": ["Sie möchte in Japan studieren.", "Sie möchte für ein ganzes Jahr nach Japan.", "Sie möchte nie wieder nach Japan."], "answer": 1}
+        ]
+      },
+      {
+        "id": "lv4-m2",
+        "source": "Modellsatz",
+        "title": "Ehrenamt: Jugendliche helfen mit",
+        "text": "In Deutschland engagieren sich viele Jugendliche ehrenamtlich. Das bedeutet, sie arbeiten freiwillig und ohne Bezahlung für andere Menschen oder für die Gemeinschaft. Eine Studie zeigt, dass etwa 35 Prozent der 14- bis 17-Jährigen ein Ehrenamt haben.\n\nDie 15-jährige Mia hilft jeden Samstag in einem Tierheim. Sie füttert die Hunde, macht die Käfige sauber und geht mit den Tieren spazieren. Am Anfang war es anstrengend, aber jetzt macht es ihr richtig Spaß. Die Tiere freuen sich immer, wenn sie kommt.\n\nIhr Mitschüler Tim trainiert eine Kindergruppe im Fußballverein. Die Kinder sind zwischen 6 und 8 Jahren alt. Man braucht viel Geduld, erzählt Tim, aber wenn die Kleinen ein Tor schießen und sich freuen, ist das das beste Gefühl.\n\nWer sich ehrenamtlich engagiert, lernt viel dazu. Man übernimmt Verantwortung, lernt im Team zu arbeiten und hilft anderen Menschen. Außerdem sieht ein Ehrenamt gut im Lebenslauf aus und kann bei der Suche nach einem Ausbildungsplatz helfen.\n\nWer Interesse hat, kann sich bei verschiedenen Organisationen melden. Die meisten Städte haben eine Freiwilligenagentur, die bei der Suche nach dem passenden Ehrenamt hilft.",
+        "questions": [
+          {"id": 321, "question": "Was bedeutet ehrenamtlich arbeiten?", "options": ["Man bekommt viel Geld dafür.", "Man arbeitet freiwillig ohne Bezahlung.", "Man arbeitet nur eine Stunde pro Woche."], "answer": 1},
+          {"id": 322, "question": "Was macht Mia im Tierheim?", "options": ["Sie arbeitet als Tierärztin.", "Sie kümmert sich um die Tiere.", "Sie verkauft Tierfutter."], "answer": 1},
+          {"id": 323, "question": "Wie alt sind die Kinder, die Tim trainiert?", "options": ["Zwischen 6 und 8 Jahren.", "Zwischen 10 und 12 Jahren.", "Zwischen 14 und 16 Jahren."], "answer": 0},
+          {"id": 324, "question": "Warum ist ein Ehrenamt gut für den Lebenslauf?", "options": ["Weil man damit Geld verdient.", "Weil es bei der Suche nach einem Ausbildungsplatz hilft.", "Weil man dann keine Hausaufgaben machen muss."], "answer": 1},
+          {"id": 325, "question": "Wo kann man Informationen über Ehrenämter bekommen?", "options": ["Nur im Internet.", "Bei der Freiwilligenagentur der Stadt.", "Nur in der Schule."], "answer": 1},
+          {"id": 326, "question": "Wie viel Prozent der Jugendlichen haben ein Ehrenamt?", "options": ["Etwa 50 Prozent.", "Etwa 35 Prozent.", "Etwa 15 Prozent."], "answer": 1}
+        ]
+      }
+    ],
+    "teil5": [
+      {
+        "id": "lv5-m1",
+        "source": "Modellsatz",
+        "title": "Nachrichten aus der Schule",
+        "texts": [
+          {"id": 421, "text": "Die Schulbibliothek hat 200 neue Bücher bekommen. Besonders viele Jugendbücher und Graphic Novels sind dabei. Ab Montag kann man sie ausleihen. Außerdem gibt es jetzt jeden Dienstag eine Lesegruppe, bei der Schüler ihre Lieblingsbücher vorstellen können."},
+          {"id": 422, "text": "Die Schulmensa bietet ab nächster Woche ein vegetarisches Menü an. Jeden Tag gibt es mindestens ein Gericht ohne Fleisch. Die Schülervertretung hatte dies schon lange gewünscht. Die Preise bleiben gleich."},
+          {"id": 423, "text": "Am Freitag findet das jährliche Sportfest statt. Die Klassen treten in verschiedenen Disziplinen gegeneinander an: Laufen, Weitsprung und Staffellauf. Die Siegerklasse gewinnt einen Wanderpokal. Bei schlechtem Wetter wird das Fest auf die nächste Woche verschoben."},
+          {"id": 424, "text": "Der Informatikkurs der 10. Klasse hat eine App programmiert, die den Vertretungsplan der Schule anzeigt. Die App ist kostenlos und kann ab sofort heruntergeladen werden. Sie zeigt auch aktuelle Nachrichten aus der Schule an."}
+        ],
+        "headings": [
+          {"letter": "A", "text": "Neues Essensangebot in der Mensa"},
+          {"letter": "B", "text": "Schüler entwickeln nützliche App"},
+          {"letter": "C", "text": "Wettbewerb der Klassen beim Sportfest"},
+          {"letter": "D", "text": "Theatergruppe sucht Mitspieler"},
+          {"letter": "E", "text": "Neue Bücher zum Ausleihen"},
+          {"letter": "F", "text": "Projektwoche zum Thema Umwelt"},
+          {"letter": "G", "text": "Wandertag ans Meer"},
+          {"letter": "H", "text": "Schülerband gibt Konzert"}
+        ],
+        "answers": {"421": "E", "422": "A", "423": "C", "424": "B"}
+      },
+      {
+        "id": "lv5-m2",
+        "source": "Modellsatz",
+        "title": "Tipps für Jugendliche",
+        "texts": [
+          {"id": 425, "text": "Du hast Probleme beim Einschlafen? Dann versuche, abends kein Handy mehr zu benutzen. Das blaue Licht vom Bildschirm macht wach. Lies stattdessen ein Buch oder höre leise Musik. Auch ein Glas warme Milch kann helfen."},
+          {"id": 426, "text": "Prüfungsangst? Das kennen viele Schüler. Wichtig ist, rechtzeitig mit dem Lernen anzufangen. Mach dir einen Lernplan und teile den Stoff in kleine Teile auf. Am Tag vor der Prüfung solltest du nicht mehr lernen, sondern dich entspannen."},
+          {"id": 427, "text": "Möchtest du fitter werden? Du musst nicht gleich ins Fitnessstudio gehen. Fahr mit dem Fahrrad zur Schule, nimm die Treppe statt den Aufzug und geh am Wochenende spazieren oder joggen. Schon 30 Minuten Bewegung am Tag reichen aus."},
+          {"id": 428, "text": "Streit mit den Eltern? Das ist in der Pubertät ganz normal. Versuche, ruhig zu bleiben und deine Meinung klar zu sagen. Höre auch zu, was deine Eltern denken. Oft findet man zusammen einen Kompromiss."}
+        ],
+        "headings": [
+          {"letter": "A", "text": "Besser schlafen ohne Bildschirm"},
+          {"letter": "B", "text": "Mit Bewegung fit bleiben"},
+          {"letter": "C", "text": "Gesund essen im Alltag"},
+          {"letter": "D", "text": "Konflikte zu Hause lösen"},
+          {"letter": "E", "text": "Keine Angst vor Prüfungen"},
+          {"letter": "F", "text": "Neue Freunde finden"},
+          {"letter": "G", "text": "Taschengeld richtig sparen"},
+          {"letter": "H", "text": "Konzentration verbessern"}
+        ],
+        "answers": {"425": "A", "426": "E", "427": "B", "428": "D"}
+      }
+    ]
+  },
+  "hoerverstehen": {
+    "teil1": [
+      {
+        "id": "hv1-m1",
+        "source": "Modellsatz",
+        "title": "Situationen im Alltag",
+        "scenes": [
+          {
+            "id": 501,
+            "spokenText": "Guten Tag, ich möchte bitte zwei Karten für den Film um 17 Uhr. Tut mir leid, die Vorstellung um 17 Uhr ist leider ausverkauft. Aber um 20 Uhr gibt es noch Plätze. Na gut, dann nehme ich zwei Karten für 20 Uhr.",
+            "options": ["Jemand kauft Karten für ein Konzert.", "Jemand kauft Kinokarten.", "Jemand kauft Fahrkarten."],
+            "answer": 1
+          },
+          {
+            "id": 502,
+            "spokenText": "Papa, mein Fahrrad ist kaputt. Das Vorderrad hat keine Luft mehr! Lass mal sehen. Oh ja, der Reifen hat ein Loch. Den müssen wir flicken. Hol mal bitte den Werkzeugkoffer aus der Garage.",
+            "options": ["Das Auto ist kaputt und muss repariert werden.", "Das Fahrrad hat einen platten Reifen.", "Der Vater kauft ein neues Fahrrad."],
+            "answer": 1
+          },
+          {
+            "id": 503,
+            "spokenText": "Entschuldigung, wissen Sie, wann der nächste Bus zum Marktplatz fährt? Der 42er fährt in zehn Minuten. Die Haltestelle ist dort drüben, sehen Sie? Ja, danke schön! Und wie viel kostet eine Fahrkarte? Zwei Euro fünfzig.",
+            "options": ["Jemand fragt nach einer Zugverbindung.", "Jemand sucht ein Taxi.", "Jemand erkundigt sich nach dem Bus."],
+            "answer": 2
+          },
+          {
+            "id": 504,
+            "spokenText": "Schau mal, es hat geschneit! Alles ist weiß! Super, dann können wir einen Schneemann bauen! Ja, und danach machen wir eine Schneeballschlacht! Aber zieht euch warm an, es sind minus fünf Grad draußen!",
+            "options": ["Die Kinder wollen bei Regen draußen spielen.", "Die Kinder freuen sich über den Schnee.", "Die Kinder können nicht nach draußen gehen."],
+            "answer": 1
+          },
+          {
+            "id": 505,
+            "spokenText": "Guten Morgen, Herr Doktor. Mein Sohn hat seit gestern Halsschmerzen und Fieber. Mach mal den Mund auf. Ja, der Hals ist ganz rot. Das ist wahrscheinlich eine Erkältung. Ich schreibe euch ein Rezept für Hustensaft.",
+            "options": ["Ein Kind ist beim Zahnarzt.", "Ein Kind hat sich das Bein gebrochen.", "Ein Kind ist wegen einer Erkältung beim Arzt."],
+            "answer": 2
+          }
+        ]
+      },
+      {
+        "id": "hv1-m2",
+        "source": "Modellsatz",
+        "title": "Gespräche im Alltag",
+        "scenes": [
+          {
+            "id": 506,
+            "spokenText": "Hallo, ich habe im Internet ein Bücherregal gesehen, das Sie verkaufen. Ist es noch da? Ja, das Regal ist noch da. Es ist aus Holz, 1 Meter 80 hoch, in sehr gutem Zustand. Kann ich es mir heute Nachmittag anschauen? Ja, kommen Sie gerne ab 15 Uhr vorbei.",
+            "options": ["Jemand kauft neue Möbel in einem Geschäft.", "Jemand möchte ein gebrauchtes Regal kaufen.", "Jemand bestellt ein Regal im Internet."],
+            "answer": 1
+          },
+          {
+            "id": 507,
+            "spokenText": "Wir haben jetzt alle Zutaten: Mehl, Eier, Zucker, Butter und Äpfel. Toll, dann können wir jetzt den Apfelkuchen backen! Heiz du schon mal den Ofen auf 180 Grad vor. Okay, und du schälst die Äpfel?",
+            "options": ["Zwei Personen gehen einkaufen.", "Zwei Personen kochen Abendessen.", "Zwei Personen backen zusammen einen Kuchen."],
+            "answer": 2
+          },
+          {
+            "id": 508,
+            "spokenText": "Mama, ich brauche neue Turnschuhe für den Sportunterricht. Die alten sind zu klein geworden. Stimmt, deine Füße sind gewachsen. Lass uns am Samstag in die Stadt fahren und welche kaufen. Kann ich blaue Schuhe haben?",
+            "options": ["Ein Kind möchte neue Sportschuhe kaufen.", "Ein Kind hat seine Schuhe verloren.", "Ein Kind braucht eine neue Schultasche."],
+            "answer": 0
+          },
+          {
+            "id": 509,
+            "spokenText": "Hast du gehört? Morgen kommt ein Zirkus in die Stadt! Wirklich? Toll! Da möchte ich unbedingt hin! Gibt es Clowns und Akrobaten? Ja, und auch Zauberkünstler! Die Vorstellung beginnt um 16 Uhr. Dann fragen wir unsere Eltern, ob wir hingehen dürfen.",
+            "options": ["Zwei Kinder sprechen über einen Zirkusbesuch.", "Zwei Kinder planen einen Kinobesuch.", "Zwei Kinder gehen in einen Freizeitpark."],
+            "answer": 0
+          },
+          {
+            "id": 510,
+            "spokenText": "Guten Tag, ich möchte mein Paket abholen. Hier ist die Benachrichtigungskarte. Ja, einen Moment bitte. Kann ich Ihren Personalausweis sehen? Natürlich, hier bitte. Danke. Hier ist Ihr Paket. Bitte unterschreiben Sie hier.",
+            "options": ["Jemand schickt ein Paket ab.", "Jemand holt ein Paket bei der Post ab.", "Jemand beschwert sich über ein verlorenes Paket."],
+            "answer": 1
+          }
+        ]
+      }
+    ],
+    "teil2": [
+      {
+        "id": "hv2-m1",
+        "source": "Modellsatz",
+        "title": "Durchsagen und Ansagen",
+        "announcements": [
+          {
+            "id": 520,
+            "spokenText": "Liebe Fahrgäste, der ICE 574 nach München hat eine Verspätung von ungefähr 20 Minuten. Wir bitten um Entschuldigung. Der Zug fährt auf Gleis 8 ab. Bitte achten Sie auf die Anzeigentafel.",
+            "question": "Welche Information bekommt man?",
+            "options": ["Der Zug fällt heute aus.", "Der Zug hat 20 Minuten Verspätung.", "Der Zug fährt von einem anderen Bahnhof."],
+            "answer": 1
+          },
+          {
+            "id": 521,
+            "spokenText": "Achtung, eine Durchsage für alle Besucher: Unser Geschäft schließt heute bereits um 18 Uhr statt um 20 Uhr. Bitte begeben Sie sich in den nächsten 15 Minuten zur Kasse. Ab morgen gelten wieder die normalen Öffnungszeiten.",
+            "question": "Was ist heute anders?",
+            "options": ["Das Geschäft hat heute länger geöffnet.", "Das Geschäft schließt heute früher.", "Das Geschäft bleibt morgen geschlossen."],
+            "answer": 1
+          },
+          {
+            "id": 522,
+            "spokenText": "Liebe Schülerinnen und Schüler, bitte beachtet: Ab nächster Woche könnt ihr euch in der Bibliothek für den Lesewettbewerb anmelden. Die Teilnahme ist freiwillig. Der Wettbewerb findet am 15. Dezember in der Aula statt. Es gibt tolle Buchpreise zu gewinnen!",
+            "question": "Worum geht es in der Durchsage?",
+            "options": ["Um einen neuen Bibliotheksausweis.", "Um die Anmeldung für einen Lesewettbewerb.", "Um neue Bücher in der Bibliothek."],
+            "answer": 1
+          },
+          {
+            "id": 523,
+            "spokenText": "Willkommen im Schwimmbad Aquafun! Bitte beachten Sie: Das Sprungbecken ist heute wegen Wartungsarbeiten geschlossen. Alle anderen Becken und die Wasserrutsche können wie gewohnt benutzt werden. Wir danken für Ihr Verständnis.",
+            "question": "Was erfahren die Besucher?",
+            "options": ["Das ganze Schwimmbad ist geschlossen.", "Das Sprungbecken ist heute nicht geöffnet.", "Die Wasserrutsche ist kaputt."],
+            "answer": 1
+          }
+        ]
+      },
+      {
+        "id": "hv2-m2",
+        "source": "Modellsatz",
+        "title": "Ansagen im Alltag",
+        "announcements": [
+          {
+            "id": 524,
+            "spokenText": "Verehrte Fluggäste, wir beginnen jetzt mit dem Einsteigen für Flug LH 432 nach Berlin. Bitte halten Sie Ihre Bordkarte und Ihren Ausweis bereit. Passagiere mit kleinen Kindern und Passagiere der Business-Klasse dürfen zuerst einsteigen.",
+            "question": "Was sollen die Fluggäste tun?",
+            "options": ["Ihre Koffer am Schalter abgeben.", "Ihre Bordkarte bereithalten.", "Zum Ausgang gehen."],
+            "answer": 1
+          },
+          {
+            "id": 525,
+            "spokenText": "Liebe Anwohner, wir informieren Sie: Ab Montag wird die Hauptstraße für drei Wochen wegen Bauarbeiten gesperrt. Eine Umleitung ist eingerichtet. Die Buslinie 12 fährt in dieser Zeit über die Parkstraße. Wir bitten um Verständnis.",
+            "question": "Warum wird die Hauptstraße gesperrt?",
+            "options": ["Wegen eines Festes.", "Wegen Bauarbeiten.", "Wegen eines Unfalls."],
+            "answer": 1
+          },
+          {
+            "id": 526,
+            "spokenText": "Hallo zusammen! Hier ist Radio Sonnenschein mit dem Wetterbericht für morgen. Am Vormittag ist es noch bewölkt, aber am Nachmittag kommt die Sonne raus. Die Temperaturen steigen auf angenehme 22 Grad. Ein perfekter Tag für einen Ausflug!",
+            "question": "Wie wird das Wetter morgen Nachmittag?",
+            "options": ["Es wird regnen.", "Es wird sonnig und warm.", "Es bleibt den ganzen Tag bewölkt."],
+            "answer": 1
+          },
+          {
+            "id": 527,
+            "spokenText": "Achtung, Durchsage im Supermarkt: Heute haben wir ein Sonderangebot! Alle Joghurts sind um 30 Prozent reduziert. Das Angebot gilt nur heute und nur, solange der Vorrat reicht. Sie finden die Joghurts im Kühlregal in Gang 3.",
+            "question": "Was ist das Sonderangebot?",
+            "options": ["Alle Getränke sind billiger.", "Joghurts kosten 30 Prozent weniger.", "Es gibt Gratisproben an der Kasse."],
+            "answer": 1
+          }
+        ]
+      }
+    ],
+    "teil3": [
+      {
+        "id": "hv3-m1",
+        "source": "Modellsatz",
+        "title": "Interview: Freiwilliges Soziales Jahr",
+        "intro": "Du hörst ein Interview mit Sarah, die ein Freiwilliges Soziales Jahr in einem Krankenhaus macht.",
+        "spokenText": "Interviewer: Sarah, du machst ein Freiwilliges Soziales Jahr im Krankenhaus. Wie bist du auf die Idee gekommen?\n\nSarah: Nach dem Abitur wusste ich nicht genau, was ich studieren will. Eine Freundin hat mir erzählt, dass man im FSJ verschiedene Berufe kennenlernen kann. Da dachte ich, das ist eine gute Möglichkeit, um herauszufinden, ob mir die Arbeit im Krankenhaus gefällt.\n\nInterviewer: Was sind deine Aufgaben dort?\n\nSarah: Ich helfe auf der Kinderstation. Ich bringe den Kindern das Essen, spiele mit ihnen und lese ihnen vor. Manchmal begleite ich sie auch zu Untersuchungen. Ich mache keine medizinischen Sachen, dafür bin ich nicht ausgebildet.\n\nInterviewer: Was gefällt dir am besten?\n\nSarah: Wenn die Kinder sich freuen, wenn ich komme. Manche Kinder sind mehrere Wochen im Krankenhaus und vermissen ihre Freunde. Dann ist es schön, wenn ich ihnen ein bisschen Freude machen kann.\n\nInterviewer: Und was ist schwierig?\n\nSarah: Es ist manchmal traurig, wenn es einem Kind sehr schlecht geht. Aber die Ärzte und Krankenschwestern unterstützen mich. Wir reden oft zusammen und das hilft.\n\nInterviewer: Weißt du jetzt, was du studieren willst?\n\nSarah: Ja! Ich möchte Medizin studieren. Das FSJ hat mir gezeigt, dass ich gerne mit kranken Menschen arbeite und ihnen helfen möchte.",
+        "statements": [
+          {"id": 610, "text": "Sarah hat das FSJ gemacht, weil sie schon wusste, dass sie Medizin studieren will.", "answer": false},
+          {"id": 611, "text": "Sarah arbeitet auf der Kinderstation.", "answer": true},
+          {"id": 612, "text": "Sarah führt auch medizinische Untersuchungen durch.", "answer": false},
+          {"id": 613, "text": "Manche Kinder müssen mehrere Wochen im Krankenhaus bleiben.", "answer": true},
+          {"id": 614, "text": "Sarah möchte nach dem FSJ Medizin studieren.", "answer": true}
+        ]
+      },
+      {
+        "id": "hv3-m2",
+        "source": "Modellsatz",
+        "title": "Interview: Schülerzeitung",
+        "intro": "Du hörst ein Interview mit Julia, die bei der Schülerzeitung ihrer Schule mitmacht.",
+        "spokenText": "Interviewer: Julia, du bist die Chefredakteurin der Schülerzeitung. Erzähl mal, was macht ihr da genau?\n\nJulia: Wir bringen viermal im Jahr eine Zeitung heraus. Darin stehen Artikel über das Schulleben, Interviews mit Lehrern und Schülern, Buchempfehlungen und manchmal auch Rätsel.\n\nInterviewer: Wie viele Schüler sind im Team?\n\nJulia: Momentan sind wir zwölf Schüler aus verschiedenen Klassen. Jeder kann mitmachen, man muss nur Lust am Schreiben haben.\n\nInterviewer: Wie läuft das ab?\n\nJulia: Wir treffen uns jeden Donnerstag nach der Schule für eine Stunde. Da besprechen wir die Themen und verteilen die Aufgaben. Jeder schreibt seine Artikel zu Hause und schickt sie mir. Ich lese alles durch und korrigiere, wenn nötig.\n\nInterviewer: Habt ihr die Zeitung auch digital?\n\nJulia: Ja, seit letztem Jahr gibt es die Zeitung auch als PDF auf der Schulwebsite. Aber viele lesen lieber die gedruckte Version. Wir drucken 300 Exemplare und die sind meistens schnell weg.\n\nInterviewer: Was macht dir am meisten Spaß?\n\nJulia: Die Interviews! Ich rede gerne mit Menschen und stelle Fragen. Letzten Monat habe ich unseren neuen Schulleiter interviewt. Das war sehr spannend.",
+        "statements": [
+          {"id": 615, "text": "Die Schülerzeitung erscheint einmal im Monat.", "answer": false},
+          {"id": 616, "text": "Im Team sind Schüler aus verschiedenen Klassen.", "answer": true},
+          {"id": 617, "text": "Das Team trifft sich jeden Donnerstag.", "answer": true},
+          {"id": 618, "text": "Die Zeitung gibt es nur in gedruckter Form.", "answer": false},
+          {"id": 619, "text": "Julia macht am liebsten die Interviews.", "answer": true}
+        ]
+      }
+    ],
+    "teil4": [
+      {
+        "id": "hv4-m1",
+        "source": "Modellsatz",
+        "title": "Bericht: Schulprojekt Umweltschutz",
+        "intro": "Du hörst einen Bericht über ein Umweltschutzprojekt an einer Schule.",
+        "spokenText": "Die Wilhelm-Schule in Hannover hat ein besonderes Projekt gestartet: Unsere Schule wird grün. Die Idee kam von den Schülern der 9. Klasse. Sie wollten etwas gegen den vielen Müll in der Schule tun.\n\nZuerst haben die Schüler eine Woche lang beobachtet, wie viel Müll in der Schule entsteht. Das Ergebnis war erschreckend: Jeden Tag landeten fünf große Säcke Müll im Container. Besonders viel Plastikmüll kam von den Verpackungen der Pausenbrote und von Plastikflaschen.\n\nDann haben die Schüler einen Plan gemacht. Sie haben Mülltrennung in allen Klassenzimmern eingeführt. Es gibt jetzt Behälter für Papier, Plastik und Restmüll. Außerdem hat die Schule Trinkwasserspender aufgestellt, damit die Schüler ihre Flaschen auffüllen können statt neue zu kaufen.\n\nDas Ergebnis nach drei Monaten: Der Plastikmüll ist um 40 Prozent zurückgegangen. Die Schüler sind stolz auf ihren Erfolg. Jetzt planen sie das nächste Projekt: einen Schulgarten auf dem Dach der Schule.\n\nDer Schulleiter, Herr Brandt, unterstützt die Schüler. Er sagt, es ist toll zu sehen, wie engagiert die Schüler sind. Sie lernen nicht nur für die Schule, sondern auch fürs Leben.",
+        "questions": [
+          {"id": 710, "question": "Von wem kam die Idee für das Projekt?", "options": ["Vom Schulleiter.", "Von den Schülern der 9. Klasse.", "Von den Eltern."], "answer": 1},
+          {"id": 711, "question": "Wie viel Müll entstand jeden Tag in der Schule?", "options": ["Drei Säcke.", "Fünf Säcke.", "Zehn Säcke."], "answer": 1},
+          {"id": 712, "question": "Was war das größte Problem beim Müll?", "options": ["Zu viel Papiermüll.", "Zu viel Plastikmüll.", "Zu viel Essensreste."], "answer": 1},
+          {"id": 713, "question": "Was hat die Schule gegen Plastikflaschen gemacht?", "options": ["Plastikflaschen wurden verboten.", "Es wurden Trinkwasserspender aufgestellt.", "Die Schüler müssen Glasflaschen mitbringen."], "answer": 1},
+          {"id": 714, "question": "Um wie viel Prozent ist der Plastikmüll zurückgegangen?", "options": ["Um 20 Prozent.", "Um 40 Prozent.", "Um 60 Prozent."], "answer": 1},
+          {"id": 715, "question": "Was planen die Schüler als nächstes?", "options": ["Einen Schulgarten auf dem Dach.", "Eine Fahrradwerkstatt.", "Einen Schulkiosk."], "answer": 0}
+        ]
+      },
+      {
+        "id": "hv4-m2",
+        "source": "Modellsatz",
+        "title": "Bericht: Digitales Lernen",
+        "intro": "Du hörst einen Bericht über digitales Lernen an einer deutschen Schule.",
+        "spokenText": "Die Georg-Schule in Leipzig gehört zu den modernsten Schulen Deutschlands. Seit zwei Jahren arbeiten alle Schüler dort mit Tablets im Unterricht. Die Schule hat 500 Tablets gekauft, eines für jeden Schüler.\n\nDie Lehrerin Frau Koch erzählt, am Anfang war es nicht einfach. Viele Lehrer mussten erst lernen, wie man mit den Tablets unterrichtet. Sie hatten spezielle Fortbildungen und haben sich gegenseitig geholfen.\n\nDie Schüler sind begeistert. Die 14-jährige Marie sagt, sie findet es toll, dass sie nicht mehr so viele schwere Bücher tragen muss. Alles ist auf dem Tablet. Und sie können im Unterricht Videos anschauen oder interaktive Übungen machen.\n\nAber es gibt auch Probleme. Manchmal funktioniert das Internet nicht richtig, und dann geht im Unterricht nichts mehr. Außerdem lenken sich manche Schüler ab und spielen auf dem Tablet statt zuzuhören.\n\nDer Schulleiter ist trotzdem zufrieden. Die Noten sind im Durchschnitt besser geworden. Und die Schüler lernen wichtige digitale Fähigkeiten, die sie später im Beruf brauchen.",
+        "questions": [
+          {"id": 716, "question": "Seit wann arbeiten die Schüler mit Tablets?", "options": ["Seit einem Jahr.", "Seit zwei Jahren.", "Seit fünf Jahren."], "answer": 1},
+          {"id": 717, "question": "Wie viele Tablets hat die Schule gekauft?", "options": ["200.", "500.", "1000."], "answer": 1},
+          {"id": 718, "question": "Was war für die Lehrer am Anfang schwierig?", "options": ["Die Schüler waren dagegen.", "Sie mussten lernen, mit Tablets zu unterrichten.", "Es gab nicht genug Tablets."], "answer": 1},
+          {"id": 719, "question": "Was findet Marie gut an den Tablets?", "options": ["Dass sie keine schweren Bücher tragen muss.", "Dass der Unterricht kürzer ist.", "Dass sie keine Hausaufgaben mehr machen muss."], "answer": 0},
+          {"id": 720, "question": "Was ist ein Problem mit den Tablets?", "options": ["Sie sind zu teuer.", "Das Internet funktioniert manchmal nicht.", "Die Tablets gehen oft kaputt."], "answer": 1},
+          {"id": 721, "question": "Wie haben sich die Noten entwickelt?", "options": ["Sie sind schlechter geworden.", "Sie sind gleich geblieben.", "Sie sind besser geworden."], "answer": 2}
+        ]
+      }
+    ],
+    "teil5": [
+      {
+        "id": "hv5-m1",
+        "source": "Modellsatz",
+        "title": "Kurze Berichte",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 821,
+            "spokenText": "In unserer Stadt hat ein neues Jugendzentrum eröffnet. Es bietet viele Freizeitangebote: einen Musikraum, eine Werkstatt, Tischtennisplatten und einen Computerraum. Das Zentrum ist von Montag bis Samstag geöffnet. Der Eintritt ist für alle Jugendlichen unter 18 Jahren kostenlos.",
+            "answer": "D"
+          },
+          {
+            "id": 822,
+            "spokenText": "Die 16-jährige Schülerin Lisa hat den ersten Platz beim Landeswettbewerb für junge Erfinder gewonnen. Sie hat einen solarbetriebenen Rucksack entwickelt, mit dem man unterwegs sein Handy aufladen kann. Lisa arbeitet schon an ihrer nächsten Erfindung.",
+            "answer": "A"
+          },
+          {
+            "id": 823,
+            "spokenText": "Ab nächster Woche gibt es in der Stadtbücherei jeden Mittwoch eine Lesestunde für Kinder. Freiwillige Helfer lesen den Kindern Geschichten vor. Die Veranstaltung beginnt um 15 Uhr und dauert eine Stunde. Eine Anmeldung ist nicht nötig.",
+            "answer": "F"
+          },
+          {
+            "id": 824,
+            "spokenText": "Das Freibad in der Waldstraße wird dieses Jahr nicht öffnen. Das Bad ist mehr als 40 Jahre alt und muss komplett renoviert werden. Die Stadt plant, an der gleichen Stelle ein modernes Schwimmbad zu bauen. Die Bauarbeiten dauern voraussichtlich zwei Jahre.",
+            "answer": "B"
+          }
+        ],
+        "headings": [
+          {"letter": "A", "text": "Schülerin gewinnt Erfinderwettbewerb"},
+          {"letter": "B", "text": "Freibad bleibt wegen Umbau geschlossen"},
+          {"letter": "C", "text": "Neuer Spielplatz für den Stadtpark"},
+          {"letter": "D", "text": "Freizeitangebote im neuen Jugendzentrum"},
+          {"letter": "E", "text": "Schulkantine bietet gesundes Essen"},
+          {"letter": "F", "text": "Vorlesen für Kinder in der Bücherei"},
+          {"letter": "G", "text": "Sportverein sucht junge Mitglieder"},
+          {"letter": "H", "text": "Konzert im Kulturzentrum"}
+        ]
+      },
+      {
+        "id": "hv5-m2",
+        "source": "Modellsatz",
+        "title": "Nachrichten für Jugendliche",
+        "intro": "Du hörst jetzt vier kurze Texte. Zu jedem Text passt eine Überschrift.",
+        "scenes": [
+          {
+            "id": 825,
+            "spokenText": "Eine Gruppe von Schülern hat am Wochenende das Flussufer gereinigt. Insgesamt haben 40 Jugendliche mitgemacht und drei Stunden lang Müll gesammelt. Am Ende hatten sie 15 große Säcke voller Abfall. Die Aktion soll im nächsten Monat wiederholt werden.",
+            "answer": "C"
+          },
+          {
+            "id": 826,
+            "spokenText": "Die Schulmannschaft der Gesamtschule Nord hat das Bezirksturnier im Handball gewonnen. Im Finale haben sie gegen die Realschule Mitte mit 24 zu 18 gewonnen. Der Trainer ist sehr stolz auf seine Mannschaft. Nächsten Monat spielen sie bei den Landesmeisterschaften.",
+            "answer": "E"
+          },
+          {
+            "id": 827,
+            "spokenText": "Ab September gibt es einen neuen Austausch mit einer Partnerschule in Frankreich. Schüler der 8. und 9. Klasse können sich bewerben. Sie verbringen zwei Wochen in einer französischen Gastfamilie und besuchen dort die Schule. Die Bewerbungsfrist endet am 30. Juni.",
+            "answer": "A"
+          },
+          {
+            "id": 828,
+            "spokenText": "Die Mensa der Kant-Schule hat ihr Angebot erweitert. Ab sofort gibt es jeden Tag ein vegetarisches und ein veganes Gericht. Außerdem gibt es eine Salatbar, an der sich die Schüler selbst bedienen können. Die Preise bleiben unverändert.",
+            "answer": "G"
+          }
+        ],
+        "headings": [
+          {"letter": "A", "text": "Neuer Schüleraustausch mit Frankreich"},
+          {"letter": "B", "text": "Fahrradprojekt der Umwelt-AG"},
+          {"letter": "C", "text": "Jugendliche sammeln Müll am Fluss"},
+          {"letter": "D", "text": "Neue Sportanlage wird eröffnet"},
+          {"letter": "E", "text": "Handballteam gewinnt Turnier"},
+          {"letter": "F", "text": "Theaterstück der Theater-AG"},
+          {"letter": "G", "text": "Mehr Auswahl beim Schulessen"},
+          {"letter": "H", "text": "Schulfest am Wochenende"}
+        ]
+      }
+    ]
+  }
+}
