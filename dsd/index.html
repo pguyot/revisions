@@ -285,11 +285,17 @@
 
     /* HV scene options (replaces pictures with text descriptions) */
     .scene-options { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .scene-options.scene-options-img { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
     .scene-opt {
       display: flex; align-items: center; gap: 0.5rem;
       padding: 0.5rem 0.8rem; border: 2px solid var(--border); border-radius: 8px;
       cursor: pointer; transition: border-color 0.2s; font-size: 0.9rem;
     }
+    .scene-opt-img {
+      flex-direction: column; align-items: center; padding: 0.4rem;
+      width: calc(33% - 0.5rem); min-width: 120px; max-width: 200px;
+    }
+    .scene-opt-img img { width: 100%; height: auto; border-radius: 4px; }
     .scene-opt:hover { border-color: var(--info); }
     .scene-opt.so-selected { border-color: var(--info); background: color-mix(in srgb, var(--info) 15%, var(--btn-bg)); }
     .scene-opt.so-correct { border-color: var(--correct); background: color-mix(in srgb, var(--correct) 15%, var(--btn-bg)); }
@@ -338,6 +344,8 @@
     .score-badge-perfect { background: var(--correct); color: #fff; }
     .score-badge-good { background: var(--accent2); color: #222; }
     .score-badge-tried { background: var(--wrong); color: #fff; }
+    .source-badge { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; background: #e0e0e0; color: #333; margin-left: 0.4rem; vertical-align: middle; }
+    @media (prefers-color-scheme: dark) { .source-badge { background: #444; color: #ddd; } }
     .progress-summary {
       font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem;
     }
@@ -598,8 +606,9 @@ function showSets(section, teil) {
       else if (sc.pct >= 60) badge = `<span class="score-badge score-badge-good">${sc.pct}%</span>`;
       else badge = `<span class="score-badge score-badge-tried">${sc.pct}%</span>`;
     }
+    const srcBadge = s.source ? `<span class="source-badge">${s.source}</span>` : '';
     return `<div class="part-card" style="text-align:left; margin-bottom:0.5rem; display:flex; align-items:center;" onclick="startExercise('${section}', ${teil}, ${i})">
-      <h4 style="flex:1">Übung ${i+1}: ${s.title}</h4>
+      <h4 style="flex:1">Übung ${i+1}: ${s.title}${srcBadge}</h4>
       ${badge}
     </div>`;
   }).join('');
@@ -1012,18 +1021,29 @@ function renderHV1Scene(ex, container, idx) {
   const scene = ex.scenes[idx];
   exerciseState.currentScene = idx;
   const letters = ['A', 'B', 'C'];
+  const hasImages = scene.options.length > 0 && typeof scene.options[0] === 'object' && scene.options[0].image;
 
-  const optsHtml = scene.options.map((opt, i) => `
-    <div class="scene-opt" id="so-${i}" onclick="selectSceneOpt(${i})">
-      <span class="so-letter">${letters[i]}</span> ${opt}
-    </div>
-  `).join('');
+  let optsHtml;
+  if (hasImages) {
+    optsHtml = scene.options.map((opt, i) => `
+      <div class="scene-opt scene-opt-img" id="so-${i}" onclick="selectSceneOpt(${i})">
+        <span class="so-letter">${letters[i]}</span>
+        <img src="${opt.image}" alt="Option ${letters[i]}">
+      </div>
+    `).join('');
+  } else {
+    optsHtml = scene.options.map((opt, i) => `
+      <div class="scene-opt" id="so-${i}" onclick="selectSceneOpt(${i})">
+        <span class="so-letter">${letters[i]}</span> ${opt}
+      </div>
+    `).join('');
+  }
 
   container.innerHTML = `
     <div style="text-align:center; font-weight:600; margin-bottom:0.5rem;">
       Szene ${idx + 1} von ${ex.scenes.length}
     </div>
-    <div class="scene-options">${optsHtml}</div>
+    <div class="scene-options${hasImages ? ' scene-options-img' : ''}">${optsHtml}</div>
   `;
 
   if (exerciseState.answers[idx] !== undefined) {
