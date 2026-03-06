@@ -1438,7 +1438,6 @@ function closeQuestionOverlay(fromPopState) {
   document.getElementById('overlay-img').src = '';
   document.removeEventListener('keydown', overlayKeyHandler);
   if (overlayPushedState && !fromPopState) {
-    overlayPushedState = false;
     history.back();
   }
   overlayPushedState = false;
