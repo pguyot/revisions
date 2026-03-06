@@ -537,6 +537,50 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
     .k-nav button.k-answered.k-current { background: var(--moyen); color: #fff; border-color: var(--moyen); }
     .k-countdown { color: var(--wrong); font-weight: 700; }
 
+    /* Question image overlay (for PWA back-navigation) */
+    .question-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1000;
+      background: var(--bg);
+      flex-direction: column;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    .question-overlay.active { display: flex; }
+    .question-overlay-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--border);
+      flex-shrink: 0;
+    }
+    .question-overlay-header button {
+      font-size: 1rem;
+      padding: 0.4rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .question-overlay-header button:hover { background: var(--btn-hover); }
+    .question-overlay-header span { font-weight: 600; font-size: 1.05rem; }
+    .question-overlay-body {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 1rem;
+      background: #fff;
+    }
+    .question-overlay-body img {
+      max-width: 100%;
+      height: auto;
+    }
+
     @media (max-width: 600px) {
       header h1 { font-size: 1.1rem; }
       .stats-bar { font-size: 0.85rem; gap: 0.7rem; }
@@ -1186,7 +1230,7 @@ function showStats() {
       const q = m.question;
       const label = 'Kangourou ' + q.year + ' Q' + q.number;
       h += '<tr>' +
-        '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
+        '<td><a href="#" onclick="showQuestionOverlay(\'' + q.image + '\', \'' + label + '\');return false">' + label + '</a></td>' +
         '<td><span class="badge badge-' + q.difficulty + '">' + q.difficulty + '</span></td>' +
         '<td><strong style="color:var(--wrong)">' + m.userAnswer + '</strong></td>' +
         '<td><strong style="color:var(--correct)">' + q.answer + '</strong></td>' +
@@ -1217,7 +1261,7 @@ function showStats() {
         const label = 'Kangourou ' + q.year + ' Q' + q.number;
         const res = e.skipped ? 'Passée' : 'Correcte';
         slowHtml += '<tr>' +
-          '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
+          '<td><a href="#" onclick="showQuestionOverlay(\'' + q.image + '\', \'' + label + '\');return false">' + label + '</a></td>' +
           '<td>' + formatTime(e.timeMs) + '</td>' +
           '<td>' + res + '</td></tr>';
       }
@@ -1264,7 +1308,7 @@ function showAllMistakes() {
     const q = m.question;
     const label = 'Kangourou ' + q.year + ' Q' + q.number;
     h += '<tr>' +
-      '<td><a href="' + q.image + '" target="_blank" rel="noopener noreferrer">' + label + '</a></td>' +
+      '<td><a href="#" onclick="showQuestionOverlay(\'' + q.image + '\', \'' + label + '\');return false">' + label + '</a></td>' +
       '<td><span class="badge badge-' + q.difficulty + '">' + q.difficulty + '</span></td>' +
       '<td><strong style="color:var(--wrong)">' + m.userAnswer + '</strong></td>' +
       '<td><strong style="color:var(--correct)">' + q.answer + '</strong></td>' +
@@ -1371,7 +1415,49 @@ function resumeGame() {
   timerInterval = setInterval(updateTimerDisplay, 1000);
   if (answered || !current) nextQuestion();
 }
+
+var overlayPrevFocus = null;
+var overlayPushedState = false;
+function showQuestionOverlay(imageSrc, label) {
+  overlayPrevFocus = document.activeElement;
+  var overlay = document.getElementById('question-overlay');
+  document.getElementById('overlay-label').textContent = label;
+  document.getElementById('overlay-img').src = imageSrc;
+  overlay.classList.add('active');
+  document.getElementById('overlay-close-btn').focus();
+  overlayPushedState = true;
+  history.pushState({overlay: true}, '');
+}
+function closeQuestionOverlay(fromPopState) {
+  var overlay = document.getElementById('question-overlay');
+  if (!overlay.classList.contains('active')) return;
+  overlay.classList.remove('active');
+  document.getElementById('overlay-img').src = '';
+  if (overlayPushedState && !fromPopState) {
+    overlayPushedState = false;
+    history.back();
+  }
+  overlayPushedState = false;
+  if (overlayPrevFocus) {
+    overlayPrevFocus.focus();
+    overlayPrevFocus = null;
+  }
+}
+window.addEventListener('popstate', function(e) {
+  if (document.getElementById('question-overlay').classList.contains('active')) {
+    closeQuestionOverlay(true);
+  }
+});
 </script>
+<div id="question-overlay" class="question-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-label">
+  <div class="question-overlay-header">
+    <button id="overlay-close-btn" onclick="closeQuestionOverlay()">&larr; Retour</button>
+    <span id="overlay-label"></span>
+  </div>
+  <div class="question-overlay-body">
+    <img id="overlay-img" alt="Question" />
+  </div>
+</div>
 </body>
 </html>
 """

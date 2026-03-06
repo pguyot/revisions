@@ -1124,21 +1124,42 @@ function resumeGame() {
   if (answered || !current) nextQuestion();
 }
 
+var overlayPrevFocus = null;
+var overlayPushedState = false;
 function showQuestionOverlay(imageSrc, label) {
-  const overlay = document.getElementById('question-overlay');
+  overlayPrevFocus = document.activeElement;
+  var overlay = document.getElementById('question-overlay');
   document.getElementById('overlay-label').textContent = label;
   document.getElementById('overlay-img').src = imageSrc;
   overlay.classList.add('active');
+  document.getElementById('overlay-close-btn').focus();
+  overlayPushedState = true;
+  history.pushState({overlay: true}, '');
 }
-function closeQuestionOverlay() {
-  const overlay = document.getElementById('question-overlay');
+function closeQuestionOverlay(fromPopState) {
+  var overlay = document.getElementById('question-overlay');
+  if (!overlay.classList.contains('active')) return;
   overlay.classList.remove('active');
   document.getElementById('overlay-img').src = '';
+  if (overlayPushedState && !fromPopState) {
+    overlayPushedState = false;
+    history.back();
+  }
+  overlayPushedState = false;
+  if (overlayPrevFocus) {
+    overlayPrevFocus.focus();
+    overlayPrevFocus = null;
+  }
 }
+window.addEventListener('popstate', function(e) {
+  if (document.getElementById('question-overlay').classList.contains('active')) {
+    closeQuestionOverlay(true);
+  }
+});
 </script>
-<div id="question-overlay" class="question-overlay">
+<div id="question-overlay" class="question-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-label">
   <div class="question-overlay-header">
-    <button onclick="closeQuestionOverlay()">&larr; Retour</button>
+    <button id="overlay-close-btn" onclick="closeQuestionOverlay()">&larr; Retour</button>
     <span id="overlay-label"></span>
   </div>
   <div class="question-overlay-body">
