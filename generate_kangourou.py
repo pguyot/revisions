@@ -725,7 +725,7 @@ function refillPool() {
     const tb = h[b.year + '_' + b.number] || 0;
     return ta - tb;
   });
-  pool = [...shuffle(unseen), ...seen];
+  pool = [...seen.reverse(), ...shuffle(unseen)];
 }
 
 function formatTime(ms) {
@@ -806,9 +806,7 @@ function startKangourou() {
   for (let n = 1; n <= 26; n++) {
     const candidates = byNumber[n];
     if (candidates && candidates.length > 0) {
-      const picked = pickSmart(candidates);
-      kQuestions.push(picked);
-      recordShown(picked);
+      kQuestions.push(pickSmart(candidates));
     }
   }
   kAnswers = new Array(kQuestions.length).fill(null);
@@ -856,7 +854,10 @@ function showKQuestion(idx) {
   const q = kQuestions[idx];
   current = q;
   answered = kAnswers[idx] !== null;
-  questionStartTime = Date.now();
+  if (!answered) {
+    questionStartTime = Date.now();
+    recordShown(q);
+  }
 
   const badge = document.getElementById('q-badge');
   badge.textContent = q.difficulty;
