@@ -245,7 +245,11 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kangourou">
+  <link rel="manifest" href="manifest.json">
   <title>Kangourou des Mathématiques — Jeu</title>
   <style>
     :root {
@@ -280,6 +284,7 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
       color: var(--fg);
       line-height: 1.6;
       min-height: 100vh;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     .container {
       max-width: 56rem;
@@ -559,6 +564,10 @@ GAME_HTML_TEMPLATE = r"""<!doctype html>
     </p>
     <div class="start-buttons">
       <button style="background:var(--moyen)" onclick="startGame()">Entraînement libre</button>
+      <button style="background:var(--facile)" onclick="startGame('facile')">Questions faciles</button>
+      <button style="background:var(--moyen)" onclick="startGame('moyen')">Questions moyennes</button>
+      <button style="background:var(--difficile)" onclick="startGame('difficile')">Questions difficiles</button>
+      <button style="background:var(--expert)" onclick="startGame('expert')">Questions expert</button>
       <button style="background:var(--expert)" onclick="startKangourou()">Mode Kangourou</button>
     </div>
   </div>
@@ -643,11 +652,49 @@ let stats = {};
 
 // Kangourou mode state
 let kangourouMode = false;
+let difficultyFilter = null;
 let kQuestions = [];
 let kAnswers = [];
 let kTimes = [];
 let kIndex = 0;
 let kFinished = false;
+
+const HISTORY_KEY = 'kangourou_history';
+
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {};
+  } catch { return {}; }
+}
+
+function recordShown(q) {
+  const h = getHistory();
+  h[q.year + '_' + q.number] = Date.now();
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+  } catch (e) {
+    console.warn('localStorage write failed:', e);
+  }
+}
+
+function pickSmart(candidates) {
+  if (candidates.length === 0) return null;
+  const h = getHistory();
+  const unseen = candidates.filter(q => !(q.year + '_' + q.number in h));
+  if (unseen.length > 0) {
+    return unseen[Math.floor(Math.random() * unseen.length)];
+  }
+  // All seen — pick the oldest
+  const sorted = [...candidates];
+  sorted.sort((a, b) => {
+    const ta = h[a.year + '_' + a.number] || 0;
+    const tb = h[b.year + '_' + b.number] || 0;
+    return ta - tb;
+  });
+  // Pick randomly among the oldest quartile
+  const quarter = Math.max(1, Math.floor(sorted.length / 4));
+  return sorted[Math.floor(Math.random() * quarter)];
+}
 
 function resetStats() {
   stats = {};
@@ -666,7 +713,19 @@ function shuffle(arr) {
 }
 
 function refillPool() {
-  pool = shuffle([...ALL_QUESTIONS]);
+  const base = difficultyFilter
+    ? ALL_QUESTIONS.filter(q => q.difficulty === difficultyFilter)
+    : ALL_QUESTIONS;
+  // Sort by history: unseen first, then oldest shown
+  const h = getHistory();
+  const unseen = base.filter(q => !(q.year + '_' + q.number in h));
+  const seen = base.filter(q => (q.year + '_' + q.number in h));
+  seen.sort((a, b) => {
+    const ta = h[a.year + '_' + a.number] || 0;
+    const tb = h[b.year + '_' + b.number] || 0;
+    return ta - tb;
+  });
+  pool = [...seen.reverse(), ...shuffle(unseen)];
 }
 
 function formatTime(ms) {
@@ -698,9 +757,10 @@ function updateTimerDisplay() {
   }
 }
 
-function startGame() {
+function startGame(filter) {
   kangourouMode = false;
   kFinished = false;
+  difficultyFilter = filter || null;
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
   document.getElementById('stats-bar').style.display = 'flex';
@@ -736,7 +796,7 @@ function startKangourou() {
     '<button onclick="kSkip()">Passer</button>' +
     '<button onclick="confirmStopKangourou()">Pause</button>';
 
-  // For each question number 1-26, pick one random year
+  // Select one question per number (1-26), picking from past years
   const byNumber = {};
   for (const q of ALL_QUESTIONS) {
     if (!byNumber[q.number]) byNumber[q.number] = [];
@@ -746,7 +806,7 @@ function startKangourou() {
   for (let n = 1; n <= 26; n++) {
     const candidates = byNumber[n];
     if (candidates && candidates.length > 0) {
-      kQuestions.push(candidates[Math.floor(Math.random() * candidates.length)]);
+      kQuestions.push(pickSmart(candidates));
     }
   }
   kAnswers = new Array(kQuestions.length).fill(null);
@@ -794,7 +854,10 @@ function showKQuestion(idx) {
   const q = kQuestions[idx];
   current = q;
   answered = kAnswers[idx] !== null;
-  questionStartTime = Date.now();
+  if (!answered) {
+    questionStartTime = Date.now();
+    recordShown(q);
+  }
 
   const badge = document.getElementById('q-badge');
   badge.textContent = q.difficulty;
@@ -969,7 +1032,7 @@ function finishKangourou() {
 }
 
 function newGame() {
-  startGame();
+  startGame(difficultyFilter);
 }
 
 function newKangourou() {
@@ -989,6 +1052,7 @@ function nextQuestion() {
   current = pool.pop();
   answered = false;
   questionStartTime = Date.now();
+  recordShown(current);
 
   // Badge
   const badge = document.getElementById('q-badge');
@@ -1184,7 +1248,8 @@ function showStats() {
   } else {
     actionsDiv.innerHTML =
       '<button onclick="resumeGame()">Reprendre</button>' +
-      '<button class="primary" onclick="newGame()">Nouvelle partie</button>';
+      '<button class="primary" onclick="newGame()">Nouvelle partie</button>' +
+      '<button onclick="backToMenu()">Menu</button>';
   }
 }
 

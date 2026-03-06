@@ -2,7 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kangourou">
+  <link rel="manifest" href="manifest.json">
   <title>Kangourou des Mathématiques — Jeu</title>
   <style>
     :root {
@@ -37,6 +41,7 @@
       color: var(--fg);
       line-height: 1.6;
       min-height: 100vh;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     .container {
       max-width: 56rem;
@@ -310,6 +315,10 @@
     </p>
     <div class="start-buttons">
       <button style="background:var(--moyen)" onclick="startGame()">Entraînement libre</button>
+      <button style="background:var(--facile)" onclick="startGame('facile')">Questions faciles</button>
+      <button style="background:var(--moyen)" onclick="startGame('moyen')">Questions moyennes</button>
+      <button style="background:var(--difficile)" onclick="startGame('difficile')">Questions difficiles</button>
+      <button style="background:var(--expert)" onclick="startGame('expert')">Questions expert</button>
       <button style="background:var(--expert)" onclick="startKangourou()">Mode Kangourou</button>
     </div>
   </div>
@@ -393,11 +402,49 @@ let stats = {};
 
 // Kangourou mode state
 let kangourouMode = false;
+let difficultyFilter = null;
 let kQuestions = [];
 let kAnswers = [];
 let kTimes = [];
 let kIndex = 0;
 let kFinished = false;
+
+const HISTORY_KEY = 'kangourou_history';
+
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {};
+  } catch { return {}; }
+}
+
+function recordShown(q) {
+  const h = getHistory();
+  h[q.year + '_' + q.number] = Date.now();
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+  } catch (e) {
+    console.warn('localStorage write failed:', e);
+  }
+}
+
+function pickSmart(candidates) {
+  if (candidates.length === 0) return null;
+  const h = getHistory();
+  const unseen = candidates.filter(q => !(q.year + '_' + q.number in h));
+  if (unseen.length > 0) {
+    return unseen[Math.floor(Math.random() * unseen.length)];
+  }
+  // All seen — pick the oldest
+  const sorted = [...candidates];
+  sorted.sort((a, b) => {
+    const ta = h[a.year + '_' + a.number] || 0;
+    const tb = h[b.year + '_' + b.number] || 0;
+    return ta - tb;
+  });
+  // Pick randomly among the oldest quartile
+  const quarter = Math.max(1, Math.floor(sorted.length / 4));
+  return sorted[Math.floor(Math.random() * quarter)];
+}
 
 function resetStats() {
   stats = {};
@@ -416,7 +463,19 @@ function shuffle(arr) {
 }
 
 function refillPool() {
-  pool = shuffle([...ALL_QUESTIONS]);
+  const base = difficultyFilter
+    ? ALL_QUESTIONS.filter(q => q.difficulty === difficultyFilter)
+    : ALL_QUESTIONS;
+  // Sort by history: unseen first, then oldest shown
+  const h = getHistory();
+  const unseen = base.filter(q => !(q.year + '_' + q.number in h));
+  const seen = base.filter(q => (q.year + '_' + q.number in h));
+  seen.sort((a, b) => {
+    const ta = h[a.year + '_' + a.number] || 0;
+    const tb = h[b.year + '_' + b.number] || 0;
+    return ta - tb;
+  });
+  pool = [...seen.reverse(), ...shuffle(unseen)];
 }
 
 function formatTime(ms) {
@@ -446,9 +505,10 @@ function updateTimerDisplay() {
   }
 }
 
-function startGame() {
+function startGame(filter) {
   kangourouMode = false;
   kFinished = false;
+  difficultyFilter = filter || null;
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
   document.getElementById('stats-bar').style.display = 'flex';
@@ -480,23 +540,24 @@ function startKangourou() {
   document.getElementById('score-wrap').style.display = 'none';
   document.getElementById('k-nav-bar').style.display = 'flex';
   document.getElementById('action-buttons').innerHTML =
-    '<button onclick="kPrev()">Pr\u00e9c\u00e9dent</button>' +
     '<button onclick="kSkip()">Passer</button>' +
-    '<button onclick="kNext()">Suivant</button>' +
-    '<button onclick="confirmStopKangourou()">Terminer</button>';
+    '<button onclick="confirmStopKangourou()">Pause</button>';
 
-  // Select 8 facile + 8 moyen + 8 difficile + 2 expert
-  const byDiff = { facile: [], moyen: [], difficile: [], expert: [] };
-  for (const q of ALL_QUESTIONS) byDiff[q.difficulty].push(q);
-  for (const d in byDiff) shuffle(byDiff[d]);
-  kQuestions = [
-    ...byDiff.facile.slice(0, 8),
-    ...byDiff.moyen.slice(0, 8),
-    ...byDiff.difficile.slice(0, 8),
-    ...byDiff.expert.slice(0, 2),
-  ];
-  kAnswers = new Array(26).fill(null);
-  kTimes = new Array(26).fill(0);
+  // Select one question per number (1-26), picking from past years
+  const byNumber = {};
+  for (const q of ALL_QUESTIONS) {
+    if (!byNumber[q.number]) byNumber[q.number] = [];
+    byNumber[q.number].push(q);
+  }
+  kQuestions = [];
+  for (let n = 1; n <= 26; n++) {
+    const candidates = byNumber[n];
+    if (candidates && candidates.length > 0) {
+      kQuestions.push(pickSmart(candidates));
+    }
+  }
+  kAnswers = new Array(kQuestions.length).fill(null);
+  kTimes = new Array(kQuestions.length).fill(0);
   kIndex = 0;
 
   score = 0;
@@ -539,13 +600,16 @@ function showKQuestion(idx) {
   const q = kQuestions[idx];
   current = q;
   answered = kAnswers[idx] !== null;
-  questionStartTime = Date.now();
+  if (!answered) {
+    questionStartTime = Date.now();
+    recordShown(q);
+  }
 
   const badge = document.getElementById('q-badge');
   badge.textContent = q.difficulty;
   badge.className = 'badge badge-' + q.difficulty;
   document.getElementById('q-info').textContent =
-    (idx + 1) + '/26 — Kangourou ' + q.year + ' — Q' + q.number;
+    (idx + 1) + '/' + kQuestions.length + ' \u2014 Kangourou ' + q.year + ' \u2014 Q' + q.number;
   document.getElementById('q-img').src = q.image;
 
   const area = document.getElementById('answers-area');
@@ -554,61 +618,116 @@ function showKQuestion(idx) {
   const choices = isExpert
     ? ['0','1','2','3','4','5','6','7','8','9']
     : ['A','B','C','D','E'];
+  const alreadyAnswered = kAnswers[idx] !== null;
   for (const ch of choices) {
     const btn = document.createElement('button');
     btn.textContent = ch;
     if (kAnswers[idx] === ch) btn.classList.add('selected');
+    if (alreadyAnswered) btn.disabled = true;
     btn.addEventListener('click', () => handleKAnswer(ch));
     area.appendChild(btn);
   }
   updateKNav();
-  document.getElementById('count-display').textContent = (idx + 1) + '/26';
+  document.getElementById('count-display').textContent = (idx + 1) + '/' + kQuestions.length;
 }
 
 function handleKAnswer(choice) {
+  if (kAnswers[kIndex] !== null) return;
   kAnswers[kIndex] = choice;
-  // Re-render buttons to show selection
   const area = document.getElementById('answers-area');
   for (const btn of area.children) {
     btn.classList.toggle('selected', btn.textContent === choice);
+    btn.disabled = true;
   }
   updateKNav();
-}
-
-function kPrev() {
-  if (kIndex > 0) {
-    saveKTime();
-    showKQuestion(kIndex - 1);
+  saveKTime();
+  const next = findNextUnanswered(kIndex);
+  if (next !== -1) {
+    setTimeout(() => showKQuestion(next), 400);
+  } else {
+    setTimeout(() => finishKangourou(), 400);
   }
 }
 
-function kNext() {
-  if (kIndex < kQuestions.length - 1) {
-    saveKTime();
-    showKQuestion(kIndex + 1);
+function findNextUnanswered(fromIndex) {
+  for (let i = 1; i <= kQuestions.length; i++) {
+    const ni = (fromIndex + i) % kQuestions.length;
+    if (kAnswers[ni] === null) return ni;
   }
+  return -1;
 }
 
 function kSkip() {
-  kAnswers[kIndex] = null;
-  const area = document.getElementById('answers-area');
-  for (const btn of area.children) btn.classList.remove('selected');
-  updateKNav();
-  // Move to next unanswered or next
-  for (let i = 1; i <= kQuestions.length; i++) {
-    const ni = (kIndex + i) % kQuestions.length;
-    if (kAnswers[ni] === null && ni !== kIndex) {
-      saveKTime();
-      showKQuestion(ni);
-      return;
-    }
+  saveKTime();
+  const next = findNextUnanswered(kIndex);
+  if (next !== -1) {
+    showKQuestion(next);
   }
 }
 
 function confirmStopKangourou() {
-  if (confirm('Terminer le mode Kangourou et voir les résultats ?')) {
-    finishKangourou();
+  saveKTime();
+  clearInterval(timerInterval);
+  pauseStart = Date.now();
+  document.getElementById('game-area').style.display = 'none';
+  document.getElementById('stats-panel').style.display = 'block';
+
+  const answeredCount = kAnswers.filter(a => a !== null).length;
+  document.getElementById('final-score').textContent =
+    answeredCount + '/' + kQuestions.length + ' r\u00e9pondues \u2014 Pause';
+
+  const actionsDiv = document.getElementById('stats-actions');
+  actionsDiv.innerHTML =
+    '<button class="primary" onclick="resumeKangourou()">Reprendre</button>' +
+    '<button onclick="finishKangourou()">Terminer</button>';
+
+  const tempStats = {};
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    tempStats[d] = { attempted: 0, correct: 0, timeMs: 0 };
   }
+  for (let i = 0; i < kQuestions.length; i++) {
+    const q = kQuestions[i];
+    const d = q.difficulty;
+    const ans = kAnswers[i];
+    if (ans !== null) {
+      tempStats[d].attempted++;
+      tempStats[d].timeMs += kTimes[i];
+      if (ans === q.answer) tempStats[d].correct++;
+    }
+  }
+  const tbody = document.getElementById('stats-body');
+  tbody.innerHTML = '';
+  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
+    const s = tempStats[d];
+    const tr = document.createElement('tr');
+    const rate = s.attempted > 0
+      ? Math.round(100 * s.correct / s.attempted) + '%' : '\u2014';
+    const avg = s.attempted > 0
+      ? formatTime(Math.round(s.timeMs / s.attempted)) : '\u2014';
+    tr.innerHTML =
+      '<td>' + DIFF_LABELS[d] + '</td>' +
+      '<td>' + s.attempted + '</td>' +
+      '<td>' + s.correct + '</td>' +
+      '<td>' + rate + '</td>' +
+      '<td>' + formatTime(s.timeMs) + '</td>' +
+      '<td>' + avg + '</td>';
+    tbody.appendChild(tr);
+  }
+  document.getElementById('stats-mistakes').innerHTML = '';
+  document.getElementById('stats-slowest').innerHTML = '';
+  document.getElementById('stats-histogram').innerHTML = '';
+}
+
+function resumeKangourou() {
+  if (pauseStart) {
+    totalPausedMs += Date.now() - pauseStart;
+    pauseStart = 0;
+  }
+  document.getElementById('stats-panel').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  timerInterval = setInterval(updateTimerDisplay, 1000);
+  updateTimerDisplay();
+  showKQuestion(kIndex);
 }
 
 function finishKangourou() {
@@ -654,7 +773,7 @@ function finishKangourou() {
 }
 
 function newGame() {
-  startGame();
+  startGame(difficultyFilter);
 }
 
 function newKangourou() {
@@ -674,6 +793,7 @@ function nextQuestion() {
   current = pool.pop();
   answered = false;
   questionStartTime = Date.now();
+  recordShown(current);
 
   // Badge
   const badge = document.getElementById('q-badge');
@@ -857,7 +977,8 @@ function showStats() {
   } else {
     actionsDiv.innerHTML =
       '<button onclick="resumeGame()">Reprendre</button>' +
-      '<button class="primary" onclick="newGame()">Nouvelle partie</button>';
+      '<button class="primary" onclick="newGame()">Nouvelle partie</button>' +
+      '<button onclick="backToMenu()">Menu</button>';
   }
 }
 
