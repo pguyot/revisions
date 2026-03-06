@@ -2073,6 +2073,180 @@
   "hoerverstehen": {
     "teil1": [
       {
+        "id": "hv1-m1",
+        "title": "Modellsatz 1 — Alltagsszenen",
+        "source": "Modellsatz 1",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Entschuldigung, haben Sie einen Brief für mich? Ich bin Herr Müller aus der Gartenstraße. — Ja, Moment, ich schaue mal nach. Hier, bitte schön, ein Einschreiben. Unterschreiben Sie bitte hier.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz1_s1_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s1_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s1_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 2,
+            "spokenText": "Entschuldigung, fährt dieser Bus zum Schwimmbad? — Nein, Sie müssen die Linie 5 nehmen. Die Haltestelle ist dort drüben. — Danke!",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz1_s2_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s2_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s2_c.png"
+              }
+            ],
+            "answer": 1
+          },
+          {
+            "id": 3,
+            "spokenText": "Guten Tag, ich suche ein Geschenk für meine Schwester. Sie liest sehr gern. — Da kann ich Ihnen dieses Buch empfehlen. Es ist ganz neu und sehr spannend. — Prima, das nehme ich!",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz1_s3_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s3_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s3_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 4,
+            "spokenText": "Schau mal, Mama, die schöne Kette dort! — Ja, die ist wirklich hübsch. Wollen wir reingehen und fragen, was sie kostet? — Oh ja, bitte!",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz1_s4_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s4_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s4_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 5,
+            "spokenText": "Pass doch auf! Du hast mit dem Ball die Autoscheibe kaputt gemacht! — Es tut mir leid! Ich wollte das nicht! — Du musst jetzt deinen Eltern Bescheid sagen.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz1_s5_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s5_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz1_s5_c.png"
+              }
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
+        "id": "hv1-m2",
+        "title": "Modellsatz 2 — Alltagsszenen",
+        "source": "Modellsatz 2",
+        "scenes": [
+          {
+            "id": 1,
+            "spokenText": "Die Wäsche ist jetzt trocken. Kannst du sie bitte von der Leine nehmen? — Ja, Mama, ich mache das gleich. — Danke, und dann leg sie bitte auf mein Bett.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz2_s1_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s1_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s1_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 2,
+            "spokenText": "Was möchten Sie trinken? — Einen Kaffee, bitte. Und ein Stück Kuchen. — Gerne. Und für Sie? — Ich nehme einen Tee mit Milch.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz2_s2_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s2_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s2_c.png"
+              }
+            ],
+            "answer": 2
+          },
+          {
+            "id": 3,
+            "spokenText": "Das Wetter ist heute so schön! Wollen wir an den Strand gehen? — Ja, super Idee! Ich hole schnell meine Badesachen. — Vergiss die Sonnencreme nicht!",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz2_s3_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s3_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s3_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 4,
+            "spokenText": "Ich bin so müde. Gestern Abend habe ich zu lange ferngesehen. — Du musst früher ins Bett gehen! — Ja, du hast recht. Heute gehe ich um neun Uhr schlafen.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz2_s4_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s4_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s4_c.png"
+              }
+            ],
+            "answer": 0
+          },
+          {
+            "id": 5,
+            "spokenText": "Schau mal, die Blumen hier sind so schön! — Ja, das ist ein toller Garten! Und sieh mal die großen Bäume dort! — Komm, wir gehen weiter den Weg entlang.",
+            "options": [
+              {
+                "image": "images/hv1_modellsatz2_s5_a.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s5_b.png"
+              },
+              {
+                "image": "images/hv1_modellsatz2_s5_c.png"
+              }
+            ],
+            "answer": 0
+          }
+        ]
+      },
+      {
         "id": "hv1-1",
         "title": "Alltagsszenen",
         "scenes": [
