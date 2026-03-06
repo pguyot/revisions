@@ -670,7 +670,11 @@ function getHistory() {
 function recordShown(q) {
   const h = getHistory();
   h[q.year + '_' + q.number] = Date.now();
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+  } catch (e) {
+    console.warn('localStorage write failed:', e);
+  }
 }
 
 function pickSmart(candidates) {
@@ -681,14 +685,15 @@ function pickSmart(candidates) {
     return unseen[Math.floor(Math.random() * unseen.length)];
   }
   // All seen — pick the oldest
-  candidates.sort((a, b) => {
+  const sorted = [...candidates];
+  sorted.sort((a, b) => {
     const ta = h[a.year + '_' + a.number] || 0;
     const tb = h[b.year + '_' + b.number] || 0;
     return ta - tb;
   });
   // Pick randomly among the oldest quartile
-  const quarter = Math.max(1, Math.floor(candidates.length / 4));
-  return candidates[Math.floor(Math.random() * quarter)];
+  const quarter = Math.max(1, Math.floor(sorted.length / 4));
+  return sorted[Math.floor(Math.random() * quarter)];
 }
 
 function resetStats() {
