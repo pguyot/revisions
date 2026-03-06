@@ -662,8 +662,9 @@ function renderExercise() {
   // Header
   const badge = isLV ? '<span class="badge badge-lv">Leseverstehen</span>'
                       : '<span class="badge badge-hv">Hörverstehen</span>';
+  const srcBadge = ex.source ? ` <span class="source-badge">${ex.source}</span>` : '';
   document.getElementById('exercise-header').innerHTML =
-    `${badge} <span class="badge badge-teil">Teil ${t}</span> <strong>${ex.title}</strong>`;
+    `${badge} <span class="badge badge-teil">Teil ${t}</span> <strong>${ex.title}</strong>${srcBadge}`;
 
   // TTS controls
   document.getElementById('tts-controls').style.display = isLV ? 'none' : '';
