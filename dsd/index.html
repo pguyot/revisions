@@ -436,6 +436,7 @@
         <div class="bar-text" id="preload-text"></div>
       </div>
     </div>
+    <div id="version-info" style="margin-top:1.5rem;font-size:0.75rem;color:var(--muted,#999)"></div>
   </div>
 
   <!-- Part Selection -->
@@ -1685,6 +1686,10 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
   navigator.serviceWorker.ready.then(function() {
     document.getElementById('preload-section').style.display = '';
+  });
+  fetch('sw.js').then(function(r) { return r.text(); }).then(function(txt) {
+    var m = txt.match(/CACHE_VERSION\s*=\s*'([^']*)'/);
+    if (m) document.getElementById('version-info').textContent = 'Version: ' + m[1];
   });
   navigator.serviceWorker.addEventListener('message', function(e) {
     if (e.data && e.data.type === 'PRELOAD_PROGRESS') {
