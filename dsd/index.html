@@ -562,7 +562,7 @@ function loadData() {
   document.querySelectorAll('.section-card').forEach(c => { c.classList.add('disabled'); c.style.opacity = '0.5'; c.style.pointerEvents = 'none'; });
   const examBtn = document.querySelector('#start-screen .btn-primary');
   if (examBtn) { examBtn.disabled = true; examBtn.style.opacity = '0.5'; }
-  fetch('data.json').then(r => r.json()).then(d => {
+  fetch('data.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(d => {
     DATA = d;
     document.querySelectorAll('.section-card').forEach(c => { c.classList.remove('disabled'); c.style.opacity = ''; c.style.pointerEvents = ''; c.onclick = () => showParts(c.dataset.section); });
     if (examBtn) { examBtn.disabled = false; examBtn.style.opacity = ''; examBtn.onclick = startFullExam; }
