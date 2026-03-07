@@ -50,9 +50,11 @@ self.addEventListener('fetch', function(event) {
         return fetch(event.request).then(function(response) {
           if (response.ok) {
             var clone = response.clone();
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(event.request, clone);
-            });
+            event.waitUntil(
+              caches.open(CACHE_NAME).then(function(cache) {
+                return cache.put(event.request, clone);
+              })
+            );
           }
           return response;
         });
@@ -66,9 +68,11 @@ self.addEventListener('fetch', function(event) {
     fetch(event.request).then(function(response) {
       if (response.ok) {
         var clone = response.clone();
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, clone);
-        });
+        event.waitUntil(
+          caches.open(CACHE_NAME).then(function(cache) {
+            return cache.put(event.request, clone);
+          })
+        );
       }
       return response;
     }).catch(function() {
