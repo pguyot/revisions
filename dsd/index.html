@@ -564,8 +564,8 @@ function loadData() {
   if (examBtn) { examBtn.disabled = true; examBtn.style.opacity = '0.5'; }
   fetch('data.json').then(r => r.json()).then(d => {
     DATA = d;
-    document.querySelectorAll('.section-card').forEach(c => { c.classList.remove('disabled'); c.style.opacity = ''; c.style.pointerEvents = ''; });
-    if (examBtn) { examBtn.disabled = false; examBtn.style.opacity = ''; }
+    document.querySelectorAll('.section-card').forEach(c => { c.classList.remove('disabled'); c.style.opacity = ''; c.style.pointerEvents = ''; c.onclick = () => showParts(c.dataset.section); });
+    if (examBtn) { examBtn.disabled = false; examBtn.style.opacity = ''; examBtn.onclick = startFullExam; }
     refreshStartScreen();
   }).catch(e => {
     console.error('Failed to load data.json:', e);
