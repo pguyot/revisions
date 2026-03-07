@@ -3,7 +3,9 @@
 
 import os
 import pathlib
+import re
 import shutil
+import subprocess
 
 OUTPUT_DIR = pathlib.Path("_site")
 
@@ -61,6 +63,24 @@ def build() -> None:
     if dsd_src.is_dir():
         shutil.copytree(dsd_src, OUTPUT_DIR / "dsd", dirs_exist_ok=True)
         print("Copied dsd/ game assets")
+
+    # Stamp service workers with git revision so any deploy busts the cache
+    try:
+        rev = subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"], text=True
+        ).strip()
+    except (FileNotFoundError, OSError, subprocess.CalledProcessError):
+        rev = None
+    if rev:
+        for sw_path in OUTPUT_DIR.glob("*/sw.js"):
+            txt = sw_path.read_text()
+            txt = re.sub(
+                r"var CACHE_VERSION = '[^']*'",
+                f"var CACHE_VERSION = '{rev}'",
+                txt,
+            )
+            sw_path.write_text(txt)
+            print(f"Stamped {sw_path} with version {rev}")
 
     print(f"Site built in {OUTPUT_DIR}/")
 
