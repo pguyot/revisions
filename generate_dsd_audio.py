@@ -43,7 +43,7 @@ VOICE_HF_PATHS = {
     VOICE_FEMALE: "de/de_DE/kerstin/low",
 }
 
-PIPER_MODEL_DIR = pathlib.Path("/tmp/piper-voices")
+PIPER_MODEL_DIR = pathlib.Path(tempfile.gettempdir()) / "piper-voices"
 
 # Silence between dialog turns (seconds)
 TURN_PAUSE_S = 0.6

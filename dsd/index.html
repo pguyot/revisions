@@ -1335,7 +1335,10 @@ function checkLV2(ex) {
     } else {
       personEl?.classList.add('match-wrong');
       const ansEl = document.getElementById('person-ans-' + d.id);
-      if (ansEl) ansEl.textContent = `${userAns || '?'} → ${correct}`;
+      if (ansEl) {
+        ansEl.textContent = `${userAns || '?'} → ${correct}`;
+        ansEl.classList.add('person-ans-wrong');
+      }
     }
   }
   // Highlight correct ads
