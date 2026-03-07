@@ -53,13 +53,14 @@ TURN_PAUSE_S = 0.6
 # Helpers
 # ---------------------------------------------------------------------------
 
-def audio_filename(teil: str, ex_idx: int, sub_idx: int | None, text: str) -> str:
+def audio_filename(teil: str, ex_idx: int, sub_idx: int | None, text: str,
+                   voice_key: str = "") -> str:
     """Stable filename based on content hash so we skip unchanged texts.
 
-    We include a 'v2' marker so multi-voice files get new names distinct from
-    the old single-voice files.
+    We include a 'v2' marker and the voice_key (describing the speaker
+    assignment) so files are regenerated when voice layout changes.
     """
-    h = hashlib.sha256(("v2:" + text).encode()).hexdigest()[:12]
+    h = hashlib.sha256(("v2:" + voice_key + ":" + text).encode()).hexdigest()[:12]
     suffix = f"_{sub_idx}" if sub_idx is not None else ""
     return f"{teil}_ex{ex_idx}{suffix}_{h}.mp3"
 
@@ -285,7 +286,11 @@ def generate_multi_voice(segments: list[tuple[str, pathlib.Path]], output_mp3: p
         for i, (text, model_path) in enumerate(segments):
             seg_wav = tmp / f"seg_{i}.wav"
             if not generate_wav(text, seg_wav, model_path):
-                continue
+                snippet = text[:60] + ("…" if len(text) > 60 else "")
+                raise RuntimeError(
+                    f"generate_wav failed for segment {i} "
+                    f"(model={model_path.name}, text={snippet!r})"
+                )
             ch, sw, fr, frames = read_wav(seg_wav)
             # Use first segment's properties as reference
             if i == 0:
@@ -332,50 +337,57 @@ def main() -> None:
     skipped = 0
 
     for teil, ex_idx, sub_idx, text, exercise in spoken:
-        fname = audio_filename(teil, ex_idx, sub_idx, text)
-        key = f"{teil}/{ex_idx}" if sub_idx is None else f"{teil}/{ex_idx}/{sub_idx}"
-        manifest[key] = fname
-
-        out_path = AUDIO_DIR / fname
-        if out_path.exists():
-            skipped += 1
-            continue
-
-        print(f"  Generating {fname} …")
+        # Determine voice plan and build segments before computing filename
+        voice_key = VOICE_MALE  # default: single male voice
+        segments: list[tuple[str, pathlib.Path]] | None = None
 
         if teil == "teil3" and "\n\n" in text:
-            # Interview format: parse speaker labels
             turns = split_interview_turns(text)
             if len(turns) > 1:
                 interviewee_gender = detect_interviewee_gender(exercise)
-                # Interviewer voice: opposite of interviewee gender
                 interviewer_model = female_model if interviewee_gender == "m" else male_model
                 interviewee_model = male_model if interviewee_gender == "m" else female_model
-                segments: list[tuple[str, pathlib.Path]] = []
+                voice_key = f"interview:gender={interviewee_gender}"
+                segments = []
                 for label, content in turns:
                     if label.lower() == "interviewer":
                         segments.append((content, interviewer_model))
                     else:
                         segments.append((content, interviewee_model))
-                generate_multi_voice(segments, out_path)
-                generated += 1
-                continue
 
-        if teil == "teil1":
-            # Dialog scenes: split by dash and alternate voices
-            turns = split_dialog_turns(text)
-            if len(turns) > 1:
+        if segments is None and teil == "teil1":
+            turns_t1 = split_dialog_turns(text)
+            if len(turns_t1) > 1:
+                voice_key = f"dialog:alt-mf:{len(turns_t1)}"
                 segments = []
-                for i, turn_text in enumerate(turns):
+                for i, turn_text in enumerate(turns_t1):
                     model = male_model if i % 2 == 0 else female_model
                     segments.append((turn_text, model))
-                generate_multi_voice(segments, out_path)
-                generated += 1
-                continue
 
-        # Default: single male voice for announcements, reports, etc.
-        generate_single_voice(text, out_path, male_model)
-        generated += 1
+        fname = audio_filename(teil, ex_idx, sub_idx, text, voice_key)
+        key = f"{teil}/{ex_idx}" if sub_idx is None else f"{teil}/{ex_idx}/{sub_idx}"
+
+        out_path = AUDIO_DIR / fname
+        if out_path.exists():
+            manifest[key] = fname
+            skipped += 1
+            continue
+
+        print(f"  Generating {fname} …")
+
+        try:
+            if segments is not None:
+                generate_multi_voice(segments, out_path)
+            else:
+                generate_single_voice(text, out_path, male_model)
+        except RuntimeError as e:
+            print(f"  ERROR: {e}", file=sys.stderr)
+
+        if out_path.exists():
+            manifest[key] = fname
+            generated += 1
+        else:
+            print(f"  WARNING: failed to produce {fname}, skipping manifest entry")
 
     # Write manifest
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:

@@ -1278,8 +1278,14 @@ function checkExercise() {
   updateScoreDisplay();
   stopTimer();
   // Hide mistakes by default — user can reveal via button
-  document.getElementById('exercise-content')?.classList.add('hide-mistakes');
+  const ec = document.getElementById('exercise-content');
+  ec?.classList.add('hide-mistakes');
+  ec?.querySelectorAll('.gap-wrong[title]').forEach(el => {
+    el.dataset.tip = el.title;
+    el.title = '';
+  });
   mistakesVisible = false;
+  document.getElementById('show-mistakes-btn').textContent = 'Fehler anzeigen';
   showResults();
 }
 
@@ -1289,9 +1295,18 @@ function toggleMistakes() {
   const btn = document.getElementById('show-mistakes-btn');
   if (mistakesVisible) {
     ec?.classList.remove('hide-mistakes');
+    // Restore saved tooltips on wrong gaps
+    ec?.querySelectorAll('.gap-wrong[data-tip]').forEach(el => {
+      el.title = el.dataset.tip;
+    });
     btn.textContent = 'Fehler ausblenden';
   } else {
     ec?.classList.add('hide-mistakes');
+    // Hide tooltips that reveal correct answers
+    ec?.querySelectorAll('.gap-wrong[title]').forEach(el => {
+      el.dataset.tip = el.title;
+      el.title = '';
+    });
     btn.textContent = 'Fehler anzeigen';
   }
 }
