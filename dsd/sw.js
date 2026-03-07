@@ -52,9 +52,11 @@ self.addEventListener('fetch', function(event) {
         return fetch(event.request).then(function(response) {
           if (response.ok) {
             var clone = response.clone();
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(event.request, clone);
-            });
+            event.waitUntil(
+              caches.open(CACHE_NAME).then(function(cache) {
+                return cache.put(event.request, clone);
+              })
+            );
           }
           return response;
         });
@@ -68,9 +70,11 @@ self.addEventListener('fetch', function(event) {
     fetch(event.request).then(function(response) {
       if (response.ok) {
         var clone = response.clone();
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, clone);
-        });
+        event.waitUntil(
+          caches.open(CACHE_NAME).then(function(cache) {
+            return cache.put(event.request, clone);
+          })
+        );
       }
       return response;
     }).catch(function() {
@@ -114,7 +118,7 @@ self.addEventListener('message', function(event) {
       }
 
       function report() {
-        self.clients.matchAll().then(function(clients) {
+        return self.clients.matchAll().then(function(clients) {
           clients.forEach(function(client) {
             client.postMessage({ type: 'PRELOAD_PROGRESS', processed: processed, cached: cached, total: total });
           });
@@ -125,7 +129,7 @@ self.addEventListener('message', function(event) {
       var workers = [];
       for (var s = 0; s < 4; s++) workers.push(grabNext());
       return Promise.all(workers).then(function() {
-        report();
+        return report();
       });
     });
     event.waitUntil(preloadPromise);

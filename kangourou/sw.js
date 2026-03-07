@@ -112,7 +112,7 @@ self.addEventListener('message', function(event) {
       }
 
       function report() {
-        self.clients.matchAll().then(function(clients) {
+        return self.clients.matchAll().then(function(clients) {
           clients.forEach(function(client) {
             client.postMessage({ type: 'PRELOAD_PROGRESS', processed: processed, cached: cached, total: total });
           });
@@ -123,7 +123,7 @@ self.addEventListener('message', function(event) {
       var workers = [];
       for (var s = 0; s < 4; s++) workers.push(grabNext());
       return Promise.all(workers).then(function() {
-        report();
+        return report();
       });
     });
     event.waitUntil(preloadPromise);

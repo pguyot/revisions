@@ -1707,12 +1707,16 @@ function preloadAllAssets() {
   navigator.serviceWorker.ready.then(function(reg) {
     var worker = navigator.serviceWorker.controller || reg.active;
     if (!worker) return;
-    // Collect all audio and image URLs from the manifest
-    fetch('audio/manifest.json').then(function(r) { return r.json(); }).then(function(manifest) {
+    // Fetch manifest and ensure DATA is loaded before building URL list
+    var manifestPromise = fetch('audio/manifest.json').then(function(r) { return r.json(); });
+    var dataPromise = DATA ? Promise.resolve(DATA) : fetch('data.json').then(function(r) { return r.json(); });
+    Promise.all([manifestPromise, dataPromise]).then(function(results) {
+      var manifest = results[0];
+      var data = results[1];
       var urls = Object.values(manifest).map(function(f) { return 'audio/' + f; });
       // Also add images from data
-      if (typeof DATA !== 'undefined' && DATA.hoerverstehen) {
-        Object.values(DATA.hoerverstehen).forEach(function(exercises) {
+      if (data && data.hoerverstehen) {
+        Object.values(data.hoerverstehen).forEach(function(exercises) {
           exercises.forEach(function(ex) {
             (ex.scenes || []).forEach(function(scene) {
               (scene.options || []).forEach(function(opt) {
