@@ -91,6 +91,33 @@
     #start-screen { text-align: center; padding: 2rem 1rem; }
     #start-screen h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
     #start-screen p { margin-bottom: 1.5rem; color: var(--muted); }
+    #preload-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    #preload-progress {
+      margin-top: 0.75rem;
+      display: none;
+    }
+    #preload-progress .bar-bg {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #preload-progress .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    #preload-progress .bar-text {
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      color: var(--muted);
+    }
     .section-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
       max-width: 36rem; margin: 0 auto 1.5rem;
@@ -402,6 +429,13 @@
       </div>
     </div>
     <button class="btn btn-primary" style="font-size:1.1rem; padding: 0.6rem 2rem;" onclick="startFullExam()">Komplette Prüfung</button>
+    <div id="preload-section" style="display:none">
+      <button class="btn" onclick="preloadAllAssets()">Alles offline verfügbar machen</button>
+      <div id="preload-progress">
+        <div class="bar-bg"><div class="bar-fill" id="preload-bar"></div></div>
+        <div class="bar-text" id="preload-text"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Part Selection -->
@@ -1644,6 +1678,46 @@ function ttsSpeedChanged() {
   if (audio && !audio.paused) {
     audio.playbackRate = parseFloat(document.getElementById('tts-speed').value);
   }
+}
+
+// --- Service Worker & Preload ---
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function() {
+    document.getElementById('preload-section').style.display = '';
+  });
+  navigator.serviceWorker.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'PRELOAD_PROGRESS') {
+      var pct = Math.round(e.data.done / e.data.total * 100);
+      document.getElementById('preload-bar').style.width = pct + '%';
+      document.getElementById('preload-text').textContent =
+        e.data.done + ' / ' + e.data.total + ' Dateien';
+      if (e.data.done >= e.data.total) {
+        document.getElementById('preload-text').textContent = 'Alle Dateien sind im Cache!';
+      }
+    }
+  });
+}
+
+function preloadAllAssets() {
+  if (!navigator.serviceWorker.controller) return;
+  // Collect all audio and image URLs from the manifest
+  fetch('audio/manifest.json').then(function(r) { return r.json(); }).then(function(manifest) {
+    var urls = Object.values(manifest).map(function(f) { return 'audio/' + f; });
+    // Also add images from data
+    if (typeof DATA !== 'undefined' && DATA.hoerverstehen) {
+      Object.values(DATA.hoerverstehen).forEach(function(exercises) {
+        exercises.forEach(function(ex) {
+          (ex.scenes || []).forEach(function(scene) {
+            (scene.options || []).forEach(function(opt) {
+              if (opt && opt.image) urls.push(opt.image);
+            });
+          });
+        });
+      });
+    }
+    navigator.serviceWorker.controller.postMessage({ type: 'PRELOAD_ASSETS', urls: urls });
+    document.getElementById('preload-progress').style.display = '';
+  });
 }
 </script>
 </body>
