@@ -179,6 +179,15 @@
       transition: opacity 0.2s;
     }
     .start-buttons button:hover { opacity: 0.85; }
+    #practice-submenu {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    #practice-submenu h3 { margin-bottom: 1rem; font-size: 1.1rem; }
 
     /* Statistics panel */
     #stats-panel {
@@ -358,12 +367,18 @@
       et cliquez sur <em>Arrêter</em> pour voir vos statistiques.
     </p>
     <div class="start-buttons">
-      <button style="background:var(--moyen)" onclick="startGame()">Entraînement libre</button>
-      <button style="background:var(--facile)" onclick="startGame('facile')">Questions faciles</button>
-      <button style="background:var(--moyen)" onclick="startGame('moyen')">Questions moyennes</button>
-      <button style="background:var(--difficile)" onclick="startGame('difficile')">Questions difficiles</button>
-      <button style="background:var(--expert)" onclick="startGame('expert')">Questions expert</button>
+      <button style="background:var(--moyen)" onclick="togglePracticeMenu()">Entraînement libre</button>
       <button style="background:var(--expert)" onclick="startKangourou()">Mode Kangourou</button>
+    </div>
+    <div id="practice-submenu">
+      <h3>Choisissez la difficulté</h3>
+      <div class="start-buttons">
+        <button style="background:var(--moyen)" onclick="startGame()">Toutes</button>
+        <button style="background:var(--facile)" onclick="startGame('facile')">Faciles</button>
+        <button style="background:var(--moyen)" onclick="startGame('moyen')">Moyennes</button>
+        <button style="background:var(--difficile)" onclick="startGame('difficile')">Difficiles</button>
+        <button style="background:var(--expert)" onclick="startGame('expert')">Expert</button>
+      </div>
     </div>
   </div>
 
@@ -547,6 +562,11 @@ function updateTimerDisplay() {
     const elapsed = Date.now() - gameStartTime - totalPausedMs;
     document.getElementById('timer-display').textContent = formatTime(elapsed);
   }
+}
+
+function togglePracticeMenu() {
+  const sub = document.getElementById('practice-submenu');
+  sub.style.display = sub.style.display === 'none' ? 'block' : 'none';
 }
 
 function startGame(filter) {
@@ -1111,6 +1131,7 @@ function backToMenu() {
   document.getElementById('start-screen').style.display = 'block';
   document.getElementById('stats-bar').style.display = 'none';
   document.getElementById('k-nav-bar').style.display = 'none';
+  document.getElementById('practice-submenu').style.display = 'none';
 }
 
 function resumeGame() {

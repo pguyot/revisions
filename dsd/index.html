@@ -314,6 +314,17 @@
       border-top: 1px solid var(--border);
     }
 
+    /* Hide mistakes by default after check */
+    .hide-mistakes .gap-wrong { border-color: var(--border) !important; color: var(--fg) !important; }
+    .hide-mistakes .match-wrong { border-color: var(--border) !important; }
+    .hide-mistakes .tf-wrong { border-color: var(--border) !important; background: var(--btn-bg) !important; color: var(--fg) !important; }
+    .hide-mistakes .mc-wrong { border-color: var(--border) !important; background: var(--btn-bg) !important; }
+    .hide-mistakes .hd-wrong { border-color: var(--border) !important; background: var(--card-bg) !important; }
+    .hide-mistakes .st-wrong { border-color: var(--border) !important; }
+    .hide-mistakes .so-wrong { border-color: var(--border) !important; background: var(--btn-bg) !important; }
+    .hide-mistakes .btn-wrong { border-color: var(--border) !important; background: var(--btn-bg) !important; color: var(--fg) !important; }
+    .hide-mistakes .person-ans-wrong { visibility: hidden; }
+
     /* Results panel */
     #results-panel { display: none; text-align: center; padding: 2rem 1rem; }
     .results-score {
@@ -443,6 +454,7 @@
     <div class="results-detail" id="results-detail"></div>
     <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
       <button class="btn" onclick="goHome()">Hauptmenü</button>
+      <button class="btn" id="show-mistakes-btn" onclick="toggleMistakes()">Fehler anzeigen</button>
       <button class="btn btn-primary" id="results-retry-btn">Nochmal versuchen</button>
     </div>
   </div>
@@ -464,6 +476,7 @@ let selectedPerson = null;
 let selectedShortText = null;
 let exerciseState = {};
 let isChecked = false;
+let mistakesVisible = false;
 
 // --- Score persistence (localStorage) ---
 const STORAGE_KEY = 'dsd-exercise-scores';
@@ -1264,7 +1277,38 @@ function checkExercise() {
 
   updateScoreDisplay();
   stopTimer();
+  // Hide mistakes by default — user can reveal via button
+  const ec = document.getElementById('exercise-content');
+  ec?.classList.add('hide-mistakes');
+  ec?.querySelectorAll('.gap-wrong[title]').forEach(el => {
+    el.dataset.tip = el.title;
+    el.title = '';
+  });
+  mistakesVisible = false;
+  document.getElementById('show-mistakes-btn').textContent = 'Fehler anzeigen';
   showResults();
+}
+
+function toggleMistakes() {
+  mistakesVisible = !mistakesVisible;
+  const ec = document.getElementById('exercise-content');
+  const btn = document.getElementById('show-mistakes-btn');
+  if (mistakesVisible) {
+    ec?.classList.remove('hide-mistakes');
+    // Restore saved tooltips on wrong gaps
+    ec?.querySelectorAll('.gap-wrong[data-tip]').forEach(el => {
+      el.title = el.dataset.tip;
+    });
+    btn.textContent = 'Fehler ausblenden';
+  } else {
+    ec?.classList.add('hide-mistakes');
+    // Hide tooltips that reveal correct answers
+    ec?.querySelectorAll('.gap-wrong[title]').forEach(el => {
+      el.dataset.tip = el.title;
+      el.title = '';
+    });
+    btn.textContent = 'Fehler anzeigen';
+  }
 }
 
 function checkLV1(ex) {
@@ -1306,7 +1350,10 @@ function checkLV2(ex) {
     } else {
       personEl?.classList.add('match-wrong');
       const ansEl = document.getElementById('person-ans-' + d.id);
-      if (ansEl) ansEl.textContent = `${userAns || '?'} → ${correct}`;
+      if (ansEl) {
+        ansEl.textContent = `${userAns || '?'} → ${correct}`;
+        ansEl.classList.add('person-ans-wrong');
+      }
     }
   }
   // Highlight correct ads
