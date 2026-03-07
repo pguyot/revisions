@@ -1,6 +1,6 @@
 // Service Worker for DSD I Prüfungstraining PWA
 // Cache version — bump to force update
-var CACHE_VERSION = 'v1';
+var CACHE_VERSION = 'v2';
 var CACHE_NAME = 'dsd-' + CACHE_VERSION;
 
 // Install: cache the app shell
