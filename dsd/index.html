@@ -1682,41 +1682,49 @@ function ttsSpeedChanged() {
 
 // --- Service Worker & Preload ---
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function() {
+  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.ready.then(function() {
     document.getElementById('preload-section').style.display = '';
   });
   navigator.serviceWorker.addEventListener('message', function(e) {
     if (e.data && e.data.type === 'PRELOAD_PROGRESS') {
-      var pct = Math.round(e.data.done / e.data.total * 100);
+      var pct = Math.round(e.data.processed / e.data.total * 100);
       document.getElementById('preload-bar').style.width = pct + '%';
-      document.getElementById('preload-text').textContent =
-        e.data.done + ' / ' + e.data.total + ' Dateien';
-      if (e.data.done >= e.data.total) {
-        document.getElementById('preload-text').textContent = 'Alle Dateien sind im Cache!';
+      if (e.data.processed >= e.data.total) {
+        var failed = e.data.total - e.data.cached;
+        document.getElementById('preload-text').textContent = failed
+          ? e.data.cached + ' / ' + e.data.total + ' Dateien im Cache (' + failed + ' Fehler)'
+          : 'Alle Dateien sind im Cache!';
+      } else {
+        document.getElementById('preload-text').textContent =
+          e.data.processed + ' / ' + e.data.total + ' Dateien';
       }
     }
   });
 }
 
 function preloadAllAssets() {
-  if (!navigator.serviceWorker.controller) return;
-  // Collect all audio and image URLs from the manifest
-  fetch('audio/manifest.json').then(function(r) { return r.json(); }).then(function(manifest) {
-    var urls = Object.values(manifest).map(function(f) { return 'audio/' + f; });
-    // Also add images from data
-    if (typeof DATA !== 'undefined' && DATA.hoerverstehen) {
-      Object.values(DATA.hoerverstehen).forEach(function(exercises) {
-        exercises.forEach(function(ex) {
-          (ex.scenes || []).forEach(function(scene) {
-            (scene.options || []).forEach(function(opt) {
-              if (opt && opt.image) urls.push(opt.image);
+  navigator.serviceWorker.ready.then(function(reg) {
+    var worker = navigator.serviceWorker.controller || reg.active;
+    if (!worker) return;
+    // Collect all audio and image URLs from the manifest
+    fetch('audio/manifest.json').then(function(r) { return r.json(); }).then(function(manifest) {
+      var urls = Object.values(manifest).map(function(f) { return 'audio/' + f; });
+      // Also add images from data
+      if (typeof DATA !== 'undefined' && DATA.hoerverstehen) {
+        Object.values(DATA.hoerverstehen).forEach(function(exercises) {
+          exercises.forEach(function(ex) {
+            (ex.scenes || []).forEach(function(scene) {
+              (scene.options || []).forEach(function(opt) {
+                if (opt && opt.image) urls.push(opt.image);
+              });
             });
           });
         });
-      });
-    }
-    navigator.serviceWorker.controller.postMessage({ type: 'PRELOAD_ASSETS', urls: urls });
-    document.getElementById('preload-progress').style.display = '';
+      }
+      worker.postMessage({ type: 'PRELOAD_ASSETS', urls: urls });
+      document.getElementById('preload-progress').style.display = '';
+    });
   });
 }
 </script>

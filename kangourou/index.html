@@ -1256,27 +1256,35 @@ document.addEventListener('click', function(e) {
 
 // --- Service Worker & Preload ---
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function() {
+  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.ready.then(function() {
     document.getElementById('preload-section').style.display = '';
   });
   navigator.serviceWorker.addEventListener('message', function(e) {
     if (e.data && e.data.type === 'PRELOAD_PROGRESS') {
-      var pct = Math.round(e.data.done / e.data.total * 100);
+      var pct = Math.round(e.data.processed / e.data.total * 100);
       document.getElementById('preload-bar').style.width = pct + '%';
-      document.getElementById('preload-text').textContent =
-        e.data.done + ' / ' + e.data.total + ' images';
-      if (e.data.done >= e.data.total) {
-        document.getElementById('preload-text').textContent = 'Toutes les images sont en cache !';
+      if (e.data.processed >= e.data.total) {
+        var failed = e.data.total - e.data.cached;
+        document.getElementById('preload-text').textContent = failed
+          ? e.data.cached + ' / ' + e.data.total + ' images en cache (' + failed + ' erreurs)'
+          : 'Toutes les images sont en cache !';
+      } else {
+        document.getElementById('preload-text').textContent =
+          e.data.processed + ' / ' + e.data.total + ' images';
       }
     }
   });
 }
 
 function preloadAllImages() {
-  if (!navigator.serviceWorker.controller) return;
-  var urls = ALL_QUESTIONS.map(function(q) { return q.image; });
-  navigator.serviceWorker.controller.postMessage({ type: 'PRELOAD_IMAGES', urls: urls });
-  document.getElementById('preload-progress').style.display = '';
+  navigator.serviceWorker.ready.then(function(reg) {
+    var worker = navigator.serviceWorker.controller || reg.active;
+    if (!worker) return;
+    var urls = ALL_QUESTIONS.map(function(q) { return q.image; });
+    worker.postMessage({ type: 'PRELOAD_IMAGES', urls: urls });
+    document.getElementById('preload-progress').style.display = '';
+  });
 }
 </script>
 <div id="question-overlay" class="question-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-label">

@@ -83,8 +83,9 @@ self.addEventListener('fetch', function(event) {
 self.addEventListener('message', function(event) {
   if (event.data && event.data.type === 'PRELOAD_ASSETS') {
     var urls = event.data.urls;
-    caches.open(CACHE_NAME).then(function(cache) {
-      var done = 0;
+    var preloadPromise = caches.open(CACHE_NAME).then(function(cache) {
+      var processed = 0;
+      var cached = 0;
       var cursor = 0;
       var total = urls.length;
 
@@ -92,14 +93,21 @@ self.addEventListener('message', function(event) {
         var i = cursor++;
         if (i >= total) return Promise.resolve();
         return cache.match(urls[i]).then(function(existing) {
-          if (existing) return;
+          if (existing) {
+            cached++;
+            return;
+          }
           return fetch(urls[i]).then(function(response) {
-            if (response.ok) return cache.put(urls[i], response);
+            if (response.ok) {
+              return cache.put(urls[i], response).then(function() {
+                cached++;
+              });
+            }
           });
         }).catch(function() {
           // skip failures
         }).then(function() {
-          done++;
+          processed++;
           report();
           return grabNext();
         });
@@ -108,7 +116,7 @@ self.addEventListener('message', function(event) {
       function report() {
         self.clients.matchAll().then(function(clients) {
           clients.forEach(function(client) {
-            client.postMessage({ type: 'PRELOAD_PROGRESS', done: done, total: total });
+            client.postMessage({ type: 'PRELOAD_PROGRESS', processed: processed, cached: cached, total: total });
           });
         });
       }
@@ -116,9 +124,10 @@ self.addEventListener('message', function(event) {
       // Run 4 parallel download workers
       var workers = [];
       for (var s = 0; s < 4; s++) workers.push(grabNext());
-      Promise.all(workers).then(function() {
+      return Promise.all(workers).then(function() {
         report();
       });
     });
+    event.waitUntil(preloadPromise);
   }
 });
