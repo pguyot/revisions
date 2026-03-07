@@ -558,8 +558,23 @@ function getSectionStats(section) {
 }
 
 // Load data and audio manifest
-fetch('data.json').then(r => r.json()).then(d => { DATA = d; refreshStartScreen(); })
-  .catch(e => console.error('Failed to load data.json:', e));
+function loadData() {
+  document.querySelectorAll('.section-card').forEach(c => { c.classList.add('disabled'); c.style.opacity = '0.5'; c.style.pointerEvents = 'none'; });
+  const examBtn = document.querySelector('#start-screen .btn-primary');
+  if (examBtn) { examBtn.disabled = true; examBtn.style.opacity = '0.5'; }
+  fetch('data.json').then(r => r.json()).then(d => {
+    DATA = d;
+    document.querySelectorAll('.section-card').forEach(c => { c.classList.remove('disabled'); c.style.opacity = ''; c.style.pointerEvents = ''; });
+    if (examBtn) { examBtn.disabled = false; examBtn.style.opacity = ''; }
+    refreshStartScreen();
+  }).catch(e => {
+    console.error('Failed to load data.json:', e);
+    document.querySelectorAll('.section-card').forEach(c => { c.style.opacity = ''; c.style.pointerEvents = ''; c.onclick = loadData; });
+    if (examBtn) { examBtn.disabled = false; examBtn.style.opacity = ''; examBtn.onclick = loadData; }
+    alert('Daten konnten nicht geladen werden. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+  });
+}
+loadData();
 fetch('audio/manifest.json').then(r => r.json()).then(m => { ttsManifest = m; })
   .catch(e => console.warn('Audio manifest not found, TTS disabled:', e));
 

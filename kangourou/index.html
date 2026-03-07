@@ -447,7 +447,7 @@
   <div id="stats-panel">
     <h2>Résultats</h2>
     <div class="score-total" id="final-score"></div>
-    <table class="stats-table">
+    <table class="stats-table" id="stats-table">
       <thead>
         <tr>
           <th>Difficulté</th>
@@ -709,9 +709,9 @@ function showKQuestion(idx) {
   kIndex = idx;
   const q = kQuestions[idx];
   current = q;
-  answered = kAnswers[idx] !== null;
-  if (!answered) {
-    questionStartTime = Date.now();
+  answered = false;
+  questionStartTime = Date.now();
+  if (kAnswers[idx] === null) {
     recordShown(q);
   }
 
@@ -728,12 +728,10 @@ function showKQuestion(idx) {
   const choices = isExpert
     ? ['0','1','2','3','4','5','6','7','8','9']
     : ['A','B','C','D','E'];
-  const alreadyAnswered = kAnswers[idx] !== null;
   for (const ch of choices) {
     const btn = document.createElement('button');
     btn.textContent = ch;
     if (kAnswers[idx] === ch) btn.classList.add('selected');
-    if (alreadyAnswered) btn.disabled = true;
     btn.addEventListener('click', () => handleKAnswer(ch));
     area.appendChild(btn);
   }
@@ -742,20 +740,19 @@ function showKQuestion(idx) {
 }
 
 function handleKAnswer(choice) {
-  if (kAnswers[kIndex] !== null) return;
+  const wasFirstAnswer = kAnswers[kIndex] === null;
   kAnswers[kIndex] = choice;
   const area = document.getElementById('answers-area');
   for (const btn of area.children) {
     btn.classList.toggle('selected', btn.textContent === choice);
-    btn.disabled = true;
   }
   updateKNav();
   saveKTime();
-  const next = findNextUnanswered(kIndex);
-  if (next !== -1) {
-    setTimeout(() => showKQuestion(next), 400);
-  } else {
-    setTimeout(() => finishKangourou(), 400);
+  if (wasFirstAnswer) {
+    const next = findNextUnanswered(kIndex);
+    if (next !== -1) {
+      setTimeout(() => showKQuestion(next), 400);
+    }
   }
 }
 
@@ -791,38 +788,8 @@ function confirmStopKangourou() {
     '<button class="primary" onclick="resumeKangourou()">Reprendre</button>' +
     '<button onclick="finishKangourou()">Terminer</button>';
 
-  const tempStats = {};
-  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
-    tempStats[d] = { attempted: 0, correct: 0, timeMs: 0 };
-  }
-  for (let i = 0; i < kQuestions.length; i++) {
-    const q = kQuestions[i];
-    const d = q.difficulty;
-    const ans = kAnswers[i];
-    if (ans !== null) {
-      tempStats[d].attempted++;
-      tempStats[d].timeMs += kTimes[i];
-      if (ans === q.answer) tempStats[d].correct++;
-    }
-  }
-  const tbody = document.getElementById('stats-body');
-  tbody.innerHTML = '';
-  for (const d of ['facile', 'moyen', 'difficile', 'expert']) {
-    const s = tempStats[d];
-    const tr = document.createElement('tr');
-    const rate = s.attempted > 0
-      ? Math.round(100 * s.correct / s.attempted) + '%' : '\u2014';
-    const avg = s.attempted > 0
-      ? formatTime(Math.round(s.timeMs / s.attempted)) : '\u2014';
-    tr.innerHTML =
-      '<td>' + DIFF_LABELS[d] + '</td>' +
-      '<td>' + s.attempted + '</td>' +
-      '<td>' + s.correct + '</td>' +
-      '<td>' + rate + '</td>' +
-      '<td>' + formatTime(s.timeMs) + '</td>' +
-      '<td>' + avg + '</td>';
-    tbody.appendChild(tr);
-  }
+  // Hide stats details during pause — only show progress
+  document.getElementById('stats-table').style.display = 'none';
   document.getElementById('stats-mistakes').innerHTML = '';
   document.getElementById('stats-slowest').innerHTML = '';
   document.getElementById('stats-histogram').innerHTML = '';
@@ -990,6 +957,7 @@ function stopGame() {
 function showStats() {
   document.getElementById('game-area').style.display = 'none';
   document.getElementById('stats-panel').style.display = 'block';
+  document.getElementById('stats-table').style.display = '';
 
   document.getElementById('final-score').textContent =
     'Score : ' + (Number.isInteger(score) ? score : score.toFixed(2));
